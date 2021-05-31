@@ -18,6 +18,7 @@ RUN sed -i  "$ a extension=zip.so"     /etc/php.ini
 RUN echo "PassEnv /opt/ibm/dsdriver/lib" > /etc/httpd/conf.d/db2-lib.conf
 RUN chown -R 1001:0 /opt/ibm/dsdriver
 RUN chown -R 1001:0  /var/www/html
+RUN chmod -R 0777 /var/www/html/upload
 USER 1001
 RUN composer install --no-interaction
 
