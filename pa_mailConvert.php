@@ -26,6 +26,7 @@ div.editable {
 <div class='col-sm-6'>
 <h1>Addresses to Convert</h1>
 	<form id='contactsForm' class="form-horizontal" method='post'>
+        <hr>
     	<div class="form-group required" >
         	<label for=CONTACTS class='col-sm-3 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Contacts'>Contacts</label>
         	<div class='col-sm-9'>
@@ -33,7 +34,8 @@ div.editable {
 				<!-- <textarea id='CONTACTS' name='CONTACTS' class='form-control' ></textarea> -->
             </div>
         </div>
-  		<div class='col-sm-offset-3 col-sm-9'>
+        <hr>
+        <div class='col-sm-offset-3 col-sm-9'>
   		<input type='hidden' id='emailsToSave'  />
   		<input type='hidden' id='emailsSaved'  />
         <?php
@@ -45,14 +47,13 @@ div.editable {
    		$allButtons[] = $resetButton;
    		$form->formBlueButtons($allButtons);
   		?>
-  		</div>
+  		</div>        
 	</form>
 	</div>
 	</div>
 <div class='row'>
 <div class='col-sm-6'>
-
-
+<hr>
 <h1>Addresses</h1>
 <table id='Addresses' class='table table-stripped table-responsive'>
 <thead>

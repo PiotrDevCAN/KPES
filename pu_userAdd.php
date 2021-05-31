@@ -1,13 +1,8 @@
 <?php
 
-
-use itdq\FormClass;
 use itdq\Trace;
 use upes\AccountTable;
 use upes\AllTables;
-use upes\AccountRecord;
-use itdq\Loader;
-use itdq\JavaScript;
 use upes\PersonRecord;
 use upes\ContractTable;
 use upes\PesLevelTable;
@@ -32,7 +27,6 @@ $personRecord = new PersonRecord();
 $personRecord->displayForm(itdq\FormClass::$modeDEFINE);
 
 include_once 'includes/modalError.html';
-$contractSelectObj = ContractTable::prepareJsonObjectForContractsSelect();
 ?>
 </div>
 
@@ -55,29 +49,20 @@ function changePesLevels(dataCategory){
 };
 
 function checkIfEmailKnown(){
-		var newEmail = $('#EMAIL_ADDRESS').val().trim().toLowerCase();
-		var allreadyExists = ($.inArray(newEmail, knownEmail) >= 0 );
-		if(allreadyExists){ // comes back with Position in array(true) or false is it's NOT in the array.
-			$('#savePerson').attr('disabled',true);
-			$('#EMAIL_ADDRESS').css("background-color","LightPink");
-			alert('Person already defined to uPES. This does NOT mean they are PES Cleared for the account you want them to be cleared on. Simply, that they have been defined to uPES before.');
-			return false;
-		} else {
-			$('#EMAIL_ADDRESS').css("background-color","LightGreen");
-			$('#savePerson').attr('disabled',false);
-		}
+	var newEmail = $('#EMAIL_ADDRESS').val().trim().toLowerCase();
+	var allreadyExists = ($.inArray(newEmail, knownEmail) >= 0 );
+	if(allreadyExists){ // comes back with Position in array(true) or false is it's NOT in the array.
+		$('#savePerson').attr('disabled',true);
+		$('#EMAIL_ADDRESS').css("background-color","LightPink");
+		alert('Person already defined to uPES. This does NOT mean they are PES Cleared for the account you want them to be cleared on. Simply, that they have been defined to uPES before.');
+		return false;
+	} else {
+		$('#EMAIL_ADDRESS').css("background-color","LightGreen");
+		$('#savePerson').attr('disabled',false);
+	}
 }
 
-
 $(document).ready(function(){
-	var contractsSelect = <?=$contractSelectObj;?>;
-
-// 	$('#CONTRACT_ID').select2({
-// 		placeholder: 'Select Contract',
-// 		width: '100%',
-// 		data : contractsSelect,
-// 		dataType : 'json'
-// 	});
 
 	$('#COUNTRY').select2({
 		placeholder: 'Select Country',
@@ -95,7 +80,6 @@ $(document).ready(function(){
 		width: '100%'
 	});
 
-
 	$('#CONTRACT_ID').change(function(e){
 		console.log(e);
 		var contractId = $('#CONTRACT_ID').val();
@@ -103,7 +87,6 @@ $(document).ready(function(){
         $("#PES_LEVEL").html("<option><option>");
         changePesLevels(pesLevelByAccount[accountContractLookup[contractId]]);
 	});
-
 
 	$('.typeahead').bind('typeahead:select', function(ev, suggestion) {
 		console.log(suggestion);
@@ -114,7 +97,6 @@ $(document).ready(function(){
  		$('#COUNTRY').val(suggestion.country).trigger('change');
 		checkIfEmailKnown();
 	});
-
 
 	$('#EMAIL_ADDRESS').on('keyup change',function(e){
 		var emailAddress = $('#EMAIL_ADDRESS').val();
@@ -147,11 +129,7 @@ $(document).ready(function(){
 	            $('#EMAIL_ADDRESS').val('');
 	            $('#EMAIL_ADDRESS').css('background-color','inherit');
 			}
-
-
-
 		}
-
 	});
 
 	$('#personForm').submit(function(e){
@@ -190,7 +168,6 @@ $(document).ready(function(){
 		            $('.modal-body').addClass('bg-success');
 		            $('#modalError').modal('show');
 
-
 		    	} else {
      	    	    $(submitBtn).removeClass('spinning').attr('disabled',false);
 		    	    $('#personForm').trigger("reset");
@@ -222,11 +199,6 @@ $(document).ready(function(){
 	});
 });
 </script>
-
-
-
-
-
 
 <?php
 Trace::pageLoadComplete($_SERVER['PHP_SELF']);

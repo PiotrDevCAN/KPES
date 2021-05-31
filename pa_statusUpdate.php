@@ -29,6 +29,7 @@ $now = new DateTime();
 
 
 <form id='updateStatus' class='form-horizontal' >
+	<hr>
  	<div class='form-group required'>
     <label for='personAccount' class='col-sm-2 control-label ceta-label-left'>Person/Account</label>
        <div class='col-sm-4'>
@@ -84,7 +85,7 @@ $now = new DateTime();
 		</div>
 		</div>
 	</div>
-
+	<hr>
 	<div class='col-sm-offset-2 -col-md-3'>
         <?php
         $form = new FormClass();
@@ -96,7 +97,7 @@ $now = new DateTime();
    		$form->formBlueButtons($allButtons);
   		?>
   		</div>
-
+	<hr>
 </form>
 </div>
 

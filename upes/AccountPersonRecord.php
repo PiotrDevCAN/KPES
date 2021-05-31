@@ -41,6 +41,7 @@ class AccountPersonRecord extends DbRecord
     protected $PES_LEVEL;
     protected $PES_DATE_REQUESTED;
     protected $PES_REQUESTOR;
+    protected $PES_CREATOR; // logged in user
     protected $PES_STATUS;
     protected $PES_STATUS_DETAILS;
     protected $PES_DATE_RESPONDED;
@@ -168,10 +169,11 @@ class AccountPersonRecord extends DbRecord
         $allCountries = $loader->load('COUNTRY',AllTables::$COUNTRY);
         ?>
         <form id='accountPersonForm' class="form-horizontal" method='post'>
-        <div class="form-group" >
+        <hr>
+        <div class="form-group required " >
             <label for='UPES_REF' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
         	  <div class='col-md-3'>
-			      <select id='UPES_REF' class='form-group select2' name='UPES_REF'  >
+			      <select id='UPES_REF' class='form-group select2' name='UPES_REF' required='required' >
         		<option value=''></option>
         		<?php
         		foreach ($allEmail as $upesRef => $emailAddress) {
@@ -182,19 +184,27 @@ class AccountPersonRecord extends DbRecord
             </div>
         </div>
 
-        <div class="form-group required">
-            <label for='contract_id' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Contract'>Contract</label>
+        <div class="form-group required " >
+            <label for='FULL_NAME' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Full Name'>Full Name</label>
         	  <div class='col-md-3'>
-        		<select id='contract_id' class='form-group select2' name='contract_id' disabled >
+				    <input id='FULL_NAME' name='FULL_NAME' class='form-control' placeholder='Select Individual Email Address' disabled required='required' />
+            </div>
+        </div>
+        
+        <div class="form-group required">
+            <label for='CONTRACT_ID' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Contract'>Contract</label>
+        	  <div class='col-md-3'>
+        		<select id='CONTRACT_ID' class='form-group select2' name='CONTRACT_ID' disabled required='required' >
         		<option value=''></option>
         		</select>
         		<input id='ACCOUNT_ID' name='ACCOUNT_ID' type='hidden'>
             </div>
         </div>
+
         <div class="form-group required " >
             <label for='PES_LEVEL' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Not applicable on all contracts'>PES Level</label>
         	  <div class='col-md-3'>
-        		<select id='PES_LEVEL' class='form-group select2' name='PES_LEVEL' <?=$notEditable?> data-placeholder='Select Pes Level' disabled >
+        		<select id='PES_LEVEL' class='form-group select2' name='PES_LEVEL' <?=$notEditable?> data-placeholder='Select Pes Level' disabled required='required' >
         		<option value=''></option>
         		</select>
             </div>
@@ -203,10 +213,10 @@ class AccountPersonRecord extends DbRecord
         <div class="form-group required" >
             <label for='COUNTRY_OF_RESIDENCE' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Country'>Country of Residence</label>
         	  <div class='col-md-3'>
-			      <select id='COUNTRY_OF_RESIDENCE' class='form-group select2' name='COUNTRY_OF_RESIDENCE' required  >
+			      <select id='COUNTRY_OF_RESIDENCE' class='form-group select2' name='COUNTRY_OF_RESIDENCE' required required='required' >
         		<option value=''></option>
         		<option value='India' data-country='India' <?=$this->COUNTRY_OF_RESIDENCE=='India' ? ' selected ': null;?>>India</option>
-        		<option value='UK'    data-country='UK' <?=$this->COUNTRY_OF_RESIDENCE=='UK' ? ' selected ': null;?>>UK</option>
+        		<option value='UK' data-country='UK' <?=$this->COUNTRY_OF_RESIDENCE=='UK' ? ' selected ': null;?>>UK</option>
         		<option value='--------' data-country='--------'  disabled >---------</option>
         		<?php
         		unset($allCountries['UK']);
@@ -219,35 +229,49 @@ class AccountPersonRecord extends DbRecord
             </div>
         </div>
 
-        <div class="form-group required " >
-            <label for='FULL_NAME' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Full Name'>Full Name</label>
-        	  <div class='col-md-3'>
-				    <input id='FULL_NAME' name='FULL_NAME' class='form-control' disabled />
-            </div>
-        </div>
+        <hr>
 
         <div class="form-group required " >
             <label for='PES_REQUESTOR' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Requestor Name'>Requestor Name</label>
         	  <div class='col-md-3'>
-				    <input id='PES_REQUESTOR' name='PES_REQUESTOR' class='form-control' disabled value='<?=$_SESSION['ssoEmail']?>' />
+				    <input id='PES_DEFAULT_REQUESTOR' name='PES_DEFAULT_REQUESTOR' type='hidden' value='<?=$_SESSION['ssoEmail']?>' />
+            <input id='PES_REQUESTOR' name='PES_REQUESTOR' class='form-control' disabled value='<?=$_SESSION['ssoEmail']?>' required='required' />
             </div>
         </div>
 
-    	<input id='PES_REQUESTOR_OLD' name='PES_REQUESTOR_OLD' type='hidden' value='<?=$_SESSION['ssoEmail']?>'/>
-    	<input id='PES_STATUS' name='PES_STATUS' type='hidden' value='<?=AccountPersonRecord::PES_STATUS_STARTER_REQUESTED;?>'/>
+      <div class='form-group'>
+        <div class='col-sm-offset-2 -col-md-3'>
+          <?php
+          $requestorButtons = array();
+          $yourselfButton  = $this->formButton('button','yourself','setYourselfAsRequestor',null,'Yourself','btn-success');
+          $functionalButton  = $this->formButton('button','functional_manager','setFLMAsRequestor',null,'Functional Manager','btn-info');
+          $otherButton  = $this->formButton('button','other_person','setOtherRequestor',null,'Other Person','btn-secondary');
+          $requestorButtons[] = $yourselfButton;
+          $requestorButtons[] = $functionalButton;
+          $requestorButtons[] = $otherButton;
+          $this->formBlueButtons($requestorButtons);
+          ?>
+        </div>
+  		</div>
+
+      <hr>
 
    		<div class='form-group'>
-   		<div class='col-sm-offset-2 -col-md-3'>
-        <?php
-        $this->formHiddenInput('mode',$mode,'mode');
-        $allButtons = array();
-        $submitButton = $mode==FormClass::$modeEDIT ?  $this->formButton('submit','Submit','updatePerson',null,'Update') :  $this->formButton('submit','Submit','savePerson',null,'Submit');
-        $resetButton  = $this->formButton('reset','Reset','resetPersonForm',null,'Reset','btn-warning');
-        $allButtons[] = $submitButton;
-        $allButtons[] = $resetButton;
-        $this->formBlueButtons($allButtons);
-        ?>
-  		</div>
+        <div class='col-sm-offset-2 -col-md-3'>
+            
+          <input id='PES_CREATOR' name='PES_CREATOR' type='hidden' value='<?=$_SESSION['ssoEmail']?>'/>
+          <input id='PES_STATUS' name='PES_STATUS' type='hidden' value='<?=AccountPersonRecord::PES_STATUS_STARTER_REQUESTED;?>'/>
+          
+          <?php
+          $this->formHiddenInput('mode',$mode,'mode');
+          $allButtons = array();
+          $submitButton = $mode==FormClass::$modeEDIT ?  $this->formButton('submit','Submit','updatePerson',null,'Update') :  $this->formButton('submit','Submit','savePerson',null,'Submit');
+          $resetButton  = $this->formButton('reset','Reset','resetPersonForm',null,'Reset','btn-warning');
+          $allButtons[] = $submitButton;
+          $allButtons[] = $resetButton;
+          $this->formBlueButtons($allButtons);
+          ?>
+        </div>
   		</div>
 	</form>
     <?php
@@ -513,7 +537,6 @@ class AccountPersonRecord extends DbRecord
 
     }
 
-
     function confirmSendPesEmailModal(){
         ?>
        <!-- Modal -->
@@ -575,6 +598,94 @@ class AccountPersonRecord extends DbRecord
       </div>
     <?php
     }
+
+    function confirmFLMAsBoardingRequestorModal(){
+      ?>
+     <!-- Modal -->
+      <div id="confirmFLMAsBoardingRequestorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Confirm Functional Manager Email Details</h4>
+          </div>
+           <div class="modal-body" >
+           <div class="panel panel-default">
+            <div class="panel-heading">Functional Manager Details</div>
+            <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="pesEmailAddress">Email address</label>
+                <input type="text" class="form-control" id="pesEmailAddress" name="pesEmailAddress" disabled >
+              </div>
+              <div class="form-group">
+                <label for="pesEmailFullName">Full Name</label>
+                <input type="text" class="form-control" id="pesEmailFullName" name="pesEmailFullName" disabled >
+              </div>
+              <div class="form-group">
+                <label for="pesEmailCnum">Cnum</label>
+                <input type="text" class="form-control" id="pesEmailCnum" name="pesEmailCnum" disabled >
+                <input type="hidden" class="form-control" id="pesEmailUpesRef" name="pesEmailUpesRef" disabled >
+              </div>
+            </form>
+            </div>
+            </div>
+          </div>
+           <div class='modal-footer'>
+            <div class='button-blue submitButtonDiv' style='display: block '>
+              <input class='btn btn-primary' type='submit' name='confirmSendPesEmail____' id='confirmSendPesEmail____' value='Confirm' >&nbsp;
+              <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+            </div>
+           </div>
+          </div>
+      </div>
+    </div>
+  <?php
+  }
+
+  function confirmOtherAsBoardingRequestorModal(){
+    ?>
+   <!-- Modal -->
+    <div id="confirmOtherAsBoardingRequestorModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirm Other Employee Email Details</h4>
+        </div>
+         <div class="modal-body" >
+         <div class="panel panel-default">
+            <div class="panel-heading">Specific Employee Details</div>
+            <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="pesEmailAddress">Email address</label>
+                <input type="text" class="form-control" id="pesEmailAddress" name="pesEmailAddress" disabled >
+              </div>
+              <div class="form-group">
+                <label for="pesEmailFullName">Full Name</label>
+                <input type="text" class="form-control" id="pesEmailFullName" name="pesEmailFullName" disabled >
+              </div>
+              <div class="form-group">
+                <label for="pesEmailCnum">Cnum</label>
+                <input type="text" class="form-control" id="pesEmailCnum" name="pesEmailCnum" disabled >
+                <input type="hidden" class="form-control" id="pesEmailUpesRef" name="pesEmailUpesRef" disabled >
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+         <div class='modal-footer'>
+          <div class='button-blue submitButtonDiv' style='display: block '>
+            <input class='btn btn-primary' type='submit' name='confirmSendPesEmail__' id='confirmSendPesEmail__' value='Confirm' >&nbsp;
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+          </div>
+         </div>
+        </div>
+    </div>
+  </div>
+<?php
+}
 
     function sendNotificationToPesTaskid(){
 

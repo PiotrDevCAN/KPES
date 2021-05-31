@@ -19,9 +19,6 @@ use itdq\DbTable;
 
  *
  */
-
-
-
 class PersonRecord extends DbRecord
 {
     protected $UPES_REF;
@@ -37,7 +34,8 @@ class PersonRecord extends DbRecord
     protected $BLUPAGES_STATUS;
 
     // public static $pesTaskId = array('lbgvetpr@uk.ibm.com'); // Only first entry will be used as the "contact" in the PES status emails.
-
+    
+    const IBM_STATUS_NOT_IBMER = 'Not an IBMer';
     const IBM_STATUS_CONTRACTOR = 'Contractor';
     const IBM_STATUS_REGULAR = 'Regular';
 
@@ -46,8 +44,6 @@ class PersonRecord extends DbRecord
     const BLUEPAGES_STATUS_IGNORE = 'ignore';
 
     protected $ibmStatus = array(self::IBM_STATUS_CONTRACTOR, self::IBM_STATUS_REGULAR);
-
-
 
   function displayForm($mode)
     {
@@ -58,30 +54,31 @@ class PersonRecord extends DbRecord
         $cnumEditable = $mode == FormClass::$modeEDIT ? ''   : 'disabled';
         ?>
         <form id='personForm' class="form-horizontal" method='post'>
-         <div class="form-group" >
+        <hr>
+        <div class="form-group required " >
             <label for='CNUM' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='IBM CNUM if applicable'><?=$ibmerLabel?></label>
         	<div class='col-md-4'>
-				<input id='ibmer' name='ibmer' type='<?=$showIbmer?>' class='form-control typeahead' <?=$notEditable;?>  value='<?=!empty($this->FULL_NAME) ? $this->FULL_NAME :null ; ?>'/>
-				<input id='CNUM' name='CNUM' type='<?=$showCnum?>'class='form-control'  <?=$cnumEditable;?> value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
-				<input id='oldCNUM' name='oldCNUM' type='hidden'class='form-control'  value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
+				<input id='ibmer' name='ibmer' type='<?=$showIbmer?>' class='form-control typeahead' <?=$notEditable;?>  value='<?=!empty($this->FULL_NAME) ? $this->FULL_NAME :null ; ?>' required='required' />
+				<input id='CNUM' name='CNUM' type='<?=$showCnum?>' class='form-control'  <?=$cnumEditable;?> value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
+				<input id='oldCNUM' name='oldCNUM' type='hidden' class='form-control'  value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
             </div>
         </div>
-        <div class="form-group" >
+        <div class="form-group required " >
             <label for='EMAIL_ADDRESS' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
         	<div class='col-md-4'>
-				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>'/>
+				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
             </div>
         </div>
         <div class="form-group required " >
             <label for='FULL_NAME' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Full Name'>Full Name</label>
         	<div class='col-md-4'>
-				<input id='FULL_NAME' name='FULL_NAME' class='form-control' <?=$notEditable;?> value='<?=!empty($this->FULL_NAME) ? $this->FULL_NAME :null ; ?>' />
+				<input id='FULL_NAME' name='FULL_NAME' class='form-control' <?=$notEditable;?> value='<?=!empty($this->FULL_NAME) ? $this->FULL_NAME :null ; ?>' required='required' />
             </div>
         </div>
         <div class="form-group required " >
             <label for='COUNTRY' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Country of Residence'>Country</label>
         	<div class='col-md-4'>
-        		<select id='COUNTRY' class='form-group select2' name='COUNTRY'  >
+        		<select id='COUNTRY' class='form-group select2' name='COUNTRY' required='required' >
         		<option value=''></option>
         		</select>
             </div>
@@ -89,7 +86,7 @@ class PersonRecord extends DbRecord
         <div class="form-group required " >
             <label for='IBM_STATUS' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='IBM Status'>Status</label>
         	<div class='col-md-4'>
-        		<select id='IBM_STATUS' class='form-group select2' name='IBM_STATUS' >
+        		<select id='IBM_STATUS' class='form-group select2' name='IBM_STATUS' required='required' >
         		<option value=''></option>
         		<?php
         		foreach ($this->ibmStatus as $status) {
@@ -101,7 +98,8 @@ class PersonRecord extends DbRecord
             </div>
         </div>
         <input id='PES_ADDER' name='PES_ADDER' type='hidden'  value='<?=$_SESSION['ssoEmail']?>'/>
-   		<div class='form-group'>
+   		<hr>
+        <div class='form-group'>
    		<div class='col-sm-offset-2 -col-md-4'>
         <?php
         $this->formHiddenInput('UPES_REF',$this->UPES_REF,'UPES_REF');

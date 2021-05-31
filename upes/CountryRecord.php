@@ -31,6 +31,7 @@ class CountryRecord extends DbRecord
 
         ?>
         <form id='countryForm' class="form-horizontal"  method='post'>
+        <hr>
         <div class="form-group required">
             <label for='COUNTRY' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Country Name'>Country Name</label>
         	<div class='col-md-3'>
@@ -67,8 +68,7 @@ class CountryRecord extends DbRecord
 				</select>
             </div>
         </div>
-
-
+        <hr>
    		<div class='form-group'>
    		<div class='col-sm-offset-2 -col-md-3'>
         <?php
@@ -82,6 +82,7 @@ class CountryRecord extends DbRecord
   		?>
   		</div>
   		</div>
+        <hr>
 	</form>
     <?php
     }

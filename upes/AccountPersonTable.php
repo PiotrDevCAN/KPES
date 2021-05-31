@@ -53,7 +53,7 @@ const PES_TRACKER_STAGE_MEDIA          = 'Media';
 const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
 const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
 
-const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
+const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
 
 const CHASER_LEVEL_ONE = 'One';
 const CHASER_LEVEL_TWO = 'Two';
@@ -113,6 +113,7 @@ public $lastSelectSql;
         $sql.= ", AP.RIGHT_TO_WORK ";
         $sql.= ", AP.PROOF_OF_ID ";
         $sql.= ", AP.PROOF_OF_RESIDENCY ";
+        $sql.= ", AP.PROOF_OF_RESIDENCY AS RAG_STATUS ";
         $sql.= ", AP.CREDIT_CHECK ";
         $sql.= ", AP.FINANCIAL_SANCTIONS ";
         $sql.= ", AP.CRIMINAL_RECORDS_CHECK ";
@@ -183,6 +184,7 @@ public $lastSelectSql;
 		<th>Proof or Right to Work</th>
 		<th>Proof of ID</th>
 		<th>Proof of Residence</th>
+        <th>RAG Status</th>
 		<th>Credit Check</th>
 		<th>Financial Sanctions</th>
 		<th>Criminal Records Check</th>
@@ -201,6 +203,7 @@ public $lastSelectSql;
 		<td class='nonSearchable'>Right to Work</td>
 		<td class='nonSearchable'>ID</td>
 		<td class='nonSearchable'>Residence</td>
+        <td class='nonSearchable'>RAG</td>
 		<td class='nonSearchable'>Credit Check</td>
 		<td class='nonSearchable'>Financial Sanctions</td>
 		<td class='nonSearchable'>Criminal Records Check</td>
@@ -529,8 +532,6 @@ public $lastSelectSql;
                 $alertClass='alert-info';
                 break;
         }
-        
-
 
        $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
 
@@ -540,6 +541,7 @@ public $lastSelectSql;
        $formattedField.= "<br/>CNUM: " . $row['CNUM'];
        $formattedField.= "<br/>" . $row['IBM_STATUS'] . ":" . $row['COUNTRY'];
        $formattedField.= "<br/>Resides:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
+       $formattedField.= "<br/>RAG Status:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
        $formattedField.= "<div class='alert $alertClass priorityDiv'>Priority:" . $priority . "</div>";
 
        $formattedField.="<span style='white-space:nowrap' >

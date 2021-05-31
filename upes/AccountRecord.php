@@ -24,6 +24,7 @@ class AccountRecord extends DbRecord
     {
         ?>
         <form id='accountsForm' class="form-horizontal"  method='post'>
+        <hr>
         <?php
 
         $notEditable = $mode == FormClass::$modeEDIT ? ' disabled ' : '';
@@ -57,7 +58,7 @@ class AccountRecord extends DbRecord
 				<input id='TASKID' name='TASKID' class='form-control' />
             </div>
         </div>
-
+        <hr>
    		<div class='form-group'>
    		<div class='col-sm-offset-2 -col-md-3'>
         <?php
@@ -71,6 +72,7 @@ class AccountRecord extends DbRecord
   		?>
   		</div>
   		</div>
+        <hr>
 	</form>
     <?php
     }

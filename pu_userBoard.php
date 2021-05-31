@@ -1,14 +1,8 @@
 <?php
 
-
-use itdq\FormClass;
 use itdq\Trace;
 use upes\AccountTable;
 use upes\AllTables;
-use upes\AccountRecord;
-use itdq\Loader;
-use itdq\JavaScript;
-use upes\PersonRecord;
 use upes\ContractTable;
 use upes\PesLevelTable;
 use upes\PersonTable;
@@ -29,9 +23,9 @@ $upesrefToNameMapping = PersonTable::prepareJsonUpesrefToNameMapping();
 <?php
 $accountPersonRecord = new AccountPersonRecord();
 $accountPersonRecord->displayForm(itdq\FormClass::$modeDEFINE);
-
+$accountPersonRecord->confirmFLMAsBoardingRequestorModal();
+$accountPersonRecord->confirmOtherAsBoardingRequestorModal();
 include_once 'includes/modalError.html';
-// $contractSelectObj = ContractTable::prepareJsonObjectForContractsSelect();
 ?>
 </div>
 
@@ -67,9 +61,9 @@ $(document).ready(function(){
 		placeholder:'Country of Residence'
 	});
 
-	$('#contract_id').change(function(e){
+	$('#CONTRACT_ID').change(function(e){
 		console.log(e);
-		var contractId = $('#contract_id').val();
+		var contractId = $('#CONTRACT_ID').val();
 		console.log(contractId);
 
 		$('#ACCOUNT_ID').val(accountContractLookup[contractId]);
@@ -78,31 +72,29 @@ $(document).ready(function(){
         changePesLevels(pesLevelByAccount[accountContractLookup[contractId]]);
 	});
 
-	$('#contract_id').select2({
+	$('#CONTRACT_ID').select2({
 		placeholder: 'Select Contract',
 		width: '100%',
-// 		data : contractsSelect,
-// 		dataType : 'json',
-		 ajax: {
-			    url: 'ajax/prepareContractsDropdown.php',
-			    dataType: 'json',
-			    type: 'POST',
-			    data: function (params) {
-				    var upesref = $('#UPES_REF').val();
-			        var query = {
-			          search: params.term,
-			          upesref: upesref
-			        }
-			        // Query parameters will be ?search=[term]&type=public
-			        return query;
-			    }
-		 }
+		ajax: {
+			url: 'ajax/prepareContractsDropdown.php',
+			dataType: 'json',
+			type: 'POST',
+			data: function (params) {
+				var upesref = $('#UPES_REF').val();
+				var query = {
+					search: params.term,
+					upesref: upesref
+				}
+				// Query parameters will be ?search=[term]&type=public
+				return query;
+			}
+		}
 	});
 
 	$('#UPES_REF').on('select2:open',function(){
 		console.log('select2:open');
-		$('#contract_id').select2('data',null);
-		$('#contract_id').val('').trigger('change');
+		$('#CONTRACT_ID').select2('data',null);
+		$('#CONTRACT_ID').val('').trigger('change');
 		});
 
 	$('#UPES_REF').change(function(e){
@@ -110,10 +102,28 @@ $(document).ready(function(){
 		var fullName = upesrefToNameMapping[upesRef];
 		$('#FULL_NAME').val(fullName);
 		if($('#UPES_REF').val() != ''){
-			$('#contract_id').attr('disabled',false).trigger('change');
+			$('#CONTRACT_ID').attr('disabled',false).trigger('change');
 		} else {
-			$('#contract_id').attr('disabled',true).trigger('change');
+			$('#CONTRACT_ID').attr('disabled',true).trigger('change');
 		}
+	});
+
+	$(document).on('click','#setYourselfAsRequestor',function(e){
+		console.log(e);
+ 		var ssoEmail = $('#PES_DEFAULT_REQUESTOR').val();
+		$('#PES_REQUESTOR').val(ssoEmail);
+	});
+
+	$(document).on('click','#setFLMAsRequestor',function(e){
+		console.log(e);
+		$('#confirmFLMAsBoardingRequestorModal').modal('show');
+		// $('#PES_REQUESTOR').val('address of FLM');
+	});
+
+	$(document).on('click','#setOtherRequestor',function(e){
+		console.log(e);
+		$('#confirmOtherAsBoardingRequestorModal').modal('show');
+		// $('#PES_REQUESTOR').val('address of Other Employee');
 	});
 
 	$('#accountPersonForm').submit(function(e){
@@ -138,7 +148,7 @@ $(document).ready(function(){
 	      		if(responseObj.success){
 		    	    $(submitBtn).removeClass('spinning').attr('disabled',false);
 		    	    $('#accountPersonForm').trigger("reset");
-		    	    $("#contract_id").trigger("change");
+		    	    $("#CONTRACT_ID").trigger("change");
 		    	    $("#UPES_REF").trigger("change");
 		    	    $('#COUNTRY_OF_RESIDENCE').val('').trigger('change');
 		    	    $('#ACCOUNT_ID').val('');
@@ -154,7 +164,7 @@ $(document).ready(function(){
 		    	} else {
      	    	    $(submitBtn).removeClass('spinning').attr('disabled',false);
 		    	    $('#accountPersonForm').trigger("reset");
-		    	    $("#contract_id").trigger("change");
+		    	    $("#CONTRACT_ID").trigger("change");
 		    	    $("#UPES_REF").trigger("change");
 		    	    $('#COUNTRY_OF_RESIDENCE').val('').trigger('change');
 		    	    $('#ACCOUNT_ID').val('');
