@@ -10,14 +10,11 @@ $target_file = $target_dir . "_" . basename($_FILES["file"]["name"]);
 $info = pathinfo($target_file);
 $target_file_name = $target_dir . "_" . basename($_FILES["file"]["name"], '.'.$info['extension']);
 
+$new_file = $target_file_name . ' - Line of Business';
+$new_file_name = $new_file . $fileType;
+
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// $targetPath = '';
-
-// if (file_exists($targetPath) === false) {
-    // mkdir($targetPath);
-// }
 
 $scrap = ob_get_contents();
 
@@ -233,8 +230,7 @@ if ($uploadOk == 0) {
         echo 'Missing Organizations number ' . $missingOrganizations;
 
         // save new file
-        $new_file = $target_file_name . ' - Line of Business.' . $fileType;
-        $handle = fopen($new_file,'w+');
+        $handle = fopen($new_file_name,'w+');
         if ($handle === false) {
             echo "Sorry, unable to write output file.";
             die('here');            
@@ -250,7 +246,7 @@ if ($uploadOk == 0) {
         echo "<br/>";
         echo "<hr>";
         echo "<br/>";
-        echo "<a href='".$new_file."'>Download modified file " . $new_file . "</a>";
+        echo "<a href='".$new_file_name."'>Download modified file " . $new_file . "</a>";
         // echo "</pre>";
 
     } else {

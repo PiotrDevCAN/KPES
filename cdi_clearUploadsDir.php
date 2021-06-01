@@ -2,7 +2,6 @@
 
 // $rootDir = stripos($_ENV['environment'], 'dev')  ? '../' : '/';
 $rootDir = stripos($_ENV['environment'], 'dev')  ? './' : '/';
-$rootDir = './';
 $ds = DIRECTORY_SEPARATOR;
 
 $d = dir($rootDir . "uploads");
