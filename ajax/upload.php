@@ -2,10 +2,13 @@
 
 use itdq\BluePages;
 
-$rootDir = stripos($_ENV['environment'], 'dev')  ? '../' : '/';
+// $rootDir = stripos($_ENV['environment'], 'dev')  ? '../' : '/';
+$rootDir = '../';
 
 $target_dir = $rootDir . "uploads/" . $_ENV['environment'];
 $target_file = $target_dir . "_" . basename($_FILES["file"]["name"]);
+
+$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 $info = pathinfo($target_file);
 $target_file_name = $target_dir . "_" . basename($_FILES["file"]["name"], '.'.$info['extension']);
@@ -14,7 +17,6 @@ $new_file = $target_file_name . ' - Line of Business';
 $new_file_name = $new_file . $fileType;
 
 $uploadOk = 1;
-$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 $scrap = ob_get_contents();
 
