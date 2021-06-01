@@ -8,11 +8,6 @@ $rootDir = '../';
 $target_dir = $rootDir . "uploads/" . $_ENV['environment'];
 $target_file = $target_dir . "_" . basename($_FILES["file"]["name"]);
 
-echo $rootDir . "uploads";
-var_dump(is_writable($rootDir . "uploads"));
-echo substr(sprintf("%o",fileperms($rootDir . "uploads")),-4);
-// exit;
-
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 $info = pathinfo($target_file);
