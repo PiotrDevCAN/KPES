@@ -8,6 +8,11 @@ $rootDir = '../';
 $target_dir = $rootDir . "uploads/" . $_ENV['environment'];
 $target_file = $target_dir . "_" . basename($_FILES["file"]["name"]);
 
+echo $rootDir . "uploads";
+var_dump(is_writable($rootDir . "uploads"));
+echo fileperms($rootDir . "uploads");
+exit;
+
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 $info = pathinfo($target_file);
@@ -28,8 +33,8 @@ echo $now->format('Y-m-d H:i:s');
 if (file_exists($target_file)) {
     $uploadOk = unlink($target_file);
     echo $uploadOk ? "<br/>Previous File deleted." : "<br/>Problem deleting previous file";
-
 }
+
 // Allow certain file formats
 if($fileType != "csv" ) {
     echo "Sorry, only CSV files are allowed.";
