@@ -2,6 +2,7 @@ FROM registry.access.redhat.com/ubi8/php-74
 ENV DB2CODEPAGE 1208
 USER root
 ADD . /var/www/html/
+RUN chmod -R 0777 /var/www/html/uploads
 ADD ./patch1.sh /patch1.sh
 RUN bash /patch1.sh && rm /patch1.sh
 WORKDIR /opt/ibm
