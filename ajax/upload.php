@@ -2,8 +2,7 @@
 
 use itdq\BluePages;
 
-// $rootDir = stripos($_ENV['environment'], 'dev')  ? '../' : '/';
-$rootDir = '/';
+$rootDir = stripos($_ENV['environment'], 'dev')  ? '../' : '/';
 
 $target_dir = $rootDir . "uploads/" . $_ENV['environment'];
 $target_file = $target_dir . "_" . basename($_FILES["file"]["name"]);
@@ -14,11 +13,11 @@ $target_file_name = $target_dir . "_" . basename($_FILES["file"]["name"], '.'.$i
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-$targetPath = '';
+// $targetPath = '';
 
-if (file_exists($targetPath) === false) {
-    mkdir($targetPath);
-} 
+// if (file_exists($targetPath) === false) {
+    // mkdir($targetPath);
+// }
 
 $scrap = ob_get_contents();
 
