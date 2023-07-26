@@ -41,7 +41,7 @@ $people = array($personA1,$personA2,$personA3,$personA4,$personA5,$personA6,$per
 
 function findConsentForm(array $person, $fileNamePattern = null, $subFolder='consentForms'){
     if(empty($person) or empty($fileNamePattern)){
-        throw new Exception('Incorrect parms passed');
+        throw new \Exception('Incorrect parms passed');
     }
 
     $pathToAccountCountryStatus     = "emailAttachments/$subFolder/" . $person['ACCOUNT'] . "/" . $person['COUNTRY'] . "/" . $person['STATUS'];

@@ -1,0 +1,5 @@
+private static $pesClearedEmail = 'Hello &&candidate&&,
+<br/>I can confirm that you have successfully passed &&accountName&& PES Screening, effective from &&effectiveDate&&
+<br/>If you need any more information regarding your PES clearance, please contact the taskid &&taskid&&.
+<br/>Please contact your manager or account project office for details of the next step in boarding to the account.
+<br/>Many Thanks for your cooperation,';

@@ -217,13 +217,12 @@ class PesEmailVentusEdition {
 
     }
 
-    function sendPesEmailChaser($upesref, $account, $emailAddress, $chaserLevel){
+    function sendPesEmailChaser($upesref, $account, $emailAddress, $chaserLevel, $requestor){
 
         $pesEmailPattern = array(); // Will be overridden when we include_once from emailBodies later.
         $pesEmail = null;          // Will be overridden when we include_once from emailBodies later.
         $names = PersonTable::getNamesFromUpesref($upesref);
         $fullName = $names['FULL_NAME'];
-        $requestor = trim($_POST['requestor']);
 
         $emailBodyFileName = 'chaser' . trim($chaserLevel) . ".php";
         $replacements = array($fullName,$account);

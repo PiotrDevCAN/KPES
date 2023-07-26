@@ -6,6 +6,8 @@ use upes\AccountPersonTable;
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
+
 $loader = new Loader();
 
 $allStatus = $loader->load('PROCESSING_STATUS',AllTables::$ACCOUNT_PERSON);

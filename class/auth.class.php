@@ -12,7 +12,7 @@
 					$this->technology = mb_strtolower($technology);
 					break;
 				default:
-					throw new Exception(htmlentities($technology).' not yet implemented.');
+					throw new \Exception(htmlentities($technology).' not yet implemented.');
 			}
 		}
 
@@ -78,7 +78,7 @@
 			$token_response = json_decode($data);
 			if($token_response)
 			{
-				if(isset($token_response->error)) throw new Exception('Error happened while authenticating. Please, try again later.');
+				if(isset($token_response->error)) throw new \Exception('Error happened while authenticating. Please, try again later.');
 
 				if ( isset( $token_response->id_token ) ) {
 					$jwt_arr = explode('.', $token_response->id_token );
@@ -132,7 +132,7 @@
 				//so basically, if you get to the else below, adjust it, open an issue on github so that the strict matching can be adjusted and it doesnt get to the else below
 				else
 				{
-					//throw new Exception('OpenIDConnect returned values were not correct.');
+					//throw new \Exception('OpenIDConnect returned values were not correct.');
 					$_SESSION = $userData;
 					$_SESSION['somethingChanged'] = true;
 					return true;
@@ -183,7 +183,7 @@
 			}
 			else
 			{
-				throw new Exception('OpenIDConnect data not correct. Please check if everything is filled out in OpenIDConnect configuration.');
+				throw new \Exception('OpenIDConnect data not correct. Please check if everything is filled out in OpenIDConnect configuration.');
 			}
 		}
 

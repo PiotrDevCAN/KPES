@@ -52,7 +52,11 @@ $now = new DateTime();
         	<option value=''>Select Status</option>
             <?php
             foreach ($allStatus as  $status) {
-                ?><option value='<?=$status?>'><?=$status;?></option><?php
+                if ($status !== AccountPersonRecord::PES_STATUS_TBD) {
+                    ?><option value='<?=$status?>'><?=$status;?></option><?php
+                } else {
+                    ?><option value='<?=$status?>' disabled><?=$status;?> - renamed to: <?=AccountPersonRecord::PES_STATUS_CLEARED_AMBER?></option><?php
+                }
             }
             ?>
        </select>

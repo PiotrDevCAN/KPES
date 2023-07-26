@@ -104,6 +104,7 @@ class manageContracts {
 	listenForEditContractName() {
 		$(document).on('click', '.editContractName', function (e) {
 			var button = $(e.target).parent('button').addClass('spinning');
+			$('#ACCOUNT_ID').val($(e.target).data('accountid')).trigger('change');
 			$('#CONTRACT').val($(e.target).data('contract'));
 			$('#CONTRACT_ID').val($(e.target).data('contractid'));
 			$('#mode').val('edit');

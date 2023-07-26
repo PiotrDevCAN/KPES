@@ -3,7 +3,7 @@ use itdq\DbTable;
 use upes\AccountPersonTable;
 use upes\AllTables;
 
-$GLOBALS['Db2Schema'] = 'UPES';
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
 
 $months = array('','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 

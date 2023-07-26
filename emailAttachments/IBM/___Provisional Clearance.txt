@@ -1,0 +1,9 @@
+private static $pesClearedProvisionalEmail = 'Hello &&candidate&&,
+<br/>I can confirm that you have provisionally cleared  &&accountName&& PES Screening. Please note this is an EXCEPTION, please arrange for your documents to be certified urgently.
+<p><b>The Certification MUST be done by an IBM'er<b>, to confirm that they have seen the original document. Either physically or Virtually (over webex).<p> For Virtual - an email can be sent directly to the PES team, by your certifier <b>to confirm each original documents/screens (in a list) which have been viewed, over video conferencing, along with the date and time they were viewed.<b> OR Physical - The following statement should be added on each document, on the same side as the image.</p>
+<h4><span style='color:red'><center>True & Certified Copy<br/>Name of certifier in BLOCK CAPITALS<br/>IBM Serial number of certifier<br/>Certification Date<br/>Signature of certifier</center></span></h4>
+<p><p>
+<p>ALL documents that you have sent to the PES team must be certified (ie, passport, address and activity/education evidences).
+<br/>If you need any more information regarding your PES clearance, please let me know.
+<br/>When sending your document please ONLY send to the PES team.
+<br/>Many Thanks for your cooperation,';

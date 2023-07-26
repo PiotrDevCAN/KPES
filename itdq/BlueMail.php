@@ -93,41 +93,6 @@ class BlueMail
             }
         }
         
-        /*
-        $mailError = new PHPMailer();
-        if (filter_var($_SESSION['ssoEmail'], FILTER_VALIDATE_EMAIL)) {
-            $localEmail = $_SESSION['ssoEmail'];
-        } else {
-            $localEmail = ! empty($_ENV['devemailid']) ? $_ENV['devemailid'] : 'piotr.tajanowicz@ocean.ibm.com';
-        }
-        $recipient = $_ENV['email'] == 'user' ? $localEmail : $_ENV['devemailid'];
-        $mailError->clearAllRecipients();
-        $mailError->addAddress($recipient);
-        $mailError->clearCCs();
-        $mailError->clearBCCs();
-
-        $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
-        $mailError->isSMTP(); // Send using SMTP
-        $mailError->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
-        $mailError->SMTPAuth = false;
-        $mailError->SMTPAutoTLS = false;
-        $mailError->Port = 25;
-        
-        $mailError->setFrom($replyto);
-        $mailError->isHTML(true);
-        
-        if ($status == "Errored") {
-            $mailError->Subject = 'Something went wrong with sending email';
-            $mailError->Body = serialize($response);
-        } else {
-            $mailError->Subject = 'Validation of sending email';
-            $mailError->Body = 'Precheck status OK';
-        }
-        if (!$mailError->send()) {
-                
-        }
-        */
-
         $mail->Subject = $subject;
         $mail->Body = $message;
         

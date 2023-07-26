@@ -17,6 +17,11 @@ class manageAccounts {
 		this.listenForKeyUpAccount();
 		this.listenForKeyUpAndChangeTaskId();
 
+		$('#ACCOUNT_TYPE').select2({
+			placeholder: 'Select Account Type',
+			width: '100%'
+		});
+
 		console.log('--- Function --- manageAccounts.constructor');
 	}
 
@@ -107,7 +112,7 @@ class manageAccounts {
 			var account = $(e.target).data('account');
 			$('#ACCOUNT').val($(e.target).data('account'));
 			$('#ACCOUNT_ID').val($(e.target).data('accountid'));
-			$('#ACCOUNT_TYPE').val($(e.target).data('accounttype'));
+			$('#ACCOUNT_TYPE').val($(e.target).data('accounttype')).trigger('change');
 			$('#TASKID').val($(e.target).data('taskid'));
 			$('#mode').val('edit');
 			$(button).removeClass('spinning');

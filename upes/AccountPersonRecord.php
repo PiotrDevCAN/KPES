@@ -87,6 +87,7 @@ class AccountPersonRecord extends DbRecord
     const PES_EVENT_MEMBERSHIP     = 'Membership';
 
     const PES_STATUS_CLEARED        = 'Cleared';
+    const PES_STATUS_CLEARED_AMBER  = 'Cleared - Amber';
     const PES_STATUS_DECLINED       = 'Declined';
     const PES_STATUS_EXCEPTION      = 'Exception';
     const PES_STATUS_FAILED         = 'Failed';
@@ -107,6 +108,7 @@ class AccountPersonRecord extends DbRecord
     
     static public $pesStatus = array(
       AccountPersonRecord::PES_STATUS_CLEARED,
+      AccountPersonRecord::PES_STATUS_CLEARED_AMBER,
       AccountPersonRecord::PES_STATUS_DECLINED,
       AccountPersonRecord::PES_STATUS_EXCEPTION,
       AccountPersonRecord::PES_STATUS_FAILED,
@@ -184,19 +186,25 @@ class AccountPersonRecord extends DbRecord
 
    //  public static $pesTaskId = array('lbgvetpr@uk.ibm.com'); // Only first entry will be used as the "contact" in the PES status emails.
 
-    static function prepareJsonArraysForPesSelection(){
+   static function prepareJsonArraysForPesSelection(){
 
-      $allStatus = self::$pesStatus;
+        $allStatus = self::$pesStatus;
+        $pesStatuses = array();
 
-      foreach ($allStatus as $key=> $status){
+        foreach ($allStatus as $key=> $status){
             $option = new \stdClass();
             $option->id = $status;
-            $option->text = $status;
+            if ($status != 'TBD') {
+                $option->text = $status;
+            } else {
+                $option->text = $status . ' - renamed to: '.AccountPersonRecord::PES_STATUS_CLEARED_AMBER;
+                $option->disabled = true;
+            }
             $pesStatuses[] = $option;
-      }
+        }
 
-      return $pesStatuses;
-  }
+        return $pesStatuses;
+    }
 
     function displayForm($mode)
     {
@@ -308,7 +316,7 @@ class AccountPersonRecord extends DbRecord
         $pesStatusWithButton = '';
         $pesStatusWithButton.= "<span class='pesStatusField' data-upesref='" . $upesRef . "' data-account='" . $account . "' data-accountid='" . $accountid . "'  >" .  $status . "</span><br/>";
         switch (true) {
-            case $status == AccountPersonRecord::PES_STATUS_TBD && !$_SESSION['isPesTeam']:
+            case $status == AccountPersonRecord::PES_STATUS_CLEARED_AMBER && !$_SESSION['isPesTeam']:
                 $pesStatusWithButton.= "<button type='button' class='btn btn-default btn-xs btnPesInitiate accessRestrict accessPmo accessFm' ";
                 $pesStatusWithButton.= " aria-label='Left Align' ";
                 $pesStatusWithButton.= " data-upesref='" .$upesRef . "' ";
@@ -356,8 +364,8 @@ class AccountPersonRecord extends DbRecord
                 
             case $status == AccountPersonRecord::PES_STATUS_PES_PROGRESSING && $_SESSION['isPesTeam'] :
             case $status == AccountPersonRecord::PES_STATUS_CANCEL_REQ && $_SESSION['isPesTeam'] :
-//            case $status == AccountPersonRecord::PES_STATUS_CLEARED_PERSONAL && $_SESSION['isPesTeam'] :
             case $status == AccountPersonRecord::PES_STATUS_CLEARED && $_SESSION['isPesTeam'] :
+            case $status == AccountPersonRecord::PES_STATUS_CLEARED_AMBER && $_SESSION['isPesTeam'] :                
             case $status == AccountPersonRecord::PES_STATUS_EXCEPTION && $_SESSION['isPesTeam'] :
             case $status == AccountPersonRecord::PES_STATUS_DECLINED && $_SESSION['isPesTeam'] ;
             case $status == AccountPersonRecord::PES_STATUS_FAILED && $_SESSION['isPesTeam'] ;

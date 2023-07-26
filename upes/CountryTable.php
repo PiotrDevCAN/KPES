@@ -62,7 +62,7 @@ class CountryTable extends DbTable
 
 
     static function getEmailBodyNameForCountry($country){
-        $sql = " SELECT EMAIL_BODY_NAME";
+        $sql = " SELECT COUNTRY, EMAIL_BODY_NAME";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$COUNTRY;
         $sql.= " WHERE COUNTRY='" . db2_escape_string($country). "' ";
 

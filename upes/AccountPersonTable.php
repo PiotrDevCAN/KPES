@@ -20,58 +20,74 @@ use itdq\slack;
 
 class AccountPersonTable extends DbTable {
 
-use xls;
+    use xls;
 
-private $xlsDateFormat = 'd/m/Y';
-private $db2DateFormat = 'Y-m-d';
+    private $xlsDateFormat = 'd/m/Y';
+    private $db2DateFormat = 'Y-m-d';
 
-protected $preparedStageUpdateStmts;
-protected $preparedTrackerInsert;
-protected $preparedGetPesCommentStmt;
-protected $preparedProcessStatusUpdate;
-protected $preparedGetProcessingStatusStmt;
-protected $preparedResetForRecheck;
+    protected $preparedStageUpdateStmts;
+    protected $preparedTrackerInsert;
+    protected $preparedGetPesCommentStmt;
+    protected $preparedProcessStatusUpdate;
+    protected $preparedGetProcessingStatusStmt;
+    protected $preparedResetForRecheck;
 
-const PES_TRACKER_RECORDS_ACTIVE       = 'Active';
-const PES_TRACKER_RECORDS_ACTIVE_PLUS  = 'Active Plus';
-const PES_TRACKER_RECORDS_NOT_ACTIVE   = 'Not Active';
-const PES_TRACKER_RECORDS_ALL          = 'All';
-const PES_TRACKER_RECORDS_ACTIVE_REQUESTED = 'Active Requested';
-const PES_TRACKER_RECORDS_ACTIVE_PROVISIONAL = 'Active Provisional';
+    const PES_TRACKER_RECORDS_ACTIVE       = 'Active';
+    const PES_TRACKER_RECORDS_ACTIVE_PLUS  = 'Active Plus';
+    const PES_TRACKER_RECORDS_NOT_ACTIVE   = 'Not Active';
+    const PES_TRACKER_RECORDS_ALL          = 'All';
+    const PES_TRACKER_RECORDS_ACTIVE_REQUESTED = 'Active Requested';
+    const PES_TRACKER_RECORDS_ACTIVE_PROVISIONAL = 'Active Provisional';
 
-const PES_TRACKER_RETURN_RESULTS_AS_ARRAY      = 'array';
-const PES_TRACKER_RETURN_RESULTS_AS_RESULT_SET = 'resultSet';
+    const PES_TRACKER_RETURN_RESULTS_AS_ARRAY      = 'array';
+    const PES_TRACKER_RETURN_RESULTS_AS_RESULT_SET = 'resultSet';
 
-const PES_TRACKER_STAGE_CONSENT        = 'Consent Form';
-const PES_TRACKER_STAGE_WORK           = 'Right to Work';
-const PES_TRACKER_STAGE_ID             = 'Proof of Id';
-const PES_TRACKER_STAGE_RESIDENCY      = 'Residency';
-const PES_TRACKER_STAGE_CREDIT         = 'Credit Check';
-const PES_TRACKER_STAGE_SANCTIONS      = 'Financial Sanctions';
-const PES_TRACKER_STAGE_CRIMINAL       = 'Criminal Records Check';
-const PES_TRACKER_STAGE_ACTIVITY       = 'Activity';
-const PES_TRACKER_STAGE_QUALIFICATIONS = 'Qualifications';
-const PES_TRACKER_STAGE_DIRECTORS      = 'Directors';
-const PES_TRACKER_STAGE_MEDIA          = 'Media';
-const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
-const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
+    const PES_TRACKER_STAGE_CONSENT        = 'Consent Form';
+    const PES_TRACKER_STAGE_WORK           = 'Right to Work';
+    const PES_TRACKER_STAGE_ID             = 'Proof of Id';
+    const PES_TRACKER_STAGE_RESIDENCY      = 'Residency';
+    const PES_TRACKER_STAGE_CREDIT         = 'Credit Check';
+    const PES_TRACKER_STAGE_SANCTIONS      = 'Financial Sanctions';
+    const PES_TRACKER_STAGE_CRIMINAL       = 'Criminal Records Check';
+    const PES_TRACKER_STAGE_ACTIVITY       = 'Activity';
+    const PES_TRACKER_STAGE_QUALIFICATIONS = 'Qualifications';
+    const PES_TRACKER_STAGE_CIFAS          = 'CIFAS';
+    const PES_TRACKER_STAGE_DIRECTORS      = 'Directors';
+    const PES_TRACKER_STAGE_MEDIA          = 'Media';
+    const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
+    const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
 
-const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
+    const PES_TRACKER_STAGES =  array(
+        'CONSENT',
+        'RIGHT_TO_WORK',
+        'PROOF_OF_ID',
+        'PROOF_OF_RESIDENCY',
+        'CREDIT_CHECK',
+        'FINANCIAL_SANCTIONS',
+        'CRIMINAL_RECORDS_CHECK',
+        'PROOF_OF_ACTIVITY',
+        'QUALIFICATIONS',
+        'CIFAS',
+        'DIRECTORS',
+        'MEDIA',
+        'MEMBERSHIP',
+        'NI_EVIDENCE'
+    );
 
-const CHASER_LEVEL_ONE = 'One';
-const CHASER_LEVEL_TWO = 'Two';
-const CHASER_LEVEL_THREE = 'Three';
+    const CHASER_LEVEL_ONE = 'One';
+    const CHASER_LEVEL_TWO = 'Two';
+    const CHASER_LEVEL_THREE = 'Three';
 
-const LEVEL_MAP = array('One'=>'(L1)','Two'=>'(L2)','Three'=>'(L3)');
-const LEVEL_MAP_NUMBER = array('One'=>'1','Two'=>'2','Three'=>'3');
+    const LEVEL_MAP = array('One'=>'(L1)','Two'=>'(L2)','Three'=>'(L3)');
+    const LEVEL_MAP_NUMBER = array('One'=>'1','Two'=>'2','Three'=>'3');
 
-const PROCESS_STATUS_PES = 'PES';
-const PROCESS_STATUS_USER = 'User';
-const PROCESS_STATUS_REQUESTOR = 'Requestor';
-const PROCESS_STATUS_CRC = 'CRC';
-const PROCESS_STATUS_UNKOWN = 'Unknown';
+    const PROCESS_STATUS_PES = 'PES';
+    const PROCESS_STATUS_USER = 'User';
+    const PROCESS_STATUS_REQUESTOR = 'Requestor';
+    const PROCESS_STATUS_CRC = 'CRC';
+    const PROCESS_STATUS_UNKOWN = 'Unknown';
 
-public $lastSelectSql;
+    public $lastSelectSql;
 
     static function preparePesEventsStmt($records='Active', $upesRef=null, $accountId=null, $start=0, $length=10, $predicate=null){
         switch (trim($records)){
@@ -100,16 +116,14 @@ public $lastSelectSql;
         }
       
         $sql = " SELECT P.CNUM ";
-        $sql.= ", P.UPES_REF ";
         $sql.= ", P.EMAIL_ADDRESS ";
-        $sql.= ", A.ACCOUNT ";
-        $sql.= ", A.ACCOUNT_ID ";
-        $sql.= ", A.ACCOUNT_TYPE ";
-        $sql.= ", C.CONTRACT";
         $sql.= ", P.PASSPORT_FIRST_NAME ";
         $sql.= ", P.PASSPORT_LAST_NAME ";
         $sql.= ", case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else P.PASSPORT_FIRST_NAME CONCAT ' ' CONCAT P.PASSPORT_LAST_NAME end as FULL_NAME  ";
         $sql.= ", P.COUNTRY ";
+        $sql.= ", P.IBM_STATUS ";
+        $sql.= ", AP.UPES_REF ";
+        $sql.= ", AP.ACCOUNT_ID ";
         $sql.= ", AP.PES_DATE_REQUESTED ";
         $sql.= ", AP.PES_REQUESTOR ";
         $sql.= ", AP.CONSENT ";
@@ -121,6 +135,7 @@ public $lastSelectSql;
         $sql.= ", AP.CRIMINAL_RECORDS_CHECK ";
         $sql.= ", AP.PROOF_OF_ACTIVITY ";
         $sql.= ", AP.QUALIFICATIONS ";
+        $sql.= ", AP.CIFAS ";
         $sql.= ", AP.DIRECTORS ";
         $sql.= ", AP.MEDIA ";
         $sql.= ", AP.MEMBERSHIP ";
@@ -133,7 +148,9 @@ public $lastSelectSql;
         $sql.= ", AP.COMMENT ";
         $sql.= ", AP.PRIORITY ";
         $sql.= ", AP.COUNTRY_OF_RESIDENCE ";
-        $sql.= ", P.IBM_STATUS ";
+        $sql.= ", A.ACCOUNT ";
+        $sql.= ", A.ACCOUNT_TYPE ";
+        $sql.= ", C.CONTRACT ";
         $sql.= ", PL.PES_LEVEL ";
         $sql.= ", PL.PES_LEVEL_DESCRIPTION ";
 
@@ -166,7 +183,7 @@ public $lastSelectSql;
                 $pesStatusPredicate = "  AP.PES_STATUS in('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING .  "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "','" . AccountPersonRecord::PES_STATUS_MOVER. "') ";
                 break;
             case self::PES_TRACKER_RECORDS_ACTIVE_PLUS :
-                $pesStatusPredicate = "  AP.PES_STATUS in('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "','" . AccountPersonRecord::PES_STATUS_CANCEL_CONFIRMED . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "','" . AccountPersonRecord::PES_STATUS_RECHECK_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_REMOVED. "','" . AccountPersonRecord::PES_STATUS_CLEARED. "','" . AccountPersonRecord::PES_STATUS_MOVER. "') ";
+                $pesStatusPredicate = "  AP.PES_STATUS in('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "','" . AccountPersonRecord::PES_STATUS_CANCEL_CONFIRMED . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "','" . AccountPersonRecord::PES_STATUS_RECHECK_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_REMOVED. "','" . AccountPersonRecord::PES_STATUS_CLEARED. "','" . AccountPersonRecord::PES_STATUS_CLEARED_AMBER. "','" . AccountPersonRecord::PES_STATUS_MOVER. "') ";
                 break;
             case self::PES_TRACKER_RECORDS_ACTIVE_REQUESTED :
                 $pesStatusPredicate = "  AP.PES_STATUS in('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_STAGE_1. "','" . AccountPersonRecord::PES_STATUS_STAGE_2. "','" . AccountPersonRecord::PES_STATUS_RECHECK_REQ . "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING .  "','" . AccountPersonRecord::PES_STATUS_MOVER. "') ";
@@ -237,7 +254,7 @@ public $lastSelectSql;
         $table = "<table id='pesTrackerTable' class='table table-striped table-bordered table-condensed '  style='width:100%'>
 		<thead>
 		<tr class='' ><th>Person Details</th><th>Account</th><th>Requestor</th>
-		<th >Consent Form</th>
+		<th>Consent Form</th>
 		<th>Proof or Right to Work</th>
 		<th>Proof of ID</th>
 		<th>Proof of Residence</th>
@@ -246,6 +263,7 @@ public $lastSelectSql;
 		<th>Criminal Records Check</th>
 		<th>Proof of Activity</th>
 		<th>Qualifications</th>
+        <th>CIFAS</th>
 		<th>Directors</th>
 		<th>Media</th>
 		<th>Membership</th>
@@ -388,6 +406,7 @@ public $lastSelectSql;
         $resultSet = $this->execute($sql);
         $resultSet ? null : die("SQL Failed");
         $allData = array();
+        $allData['data'] = array();
 
         /*
         while(($row = db2_fetch_assoc($resultSet))==true){
@@ -414,6 +433,7 @@ public $lastSelectSql;
             $account = $row['ACCOUNT'];
             $fullName = $row['FULL_NAME'];
             $emailaddress = $row['EMAIL_ADDRESS'];
+            $contract = $row['CONTRACT'];
 
             $formattedIdentityField = self::formatEmailFieldOnTracker($row);
             $cellContent = "<td class='formattedEmailTd'>
@@ -421,10 +441,12 @@ public $lastSelectSql;
             </td>";
             $row['PERSON_DETAILS'] = array('display'=>$cellContent, 'sort'=>false);
 
-            $cellContent = "<td>".$row['ACCOUNT']."<br/>".$row['PES_LEVEL']."<br/>".$row['PES_LEVEL_DESCRIPTION']."</td>";
+            $accountText = !empty($account) ? $account : "<span style='color: red;'></span>";
+            $cellContent = "<td>".$accountText."<br/>".$row['PES_LEVEL']."<br/>".$row['PES_LEVEL_DESCRIPTION']."</td>";
             $row['ACCOUNT_DETAILS'] = array('display'=>$cellContent, 'sort'=>false);
 
-            $cellContent = "<td>".$row['CONTRACT']."</td>";
+            $contractText = !empty($contract) ? $contract : "<span style='color: red;'></span>";
+            $cellContent = "<td>".$contractText."</td>";
             $row['CONTRACT_DETAILS'] = array('display'=>$cellContent, 'sort'=>false);
 
             $originalRequestor = $row['PES_REQUESTOR'];
@@ -486,8 +508,10 @@ public $lastSelectSql;
             <div class='pesComments' data-upesacc='".$upesref.$accountId."' data-upesref='".$upesref."'><small>".$row['COMMENT']."</small></div>
             </td>";
             $row['COMMENT'] = array('display'=>$cellContent, 'sort'=>false);
-            $allData[] = $row;
+            $allData['data'][]  = $row;
         }
+
+        $allData['sql'] = $sql;
 
         return $allData;
     }
@@ -514,7 +538,7 @@ public $lastSelectSql;
     function displayTable($records='Active Initiated'){
         ?>
         <div class='container-fluid' >
-        <div class='col-sm-8 col-sm-offset-1'>
+        <div class='col-sm-10 col-sm-offset-1'>
           <form class="form-horizontal">
   			<div class="form-group">
     			<label class="control-label col-sm-1" for="pesTrackerTableSearch">Table Search:</label>                
@@ -583,6 +607,7 @@ public $lastSelectSql;
                     <th>Criminal Records Check</th>
                     <th>Proof of Activity</th>
                     <th>Qualifications</th>
+                    <th>CIFAS</th>
                     <th>Directors</th>
                     <th>Media</th>
                     <th>Membership</th>
@@ -602,6 +627,7 @@ public $lastSelectSql;
                         <td class='nonSearchable'>Criminal Records Check</td>
                         <td class='nonSearchable'>Proof of Activity</td>
                         <td class='nonSearchable'>Qualifications</td>
+                        <td class='nonSearchable'>CIFAS</td>
                         <td class='nonSearchable'>Directors</td>
                         <td class='nonSearchable'>Media</td>
                         <td class='nonSearchable'>Membership</td>
@@ -917,7 +943,6 @@ public $lastSelectSql;
                 $dateField = 'PES_EVIDENCE_DATE';
                 break;
             case AccountPersonRecord::PES_STATUS_CLEARED:
-//            case AccountPersonRecord::PES_STATUS_CLEARED_PERSONAL:
                 $dateField = 'PES_CLEARED_DATE';
                 $this->setPesRescheckDate($upesref,$accountid, $requestor, $dateToUse ); // too Soon, we've not set the new Cleared Date
                 break;

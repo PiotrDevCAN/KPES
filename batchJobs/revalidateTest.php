@@ -10,7 +10,7 @@ use itdq\slack;
 
 // $slack = new slack();
 
-$GLOBALS['Db2Schema'] = 'UPES';
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
 
 echo $GLOBALS['Db2Schema'];
 

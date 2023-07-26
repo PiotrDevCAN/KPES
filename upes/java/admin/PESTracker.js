@@ -13,8 +13,8 @@ import commentBox from '../modules/boxes/commentBox.js';
 import extractTrackerBox from '../modules/boxes/extractTrackerBox.js';
 import togglePESTrackerStatusDetailsBox from '../modules/boxes/togglePesTrackerStatusDetailsBox.js';
 
-$.expr[":"].contains = $.expr.createPseudo(function(arg) {
-    return function( elem ) {
+$.expr[":"].contains = $.expr.createPseudo(function (arg) {
+    return function (elem) {
         return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
     };
 });
@@ -32,12 +32,12 @@ class PESTracker {
         this.listenForFilterProcess(); // PAGE filtering keep where it is now
         this.listenForKeyUpPesTrackerTableSearch();
 
-        console.log($('button[name=pesRecordFilter]:checked'));
-        console.log($('button[name=pesRecordFilter]:checked').val());
-        console.log($('button[name=pesRecordFilter]:checked').data('pesrecords'));
+        // console.log($('button[name=pesRecordFilter]:checked'));
+        // console.log($('button[name=pesRecordFilter]:checked').val());
+        // console.log($('button[name=pesRecordFilter]:checked').data('pesrecords'));
 
-        console.log($('.btnRecordSelection'));
-        console.log($('.btnRecordSelection:checked'));
+        // console.log($('.btnRecordSelection'));
+        // console.log($('.btnRecordSelection:checked'));
 
         console.log('--- Function --- PESTracker.constructor');
     }
@@ -45,9 +45,9 @@ class PESTracker {
     searchTable() {
         var filter = $('#pesTrackerTableSearch').val();
         var table = this.table;
-    
-        if(filter.length > 3){
-            table.search( filter ).draw();
+
+        if (filter.length > 3) {
+            table.search(filter).draw();
         } else {
             table.search('').draw();
         }
@@ -68,22 +68,22 @@ class PESTracker {
                         d.records = $('.btnRecordSelection.active').data('pesrecords');
                     },
                     dataSrc: function (json) {
-                        console.log('dataSrc');
-                        console.log(json);
-                        console.log($('#pesTrackerTable_processing').is(":visible"));
+                        // console.log('dataSrc');
+                        // console.log(json);
+                        // console.log($('#pesTrackerTable_processing').is(":visible"));
 
                         //Make your callback here.
                         if (json.error.length != 0) {
                             $('#errorMessageBody').html(json.error);
                             $('#errorMessageModal').modal('show');
                         }
-                        console.log(json.data);
+                        // console.log(json.data);
                         return json.data;
                     },
                     beforeSend: function (jqXHR, settings) {
-                        console.log('before send');
-                        console.log($('.dataTables_processing'));
-                        console.log($('#pesTrackerTable_processing').is(":visible"));
+                        // console.log('before send');
+                        // console.log($('.dataTables_processing'));
+                        // console.log($('#pesTrackerTable_processing').is(":visible"));
 
                         $.each(xhrPool, function (idx, jqXHR) {
                             jqXHR.abort();  // basically, cancel any existing request, so this one is the only one running
@@ -138,6 +138,8 @@ class PESTracker {
                     }, {
                         data: "QUALIFICATIONS", render: { _: "display", sort: "sort" }
                     }, {
+                        data: "CIFAS", render: { _: "display", sort: "sort" }
+                    }, {
                         data: "DIRECTORS", render: { _: "display", sort: "sort" }
                     }, {
                         data: "MEDIA", render: { _: "display", sort: "sort" }
@@ -191,10 +193,10 @@ class PESTracker {
 
     listenForKeyUpPesTrackerTableSearch() {
         var $this = this;
-		$(document).on('keyup', '#pesTrackerTableSearch', function (e) {
+        $(document).on('keyup', '#pesTrackerTableSearch', function (e) {
             $this.searchTable();
-		});
-	}
+        });
+    }
 }
 
 const PesTracker = new PESTracker();

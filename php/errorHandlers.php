@@ -27,10 +27,11 @@ function myErrorHandler($code, $message, $file, $line) {
     $mailError->SMTPAutoTLS = false;
     $mailError->Port = 25;
 
-    $replyto = 'atm.pes.processing@uk.ibm.com';
+    $replyto = $_ENV['noreplyemailid'];
     $mailError->setFrom($replyto);
     $mailError->isHTML(true);
     $mailError->Subject = "**" . $_ENV['environment'] . "**" . 'Error has occurred while running PHP script';
+
     $response = array(
         'code' => $code, 
         'message' => $message, 
@@ -48,7 +49,7 @@ function fatalErrorShutdownHandler() {
     if (!is_null($last_error)) {
         if ($last_error['type'] === E_ERROR) {
             // fatal error
-            myErrorHandler(E_ERROR, $last_error['message'], $last_error['file'], $last_error['line']);
+            myErrorHandler(E_ERROR, $last_error['message'].'FROM fatalErrorShutdownHandler', $last_error['file'], $last_error['line']);
         }    
     }
 }

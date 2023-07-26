@@ -3,8 +3,6 @@ use itdq\DbTable;
 use upes\AllTables;
 use upes\AccountPersonRecord;
 
-$GLOBALS['Db2Schema'] = 'UPES';
-
 $months = array('','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
 $twelveMonthsAgo = new DateTime("first day of this month");

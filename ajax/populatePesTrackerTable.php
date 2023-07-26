@@ -17,41 +17,43 @@ $draw = isset($_REQUEST['draw']) ? $_REQUEST['draw'] * 1 : 1 ;
 $start = isset($_REQUEST['start']) ? $_REQUEST['start'] * 1 : 1 ;
 $length = isset($_REQUEST['length']) ? $_REQUEST['length'] : 50;
 
-//$predicate = !empty($_REQUEST['search']['value']) ? " AND LOWER(P.EMAIL_ADDRESS) like '%" . db2_escape_string(strtolower(trim($_REQUEST['search']['value']))) . "%' " : null;
-// $predicate = !empty($_REQUEST['search']['value']) ? " AND REGEXP_LIKE(P.EMAIL_ADDRESS, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')" : null;
-
 $predicate = '';
 if(!empty($_REQUEST['search']['value'])) {
-    $predicate .= " AND (REGEXP_LIKE(P.PASSPORT_FIRST_NAME, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.PASSPORT_LAST_NAME, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.CNUM, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.IBM_STATUS, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.COUNTRY, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.COUNTRY_OF_RESIDENCE, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.UPES_REF, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_ID, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_TYPE, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.FULL_NAME, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.EMAIL_ADDRESS, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL_DESCRIPTION, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_REQUESTOR, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_DATE_REQUESTED, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.DATE_LAST_CHASED, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_STATUS, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.COMMENT, '". db2_escape_string(trim($_REQUEST['search']['value'])) . "', 'i')";
+    $searchValue = db2_escape_string(trim($_REQUEST['search']['value']));
+    $predicate .= " AND (REGEXP_LIKE(P.PASSPORT_FIRST_NAME, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.PASSPORT_LAST_NAME, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.CNUM, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.IBM_STATUS, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.COUNTRY, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.COUNTRY_OF_RESIDENCE, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.UPES_REF, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_ID, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_TYPE, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.FULL_NAME, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(P.EMAIL_ADDRESS, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL_DESCRIPTION, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.PES_REQUESTOR, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.PES_DATE_REQUESTED, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.DATE_LAST_CHASED, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.PES_STATUS, '". $searchValue . "', 'i')";
+    $predicate .= " OR REGEXP_LIKE(AP.COMMENT, '". $searchValue . "', 'i')";
     $predicate .= ") ";
 }
 
 $pesTrackerTable = new AccountPersonTable(AllTables::$ACCOUNT_PERSON);
-$records = empty($_REQUEST['records'])   ? AccountPersonTable::PES_TRACKER_RECORDS_ACTIVE : $_REQUEST['records'];
+$records = empty($_REQUEST['records']) ? AccountPersonTable::PES_TRACKER_RECORDS_ACTIVE : $_REQUEST['records'];
 
 // $table = $pesTrackerTable->buildTable($records);
-$data = $pesTrackerTable->returnAsArray($records, 'array', null, null, $start, $length, $predicate);
+$dataAndSql = $pesTrackerTable->returnAsArray($records, 'array', null, null, $start, $length, $predicate);
+list(
+    'data' => $data, 
+    'sql' => $sql
+) = $dataAndSql;
 
 // $sql = $pesTrackerTable->preparePesEventsStmt($records);
-$total = $pesTrackerTable->totalRows($records, 'array', null, null, $start, $length);
+$total = $pesTrackerTable->totalRows($records, 'array', null, null);
 $filtered = $pesTrackerTable->recordsFiltered($records, 'array', null, null, $predicate);
 
 // $dataJsonAble = json_encode($table);
@@ -65,12 +67,8 @@ if($dataJsonAble) {
         "data"=>$data,
         'recordsTotal'=>$total,
         'recordsFiltered'=>$filtered,
-        "error"=>$messages
-        // "records"=>$records,
-        // "success"=>$success,
-        // "messages"=>$messages,
-        // "table"=>$table,
-        // "sql"=>$sql,
+        "error"=>$messages,
+        "sql"=>$sql
     );
     
     if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {

@@ -6,8 +6,9 @@ use upes\AccountPersonTable;
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
-$loader = new Loader();
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
 
+$loader = new Loader();
 
 $date = new DateTime();
 $oneMonth = new DateInterval('P1M');

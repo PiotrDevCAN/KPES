@@ -1,7 +1,5 @@
 <?php
 
-use itdq\Loader;
-use upes\AllTables;
 use upes\PesEmail;
 
 ob_start();

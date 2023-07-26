@@ -7,7 +7,6 @@ use upes\AllTables;
 use upes\PersonRecord;
 use upes\PersonTable;
 
-
 ob_start();
 $pesEmailObj = new PesEmail();
 $accountPersonTable = new AccountPersonTable(AllTables::$ACCOUNT_PERSON);
@@ -23,7 +22,7 @@ $emailDetails = array();
 
 try {
 
-    $sendResponse = PesEmail::sendPesApplicationForms($_POST['account'], $_POST['country'], $personRecordData['CNUM'],  $personRecordData['FULL_NAME'], $names[0],array($personRecordData['EMAIL_ADDRESS']),$_POST['recheck']);
+    $sendResponse = PesEmail::sendPesApplicationForms($_POST['account'], $_POST['country'], $personRecordData['CNUM'],  $personRecordData['FULL_NAME'], $names[0], $personRecordData['EMAIL_ADDRESS'],$_POST['recheck']);
 
     $indicateRecheck = strtolower($_POST['recheck']) == 'yes' ? "(recheck)" : null;
     $nextStatus = strtolower($_POST['recheck']) == 'yes' ? AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING : AccountPersonRecord::PES_STATUS_PES_PROGRESSING ;

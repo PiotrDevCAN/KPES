@@ -28,7 +28,7 @@ $resultSet = $personTable->fetchPeopleList();
 if (!$resultSet) {
     echo db2_stmt_error();
     echo db2_stmt_errormsg();
-    throw new Exception('Error reading People from PERSON');
+    throw new \Exception('Error reading People from PERSON');
 }
 
 $callback = [$personTable, 'updateTable'];

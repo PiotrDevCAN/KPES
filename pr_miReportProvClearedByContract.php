@@ -3,7 +3,7 @@ use itdq\DbTable;
 use upes\AllTables;
 use upes\AccountPersonRecord;
 
-$GLOBALS['Db2Schema'] = 'UPES';
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
 
 $months = array('','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
@@ -41,7 +41,7 @@ if(!$rs){
 }
 
 $byMonth = array();
-$allAccounts = array();
+$allContracts = array();
 $maxYear = 0;
 $minYear = 9999;
 
