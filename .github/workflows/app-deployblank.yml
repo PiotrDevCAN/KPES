@@ -21,7 +21,7 @@ jobs:
             tlsSkipVerify: false
             secrets: |
                 kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
-                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN 
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_PASSWORD 
         - name: Checkout
           uses: actions/checkout@v3
         
