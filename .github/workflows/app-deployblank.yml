@@ -27,8 +27,7 @@ jobs:
         
         - name: Display credentials
           run: |
-                echo "JFROG_USER ${{ steps.import-secrets.outputs.JFROG_USER }}"
-                echo "JFROG_USER ${{ steps.import-secrets.outputs.JFROG_USER }}"
+                echo "JFROG_USER ${{ steps.import-secrets.outputs }}"
                 echo "JFROG_USER ${{ steps.import-secrets.outputs.JFROG_USER }}"
                 echo "JFROG_PW ${{ steps.import-secrets.outputs.JFROG_PASSWORD }}"
           shell: bash
