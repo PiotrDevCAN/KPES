@@ -20,9 +20,9 @@ jobs:
             token: ${{secrets.VAULT_TOKEN}}
             tlsSkipVerify: false
             secrets: |
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_PASSWORD | JFROG_PASSWORD ;
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN 
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_PASSWORD | JFROG_PASSWORD ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN 
         - name: Checkout
           uses: actions/checkout@v3
         - name: Login to Jfrog
@@ -59,12 +59,12 @@ jobs:
             token: ${{secrets.VAULT_TOKEN}}
             tlsSkipVerify: false
             secrets: |
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_PASSWORD | JFROG_PASSWORD ;
-                kps-gd-app-kpes/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN ;
-                kps-gd-app-kpes/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
-                kps-gd-app-kpes/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
-                kps-gd-app-kpes/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_PASSWORD | JFROG_PASSWORD ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE
         - name: Login to ARO Cluster
           id: set-aro-context
           uses: redhat-actions/oc-login@v1
