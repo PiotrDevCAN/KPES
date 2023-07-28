@@ -27,8 +27,9 @@ jobs:
         
         - name: Display credentials
           uses: actions/checkout@v3
-          run: echo ${{ steps.import-secrets.outputs.JFROG_USER }}
-          run: echo ${{ steps.import-secrets.outputs.JFROG_PASSWORD }}
+          run: |
+                echo ${{ steps.import-secrets.outputs.JFROG_USER }}
+                echo ${{ steps.import-secrets.outputs.JFROG_PASSWORD }}
           shell: bash
 
         - name: Login to Jfrog
