@@ -1,36 +1,93 @@
-# This is a basic workflow to help you get started with Actions
+name: ci
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "cirrus" branch
   push:
-    branches: [ "cirrus" ]
-  pull_request:
-    branches: [ "cirrus" ]
+    branches:
+      - "cirrus"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: [ self-hosted ]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  Build:
+    runs-on: [ self-hosted, aro-dev-westus3 ]
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+        - name: Get JFROG Credentials
+          id: import-secrets
+          uses: hashicorp/vault-action@v2
+          with:
+            url: https://vault.kyndryl.net
+            method: token
+            namespace: kyndryl/KYNDRYL_PRACTICES/
+            token: ${{secrets.VAULT_TOKEN}}
+            tlsSkipVerify: false
+            secrets: |
+                kps-gd-app-kpes/data/dev/w3us/jfrog  JFROG_USER | JFROG_USER ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog  JFROG_PASSWORD | JFROG_PASSWORD
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Login to Jfrog
+          uses: docker/login-action@v2
+          with:
+            registry: kyndryl.jfrog.io
+            username: ${{ steps.import-secrets.outputs.JFROG_USER }}
+            password: ${{ steps.import-secrets.outputs.JFROG_PASSWORD }}
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
+        - name: Build and push
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            file: ./Dockerfile
+            push: true
+            tags: kyndryl.jfrog.io/kpes-backend-docker-local/dev/kpes:latest 
+            
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+  Deploy:
+    name: Deploy
+    runs-on: [ self-hosted, aro-dev-westus3 ]
+    needs: [ Build ]
+    steps:
+        - name: Checkout Sourcecode
+          uses: actions/checkout@v3
+        - name: Import JFROG & ARO Secrets
+          id: import-secrets
+          uses: hashicorp/vault-action@v2
+          with:
+            url: https://vault.kyndryl.net
+            method: token
+            namespace: kyndryl/KYNDRYL_PRACTICES/
+            token: ${{secrets.VAULT_TOKEN}}
+            tlsSkipVerify: false
+            secrets: |
+                kps-gd-app-kpes/data/dev/w3us/jfrog  JFROG_USER | JFROG_USER ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog  JFROG_PASSWORD | JFROG_PASSWORD ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE
+        - name: Login to ARO Cluster
+          id: set-aro-context
+          uses: redhat-actions/oc-login@v1
+          with:
+            openshift_server_url: ${{ steps.import-secrets.outputs.SERVER_URL }}
+            openshift_token: ${{ steps.import-secrets.outputs.TOKEN }}
+            insecure_skip_tls_verify: true
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+        - name: Set ImagePullSecrets
+          id: image_secret
+          uses: Azure/k8s-create-secret@v1.1
+          with:
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+            container-registry-url: kyndryl.jfrog.io
+            container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
+            container-registry-password: ${{ steps.import-secrets.outputs.JFROG_PASSWORD }}
+            secret-name: kpes-app-secrets
+        - name: Deploy application
+          id: deploy-app
+          uses: Azure/k8s-deploy@v4
+          with:
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+            manifests: |
+              myapp-deployment.yml
+              myapp-service.yml
+              myapp-sn-dev_route.yml
+            imagepullsecrets: |
+              kpes-app-secrets
