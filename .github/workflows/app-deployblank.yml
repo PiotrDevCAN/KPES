@@ -8,7 +8,7 @@ on:
 
 jobs:
   Build:
-    runs-on: [ self-hosted, aro-dev-westus3 ]
+    runs-on: [ aro-dev-westus3 ]
     steps:
         - name: Get JFROG Credentials
           id: import-secrets
