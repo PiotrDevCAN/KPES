@@ -42,6 +42,7 @@ class AccountPersonTable extends DbTable {
     const PES_TRACKER_RETURN_RESULTS_AS_ARRAY      = 'array';
     const PES_TRACKER_RETURN_RESULTS_AS_RESULT_SET = 'resultSet';
 
+<<<<<<< HEAD
     const PES_TRACKER_STAGE_CONSENT        = 'Consent Form';
     const PES_TRACKER_STAGE_WORK           = 'Right to Work';
     const PES_TRACKER_STAGE_ID             = 'Proof of Id';
@@ -56,6 +57,9 @@ class AccountPersonTable extends DbTable {
     const PES_TRACKER_STAGE_MEDIA          = 'Media';
     const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
     const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
+=======
+const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
     const PES_TRACKER_STAGES =  array(
         'CONSENT',
@@ -130,6 +134,7 @@ class AccountPersonTable extends DbTable {
         $sql.= ", AP.RIGHT_TO_WORK ";
         $sql.= ", AP.PROOF_OF_ID ";
         $sql.= ", AP.PROOF_OF_RESIDENCY ";
+        $sql.= ", AP.PROOF_OF_RESIDENCY AS RAG_STATUS ";
         $sql.= ", AP.CREDIT_CHECK ";
         $sql.= ", AP.FINANCIAL_SANCTIONS ";
         $sql.= ", AP.CRIMINAL_RECORDS_CHECK ";
@@ -258,6 +263,7 @@ class AccountPersonTable extends DbTable {
 		<th>Proof or Right to Work</th>
 		<th>Proof of ID</th>
 		<th>Proof of Residence</th>
+        <th>RAG Status</th>
 		<th>Credit Check</th>
 		<th>Financial Sanctions</th>
 		<th>Criminal Records Check</th>
@@ -277,6 +283,7 @@ class AccountPersonTable extends DbTable {
 		<td class='nonSearchable'>Right to Work</td>
 		<td class='nonSearchable'>ID</td>
 		<td class='nonSearchable'>Residence</td>
+        <td class='nonSearchable'>RAG</td>
 		<td class='nonSearchable'>Credit Check</td>
 		<td class='nonSearchable'>Financial Sanctions</td>
 		<td class='nonSearchable'>Criminal Records Check</td>
@@ -789,6 +796,7 @@ class AccountPersonTable extends DbTable {
                 $alertClass='alert-info';
                 break;
         }
+<<<<<<< HEAD
         
         $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
 
@@ -806,6 +814,26 @@ class AccountPersonTable extends DbTable {
             <button class='btn btn-xs btn-success btnPesPriority accessPes accessCdi' data-pespriority='3' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Low'><span class='glyphicon glyphicon-pawn' ></button>
             <button class='btn btn-xs btn-info    btnPesPriority accessPes accessCdi' data-pespriority='99'    data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Unknown'><span class='glyphicon glyphicon-erase' ></button>
             </span>";
+=======
+
+       $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
+
+       $formattedField = $emailAddress . "<br/><small>";
+       $formattedField.= "<i>" . $row['PASSPORT_FIRST_NAME'] . "&nbsp;<b>" . $row['PASSPORT_LAST_NAME'] . "</b></i><br/>";
+       $formattedField.= $row['FULL_NAME'] . "</b></small><br/>Ref: " . $row['UPES_REF'];
+       $formattedField.= "<br/>CNUM: " . $row['CNUM'];
+       $formattedField.= "<br/>" . $row['IBM_STATUS'] . ":" . $row['COUNTRY'];
+       $formattedField.= "<br/>Resides:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
+       $formattedField.= "<br/>RAG Status:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
+       $formattedField.= "<div class='alert $alertClass priorityDiv'>Priority:" . $priority . "</div>";
+
+       $formattedField.="<span style='white-space:nowrap' >
+           <button class='btn btn-xs btn-danger  btnPesPriority accessPes accessCdi' data-pespriority='1'  data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='High' ><span class='glyphicon glyphicon-king' ></button>
+           <button class='btn btn-xs btn-warning btnPesPriority accessPes accessCdi' data-pespriority='2' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Medium' ><span class='glyphicon glyphicon-knight' ></button>
+           <button class='btn btn-xs btn-success btnPesPriority accessPes accessCdi' data-pespriority='3' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Low'><span class='glyphicon glyphicon-pawn' ></button>
+           <button class='btn btn-xs btn-info    btnPesPriority accessPes accessCdi' data-pespriority='99'    data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Unknown'><span class='glyphicon glyphicon-erase' ></button>
+           </span>";
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
 
         return $formattedField;

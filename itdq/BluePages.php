@@ -12,8 +12,6 @@ class BluePages {
 		return $cleanId;
 	}
 
-
-
 	static function getDetailsFromCnumSlapMulti($cnumArray,$parms="&uid&dept&div&cr&notesId&mail&managerSerialNumber&managerCountryCode&notesEmail&isManager"){
 	    $startTime = microtime(true);
 	    set_time_limit(120);
@@ -31,8 +29,10 @@ class BluePages {
 	     * http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmperson/(|(UID=099470866)(UID=001399866)).list/byJson?&uid&dept&div&c&managerCnum&managerCountryCode%C2%ACesEmail&isManager%C2%ACesId&mail
 	     */
 	    $ch = curl_init ( $urlTemplate );
+		// echo '<br/>';
+		// echo $urlTemplate;
 
-	    AuditTable::audit(__FUNCTION__ . ":" . print_r($urlTemplate,true),AuditTable::RECORD_TYPE_DETAILS);
+	    // AuditTable::audit(__FUNCTION__ . ":" . print_r($urlTemplate,true),AuditTable::RECORD_TYPE_DETAILS);
 	    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 	    curl_setopt ( $ch, CURLOPT_VERBOSE, true );
 	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -44,7 +44,7 @@ class BluePages {
 
 	    //$xml = simplexml_load_string($curlReturn);
 	    $jsonObject = json_decode($curlReturn);
-	    AuditTable::audit(__FUNCTION__ . ":" . print_r($curlReturn,true),AuditTable::RECORD_TYPE_DETAILS);
+	    // AuditTable::audit(__FUNCTION__ . ":" . print_r($curlReturn,true),AuditTable::RECORD_TYPE_DETAILS);
 	    return $jsonObject;
 	}
 
@@ -54,7 +54,6 @@ class BluePages {
 	    return $directoryEntries;
 	}
 
-
 	static function getAllDetailsFromCnumSlapMulti($batchOfCnums, &$allDetails, $report=true){
 	    echo $report ?  "<h4>About to process a batch of " . count($batchOfCnums) . " cnums</h4>" : null;
 	    $directoryEntries = BluePages::getDirectoryEntriesFromCnumSlapMulti($batchOfCnums);
@@ -63,7 +62,6 @@ class BluePages {
 	        bluePages::extractSpecificDetailsToAllDetails($directoryEntries, $allDetails);
 	    }
 	}
-
 
 	static function getDetailsFromIntranetId($intranetId){
 		if(empty($intranetId)){
@@ -127,10 +125,6 @@ class BluePages {
 		return self::processDetails($ch);
 	}
 
-
-
-
-
 	static function getNotesidFromIntranetId($intranetId){
 		if(empty($intranetId)){
 			return FALSE;
@@ -192,7 +186,6 @@ class BluePages {
 		}
 
 	}
-
 
 	static function validateNotesId($notesId) {
 		if(empty($notesId)){
@@ -328,14 +321,13 @@ class BluePages {
 		}
 	}
 
-
 	static function validateIntranetId($intranetId) {
 		if(empty($intranetId)){
 			return FALSE;
 		}
 		set_time_limit(120);
 		$url = "https://bluepages.ibm.com/BpHttpApisv3/wsapi?byInternetAddr=INTRANET_ID_HERE";
-//echo "<BR/>" . str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url);
+		//echo "<BR/>" . str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url);
 		$ch = curl_init ( str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url) );
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 
@@ -460,7 +452,6 @@ class BluePages {
 		}
 	}
 
-
 	function saveDeptToDb() {
 		if (isset ( $this->dept )) {
 		//	$sql = " INSERT INTO " . $_SESSION ['prefix'] . "." . $this->table . " ( NAME, SERIAL, COUNTRY_CODE, LOCATION, MGR_SERIAL, MGR_CTRY_CODE, REG_OR_SUBCO, INTERNET, EMPTYPE, HRACTIVE, HREMPLOYEETYPE, DEPT, HRFAMILYNAME, NOTESID, JOBRESPONSIB) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)  ";
@@ -518,41 +509,41 @@ class BluePages {
 	}
 
 	function savePersonToDb() {
-			$actual = 0;
-			$data [0] = substr ( $this->person  ['NAME'], 0, 50 );	 	// Name from BP
-			$data [1] = substr ( $this->person  ['EMPNUM'], 0, 6 );		// 6 Digit Serial
-			$data [2] = substr ( $this->person  ['EMPCC'], 0, 3 ); 		// 3 Digit Country Code
-			$data [3] = $this->person ['WORKLOC'] ; 					// 3 Digit Work Location
-			$data [4] = substr ( $this->person  ['MGRNUM'], 0, 6 );  	// Mgrs Serial
-			$data [5] = substr ( $this->person  ['MGRCC'], 0, 3 ); 		// Mgrs Country Code
-			if (stripos ( $data [0], '*CON' ) === false) {
-				$data [6] = 'R'; // They are a Regular
-			} else {
-				$data [6] = 'C'; // They are a Contractor
+		$actual = 0;
+		$data [0] = substr ( $this->person  ['NAME'], 0, 50 );	 	// Name from BP
+		$data [1] = substr ( $this->person  ['EMPNUM'], 0, 6 );		// 6 Digit Serial
+		$data [2] = substr ( $this->person  ['EMPCC'], 0, 3 ); 		// 3 Digit Country Code
+		$data [3] = $this->person ['WORKLOC'] ; 					// 3 Digit Work Location
+		$data [4] = substr ( $this->person  ['MGRNUM'], 0, 6 );  	// Mgrs Serial
+		$data [5] = substr ( $this->person  ['MGRCC'], 0, 3 ); 		// Mgrs Country Code
+		if (stripos ( $data [0], '*CON' ) === false) {
+			$data [6] = 'R'; // They are a Regular
+		} else {
+			$data [6] = 'C'; // They are a Contractor
+		}
+		$data[7]  = $this->person['INTERNET'];
+		$data[8]  = $this->person['EMPTYPE'];
+		$data[9]  = $this->person['HRACTIVE'];
+		$data[10] = $this->person['HREMPLOYEETYPE'];
+		$data[11] = $this->person['DEPT'];
+		$data[12] = $this->person['HRFAMILYNAME'];
+		$data[13] = $this->person['NOTESID'];
+		$data[14] = $this->person['JOBRESPONSIB'];
+		if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
+			$rs = db2_execute ( $this->preparedInsert, $data );
+			if (! $rs) {
+				echo "<BR>" . db2_stmt_error ();
+				echo "<BR>" . db2_stmt_errormsg () . "<BR>";
+				echo "<BR> Data :";
+				print_r ( $data );
+				exit ( "Unable to Execute $sql" );
 			}
-			$data[7]  = $this->person['INTERNET'];
-			$data[8]  = $this->person['EMPTYPE'];
-			$data[9]  = $this->person['HRACTIVE'];
-			$data[10] = $this->person['HREMPLOYEETYPE'];
-			$data[11] = $this->person['DEPT'];
-			$data[12] = $this->person['HRFAMILYNAME'];
-			$data[13] = $this->person['NOTESID'];
-			$data[14] = $this->person['JOBRESPONSIB'];
-			if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
-				$rs = db2_execute ( $this->preparedInsert, $data );
-				if (! $rs) {
-					echo "<BR>" . db2_stmt_error ();
-					echo "<BR>" . db2_stmt_errormsg () . "<BR>";
-					echo "<BR> Data :";
-					print_r ( $data );
-					exit ( "Unable to Execute $sql" );
-				}
-				$actual++ ;
-			}
-			$data = null;
-			if($this->online){
-				echo "<H2>Saved Details for : " . $this->CNUM . " " . $this->person  ['NAME'] . "</H2>";
-			}
+			$actual++ ;
+		}
+		$data = null;
+		if($this->online){
+			echo "<H2>Saved Details for : " . $this->CNUM . " " . $this->person  ['NAME'] . "</H2>";
+		}
 //			$rs = DB2_EXEC ( $_SESSION ['conn'], " COMMIT" );
 //			if (! $rs) {
 //				print_r ( $_SESSION );
@@ -560,7 +551,7 @@ class BluePages {
 //				echo "<BR>" . db2_stmt_errormsg () . "<BR>";
 //				exit ( "Error in: " . __METHOD__ . " running: COMMIT " );
 //			}
-		}
+	}
 
 	static function processDetails($ch){
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
@@ -595,15 +586,15 @@ class BluePages {
 	}
 
 	static function lookupLocations($locations){
-	        set_time_limit(120);
-	        //$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmperson/(|";
-	        //$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmworklocation/(|";
-	        $urlTemplate = $_SERVER['SERVER_NAME'] . "/api/bluepages.php?ibmworklocation/(|";
+		set_time_limit(120);
+		//$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmperson/(|";
+		//$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmworklocation/(|";
+		$urlTemplate = $_SERVER['SERVER_NAME'] . "/api/bluepages.php?ibmworklocation/(|";
 
-	        foreach ($locations as $loc){
-	            $urlTemplate .= "(workloc=" . trim($loc) . ")";
-	        }
-	        $urlTemplate .= ").list/byJson?";
+		foreach ($locations as $loc){
+			$urlTemplate .= "(workloc=" . trim($loc) . ")";
+		}
+		$urlTemplate .= ").list/byJson?";
 	    $ch = curl_init ( $urlTemplate );
 	    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 	    $curlReturn = curl_exec ( $ch );
@@ -611,7 +602,22 @@ class BluePages {
 	    return $jsonObject;
 	}
 
+	static function lookupOrganizations($rganizationCodes){
+		set_time_limit(120);
+		//$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmperson/(|";
+		$urlTemplate = "http://bluepages.ibm.com/BpHttpApisv3/slaphapi?ibmorganization/(|";
+		// $urlTemplate = $_SERVER['SERVER_NAME'] . "/api/bluepages.php?ibmorganization/(|";
 
+		foreach ($rganizationCodes as $orgcode){
+			$urlTemplate .= "(hrorganizationcode=" . trim($orgcode) . ")";
+		}
+		$urlTemplate .= ").list/byJson?";
+		$ch = curl_init ( $urlTemplate );
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+		$curlReturn = curl_exec ( $ch );
+		$jsonObject = json_decode($curlReturn);
+	return $jsonObject;
+}
 }
 
 ?>

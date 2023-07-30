@@ -19,7 +19,8 @@ class ContractRecord extends DbRecord
 
         ?>
         <form id='contractsForm' class="form-horizontal"  method='post'>
-        <div class="form-group required">
+        <hr>
+		<div class="form-group required">
             <label for='ACCOUNT_ID' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Account Name'>Account Name</label>
         	<div class='col-md-3'>
         		<select id='ACCOUNT_ID' class='form-group select2' name='ACCOUNT_ID' <?=$notEditable?> required='required'>
@@ -40,8 +41,7 @@ class ContractRecord extends DbRecord
 				<input id='CONTRACT_ID' name='CONTRACT_ID' type='hidden' value='0' />
             </div>
         </div>
-
-
+		<hr>
    		<div class='form-group'>
    		<div class='col-sm-offset-2 -col-md-3'>
         <?php
@@ -55,6 +55,7 @@ class ContractRecord extends DbRecord
   		?>
   		</div>
   		</div>
+		<hr>
 	</form>
     <?php
     }
