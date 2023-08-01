@@ -1,4 +1,4 @@
-name: ci-build-and-deploy
+name: ci-build-and-deploy-v1
 
 on:
   push:
