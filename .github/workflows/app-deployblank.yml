@@ -1,4 +1,4 @@
-name: ci-build-only-new-v2
+name: ci-build-and-deploy
 
 on:
   push:
@@ -38,3 +38,55 @@ jobs:
             file: ./Dockerfile
             push: true
             tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest 
+
+  Deploy:
+    name: Deploy
+    runs-on: [ aro-dev-westus3 ]
+    needs: [ Build ]
+    steps:
+        - name: Checkout Sourcecode
+          uses: actions/checkout@v3
+        - name: Import JFROG & ARO Secrets
+          id: import-secrets
+          uses: hashicorp/vault-action@v2
+          with:
+            url: https://vault.kyndryl.net
+            method: token
+            namespace: kyndryl/KYNDRYL_PRACTICES/
+            token: ${{secrets.VAULT_TOKEN}}
+            tlsSkipVerify: false
+            secrets: |
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_PASSWORD | JFROG_PASSWORD ;
+                kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
+                kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE
+        - name: Login to ARO Cluster
+          id: set-aro-context
+          uses: redhat-actions/oc-login@v1
+          with:
+            openshift_server_url: ${{ steps.import-secrets.outputs.SERVER_URL }}
+            openshift_token: ${{ steps.import-secrets.outputs.TOKEN }}
+            insecure_skip_tls_verify: true
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+        - name: Set ImagePullSecrets
+          id: image_secret
+          uses: Azure/k8s-create-secret@v1.1
+          with:
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+            container-registry-url: kyndryl.jfrog.io
+            container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
+            container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
+            secret-name: kpes-app-secrets
+        - name: Deploy application
+          id: deploy-app
+          uses: Azure/k8s-deploy@v4
+          with:
+            namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+            manifests: |
+              myapp-deployment.yml
+              myapp-service.yml
+              myapp-sn-dev_route.yml
+            imagepullsecrets: |
+              kpes-app-secrets
