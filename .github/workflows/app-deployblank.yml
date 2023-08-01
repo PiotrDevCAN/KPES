@@ -66,7 +66,8 @@ jobs:
           uses: redhat-actions/oc-login@v1
           with:
             openshift_server_url: ${{ steps.import-secrets.outputs.SERVER_URL }}
-            openshift_token: ${{ steps.import-secrets.outputs.SA_TOKEN }}
+            # openshift_token: ${{ steps.import-secrets.outputs.SA_TOKEN }}            
+            openshift_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6InRUZEpQeHdGSDRxQ3YteDgtQV95SEY3WGcxYkFfcmZOSjB6bjB2eGRSMFEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJucy1rcGVzLWdkLWtwcy1kZXYtd3VzMyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJzYS1rcGVzLWdkLWtwcy1kZXYtd3VzMy10b2tlbi1xY2tzdyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJzYS1rcGVzLWdkLWtwcy1kZXYtd3VzMyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjhlYTJmZmVjLWNhMjgtNDg2NS1iOTJjLTU0ZjM5MTU1ZmNiOCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpucy1rcGVzLWdkLWtwcy1kZXYtd3VzMzpzYS1rcGVzLWdkLWtwcy1kZXYtd3VzMyJ9.TocUN_0WKDqKVyNfi1R6ogxm4s8NqRg3UOROSbbO3vJ6uR4zUDemsVziZisIdvWHLUXrt_0JlWnXkVRDpk4NSM9lkL3GajZ5ZPKnEsCEAiNoPiRhUGMh9bISw9W4sLwBArfz6IYWEJ18TdQwS8X4P4CL9Tuhu-9biAmJ3CuO6h0hhBbXjNw2Kv84HxWe6P1-NV2OvQeSJveHCLaUwfpSIPnPr8hFZLPf-8tG-ShOnjjmViEq6MH7C2eDZoBNZRgmmbKjCV7a1HK1oQiEnvoeHrrVfJZDLOZTJGzIx8rUl3pwy9IXxSfAYvi6KFYE20QGnyRVpeoptW0b8Jq3e5c-3_ufjF5MhhCydU_HeIZA_Tcnen0uf_FNuGHqbqPYkZd2Lxi1wN8P7ynulAGiJCBmyswFqqgl4vqSNyf8FZSPXkClLWmp2BWuxomkOUXnqRNHKmwq7mWATiENkPE-zpqalhA3lwAsPBb4gTzmGb2QGM2qdtiA6EffKoWj3HbyXwxr8yRhht5BKn5ziGbzsJbvSs5RHVgZlDHrJpwkZFqlBeEowbGQL3XdR0DCg_3kBZ4pKP9nLrKdu7cRaj-quXOPlEziJXbRgS_A58YGl3ysqYkou3Zt5Up2gJaHMjhkTL5ZXug17-qp13GSWaYab3o4ONLLUeurD-BK-b29hVW6Rjw"
             insecure_skip_tls_verify: true
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
         - name: Set ImagePullSecrets
