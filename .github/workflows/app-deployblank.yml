@@ -37,4 +37,4 @@ jobs:
             context: .
             file: ./Dockerfile
             push: true
-            tags: kyndryl.jfrog.io/artifactory/uki-business-intelligence-test-docker-local:latest 
+            tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest 
