@@ -1,4 +1,4 @@
-name: ci-build-only-new-v1
+name: ci-build-only-new-v2
 
 on:
   push:
