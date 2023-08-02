@@ -85,8 +85,8 @@ jobs:
           with:
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
             manifests: |
-              myapp-deployment.yml
-              myapp-service.yml
-              myapp-sn-dev_route.yml
+              kps-gd-app-kpes/myapp-deployment.yml
+              kps-gd-app-kpes/myapp-service.yml
+              kps-gd-app-kpes/myapp-sn-dev_route.yml
             imagepullsecrets: |
               kpes-app-secrets
