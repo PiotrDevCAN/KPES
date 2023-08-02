@@ -10,7 +10,6 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: [ aro-dev-westus3 ]
-#     needs: [ Build ]
     steps:
         - name: Checkout Sourcecode
           uses: actions/checkout@v3
