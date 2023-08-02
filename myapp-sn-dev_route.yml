@@ -1,1 +1,73 @@
-
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    cirrus.ibm.com/submitted-by: piotr.tajanowicz@ibm.com
+    haproxy.router.openshift.io/timeout: 120s
+  resourceVersion: '519936101'
+  name: b7e3267f-b932-448a-b813-cfd24147c13b
+  uid: c0f71ceb-5f1e-4e26-b271-6950e399c465
+  creationTimestamp: '2021-03-18T10:52:44Z'
+  managedFields:
+    - manager: main
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2021-03-18T10:52:41Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:cirrus.ibm.com/submitted-by': {}
+        'f:spec':
+          'f:host': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2021-03-18T10:52:44Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+  namespace: upes-new-co
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: upes-new-co
+      uid: cf1ad500-bca9-4a85-aaf0-45ba31e3dc97
+  labels:
+    app: upes-new-co
+    applications.cirrus.ibm.com/name: upes-new-co
+    applications.cirrus.ibm.com/pipeline: 410eb7fc-d636-4808-bd4e-dc840082fa7e
+    crcshard: '2'
+    mtos.cio-project: c5c1c238-36ce-4b3c-8aed-5b5855249bbe
+    mtos.cluster: 3f369b42-08fb-4f45-0dd8-45f69f2071ce
+    mtos.env: prod
+    shard: A
+spec:
+  host: upes-new-co.ndal.apps.cirrus.ibm.com
+  to:
+    kind: Service
+    name: upes-new-co
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: upes-new-co.ndal.apps.cirrus.ibm.com
+      routerName: custom
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2022-06-21T20:46:03Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-custom.shard.ndal.apps.cirrus.ibm.com
