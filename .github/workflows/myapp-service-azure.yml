@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kpes-svc
+  labels:
+    app: kpes
+spec:
+  type: ClusterIP
+  selector:
+    app: kpes
+  ports:
+    - name: kpes-svc-port
+      port: 8090
+      protocol: TCP
+      targetPort: 8080
