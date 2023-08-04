@@ -33,9 +33,6 @@ spec:
           protocol: TCP
         imagePullPolicy: IfNotPresent
         terminationMessagePolicy: File
-        envFrom:
-        - secretRef:
-            name: kpes-south1-prod-private
         image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest' # Replace this with the actual image name and tag
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
