@@ -31,7 +31,7 @@ spec:
         - name: http
           containerPort: 8080
           protocol: TCP
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         terminationMessagePolicy: File
         image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest' # Replace this with the actual image name and tag
       automountServiceAccountToken: false
