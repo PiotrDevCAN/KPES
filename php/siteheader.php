@@ -324,6 +324,10 @@ if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
 $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
 $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
+echo '<pre>';
+var_dump($_ENV);
+echo '</pre>';
+
 // global var and config file
 include_once ('w3config.php');
 $content = array();
