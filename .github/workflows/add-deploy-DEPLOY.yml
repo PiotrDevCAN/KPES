@@ -52,8 +52,8 @@ jobs:
           with:    
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}    
             manifests: |
-              myapp-deployment-azure.yml
-              myapp-service-azure.yml
-              myapp-sn-dev_route-azure.yml    
+              ./myapp-deployment-azure.yml
+              ./myapp-service-azure.yml
+              ./myapp-sn-dev_route-azure.yml    
             imagepullsecrets: |       
               kpes-app-secrets
