@@ -51,7 +51,6 @@ jobs:
           uses: Azure/k8s-deploy@v4
           with:    
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}    
-            publish_dir: ./
             manifests: |
               myapp-deployment-azure.yml
               myapp-service-azure.yml
