@@ -51,9 +51,10 @@ jobs:
           uses: Azure/k8s-deploy@v4
           with:    
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}    
+            publish_dir: ./
             manifests: |
-              workflows/myapp-deployment-azure.yml
-              workflows/myapp-service-azure.yml
-              workflows/myapp-sn-dev_route-azure.yml    
+              myapp-deployment-azure.yml
+              myapp-service-azure.yml
+              myapp-sn-dev_route-azure.yml    
             imagepullsecrets: |       
               kpes-app-secrets
