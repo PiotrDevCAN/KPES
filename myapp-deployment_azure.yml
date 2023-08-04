@@ -14,6 +14,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext: {}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
     containers:
         - resources:
             limits:
@@ -37,5 +39,3 @@ spec:
             - secretRef:
                 name: kpes-south1-prod-private
           image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest'
-      automountServiceAccountToken: false
-      dnsPolicy: ClusterFirst
