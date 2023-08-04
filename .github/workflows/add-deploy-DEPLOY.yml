@@ -53,7 +53,6 @@ jobs:
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}    
             manifests: |
               ./test.yml
-              # ./myapp-deployment_azure.yml
               ./myapp-service_azure.yml
               ./myapp-sn-dev_route-azure.yml
             imagepullsecrets: |       
