@@ -321,12 +321,13 @@ if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
     // exit('ob_html_compress 2');
 }
 
-$GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
-$https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
-
+echo 'Has been application updated?';
 echo '<pre>';
 var_dump($_ENV);
 echo '</pre>';
+
+$GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+$https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
 // global var and config file
 include_once ('w3config.php');
