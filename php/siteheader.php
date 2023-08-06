@@ -273,6 +273,11 @@ function _microtime_float()
     return ((float) $usec + (float) $sec);
 }
 
+
+// Env variables walkaround
+$_ENV['environment'] = 'upes_newco_dev';
+
+
 $start = microtime(true);
 
 set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
@@ -320,11 +325,6 @@ if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
     ob_start("ob_html_compress");
     // exit('ob_html_compress 2');
 }
-
-echo 'Has been application updated?';
-echo '<pre>';
-var_dump($_ENV);
-echo '</pre>';
 
 $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
 $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
