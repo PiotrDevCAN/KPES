@@ -43,6 +43,7 @@ class AccountPersonTable extends DbTable {
     const PES_TRACKER_RETURN_RESULTS_AS_RESULT_SET = 'resultSet';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     const PES_TRACKER_STAGE_CONSENT        = 'Consent Form';
     const PES_TRACKER_STAGE_WORK           = 'Right to Work';
     const PES_TRACKER_STAGE_ID             = 'Proof of Id';
@@ -57,6 +58,9 @@ class AccountPersonTable extends DbTable {
     const PES_TRACKER_STAGE_MEDIA          = 'Media';
     const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
     const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
+=======
+const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
@@ -797,6 +801,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
                 break;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
 
@@ -815,6 +820,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
             <button class='btn btn-xs btn-info    btnPesPriority accessPes accessCdi' data-pespriority='99'    data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Unknown'><span class='glyphicon glyphicon-erase' ></button>
             </span>";
 =======
+=======
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
        $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
 

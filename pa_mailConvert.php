@@ -49,6 +49,10 @@ div.editable {
 <div class='row'>
 <div class='col-sm-6'>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<hr>
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 <hr>
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e

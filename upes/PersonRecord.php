@@ -62,9 +62,12 @@ class PersonRecord extends DbRecord
         ?>
         <form id='personForm' class="form-horizontal" method='post'>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="form-group required " >
             <label for='CNUM' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='<?=$cnumTitle?>'><?=$cnumLabel?></label>
 =======
+=======
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
         <hr>
         <div class="form-group required " >
             <label for='CNUM' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='IBM CNUM if applicable'><?=$ibmerLabel?></label>
@@ -79,7 +82,11 @@ class PersonRecord extends DbRecord
             <label for='EMAIL_ADDRESS' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
         	<div class='col-md-4'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' type='email' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
+=======
+				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e

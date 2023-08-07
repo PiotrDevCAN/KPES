@@ -24,6 +24,9 @@ $personRecord->displayForm(itdq\FormClass::$modeDEFINE);
 <<<<<<< HEAD
 =======
 include_once 'includes/modalError.html';
+<<<<<<< HEAD
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
+=======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 ?>
 </div>
@@ -198,6 +201,9 @@ $(document).ready(function(){
 });
 </script>
 
+<<<<<<< HEAD
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
+=======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 <?php
 Trace::pageLoadComplete($_SERVER['PHP_SELF']);

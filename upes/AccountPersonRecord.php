@@ -216,10 +216,18 @@ class AccountPersonRecord extends DbRecord
         ?>
         <form id='accountPersonForm' class="form-horizontal" method='post'>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="form-group required">
             <label for='UPES_REF' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
         	  <div class='col-md-3'>
 			      <select id='UPES_REF' class='form-group select2' name='UPES_REF' required >
+=======
+        <hr>
+        <div class="form-group required " >
+            <label for='UPES_REF' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
+        	  <div class='col-md-3'>
+			      <select id='UPES_REF' class='form-group select2' name='UPES_REF' required='required' >
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
         <hr>
         <div class="form-group required " >
@@ -238,6 +246,7 @@ class AccountPersonRecord extends DbRecord
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="form-group required">
             <label for='CONTRACT_ID' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Contract'>Contract</label>
         	  <div class='col-md-3'>
@@ -246,6 +255,11 @@ class AccountPersonRecord extends DbRecord
         <div class="form-group required " >
             <label for='FULL_NAME' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Full Name'>Full Name</label>
         	  <div class='col-md-3'>
+=======
+        <div class="form-group required " >
+            <label for='FULL_NAME' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Full Name'>Full Name</label>
+        	  <div class='col-md-3'>
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 				    <input id='FULL_NAME' name='FULL_NAME' class='form-control' placeholder='Select Individual Email Address' disabled required='required' />
             </div>
         </div>
@@ -254,6 +268,9 @@ class AccountPersonRecord extends DbRecord
             <label for='CONTRACT_ID' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Contract'>Contract</label>
         	  <div class='col-md-3'>
         		<select id='CONTRACT_ID' class='form-group select2' name='CONTRACT_ID' disabled required='required' >
+<<<<<<< HEAD
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
+=======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
         		<option value=''></option>
         		</select>
@@ -295,7 +312,12 @@ class AccountPersonRecord extends DbRecord
             <label for='PES_REQUESTOR' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Requestor Name'>Requestor Name</label>
         	  <div class='col-md-3'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    <input id='PES_REQUESTOR' name='PES_REQUESTOR' required class='form-control' value='<?=$_SESSION['ssoEmail']?>' />
+=======
+				    <input id='PES_DEFAULT_REQUESTOR' name='PES_DEFAULT_REQUESTOR' type='hidden' value='<?=$_SESSION['ssoEmail']?>' />
+            <input id='PES_REQUESTOR' name='PES_REQUESTOR' class='form-control' disabled value='<?=$_SESSION['ssoEmail']?>' required='required' />
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 				    <input id='PES_DEFAULT_REQUESTOR' name='PES_DEFAULT_REQUESTOR' type='hidden' value='<?=$_SESSION['ssoEmail']?>' />
             <input id='PES_REQUESTOR' name='PES_REQUESTOR' class='form-control' disabled value='<?=$_SESSION['ssoEmail']?>' required='required' />
@@ -752,6 +774,9 @@ class AccountPersonRecord extends DbRecord
 <?php
 }
 
+<<<<<<< HEAD
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
+=======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
     function sendNotificationToPesTaskid(){
 

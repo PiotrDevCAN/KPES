@@ -24,6 +24,12 @@ $upesrefToNameMapping = PersonTable::prepareJsonUpesrefToNameMapping();
 $accountPersonRecord = new AccountPersonRecord();
 $accountPersonRecord->displayForm(itdq\FormClass::$modeDEFINE);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+$accountPersonRecord->confirmFLMAsBoardingRequestorModal();
+$accountPersonRecord->confirmOtherAsBoardingRequestorModal();
+include_once 'includes/modalError.html';
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 $accountPersonRecord->confirmFLMAsBoardingRequestorModal();
 $accountPersonRecord->confirmOtherAsBoardingRequestorModal();

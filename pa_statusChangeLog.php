@@ -22,7 +22,10 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 </div>
 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
 <script>
 
