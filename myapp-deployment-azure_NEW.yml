@@ -37,5 +37,5 @@ spec:
           terminationMessagePolicy: File
           envFrom:
             - secretRef:
-                name: kpes-south1-prod-private
+              name: kpes-south1-prod-private
           image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest'

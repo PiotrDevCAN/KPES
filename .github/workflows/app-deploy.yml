@@ -38,7 +38,7 @@ jobs:
             context: .
             file: ./Dockerfile
             push: true
-            tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_2 
+            tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_3 
 
   Deploy:
     name: Deploy
@@ -79,6 +79,7 @@ jobs:
             container-registry-url: kyndryl.jfrog.io
             container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
             container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
+            my-test-key: "SOME INIT VALUE"
             secret-name: kpes-app-secrets
         - name: Deploy application  
           id: deploy-app
@@ -86,8 +87,8 @@ jobs:
           with:    
             namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}    
             manifests: |
-              ./test.yml
-              ./myapp-service_azure.yml
+              ./myapp-deployment-azure.yml
+              ./myapp-service-azure.yml
               ./myapp-sn-dev_route-azure.yml
             imagepullsecrets: |       
               kpes-app-secrets

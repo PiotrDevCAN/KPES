@@ -14,6 +14,8 @@ spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       securityContext: {}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
       containers:
       - name: kpes
         resources:
@@ -33,6 +35,7 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_2' # Replace this with the actual image name and tag
-      automountServiceAccountToken: false
-      dnsPolicy: ClusterFirst
+        envFrom:
+          - secretRef:
+            name: kpes-app-secrets
+        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_3' # Replace this with the actual image name and tag

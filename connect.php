@@ -38,13 +38,13 @@ if( isset($_ENV['ssldsn']) )
 
     while(!$conn && ++$attempts < 3){
         // since Cirrus - we have the occasional problem connecting, so sleep and try again a couple of times 
-        $conn = tryConnect($conn_string);
-        if(!$conn){
-            error_log("Failed attempt $attempts to connect to DB2");
-            error_log("Msg:" . db2_conn_errormsg());
-            error_log("Err:" . db2_conn_error());
-            sleep(3);
-        }
+        // $conn = tryConnect($conn_string);
+        // if(!$conn){
+        //     error_log("Failed attempt $attempts to connect to DB2");
+        //     error_log("Msg:" . db2_conn_errormsg());
+        //     error_log("Err:" . db2_conn_error());
+        //     sleep(3);
+        // }
     }
     
 
