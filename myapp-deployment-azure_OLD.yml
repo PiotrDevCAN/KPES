@@ -18,7 +18,6 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: kpes
-        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_32' # Replace this with the actual image name and tag
         resources:
           limits:
             cpu: 500m
@@ -37,7 +36,6 @@ spec:
         imagePullPolicy: Always
         terminationMessagePolicy: File
         envFrom:
-        - configMapRef:
-            name: env-configmap
-        - secretRef:
-            name: env-secrets
+          - secretRef:
+              name: kpes-app-secrets
+        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_32' # Replace this with the actual image name and tag
