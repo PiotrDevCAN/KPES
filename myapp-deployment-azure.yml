@@ -38,8 +38,4 @@ spec:
         envFrom:
           - secretRef:
               name: kpes-app-secrets
-<<<<<<< HEAD
         image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_3' # Replace this with the actual image name and tag
-=======
-        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_3' # Replace this with the actual image name and tag a
->>>>>>> 51936eb69247e6330898a6d3b3153843d9f480c2
