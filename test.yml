@@ -33,6 +33,6 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest' # Replace this with the actual image name and tag
+        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_1' # Replace this with the actual image name and tag
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
