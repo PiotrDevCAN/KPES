@@ -71,6 +71,7 @@ if( isset($_ENV['ssldsn']) )
     }
     else
     {
+        
         error_log(__FILE__ . __LINE__ . " Connect to DB2 Failed");
         // error_log(__FILE__ . __LINE__ . $conn_string);
         // error_log(__FILE__ . __LINE__ . db2_conn_errormsg());
