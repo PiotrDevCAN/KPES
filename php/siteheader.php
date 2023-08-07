@@ -273,6 +273,9 @@ function _microtime_float()
     return ((float) $usec + (float) $sec);
 }
 
+echo '<pre>';
+var_dump($_ENV);
+echo '</pre>';
 
 // Env variables walk around
 $_ENV['environment'] = 'upes_newco_dev';
