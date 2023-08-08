@@ -17,6 +17,11 @@ spec:
       securityContext: {}
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
+      volumes:
+        - name: kpes-vol
+          configMap:
+            name: kpes-conf
+            key: kpes-conf
       containers:
         - name: kpes
           image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest
@@ -31,14 +36,18 @@ spec:
           env:
             - name: PORT
               value: "8080"
+            - name: MYSQL_USER
+              valueForm:
+                secretKeyRef:
+                  name: mysql.secret
+                  key: mysqluser
+          volumeMounts:
+            - name: kpes-conf-vol
+              mounthPath: /var/www/html/env-configmap.yml
+              subPath: env-configmap.yml
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          envFrom:
-            - configMapRef:
-                name: env-configmap.yml
-            - secretRef:
-                name: env-secrets.yml
