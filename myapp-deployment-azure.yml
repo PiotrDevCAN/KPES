@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,22 +18,22 @@ spec:
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       containers:
-      - name: kpes
-        image: 'kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_32' # Replace this with the actual image name and tag
-        resources:
-          limits:
-            cpu: 500m
-            memory: 512Mi
-          requests:
-            cpu: 32m
-            memory: 128Mi
-        terminationMessagePath: /dev/termination-log
-        env:
-        - name: PORT
-          value: '8080'
-        ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        imagePullPolicy: Always
-        terminationMessagePolicy: File
+        - name: kpes
+          image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_32
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 32m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          env:
+            - name: PORT
+              value: "8080"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
