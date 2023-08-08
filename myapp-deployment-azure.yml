@@ -36,8 +36,3 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        envFrom:
-        - configMapRef:
-            name: env-configmap
-        - secretRef:
-            name: env-secrets
