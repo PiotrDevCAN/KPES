@@ -42,16 +42,8 @@ $tracker        = new NavBarOption('Tracker','pc_pesTracker.php','accessCdi acce
 $mailConvert    = new NavBarOption('Notes ID to Email','pa_mailConvert.php','accessCdi accessPesTeam');
 $manualStatus   = new NavBarOption('Manual Status update','pa_statusUpdate.php','accessCdi accessPesTeam');
 $pesStatusAudit = new NavBarOption('PES Status Change Log','pa_statusChangeLog.php','accessCdi accessPesTeam');
-<<<<<<< HEAD
-<<<<<<< HEAD
 // $BPLookUp       = new NavbarOption('Blue Pages Lookup Form','pa_BPLookupForm.php','accessCdi accessPesTeam');
 $uploadPerson   = new NavbarOption('Person Data Update Form','pc_otPersonDataUpload.php','accessCdi accessPesTeam');
-=======
-$BPLookUp       = new NavbarOption('Blue Pages Lookup Form','pa_BPLookupForm.php','accessCdi accessPesTeam');
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-=======
-$BPLookUp       = new NavbarOption('Blue Pages Lookup Form','pa_BPLookupForm.php','accessCdi accessPesTeam');
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 $admin->addOption($accounts);
 $admin->addOption($contracts);
 $admin->addOption($pesLevels);
@@ -60,16 +52,8 @@ $admin->addOption($tracker);
 $admin->addOption($mailConvert);
 $admin->addOption($manualStatus);
 $admin->addOption($pesStatusAudit);
-<<<<<<< HEAD
-<<<<<<< HEAD
 // $admin->addOption($BPLookUp);
 $admin->addOption($uploadPerson);
-=======
-$admin->addOption($BPLookUp);
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-=======
-$admin->addOption($BPLookUp);
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
 $user          = new NavBarMenu("uPES",'accessCdi accessPesTeam accessUser ' );
 $userAdd       = new NavBarOption('Add to PES','pu_userAdd.php','accessCdi accessPesTeam accessUser ');
