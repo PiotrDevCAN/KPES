@@ -19,7 +19,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
         - name: kpes
-          image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_32
+          image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_33
           resources:
             limits:
               cpu: 500m
@@ -37,3 +37,8 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           terminationMessagePolicy: File
+          envFrom:
+            - configMapRef:
+                name: env-configmap
+            - secretRef:
+                name: env-secrets
