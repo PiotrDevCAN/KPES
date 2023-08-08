@@ -1,11 +1,12 @@
+---
 kind: Service
 apiVersion: v1
 metadata:
   name: upes-new-co
   namespace: upes-new-co
   uid: 5c484c74-d824-4b1a-8ac1-6cb78ae588e3
-  resourceVersion: '1274559054'
-  creationTimestamp: '2021-03-18T10:52:38Z'
+  resourceVersion: "1274559054"
+  creationTimestamp: 2021-03-18T10:52:38Z
   labels:
     app: upes-new-co
     applications.cirrus.ibm.com/eal: EAL-008862
@@ -13,9 +14,9 @@ metadata:
     mtos.env: prod
     mtos.cio-project: c5c1c238-36ce-4b3c-8aed-5b5855249bbe
     applications.cirrus.ibm.com/name: upes-new-co
-    cirrus.ibm.com/redeployed-at: '1663755136'
+    cirrus.ibm.com/redeployed-at: "1663755136"
     mtos.cluster: 3f369b42-08fb-4f45-0dd8-45f69f2071ce
-    applications.cirrus.ibm.com/autodeploy: 'false'
+    applications.cirrus.ibm.com/autodeploy: "false"
   ownerReferences:
     - apiVersion: cirrus.ibm.com/v1alpha1
       kind: Application
@@ -27,36 +28,36 @@ metadata:
     - manager: manager
       operation: Update
       apiVersion: v1
-      time: '2023-05-11T07:52:36Z'
+      time: 2023-05-11T07:52:36Z
       fieldsType: FieldsV1
       fieldsV1:
-        'f:metadata':
-          'f:labels':
-            'f:mtos.cio-project': {}
-            'f:applications.cirrus.ibm.com/name': {}
-            'f:cirrus.ibm.com/redeployed-at': {}
-            'f:mtos.cluster': {}
-            'f:app': {}
+        f:metadata:
+          f:labels:
+            f:mtos.cio-project: {}
+            f:applications.cirrus.ibm.com/name: {}
+            f:cirrus.ibm.com/redeployed-at: {}
+            f:mtos.cluster: {}
+            f:app: {}
             .: {}
-            'f:applications.cirrus.ibm.com/autodeploy': {}
-            'f:applications.cirrus.ibm.com/eal': {}
-            'f:applications.cirrus.ibm.com/pipeline': {}
-            'f:mtos.env': {}
-          'f:ownerReferences':
+            f:applications.cirrus.ibm.com/autodeploy: {}
+            f:applications.cirrus.ibm.com/eal: {}
+            f:applications.cirrus.ibm.com/pipeline: {}
+            f:mtos.env: {}
+          f:ownerReferences:
             .: {}
             'k:{"uid":"0a41c30d-de27-4648-822b-4d9a08ed7b03"}': {}
-        'f:spec':
-          'f:ports':
+        f:spec:
+          f:ports:
             .: {}
             'k:{"port":80,"protocol":"TCP"}':
               .: {}
-              'f:name': {}
-              'f:port': {}
-              'f:protocol': {}
-              'f:targetPort': {}
-          'f:selector': {}
-          'f:sessionAffinity': {}
-          'f:type': {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
 spec:
   clusterIP: 172.21.199.143
   ipFamilies:

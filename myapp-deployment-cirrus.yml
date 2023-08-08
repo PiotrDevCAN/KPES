@@ -1,127 +1,128 @@
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: '134'
-  resourceVersion: '1438524478'
+    deployment.kubernetes.io/revision: "134"
+  resourceVersion: "1438524478"
   name: upes-new-co
   uid: cf1ad500-bca9-4a85-aaf0-45ba31e3dc97
-  creationTimestamp: '2021-03-18T10:52:38Z'
+  creationTimestamp: 2021-03-18T10:52:38Z
   generation: 146
   managedFields:
     - manager: manager
       operation: Update
       apiVersion: apps/v1
-      time: '2022-10-19T02:03:36Z'
+      time: 2022-10-19T02:03:36Z
       fieldsType: FieldsV1
       fieldsV1:
-        'f:metadata':
-          'f:labels':
-            'f:mtos.cio-project': {}
-            'f:applications.cirrus.ibm.com/name': {}
-            'f:cirrus.ibm.com/redeployed-at': {}
-            'f:mtos.cluster': {}
-            'f:app': {}
+        f:metadata:
+          f:labels:
+            f:mtos.cio-project: {}
+            f:applications.cirrus.ibm.com/name: {}
+            f:cirrus.ibm.com/redeployed-at: {}
+            f:mtos.cluster: {}
+            f:app: {}
             .: {}
-            'f:applications.cirrus.ibm.com/autodeploy': {}
-            'f:applications.cirrus.ibm.com/eal': {}
-            'f:applications.cirrus.ibm.com/headless-service': {}
-            'f:applications.cirrus.ibm.com/quota': {}
-            'f:applications.cirrus.ibm.com/pipeline': {}
-            'f:mtos.env': {}
-          'f:ownerReferences':
+            f:applications.cirrus.ibm.com/autodeploy: {}
+            f:applications.cirrus.ibm.com/eal: {}
+            f:applications.cirrus.ibm.com/headless-service: {}
+            f:applications.cirrus.ibm.com/quota: {}
+            f:applications.cirrus.ibm.com/pipeline: {}
+            f:mtos.env: {}
+          f:ownerReferences:
             .: {}
             'k:{"uid":"0a41c30d-de27-4648-822b-4d9a08ed7b03"}': {}
-        'f:spec':
-          'f:progressDeadlineSeconds': {}
-          'f:replicas': {}
-          'f:revisionHistoryLimit': {}
-          'f:selector': {}
-          'f:strategy':
-            'f:rollingUpdate':
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
               .: {}
-              'f:maxSurge': {}
-              'f:maxUnavailable': {}
-            'f:type': {}
-          'f:template':
-            'f:metadata':
-              'f:labels':
-                'f:mtos.cio-project': {}
-                'f:applications.cirrus.ibm.com/name': {}
-                'f:cirrus.ibm.com/redeployed-at': {}
-                'f:mtos.cluster': {}
-                'f:app': {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                f:mtos.cio-project: {}
+                f:applications.cirrus.ibm.com/name: {}
+                f:cirrus.ibm.com/redeployed-at: {}
+                f:mtos.cluster: {}
+                f:app: {}
                 .: {}
-                'f:applications.cirrus.ibm.com/autodeploy': {}
-                'f:applications.cirrus.ibm.com/eal': {}
-                'f:applications.cirrus.ibm.com/headless-service': {}
-                'f:applications.cirrus.ibm.com/quota': {}
-                'f:applications.cirrus.ibm.com/pipeline': {}
-                'f:mtos.env': {}
-              'f:name': {}
-            'f:spec':
-              'f:containers':
+                f:applications.cirrus.ibm.com/autodeploy: {}
+                f:applications.cirrus.ibm.com/eal: {}
+                f:applications.cirrus.ibm.com/headless-service: {}
+                f:applications.cirrus.ibm.com/quota: {}
+                f:applications.cirrus.ibm.com/pipeline: {}
+                f:mtos.env: {}
+              f:name: {}
+            f:spec:
+              f:containers:
                 'k:{"name":"upes-new-co"}':
-                  'f:envFrom': {}
-                  'f:image': {}
-                  'f:terminationMessagePolicy': {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:terminationMessagePolicy: {}
                   .: {}
-                  'f:resources':
+                  f:resources:
                     .: {}
-                    'f:limits':
+                    f:limits:
                       .: {}
-                      'f:cpu': {}
-                      'f:memory': {}
-                    'f:requests':
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
                       .: {}
-                      'f:cpu': {}
-                      'f:memory': {}
-                  'f:env':
+                      f:cpu: {}
+                      f:memory: {}
+                  f:env:
                     .: {}
                     'k:{"name":"PORT"}':
                       .: {}
-                      'f:name': {}
-                      'f:value': {}
-                  'f:terminationMessagePath': {}
-                  'f:imagePullPolicy': {}
-                  'f:ports':
+                      f:name: {}
+                      f:value: {}
+                  f:terminationMessagePath: {}
+                  f:imagePullPolicy: {}
+                  f:ports:
                     .: {}
                     'k:{"containerPort":8080,"protocol":"TCP"}':
                       .: {}
-                      'f:containerPort': {}
-                      'f:name': {}
-                      'f:protocol': {}
-                  'f:name': {}
-              'f:dnsPolicy': {}
-              'f:automountServiceAccountToken': {}
-              'f:restartPolicy': {}
-              'f:schedulerName': {}
-              'f:nodeSelector': {}
-              'f:terminationGracePeriodSeconds': {}
-              'f:imagePullSecrets':
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:name: {}
+              f:dnsPolicy: {}
+              f:automountServiceAccountToken: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:nodeSelector: {}
+              f:terminationGracePeriodSeconds: {}
+              f:imagePullSecrets:
                 .: {}
                 'k:{"name":"mtos-quay"}': {}
-              'f:securityContext': {}
+              f:securityContext: {}
     - manager: kube-controller-manager
       operation: Update
       apiVersion: apps/v1
-      time: '2023-07-17T20:55:19Z'
+      time: 2023-07-17T20:55:19Z
       fieldsType: FieldsV1
       fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            'f:deployment.kubernetes.io/revision': {}
-        'f:status':
-          'f:availableReplicas': {}
-          'f:conditions':
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
             'k:{"type":"Progressing"}':
-              'f:lastUpdateTime': {}
-              'f:message': {}
-              'f:reason': {}
-          'f:observedGeneration': {}
-          'f:readyReplicas': {}
-          'f:replicas': {}
-          'f:updatedReplicas': {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
       subresource: status
   namespace: upes-new-co
   ownerReferences:
@@ -133,16 +134,16 @@ metadata:
       blockOwnerDeletion: true
   labels:
     app: upes-new-co
-    applications.cirrus.ibm.com/headless-service: 'false'
+    applications.cirrus.ibm.com/headless-service: "false"
     applications.cirrus.ibm.com/eal: EAL-008862
     applications.cirrus.ibm.com/pipeline: 94c8da03-4f04-4d73-aaea-579365a80d32
     mtos.env: prod
     applications.cirrus.ibm.com/quota: q512mb
     mtos.cio-project: c5c1c238-36ce-4b3c-8aed-5b5855249bbe
     applications.cirrus.ibm.com/name: upes-new-co
-    cirrus.ibm.com/redeployed-at: '1663755136'
+    cirrus.ibm.com/redeployed-at: "1663755136"
     mtos.cluster: 3f369b42-08fb-4f45-0dd8-45f69f2071ce
-    applications.cirrus.ibm.com/autodeploy: 'false'
+    applications.cirrus.ibm.com/autodeploy: "false"
 spec:
   replicas: 5
   selector:
@@ -154,19 +155,19 @@ spec:
       creationTimestamp: null
       labels:
         app: upes-new-co
-        applications.cirrus.ibm.com/headless-service: 'false'
+        applications.cirrus.ibm.com/headless-service: "false"
         applications.cirrus.ibm.com/eal: EAL-008862
         applications.cirrus.ibm.com/pipeline: 94c8da03-4f04-4d73-aaea-579365a80d32
         mtos.env: prod
         applications.cirrus.ibm.com/quota: q512mb
         mtos.cio-project: c5c1c238-36ce-4b3c-8aed-5b5855249bbe
         applications.cirrus.ibm.com/name: upes-new-co
-        cirrus.ibm.com/redeployed-at: '1663755136'
+        cirrus.ibm.com/redeployed-at: "1663755136"
         mtos.cluster: 3f369b42-08fb-4f45-0dd8-45f69f2071ce
-        applications.cirrus.ibm.com/autodeploy: 'false'
+        applications.cirrus.ibm.com/autodeploy: "false"
     spec:
       nodeSelector:
-        mtos.worker: ''
+        mtos.worker: ""
       restartPolicy: Always
       imagePullSecrets:
         - name: mtos-quay
@@ -185,7 +186,7 @@ spec:
           name: upes-new-co
           env:
             - name: PORT
-              value: '8080'
+              value: "8080"
           ports:
             - name: http
               containerPort: 8080
@@ -195,7 +196,7 @@ spec:
           envFrom:
             - secretRef:
                 name: upes-new-co-south1-prod-private
-          image: 'registry.cirrus.ibm.com/upes-new-co/upes-ghe-cdi-own-pipeline:dev_4'
+          image: registry.cirrus.ibm.com/upes-new-co/upes-ghe-cdi-own-pipeline:dev_4
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
   strategy:
@@ -213,14 +214,14 @@ status:
   availableReplicas: 5
   conditions:
     - type: Available
-      status: 'True'
-      lastUpdateTime: '2023-03-21T16:51:16Z'
-      lastTransitionTime: '2023-03-21T16:51:16Z'
+      status: "True"
+      lastUpdateTime: 2023-03-21T16:51:16Z
+      lastTransitionTime: 2023-03-21T16:51:16Z
       reason: MinimumReplicasAvailable
       message: Deployment has minimum availability.
     - type: Progressing
-      status: 'True'
-      lastUpdateTime: '2023-05-22T18:35:09Z'
-      lastTransitionTime: '2022-11-16T22:06:46Z'
+      status: "True"
+      lastUpdateTime: 2023-05-22T18:35:09Z
+      lastTransitionTime: 2022-11-16T22:06:46Z
       reason: NewReplicaSetAvailable
       message: ReplicaSet "upes-new-co-5bd85fc56b" has successfully progressed.
