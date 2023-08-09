@@ -66,9 +66,9 @@ jobs:
 
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
 
-            kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE
+            kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
 
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | USER_NAME
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | USER_NAME ;
 
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | USER_PW
       - name: Login to ARO Cluster
