@@ -85,7 +85,7 @@ jobs:
         uses: Azure/k8s-create-secret@v4.0
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
-          secret-type: generic94
+          secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
           data: 
             - test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }}
