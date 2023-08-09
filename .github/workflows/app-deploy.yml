@@ -91,7 +91,9 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
-          data: ${{ steps.import-secrets }}
+          data:
+            a: dGVzdA==
+            b: dGVzdA==
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
