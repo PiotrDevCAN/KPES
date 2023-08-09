@@ -88,7 +88,7 @@ jobs:
           secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
           data: |
-            test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }} ;
+            test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }}
             test_2: ${{ steps.import-secrets.outputs.DB_USER_PW }}
       - name: Deploy application
         id: deploy-app
