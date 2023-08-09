@@ -87,10 +87,7 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
-          data: |
-             "one": "1", 
-             "two": "2", 
-             "three": "3"
+          data: ${{ steps.import-secrets.outputs.JFROG_USER }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
