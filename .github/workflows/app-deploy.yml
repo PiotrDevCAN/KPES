@@ -57,20 +57,14 @@ jobs:
           namespace: kyndryl/KYNDRYL_PRACTICES/
           token: ${{secrets.VAULT_TOKEN}}
           tlsSkipVerify: false
-          secrets: >
+          secrets: |
             kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_USER | JFROG_USER ;
-
             kps-gd-app-kpes/data/dev/w3us/jfrog_piotr  JFROG_TOKEN | JFROG_TOKEN ;
-
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
-
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
-
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
-
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | DB_USER_NAME ;
-
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | DB_USER_PW
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
@@ -95,9 +89,8 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: generic94
           secret-name: kpes-app-docker-secrets-generic
-          data: >
+          data: |
             test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }}
-
             test_2: ${{ steps.import-secrets.outputs.DB_USER_PW }}
       - name: Deploy application
         id: deploy-app
