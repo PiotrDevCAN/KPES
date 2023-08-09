@@ -83,13 +83,13 @@ jobs:
           secret-name: kpes-app-docker-secrets
           container-registry-url: kyndryl.jfrog.io
           container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
-          container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}          
+          container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
       - name: Set ImagePullSecrets generic
         id: image_secret-2
         uses: Azure/k8s-create-secret@v1.1
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
-          secret-type: 'generic'
+          secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
           data: ${{ steps.import-secrets.outputs }}
       - name: Deploy application
@@ -97,7 +97,7 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
-          images: |
+          images: >
             kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest
           manifests: |
             ./myapp-deployment-azure.yml
