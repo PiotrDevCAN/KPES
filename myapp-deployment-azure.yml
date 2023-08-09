@@ -19,7 +19,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
         - name: kpes
-          image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest
+          image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_test
           resources:
             limits:
               cpu: 500m
