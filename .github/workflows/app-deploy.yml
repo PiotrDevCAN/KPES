@@ -92,8 +92,8 @@ jobs:
           secret-type: generic
           secret-name: kpes-app-docker-secrets-generic
           data: |
-            a: dGVzdA==
-            b: dGVzdA==
+            test_1: ${{ steps.import-secrets.outputs.JFROG_USER }}
+            test_2: ${{ steps.import-secrets.outputs.JFROG_USER }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
