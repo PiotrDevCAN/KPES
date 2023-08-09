@@ -86,7 +86,7 @@ jobs:
           container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
       - name: Set ImagePullSecrets generic
         id: image_secret-2
-        uses: Azure/k8s-create-secret@v1.1
+        uses: Azure/k8s-create-secret@v4.0
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: generic
