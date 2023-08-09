@@ -68,9 +68,9 @@ jobs:
 
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
 
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | sqlserver-username ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | DB_USER_NAME ;
 
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | pass-srv-kpes-sql-dev-wus3-001 ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | DB_USER_PW
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
@@ -96,9 +96,9 @@ jobs:
           secret-type: generic94
           secret-name: kpes-app-docker-secrets-generic
           data: >
-            test_1: ${{ steps.import-secrets.outputs.sqlserver-username }}
+            test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }}
 
-            test_2: ${{ steps.import-secrets.outputs.pass-srv-kpes-sql-dev-wus3-001 }}
+            test_2: ${{ steps.import-secrets.outputs.DB_USER_PW }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
