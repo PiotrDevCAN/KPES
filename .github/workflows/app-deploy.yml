@@ -70,7 +70,7 @@ jobs:
 
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 sqlserver-username | sqlserver-username ;
 
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | pass-srv-kpes-sql-dev-wus3-001
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 pass-srv-kpes-sql-dev-wus3-001 | pass-srv-kpes-sql-dev-wus3-001 ;
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
