@@ -89,9 +89,10 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: generic94
           secret-name: kpes-app-docker-secrets-generic
-          data: |
+          data: {
             test_1: ${{ steps.import-secrets.outputs.DB_USER_NAME }}
             test_2: ${{ steps.import-secrets.outputs.DB_USER_PW }}
+          }
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
