@@ -38,7 +38,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_test
+          tags: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest
   Deploy:
     name: Deploy
     runs-on:
