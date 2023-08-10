@@ -36,6 +36,3 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        envFrom:
-        - secretRef:
-          name: kpes-app-docker-secrets-generic
