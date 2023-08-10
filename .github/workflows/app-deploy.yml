@@ -98,10 +98,16 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
             kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
+          # Path to the manifest files to be used for deployment. 
           manifests: |
+            ./env-configmap.yml
+            ./env-secrets.yml
             ./myapp-deployment-azure.yml
             ./myapp-service-azure.yml
             ./myapp-sn-dev_route-azure.yml
+          # Multiline input where each line contains the name of a docker-registry secret 
+          # that has already been setup within the cluster. 
+          # Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
           imagepullsecrets: |
             kpes-app-docker-secrets
             kpes-app-docker-secrets-generic
