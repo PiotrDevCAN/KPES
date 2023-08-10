@@ -1,6 +1,7 @@
 /.buildpath
+/.github/workflows/create-secrets.yml
+/.htaccess
 /.project
 /vendor/
 /composer.phar
-/.htaccess
 /dev_env.list

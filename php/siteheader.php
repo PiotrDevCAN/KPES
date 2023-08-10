@@ -293,12 +293,12 @@ include ('splClassLoader.php');
 // ->withTimeoutMinutes(120)
 // ->withSecret($_ENV['jwt_token']);
 
-$sessionConfig = new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']);
-$sessionConfig->withTimeoutMinutes(120);
-$sessionConfig->withSecret($_ENV['jwt_token']);
+// $sessionConfig = new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']);
+// $sessionConfig->withTimeoutMinutes(120);
+// $sessionConfig->withSecret($_ENV['jwt_token']);
 
-$handler = new JwtSecureSession($sessionConfig);
-session_set_save_handler($handler, true);
+// $handler = new JwtSecureSession($sessionConfig);
+// session_set_save_handler($handler, true);
 
 session_start();
 
