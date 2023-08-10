@@ -83,7 +83,7 @@ jobs:
         id: image_secret-2
         uses: azure/k8s-actions/k8s-create-secret@master
         with:
-          namespace: 'default'
+          namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: 'generic'
           arguments:  --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}
           secret-name: kpes-app-docker-secrets-generic
