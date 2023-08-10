@@ -19,7 +19,7 @@ WORKDIR /var/www/html/
 #ADD db2consv_ee.lic /opt/ibm/dsdriver/license/db2consv_ee.lic ### for zOS host, enable this line to add your license
 #RUN echo "PassEnv /opt/ibm/dsdriver/lib" > /etc/httpd/conf.d/db2-lib.conf
 # RUN echo "PassEnv LIBPATH" > /etc/httpd/conf.d/db2-lib.conf
-RUN chown -R 1001:0 /opt/ibm/dsdriver
+# RUN chown -R 1001:0 /opt/ibm/dsdriver
 RUN chown -R 1001:0  /var/www/html
 RUN chown -R 1001:0 /run
 RUN chown -R 1001:0 /etc/httpd/run
