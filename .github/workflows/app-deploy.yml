@@ -72,7 +72,7 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
       - name: Set ImagePullSecrets
         id: image_secret
-        uses: Azure/k8s-create-secret@master
+        uses: Azure/k8s-create-secret@v4.0
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets
@@ -81,7 +81,8 @@ jobs:
           container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
       - name: Set ImagePullSecrets 2
         id: image_secret-2
-        uses: azure/k8s-actions/k8s-create-secret@master
+        # uses: azure/k8s-actions/k8s-create-secret@master
+        uses: Azure/k8s-create-secret@v4.0
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-type: 'generic'
