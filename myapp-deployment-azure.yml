@@ -36,8 +36,6 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        # envFrom:
-#   - configMapRef:
-#       name: env-configmap
-#   - secretRef:
-#       name: env-secrets
+        envFrom:
+        - secretRef:
+          name: kpes-app-docker-secrets-generic

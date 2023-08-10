@@ -41,6 +41,8 @@ jobs:
             kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
   Deploy:
     name: Deploy
+    needs:
+      - Build
     runs-on:
       - aro-dev-westus3
     steps:
