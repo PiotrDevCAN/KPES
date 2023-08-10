@@ -20,9 +20,9 @@ WORKDIR /var/www/html/
 #RUN echo "PassEnv /opt/ibm/dsdriver/lib" > /etc/httpd/conf.d/db2-lib.conf
 # RUN echo "PassEnv LIBPATH" > /etc/httpd/conf.d/db2-lib.conf
 # RUN chown -R 1001:0 /opt/ibm/dsdriver
-RUN chown -R 1001:0  /var/www/html
-RUN chown -R 1001:0 /run
-RUN chown -R 1001:0 /etc/httpd/run
+# RUN chown -R 1001:0  /var/www/html
+# RUN chown -R 1001:0 /run
+# RUN chown -R 1001:0 /etc/httpd/run
 RUN chmod -R 777 /run
 RUN chmod -R 777 /etc/httpd/run
 RUN chmod -R 777 /var/www/html/extracts
