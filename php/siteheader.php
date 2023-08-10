@@ -273,6 +273,7 @@ function _microtime_float()
     return ((float) $usec + (float) $sec);
 }
 
+echo 'NEW VERSION OF CONTAINER CREATED !!!';
 echo '<pre>';
 var_dump($_ENV);
 echo '</pre>';
