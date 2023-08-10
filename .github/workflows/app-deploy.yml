@@ -80,14 +80,6 @@ jobs:
           container-registry-url: kyndryl.jfrog.io
           container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
           container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
-      - name: Set ImagePullSecrets generic
-        id: image_secret-2
-        uses: Azure/k8s-create-secret@v4.0
-        with:
-          namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
-          secret-type: generic
-          secret-name: kpes-app-docker-secrets-generic
-          data: ${{ steps.import-secrets.outputs.JFROG_USER }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
@@ -101,4 +93,3 @@ jobs:
             ./myapp-sn-dev_route-azure.yml
           imagepullsecrets: |
             kpes-app-docker-secrets
-            kpes-app-docker-secrets-generic
