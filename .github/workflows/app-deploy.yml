@@ -37,8 +37,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            ${{ env.JFROG_REGISTRY }}/${{ env.JFROG_REPO }}/${{ env.APP_NAME }}:${{ github.run_number }}
+          tags: | 
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
   Deploy:
     name: Deploy
     runs-on:
@@ -95,7 +95,7 @@ jobs:
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
-            ${{ env.JFROG_REGISTRY }}/${{ env.JFROG_REPO }}/${{ env.APP_NAME }}:${{ github.run_number }}
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
           manifests: |
             ./myapp-deployment-azure.yml
             ./myapp-service-azure.yml
