@@ -38,7 +38,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.JFROG_REGISTRY }}/${{ env.JFROG_REPO }}/${{ env.APP_NAME }}:latest
             ${{ env.JFROG_REGISTRY }}/${{ env.JFROG_REPO }}/${{ env.APP_NAME }}:${{ github.run_number }}
   Deploy:
     name: Deploy
