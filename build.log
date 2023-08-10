@@ -1,366 +1,370 @@
 #1 [internal] load build definition from Dockerfile
-#1 sha256:e2784958c2a6dba7d05b073a709d8d0d5507d16f03225fe0cff20607b6ef5543
-#1 transferring dockerfile: 32B done
+#1 sha256:d4bee72b5dedb793712dd0f998100dfd53df0859b56f683f3eca8030f6070364
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 sha256:d4bee72b5dedb793712dd0f998100dfd53df0859b56f683f3eca8030f6070364
+#1 transferring dockerfile: 32B 0.0s done
 #1 DONE 0.0s
 
 #2 [internal] load .dockerignore
-#2 sha256:80d0f20359080fd410e04cdf0ef5bbf2b11e9c82520b1280c8d468bf5056934a
+#2 sha256:31f2c1c58188983bb3013a66d0e40effe5e02d8f249c8d63450455e4007dcccb
 #2 transferring context: 2B done
 #2 DONE 0.0s
 
 #3 [internal] load metadata for registry.access.redhat.com/ubi8/php-74:latest
 #3 sha256:835baa3775d9736b3454c8fd7796952ea0d85c589cecf26b5d80e797d4f7de51
-#3 DONE 0.4s
+#3 DONE 0.5s
 
 #4 [ 1/17] FROM registry.access.redhat.com/ubi8/php-74@sha256:e9223e068711cfac52f0ac4e2ce0bf03d021038e3c21b4db5cc1e0934af7041c
 #4 sha256:8f520aa0c86d232df55d4d3929671f72567d56c7deba71af8a2e40de0874c957
 #4 CACHED
 
 #5 [internal] load build context
-#5 sha256:cb834dd0d7eb653fd4bb2ca8ddc3e20bac0653d35dcbd076a91f87ed8219aa5c
-#5 transferring context: 413.97kB 0.4s done
-#5 DONE 0.4s
+#5 sha256:b7c7dfce57a232d90c3399a48cb808aca7c3ea485edd92201c22ac0747b0658b
+#5 transferring context: 433.44kB 0.6s done
+#5 DONE 0.7s
 
 #6 [ 2/17] ADD . /var/www/html/
-#6 sha256:6b9fa1001ba915e6b28096af35199c06b203b3bb826132469edab487712ad7bb
-#6 DONE 1.4s
+#6 sha256:fad09a966d5ecf53ef46ca2cb296c48dbcae320f732b29c44381381e81f28a15
+#6 DONE 1.6s
 
 #7 [ 3/17] ADD ./patch1.sh /patch1.sh
-#7 sha256:91680e8cefe0ede26e8ebce983f6dda529e856660346c65d84735f7332df4056
+#7 sha256:16e8792babcf50658bf31b18de239c26d79a9deea735c047ae404902bab34a81
 #7 DONE 0.0s
 
 #8 [ 4/17] RUN bash /patch1.sh && rm /patch1.sh
-#8 sha256:4c042d6f6943c55d0e7f062766a05169181128c4dc480b650f19c6d8b17d2064
-#8 1.101 Updating Subscription Management repositories.
-#8 1.102 Unable to read consumer identity
-#8 1.102 Subscription Manager is operating in container mode.
-#8 1.107 
-#8 1.107 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 1.107 
-#8 1.352 Dependencies resolved.
-#8 1.354 ========================================================================================================================
-#8 1.354  Package            Arch    Version                                             Repository                          Size
-#8 1.354 ========================================================================================================================
-#8 1.354 Removing:
-#8 1.354  nodejs             x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   37 M
-#8 1.354 Removing dependent packages:
-#8 1.354  npm                x86_64  1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6 @rhel-8-for-x86_64-appstream-rpms   16 M
-#8 1.354 Removing unused dependencies:
-#8 1.354  nodejs-docs        noarch  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   60 M
-#8 1.354  nodejs-full-i18n   x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   28 M
-#8 1.354 
-#8 1.354 Transaction Summary
-#8 1.354 ========================================================================================================================
-#8 1.354 Remove  4 Packages
-#8 1.354 
-#8 1.355 Freed space: 141 M
-#8 1.355 Running transaction check
-#8 1.369 Transaction check succeeded.
-#8 1.369 Running transaction test
-#8 1.431 Transaction test succeeded.
-#8 1.432 Running transaction
-#8 1.733   Preparing        :                                                        1/1 
-#8 1.773   Erasing          : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
-#8 2.336   Erasing          : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   2/4 
-#8 2.415   Erasing          : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   3/4 
-#8 2.432   Erasing          : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   4/4 
-#8 2.528   Verifying        : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
-#8 2.528   Verifying        : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   2/4 
-#8 2.528   Verifying        : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   3/4 
-#8 2.528   Verifying        : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   4/4 
+#8 sha256:d11e4f77d3aabdaeefaa9195559e2b01ba997c77ea071e8bdafccb49e4d9ed82
+#8 1.232 Updating Subscription Management repositories.
+#8 1.232 Unable to read consumer identity
+#8 1.233 Subscription Manager is operating in container mode.
+#8 1.238 
+#8 1.238 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 1.238 
+#8 1.434 Dependencies resolved.
+#8 1.436 ========================================================================================================================
+#8 1.436  Package            Arch    Version                                             Repository                          Size
+#8 1.436 ========================================================================================================================
+#8 1.436 Removing:
+#8 1.436  nodejs             x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   37 M
+#8 1.436 Removing dependent packages:
+#8 1.436  npm                x86_64  1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6 @rhel-8-for-x86_64-appstream-rpms   16 M
+#8 1.436 Removing unused dependencies:
+#8 1.436  nodejs-docs        noarch  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   60 M
+#8 1.436  nodejs-full-i18n   x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   28 M
+#8 1.436 
+#8 1.436 Transaction Summary
+#8 1.436 ========================================================================================================================
+#8 1.436 Remove  4 Packages
+#8 1.436 
+#8 1.436 Freed space: 141 M
+#8 1.437 Running transaction check
+#8 1.450 Transaction check succeeded.
+#8 1.450 Running transaction test
+#8 1.499 Transaction test succeeded.
+#8 1.500 Running transaction
+#8 1.744   Preparing        :                                                        1/1 
+#8 1.796   Erasing          : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
+#8 2.396   Erasing          : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   2/4 
+#8 2.476   Erasing          : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   3/4 
+#8 2.492   Erasing          : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   4/4 
+#8 2.592   Verifying        : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
+#8 2.592   Verifying        : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   2/4 
+#8 2.592   Verifying        : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   3/4 
+#8 2.592   Verifying        : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   4/4 
 #8 2.738 Installed products updated.
-#8 2.748 
-#8 2.748 Removed:
-#8 2.748   nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64                       
-#8 2.748   nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.noarch                  
-#8 2.748   nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64             
-#8 2.748   npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6.x86_64                
-#8 2.748 
-#8 2.748 Complete!
-#8 3.326 Updating Subscription Management repositories.
-#8 3.327 Unable to read consumer identity
-#8 3.327 Subscription Manager is operating in container mode.
-#8 3.332 
-#8 3.332 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 3.332 
-#8 3.349 0 files removed
-#8 3.944 Updating Subscription Management repositories.
-#8 3.944 Unable to read consumer identity
-#8 3.944 Subscription Manager is operating in container mode.
-#8 3.948 
-#8 3.948 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 3.948 
-#8 4.769 Red Hat Universal Base Image 8 (RPMs) - BaseOS  1.1 MB/s | 844 kB     00:00    
-#8 5.721 Red Hat Universal Base Image 8 (RPMs) - AppStre 4.3 MB/s | 3.4 MB     00:00    
-#8 6.799 Red Hat Universal Base Image 8 (RPMs) - CodeRea 266 kB/s | 106 kB     00:00    
-#8 7.131 Dependencies resolved.
-#8 7.134 ================================================================================
-#8 7.134  Package         Arch       Version                 Repository             Size
-#8 7.134 ================================================================================
-#8 7.134 Upgrading:
-#8 7.134  dbus            x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      42 k
-#8 7.134  dbus-common     noarch     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      47 k
-#8 7.134  dbus-daemon     x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms     241 k
-#8 7.134  dbus-libs       x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms     185 k
-#8 7.134  dbus-tools      x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      86 k
-#8 7.134  libsemanage     x86_64     2.9-9.el8_6             ubi-8-baseos-rpms     168 k
-#8 7.134  libsolv         x86_64     0.7.20-4.el8_7          ubi-8-baseos-rpms     376 k
-#8 7.134 
-#8 7.134 Transaction Summary
-#8 7.134 ================================================================================
-#8 7.134 Upgrade  7 Packages
-#8 7.134 
-#8 7.135 Total download size: 1.1 M
-#8 7.135 Downloading Packages:
-#8 7.314 (1/7): dbus-common-1.12.8-24.el8_8.1.noarch.rpm 266 kB/s |  47 kB     00:00    
-#8 7.379 (2/7): dbus-libs-1.12.8-24.el8_8.1.x86_64.rpm   767 kB/s | 185 kB     00:00    
-#8 7.383 (3/7): dbus-1.12.8-24.el8_8.1.x86_64.rpm        623 kB/s |  42 kB     00:00    
-#8 7.401 (4/7): libsolv-0.7.20-4.el8_7.x86_64.rpm        1.4 MB/s | 376 kB     00:00    
-#8 7.455 (5/7): dbus-tools-1.12.8-24.el8_8.1.x86_64.rpm  1.6 MB/s |  86 kB     00:00    
-#8 7.481 (6/7): dbus-daemon-1.12.8-24.el8_8.1.x86_64.rpm 2.3 MB/s | 241 kB     00:00    
-#8 7.504 (7/7): libsemanage-2.9-9.el8_6.x86_64.rpm       1.4 MB/s | 168 kB     00:00    
-#8 7.510 --------------------------------------------------------------------------------
-#8 7.510 Total                                           3.0 MB/s | 1.1 MB     00:00     
-#8 7.604 Running transaction check
-#8 7.633 Transaction check succeeded.
-#8 7.634 Running transaction test
-#8 7.685 Transaction test succeeded.
-#8 7.688 Running transaction
-#8 7.759   Preparing        :                                                        1/1 
-#8 7.814   Running scriptlet: dbus-libs-1:1.12.8-24.el8_8.1.x86_64                   1/1 
-#8 7.842   Upgrading        : dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  1/14 
-#8 7.861   Running scriptlet: dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  1/14 
-#8 7.885   Upgrading        : dbus-tools-1:1.12.8-24.el8_8.1.x86_64                 2/14 
-#8 7.912   Upgrading        : dbus-common-1:1.12.8-24.el8_8.1.noarch                3/14 
-#8 7.920   Running scriptlet: dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
-#8 7.972   Upgrading        : dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
-#8 7.994   Running scriptlet: dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
-#8 8.000   Upgrading        : dbus-1:1.12.8-24.el8_8.1.x86_64                       5/14 
-#8 8.033   Upgrading        : libsemanage-2.9-9.el8_6.x86_64                        6/14 
-#8 8.094   Upgrading        : libsolv-0.7.20-4.el8_7.x86_64                         7/14 
-#8 8.118   Cleanup          : dbus-1:1.12.8-24.el8.x86_64                           8/14 
-#8 8.127   Running scriptlet: dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
-#8 8.135   Cleanup          : dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
-#8 8.136   Running scriptlet: dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
-#8 8.163   Cleanup          : dbus-tools-1:1.12.8-24.el8.x86_64                    10/14 
-#8 8.174   Cleanup          : dbus-common-1:1.12.8-24.el8.noarch                   11/14 
-#8 8.193   Cleanup          : dbus-libs-1:1.12.8-24.el8.x86_64                     12/14 
-#8 8.193   Running scriptlet: dbus-libs-1:1.12.8-24.el8.x86_64                     12/14 
-#8 8.215   Cleanup          : libsemanage-2.9-9.el8.x86_64                         13/14 
-#8 8.236   Cleanup          : libsolv-0.7.20-4.el8.x86_64                          14/14 
-#8 8.263   Running scriptlet: libsolv-0.7.20-4.el8.x86_64                          14/14 
-#8 8.410   Verifying        : libsolv-0.7.20-4.el8_7.x86_64                         1/14 
-#8 8.410   Verifying        : libsolv-0.7.20-4.el8.x86_64                           2/14 
-#8 8.410   Verifying        : dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  3/14 
-#8 8.410   Verifying        : dbus-libs-1:1.12.8-24.el8.x86_64                      4/14 
-#8 8.411   Verifying        : dbus-common-1:1.12.8-24.el8_8.1.noarch                5/14 
-#8 8.411   Verifying        : dbus-common-1:1.12.8-24.el8.noarch                    6/14 
-#8 8.411   Verifying        : dbus-1:1.12.8-24.el8_8.1.x86_64                       7/14 
-#8 8.411   Verifying        : dbus-1:1.12.8-24.el8.x86_64                           8/14 
-#8 8.411   Verifying        : dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                9/14 
-#8 8.411   Verifying        : dbus-daemon-1:1.12.8-24.el8.x86_64                   10/14 
-#8 8.411   Verifying        : libsemanage-2.9-9.el8_6.x86_64                       11/14 
-#8 8.412   Verifying        : libsemanage-2.9-9.el8.x86_64                         12/14 
-#8 8.412   Verifying        : dbus-tools-1:1.12.8-24.el8_8.1.x86_64                13/14 
-#8 8.412   Verifying        : dbus-tools-1:1.12.8-24.el8.x86_64                    14/14 
-#8 8.593 Installed products updated.
-#8 8.615 
-#8 8.615 Upgraded:
-#8 8.615   dbus-1:1.12.8-24.el8_8.1.x86_64        dbus-common-1:1.12.8-24.el8_8.1.noarch
-#8 8.615   dbus-daemon-1:1.12.8-24.el8_8.1.x86_64 dbus-libs-1:1.12.8-24.el8_8.1.x86_64  
-#8 8.615   dbus-tools-1:1.12.8-24.el8_8.1.x86_64  libsemanage-2.9-9.el8_6.x86_64        
-#8 8.615   libsolv-0.7.20-4.el8_7.x86_64         
-#8 8.615 
-#8 8.615 Complete!
-#8 9.176 Updating Subscription Management repositories.
-#8 9.176 Unable to read consumer identity
-#8 9.176 Subscription Manager is operating in container mode.
-#8 9.179 
-#8 9.179 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 9.179 
-#8 9.305 Last metadata expiration check: 0:00:03 ago on Thu Aug 10 11:26:31 2023.
-#8 9.482 Dependencies resolved.
-#8 9.483 Nothing to do.
-#8 9.483 Complete!
-#8 10.05 Updating Subscription Management repositories.
-#8 10.05 Unable to read consumer identity
-#8 10.06 Subscription Manager is operating in container mode.
-#8 10.06 
-#8 10.06 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 10.06 
-#8 10.22 Last metadata expiration check: 0:00:03 ago on Thu Aug 10 11:26:31 2023.
-#8 10.40 Package unzip-6.0-46.el8.x86_64 is already installed.
-#8 10.40 Package zip-3.0-23.el8.x86_64 is already installed.
-#8 10.42 Dependencies resolved.
-#8 10.42 ==========================================================================================
-#8 10.42  Package     Arch    Version                                   Repository             Size
-#8 10.42 ==========================================================================================
-#8 10.42 Installing:
-#8 10.42  php-devel   x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa    ubi-8-appstream-rpms  730 k
-#8 10.42  php-pear    noarch  1:1.10.13-1.module+el8.7.0+15127+a450a8db ubi-8-appstream-rpms  362 k
-#8 10.42 Installing dependencies:
-#8 10.42  libtool     x86_64  2.4.6-25.el8                              ubi-8-appstream-rpms  709 k
-#8 10.42 
-#8 10.42 Transaction Summary
-#8 10.42 ==========================================================================================
-#8 10.42 Install  3 Packages
-#8 10.42 
-#8 10.42 Total download size: 1.8 M
-#8 10.42 Installed size: 9.9 M
-#8 10.43 Downloading Packages:
-#8 10.84 (1/3): php-pear-1.10.13-1.module+el8.7.0+15127+ 886 kB/s | 362 kB     00:00    
-#8 10.90 (2/3): php-devel-7.4.33-1.module+el8.8.0+17865+ 1.5 MB/s | 730 kB     00:00    
-#8 10.94 (3/3): libtool-2.4.6-25.el8.x86_64.rpm          1.3 MB/s | 709 kB     00:00    
-#8 10.95 --------------------------------------------------------------------------------
-#8 10.95 Total                                           3.4 MB/s | 1.8 MB     00:00     
-#8 10.99 Running transaction check
-#8 11.01 Transaction check succeeded.
-#8 11.01 Running transaction test
-#8 11.05 Transaction test succeeded.
-#8 11.05 Running transaction
-#8 11.09   Preparing        :                                                        1/1 
-#8 11.17   Installing       : libtool-2.4.6-25.el8.x86_64                            1/3 
-#8 11.19   Running scriptlet: libtool-2.4.6-25.el8.x86_64                            1/3 
-#8 11.33   Installing       : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/3 
-#8 11.43   Installing       : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
-#8 11.45   Running scriptlet: php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
-#8 11.87   Verifying        : libtool-2.4.6-25.el8.x86_64                            1/3 
-#8 11.87   Verifying        : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/3 
-#8 11.87   Verifying        : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
-#8 12.03 Installed products updated.
-#8 12.06 
-#8 12.06 Installed:
-#8 12.06   libtool-2.4.6-25.el8.x86_64                                                   
-#8 12.06   php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                       
-#8 12.06   php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.noarch                     
-#8 12.06 
-#8 12.06 Complete!
-#8 13.11 All settings correct for using Composer
-#8 13.11 Downloading...
-#8 14.28 
-#8 14.28 Composer (version 2.5.8) successfully installed to: /usr/local/bin/composer
-#8 14.28 Use it: php /usr/local/bin/composer
-#8 14.28 
-#8 DONE 14.6s
+#8 2.747 
+#8 2.747 Removed:
+#8 2.747   nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64                       
+#8 2.747   nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.noarch                  
+#8 2.747   nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64             
+#8 2.747   npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6.x86_64                
+#8 2.747 
+#8 2.747 Complete!
+#8 3.429 Updating Subscription Management repositories.
+#8 3.429 Unable to read consumer identity
+#8 3.430 Subscription Manager is operating in container mode.
+#8 3.434 
+#8 3.434 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 3.434 
+#8 3.444 0 files removed
+#8 4.164 Updating Subscription Management repositories.
+#8 4.167 Unable to read consumer identity
+#8 4.169 Subscription Manager is operating in container mode.
+#8 4.179 
+#8 4.179 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 4.179 
+#8 5.300 Red Hat Universal Base Image 8 (RPMs) - BaseOS  1.1 MB/s | 844 kB     00:00    
+#8 6.439 Red Hat Universal Base Image 8 (RPMs) - AppStre 3.6 MB/s | 3.4 MB     00:00    
+#8 7.381 Red Hat Universal Base Image 8 (RPMs) - CodeRea 337 kB/s | 106 kB     00:00    
+#8 7.691 Dependencies resolved.
+#8 7.693 ================================================================================
+#8 7.693  Package         Arch       Version                 Repository             Size
+#8 7.693 ================================================================================
+#8 7.693 Upgrading:
+#8 7.693  dbus            x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      42 k
+#8 7.693  dbus-common     noarch     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      47 k
+#8 7.693  dbus-daemon     x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms     241 k
+#8 7.693  dbus-libs       x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms     185 k
+#8 7.693  dbus-tools      x86_64     1:1.12.8-24.el8_8.1     ubi-8-baseos-rpms      86 k
+#8 7.693  libsemanage     x86_64     2.9-9.el8_6             ubi-8-baseos-rpms     168 k
+#8 7.693  libsolv         x86_64     0.7.20-4.el8_7          ubi-8-baseos-rpms     376 k
+#8 7.693 
+#8 7.693 Transaction Summary
+#8 7.693 ================================================================================
+#8 7.693 Upgrade  7 Packages
+#8 7.693 
+#8 7.694 Total download size: 1.1 M
+#8 7.695 Downloading Packages:
+#8 7.842 (1/7): dbus-common-1.12.8-24.el8_8.1.noarch.rpm 323 kB/s |  47 kB     00:00    
+#8 7.893 (2/7): dbus-1.12.8-24.el8_8.1.x86_64.rpm        837 kB/s |  42 kB     00:00    
+#8 7.898 (3/7): dbus-libs-1.12.8-24.el8_8.1.x86_64.rpm   918 kB/s | 185 kB     00:00    
+#8 8.067 (4/7): libsolv-0.7.20-4.el8_7.x86_64.rpm        1.0 MB/s | 376 kB     00:00    
+#8 8.071 (5/7): libsemanage-2.9-9.el8_6.x86_64.rpm       980 kB/s | 168 kB     00:00    
+#8 8.131 (6/7): dbus-tools-1.12.8-24.el8_8.1.x86_64.rpm  1.4 MB/s |  86 kB     00:00    
+#8 8.169 (7/7): dbus-daemon-1.12.8-24.el8_8.1.x86_64.rpm 877 kB/s | 241 kB     00:00    
+#8 8.173 --------------------------------------------------------------------------------
+#8 8.174 Total                                           2.3 MB/s | 1.1 MB     00:00     
+#8 8.262 Running transaction check
+#8 8.287 Transaction check succeeded.
+#8 8.287 Running transaction test
+#8 8.336 Transaction test succeeded.
+#8 8.339 Running transaction
+#8 8.393   Preparing        :                                                        1/1 
+#8 8.427   Running scriptlet: dbus-libs-1:1.12.8-24.el8_8.1.x86_64                   1/1 
+#8 8.453   Upgrading        : dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  1/14 
+#8 8.464   Running scriptlet: dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  1/14 
+#8 8.491   Upgrading        : dbus-tools-1:1.12.8-24.el8_8.1.x86_64                 2/14 
+#8 8.514   Upgrading        : dbus-common-1:1.12.8-24.el8_8.1.noarch                3/14 
+#8 8.523   Running scriptlet: dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
+#8 8.561   Upgrading        : dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
+#8 8.583   Running scriptlet: dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                4/14 
+#8 8.590   Upgrading        : dbus-1:1.12.8-24.el8_8.1.x86_64                       5/14 
+#8 8.612   Upgrading        : libsemanage-2.9-9.el8_6.x86_64                        6/14 
+#8 8.681   Upgrading        : libsolv-0.7.20-4.el8_7.x86_64                         7/14 
+#8 8.694   Cleanup          : dbus-1:1.12.8-24.el8.x86_64                           8/14 
+#8 8.701   Running scriptlet: dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
+#8 8.708   Cleanup          : dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
+#8 8.709   Running scriptlet: dbus-daemon-1:1.12.8-24.el8.x86_64                    9/14 
+#8 8.725   Cleanup          : dbus-tools-1:1.12.8-24.el8.x86_64                    10/14 
+#8 8.733   Cleanup          : dbus-common-1:1.12.8-24.el8.noarch                   11/14 
+#8 8.742   Cleanup          : dbus-libs-1:1.12.8-24.el8.x86_64                     12/14 
+#8 8.742   Running scriptlet: dbus-libs-1:1.12.8-24.el8.x86_64                     12/14 
+#8 8.761   Cleanup          : libsemanage-2.9-9.el8.x86_64                         13/14 
+#8 8.771   Cleanup          : libsolv-0.7.20-4.el8.x86_64                          14/14 
+#8 8.786   Running scriptlet: libsolv-0.7.20-4.el8.x86_64                          14/14 
+#8 8.903   Verifying        : libsolv-0.7.20-4.el8_7.x86_64                         1/14 
+#8 8.903   Verifying        : libsolv-0.7.20-4.el8.x86_64                           2/14 
+#8 8.903   Verifying        : dbus-libs-1:1.12.8-24.el8_8.1.x86_64                  3/14 
+#8 8.904   Verifying        : dbus-libs-1:1.12.8-24.el8.x86_64                      4/14 
+#8 8.904   Verifying        : dbus-common-1:1.12.8-24.el8_8.1.noarch                5/14 
+#8 8.904   Verifying        : dbus-common-1:1.12.8-24.el8.noarch                    6/14 
+#8 8.904   Verifying        : dbus-1:1.12.8-24.el8_8.1.x86_64                       7/14 
+#8 8.904   Verifying        : dbus-1:1.12.8-24.el8.x86_64                           8/14 
+#8 8.904   Verifying        : dbus-daemon-1:1.12.8-24.el8_8.1.x86_64                9/14 
+#8 8.904   Verifying        : dbus-daemon-1:1.12.8-24.el8.x86_64                   10/14 
+#8 8.905   Verifying        : libsemanage-2.9-9.el8_6.x86_64                       11/14 
+#8 8.905   Verifying        : libsemanage-2.9-9.el8.x86_64                         12/14 
+#8 8.905   Verifying        : dbus-tools-1:1.12.8-24.el8_8.1.x86_64                13/14 
+#8 8.905   Verifying        : dbus-tools-1:1.12.8-24.el8.x86_64                    14/14 
+#8 9.067 Installed products updated.
+#8 9.090 
+#8 9.090 Upgraded:
+#8 9.090   dbus-1:1.12.8-24.el8_8.1.x86_64        dbus-common-1:1.12.8-24.el8_8.1.noarch
+#8 9.090   dbus-daemon-1:1.12.8-24.el8_8.1.x86_64 dbus-libs-1:1.12.8-24.el8_8.1.x86_64  
+#8 9.090   dbus-tools-1:1.12.8-24.el8_8.1.x86_64  libsemanage-2.9-9.el8_6.x86_64        
+#8 9.090   libsolv-0.7.20-4.el8_7.x86_64         
+#8 9.090 
+#8 9.090 Complete!
+#8 9.687 Updating Subscription Management repositories.
+#8 9.687 Unable to read consumer identity
+#8 9.687 Subscription Manager is operating in container mode.
+#8 9.691 
+#8 9.691 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 9.691 
+#8 9.797 Last metadata expiration check: 0:00:03 ago on Thu Aug 10 11:50:17 2023.
+#8 9.975 Dependencies resolved.
+#8 9.976 Nothing to do.
+#8 9.976 Complete!
+#8 10.44 Updating Subscription Management repositories.
+#8 10.44 Unable to read consumer identity
+#8 10.44 Subscription Manager is operating in container mode.
+#8 10.44 
+#8 10.44 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 10.44 
+#8 10.53 Last metadata expiration check: 0:00:03 ago on Thu Aug 10 11:50:17 2023.
+#8 10.68 Package unzip-6.0-46.el8.x86_64 is already installed.
+#8 10.68 Package zip-3.0-23.el8.x86_64 is already installed.
+#8 10.69 Dependencies resolved.
+#8 10.70 ==========================================================================================
+#8 10.70  Package     Arch    Version                                   Repository             Size
+#8 10.70 ==========================================================================================
+#8 10.70 Installing:
+#8 10.70  php-devel   x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa    ubi-8-appstream-rpms  730 k
+#8 10.70  php-pear    noarch  1:1.10.13-1.module+el8.7.0+15127+a450a8db ubi-8-appstream-rpms  362 k
+#8 10.70 Installing dependencies:
+#8 10.70  libtool     x86_64  2.4.6-25.el8                              ubi-8-appstream-rpms  709 k
+#8 10.70 
+#8 10.70 Transaction Summary
+#8 10.70 ==========================================================================================
+#8 10.70 Install  3 Packages
+#8 10.70 
+#8 10.70 Total download size: 1.8 M
+#8 10.70 Installed size: 9.9 M
+#8 10.70 Downloading Packages:
+#8 11.10 (1/3): php-pear-1.10.13-1.module+el8.7.0+15127+ 908 kB/s | 362 kB     00:00    
+#8 11.19 (2/3): php-devel-7.4.33-1.module+el8.8.0+17865+ 1.5 MB/s | 730 kB     00:00    
+#8 11.20 (3/3): libtool-2.4.6-25.el8.x86_64.rpm          1.4 MB/s | 709 kB     00:00    
+#8 11.20 --------------------------------------------------------------------------------
+#8 11.20 Total                                           3.5 MB/s | 1.8 MB     00:00     
+#8 11.25 Running transaction check
+#8 11.26 Transaction check succeeded.
+#8 11.26 Running transaction test
+#8 11.31 Transaction test succeeded.
+#8 11.31 Running transaction
+#8 11.34   Preparing        :                                                        1/1 
+#8 11.43   Installing       : libtool-2.4.6-25.el8.x86_64                            1/3 
+#8 11.44   Running scriptlet: libtool-2.4.6-25.el8.x86_64                            1/3 
+#8 11.77   Installing       : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/3 
+#8 11.86   Installing       : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
+#8 11.88   Running scriptlet: php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
+#8 12.26   Verifying        : libtool-2.4.6-25.el8.x86_64                            1/3 
+#8 12.26   Verifying        : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/3 
+#8 12.26   Verifying        : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/3 
+#8 12.64 Installed products updated.
+#8 12.67 
+#8 12.67 Installed:
+#8 12.67   libtool-2.4.6-25.el8.x86_64                                                   
+#8 12.67   php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                       
+#8 12.67   php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.noarch                     
+#8 12.67 
+#8 12.67 Complete!
+#8 13.10 All settings correct for using Composer
+#8 13.10 Downloading...
+#8 14.02 
+#8 14.02 Composer (version 2.5.8) successfully installed to: /usr/local/bin/composer
+#8 14.02 Use it: php /usr/local/bin/composer
+#8 14.02 
+#8 DONE 14.1s
 
 #9 [ 5/17] WORKDIR /opt/ibm
-#9 sha256:5ebe3a96750c427af0076bf1fbc881d0f47cc7c8903b6aeb8466a4a5adf71f0d
-#9 DONE 0.1s
+#9 sha256:db162da5c4cc6b4a57fac5bf4619ee0fce5b30d490d78e6bb7b81c4c984419bf
+#9 DONE 0.0s
 
 #10 [ 6/17] RUN dnf -y install php-zip
-#10 sha256:3877f21f08a711308bc404ff34ac04c03ab5d2ef62451bc664998f38591a813e
-#10 0.863 Updating Subscription Management repositories.
-#10 0.863 Unable to read consumer identity
-#10 0.863 Subscription Manager is operating in container mode.
-#10 0.867 
-#10 0.867 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#10 0.867 
-#10 0.966 Last metadata expiration check: 0:00:09 ago on Thu Aug 10 11:26:31 2023.
-#10 1.112 Package php-pecl-zip-1.18.2-1.module+el8.3.0+6678+b09f589e.x86_64 is already installed.
-#10 1.209 Dependencies resolved.
-#10 1.214 Nothing to do.
-#10 1.215 Complete!
+#10 sha256:26201dd89a5f23618fb3f86f0048098d416f9f1b3980faa5a7481fc1a87969ac
+#10 0.984 Updating Subscription Management repositories.
+#10 0.984 Unable to read consumer identity
+#10 0.984 Subscription Manager is operating in container mode.
+#10 0.988 
+#10 0.988 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#10 0.988 
+#10 1.074 Last metadata expiration check: 0:00:08 ago on Thu Aug 10 11:50:17 2023.
+#10 1.228 Package php-pecl-zip-1.18.2-1.module+el8.3.0+6678+b09f589e.x86_64 is already installed.
+#10 1.309 Dependencies resolved.
+#10 1.311 Nothing to do.
+#10 1.311 Complete!
 #10 DONE 1.4s
 
 #11 [ 7/17] RUN dnf remove nginx-filesystem -y
-#11 sha256:909bdb523a7e0499dba4c856ff59fd1adc2fbc3df90b608ccfad7f7ab100d4e5
-#11 1.077 Updating Subscription Management repositories.
-#11 1.077 Unable to read consumer identity
-#11 1.077 Subscription Manager is operating in container mode.
-#11 1.081 
-#11 1.081 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#11 1.081 
-#11 1.221 Dependencies resolved.
-#11 1.223 ============================================================================================================
-#11 1.223  Package            Arch    Version                                 Repository                          Size
-#11 1.223 ============================================================================================================
-#11 1.223 Removing:
-#11 1.223  nginx-filesystem   noarch  1:1.14.1-9.module+el8.0.0+4108+af250afe @rhel-8-for-x86_64-appstream-rpms    0  
-#11 1.223 Removing dependent packages:
-#11 1.223  php-fpm            x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa  @rhel-8-for-x86_64-appstream-rpms  6.2 M
-#11 1.223 
-#11 1.223 Transaction Summary
-#11 1.223 ============================================================================================================
-#11 1.223 Remove  2 Packages
-#11 1.223 
-#11 1.224 Freed space: 6.2 M
-#11 1.225 Running transaction check
-#11 1.230 Transaction check succeeded.
-#11 1.230 Running transaction test
-#11 1.252 Transaction test succeeded.
-#11 1.253 Running transaction
-#11 1.519   Preparing        :                                                        1/1 
-#11 1.544   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/1 
-#11 1.553   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#11 1.581   Erasing          : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#11 1.582   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#11 1.604   Erasing          : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
-#11 1.605   Running scriptlet: nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
-#11 1.713   Verifying        : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   1/2 
-#11 1.713   Verifying        : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   2/2 
-#11 1.887 Installed products updated.
-#11 1.897 
-#11 1.897 Removed:
-#11 1.897   nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af250afe.noarch               
-#11 1.897   php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                         
-#11 1.897 
-#11 1.897 Complete!
-#11 DONE 2.0s
+#11 sha256:09c4863c04145cc3e659a2f93e392ce6eeb5b40d7ffc7acb35238c76afd92342
+#11 1.016 Updating Subscription Management repositories.
+#11 1.016 Unable to read consumer identity
+#11 1.016 Subscription Manager is operating in container mode.
+#11 1.020 
+#11 1.020 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#11 1.020 
+#11 1.229 Dependencies resolved.
+#11 1.231 ============================================================================================================
+#11 1.231  Package            Arch    Version                                 Repository                          Size
+#11 1.231 ============================================================================================================
+#11 1.231 Removing:
+#11 1.231  nginx-filesystem   noarch  1:1.14.1-9.module+el8.0.0+4108+af250afe @rhel-8-for-x86_64-appstream-rpms    0  
+#11 1.231 Removing dependent packages:
+#11 1.231  php-fpm            x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa  @rhel-8-for-x86_64-appstream-rpms  6.2 M
+#11 1.231 
+#11 1.231 Transaction Summary
+#11 1.231 ============================================================================================================
+#11 1.231 Remove  2 Packages
+#11 1.231 
+#11 1.231 Freed space: 6.2 M
+#11 1.231 Running transaction check
+#11 1.235 Transaction check succeeded.
+#11 1.235 Running transaction test
+#11 1.255 Transaction test succeeded.
+#11 1.255 Running transaction
+#11 1.800   Preparing        :                                                        1/1 
+#11 1.821   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/1 
+#11 1.831   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#11 1.857   Erasing          : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#11 1.859   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#11 1.887   Erasing          : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
+#11 1.889   Running scriptlet: nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
+#11 2.033   Verifying        : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   1/2 
+#11 2.033   Verifying        : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   2/2 
+#11 2.240 Installed products updated.
+#11 2.252 
+#11 2.252 Removed:
+#11 2.252   nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af250afe.noarch               
+#11 2.252   php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                         
+#11 2.252 
+#11 2.252 Complete!
+#11 DONE 2.4s
 
 #12 [ 8/17] WORKDIR /var/www/html/
-#12 sha256:00107af045ca3f0ab3535fd9421a1def863e21802aca47e93ac82ac02cea1af9
+#12 sha256:f4f21ebd4356152998ceba9f04a24cc1db83c3fdabe845d4876d9f7b4989049a
 #12 DONE 0.0s
 
 #13 [ 9/17] RUN chown -R 1001:0  /var/www/html
-#13 sha256:b2f0e1b4fe07e1ee6f5e094cd949368cc5a2822869d2cc3c45189466c8fd0334
-#13 DONE 10.6s
+#13 sha256:98a94e995a2cef8b25e356ba478d70d47698084f1fc43ab2c3105e45ee40702f
+#13 DONE 8.9s
 
 #14 [10/17] RUN chown -R 1001:0 /run
-#14 sha256:a730a4c0838221a6da4597fdc15f5711948c9399829cfd1c87613d4e50e93202
+#14 sha256:60574d65a26c11e77434f422700eb0bd9a1a2571483406e01ce6b895f3579c7c
 #14 DONE 0.7s
 
 #15 [11/17] RUN chown -R 1001:0 /etc/httpd/run
-#15 sha256:91cd596d6ea0059fd41815ce1a8a6b3f0584aa82c9137415372a41c8aafacc8f
-#15 DONE 0.6s
+#15 sha256:8639a11f1134039226d48437b4b08e5934f49d1aff916a735e762975a9d51f7c
+#15 DONE 0.9s
 
 #16 [12/17] RUN chmod -R 777 /run
-#16 sha256:90669197e90da29beb56913dc7032645cd853cc991ed10b50b7b84125f7f528c
-#16 DONE 0.7s
+#16 sha256:8cc0f4d42c671fbd465f648c5104cbf94503892d7d9679dee6a278b3a6a1577b
+#16 DONE 0.6s
 
 #17 [13/17] RUN chmod -R 777 /etc/httpd/run
-#17 sha256:3d1981b1986f98ec137bf1ddd625b9e33d09f68b8901bf2df1163f1fe30bbd26
-#17 DONE 0.6s
+#17 sha256:693c04137cd489cc8e358e255fc2b4a4e1e599b4f2a853ab8587b71a47a85441
+#17 DONE 0.7s
 
 #18 [14/17] RUN chmod -R 777 /var/www/html/extracts
-#18 sha256:08d2bc8c708e5b3927cd6a051bf20b945b2a1efbf7f54669ea47ce8121a77acb
-#18 DONE 0.6s
+#18 sha256:555cbf69462769f4e55342d509f25f028a23a4882c8778938873e548e7045d96
+#18 DONE 0.7s
 
 #19 [15/17] RUN composer install --no-interaction
-#19 sha256:d8222081055d1befae194da27738cd8d64e02254162cd61afc23cb51eb193692
-#19 0.936 Installing dependencies from lock file (including require-dev)
-#19 0.937 Verifying lock file contents can be installed on current platform.
-#19 0.971 Package operations: 0 installs, 0 updates, 2 removals
-#19 0.971   - Removing laminas/laminas-stdlib (3.7.1)
-#19 0.974   - Removing laminas/laminas-db (2.15.0)
-#19 0.989  0/2 [>---------------------------]   0%
-#19 1.011  2/2 [============================] 100%
-#19 1.018 Generating autoload files
-#19 1.025 3 packages you are using are looking for funding.
-#19 1.025 Use the `composer fund` command to find out more!
-#19 DONE 1.0s
+#19 sha256:92d77d266cdb57b6bcaff6419204bbbcbbebbd222d0b494dd531598835be96ff
+#19 1.047 Installing dependencies from lock file (including require-dev)
+#19 1.048 Verifying lock file contents can be installed on current platform.
+#19 1.088 Package operations: 0 installs, 0 updates, 2 removals
+#19 1.089   - Removing laminas/laminas-stdlib (3.7.1)
+#19 1.091   - Removing laminas/laminas-db (2.15.0)
+#19 1.108  0/2 [>---------------------------]   0%
+#19 1.131  2/2 [============================] 100%
+#19 1.141 Generating autoload files
+#19 1.148 3 packages you are using are looking for funding.
+#19 1.148 Use the `composer fund` command to find out more!
+#19 DONE 1.2s
 
 #20 [16/17] ADD ./patch2.sh /patch2.sh
-#20 sha256:dfd0a190648c5f01cade515b3eccd9f30c80d180b4b34558be107a00f77526d4
+#20 sha256:c876506eaa2505c522cd1c47a547ac70b82e891b16fc77142b2bd2ff9b0de725
 #20 DONE 0.0s
 
 #21 [17/17] RUN bash /patch2.sh && rm /patch2.sh
-#21 sha256:eca7e510f49f129138ca3ae928aa42b586da7695fce70f2b2b832b098691fdd2
-#21 DONE 0.6s
+#21 sha256:dcd7a4aeba8644a7294d30354d19aaddfc66049e3a2e5a8fbb729494cfb30248
+#21 DONE 0.7s
 
 #22 exporting to image
 #22 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
 #22 exporting layers
-#22 exporting layers 2.3s done
-#22 writing image sha256:57c132f9ae5711f02236d62441fb2c2d700e189531ee154dc24d82116fe0533d done
+#22 exporting layers 2.9s done
+#22 writing image sha256:e5554a580f11296d8e538176225e8baeecf1df893ee2f07625726a538db1e20a done
 #22 naming to docker.io/library/kpes done
-#22 DONE 2.3s
+#22 DONE 2.9s
