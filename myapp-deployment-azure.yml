@@ -27,15 +27,20 @@ spec:
             cpu: 32m
             memory: 128Mi
         terminationMessagePath: /dev/termination-log
-        env:
-        - name: PORT
-          value: "8080"
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TEMP_INLINE_VALUE
+          value: Linux
         envFrom:
+        - configMapRef:
+            name: env-configmap
         - secretRef:
-            name: kpes-app-docker-secrets-generic
+            # name: kpes-app-docker-secrets-generic
+            name: env-secrets

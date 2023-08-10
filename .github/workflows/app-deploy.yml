@@ -111,3 +111,5 @@ jobs:
           imagepullsecrets: |
             kpes-app-docker-secrets
             kpes-app-docker-secrets-generic
+            env-configmap
+            env-secrets
