@@ -273,35 +273,14 @@ function _microtime_float()
     return ((float) $usec + (float) $sec);
 }
 
-echo 'NEW VERSION OF CONTAINER CREATED !!!';
+if (!isset($_SERVER['SERVER_NAME'])) {
+    $_SERVER['SERVER_NAME'] = 'azure';
+}
+
+echo 'NEW VERSION OF CONTAINER CREATED - WITH SECRETS AND VARIABLES !!!';
 echo '<pre>';
 var_dump($_ENV);
 echo '</pre>';
-
-// Env variables walk around
-$_ENV['environment'] = 'upes_newco_dev';
-$_ENV['email'] = 'dev';
-$_ENV['devemailid'] = 'piotr.tajanowicz@ocean.ibm.com';
-$_ENV['environment'] = 'upes_newco_dev';
-$_ENV['SERVER_ADMIN'] = 'piotr.tajanowicz@ocean.ibm.com';
-$_ENV['SSO_environment'] = 'staging';
-$_ENV['api_token'] = '35310a45-62a7-4de6-b8a3-17f9c6efdd26';
-$_ENV['ssldsn'] = 'DATABASE=BLUDB;HOSTNAME=541923aa-a2a2-40a4-9e67-94eb6e88d5f5.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=30725;PROTOCOL=TCPIP;UID=iae2chzk;PWD=voJchMHqPNqo3mVk;Security=SSL';
-$_ENV['token_ventus_sre'] = 'xxxxx';
-$_ENV['jwt_token'] = 'dGhpcyBpcyBhIHN0cmluZyB0aGF0IHdpbGwgYmUgdXNlZCB0byBzZWN1cmUgdmJhYydzIHNlc3Npb25zLiBUaGUgbW9yZSBjaGFyYWN0ZXJzIEkga2V5IGludG8gdGhpcyB0aGUgbW9yZSBzZWN1cmUgaXQgaXMg';
-$_ENV['sso_staging_secret'] = 'NjMzODZkNWUtZjMyMi00';
-$_ENV['sso_staging_id'] = 'ZThiZDg1M2ItZGFiMi00';
-$_ENV['password'] = 'KeepUpesDataSafe2020!';
-$_ENV['upes_audit'] = 'https://hooks.slack.com/services/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';
-
-$_ENV['sso_client_id']='ZThiZDg1M2ItZGFiMi00';
-$_ENV['sso_client_secret']='NjMzODZkNWUtZjMyMi00';
-$_ENV['sso_authorize_url']='https://login.w3.ibm.com/oidc/endpoint/default/authorize';
-$_ENV['sso_token_url']='https://login.w3.ibm.com/oidc/endpoint/default/token';
-$_ENV['sso_introspect_url']='https://login.w3.ibm.com/oidc/endpoint/default/introspect';
-$_ENV['noreplyemailid']='kpes@noreply.ibm.com';
-$_ENV['noreplykyndrylemailid']='kpesNoReply@kyndryl.com';
-
 
 $start = microtime(true);
 

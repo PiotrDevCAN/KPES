@@ -3,5 +3,11 @@ kind: ConfigMap
 metadata:
   name: env-configmap
 data:
-  APP_NAME: Mans Not Hot
-  APP_ENV: production
+  SERVER_ADMIN: piotr.tajanowicz@ocean.ibm.com
+  SERVER_NAME: Azure kPES
+  email: dev
+  environment: upes_newco_dev
+  devemailid: piotr.tajanowicz@ocean.ibm.com
+  noreplyemailid: kpes@noreply.ibm.com
+  noreplykyndrylemailid: kpesNoReply@kyndryl.com
+  upes_audit: https://hooks.slack.com/services/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
