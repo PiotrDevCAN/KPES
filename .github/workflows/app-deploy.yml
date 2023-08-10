@@ -81,13 +81,13 @@ jobs:
           container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
       - name: Set ImagePullSecrets 2
         id: image_secret-2
-        # uses: azure/k8s-actions/k8s-create-secret@master
-        uses: Azure/k8s-create-secret@v4.0
+        uses: azure/k8s-actions/k8s-create-secret@master
+        # uses: Azure/k8s-create-secret@v4.0
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
-          secret-type: 'generic'
-          arguments: --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}
           secret-name: kpes-app-docker-secrets-generic
+          secret-type: 'generic'
+          arguments: --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}          
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
