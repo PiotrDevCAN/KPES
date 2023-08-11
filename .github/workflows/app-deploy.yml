@@ -102,9 +102,9 @@ jobs:
           manifests: |
             ./env-configmap.yml
             ./env-secrets.yml
-            ./myapp-deployment-azure.yml
-            ./myapp-service-azure.yml
-            ./myapp-sn-dev_route-azure.yml
+            ./myapp-deployment.yml
+            ./myapp-service.yml
+            ./myapp-sn-dev_route.yml
           # Multiline input where each line contains the name of a docker-registry secret 
           # that has already been setup within the cluster. 
           # Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
