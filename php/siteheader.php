@@ -277,10 +277,10 @@ if (!isset($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = 'azure';
 }
 
-echo 'NEW VERSION OF CONTAINER CREATED - WITH SECRETS AND VARIABLES !!!';
-echo '<pre>';
-var_dump($_ENV);
-echo '</pre>';
+// echo 'NEW VERSION OF CONTAINER CREATED - WITH SECRETS AND VARIABLES !!!';
+// echo '<pre>';
+// var_dump($_ENV);
+// echo '</pre>';
 
 $start = microtime(true);
 

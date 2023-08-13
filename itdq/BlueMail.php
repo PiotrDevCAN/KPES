@@ -115,13 +115,20 @@ class BlueMail
                 
                 // no BREAK - need to drop through to proper email.
             case 'on':
+                // $mail->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
+                // $mail->isSMTP(); // Send using SMTP
+                // $mail->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
+                // $mail->SMTPAuth = false;
+                // $mail->SMTPAutoTLS = false;
+                // $mail->Port = 25;
+                
                 $mail->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
                 $mail->isSMTP(); // Send using SMTP
                 $mail->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
                 $mail->SMTPAuth = false;
                 $mail->SMTPAutoTLS = false;
                 $mail->Port = 25;
-                
+
                 $mail->setFrom($replyto);
                 $mail->isHTML(true);
                 

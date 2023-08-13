@@ -12,6 +12,20 @@ if(!function_exists("tryConnect")){
     }
 }
 
+$serverName = 'srv-kpes-sql-dev-wus3-001.database.windows.net';
+$userName = 'kpesdev_db_admin';
+$password = 'Po)h5W7[tvpNNwWRaE5Tw';
+
+// $serverName = "serverName\\sqlexpress"; //serverName\instanceName
+$connectionInfo = array( "Database"=>"KPES", "UID"=>$userName, "PWD"=>$password);
+$conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+if( $conn ) {
+     echo "Connection to Azure SQL database established.<br />";
+}else{
+     echo "Connection could not be established.<br />";
+     die( print_r( sqlsrv_errors(), true));
+}
 
 if( isset($_ENV['ssldsn']) )
 {
@@ -46,7 +60,6 @@ if( isset($_ENV['ssldsn']) )
         //     sleep(3);
         // }
     }
-    
 
     if( $conn )
     {

@@ -20,6 +20,13 @@ function myErrorHandler($code, $message, $file, $line) {
     $mailError->clearCCs();
     $mailError->clearBCCs();
 
+    // $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
+    // $mailError->isSMTP(); // Send using SMTP
+    // $mailError->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
+    // $mailError->SMTPAuth = false;
+    // $mailError->SMTPAutoTLS = false;
+    // $mailError->Port = 25;
+
     $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
     $mailError->isSMTP(); // Send using SMTP
     $mailError->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
