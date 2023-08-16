@@ -18,8 +18,15 @@ source ~/.bashrc
 
 sudo yum install -y initscripts unixODBC-2.3.7 unixODBC-devel-2.3.7
 
-sudo pecl channel-update pecl.php.net		 
-sudo pecl install sqlsrv-5.10.1 pdo_sqlsrv-5.10.1
+sudo pecl channel-update pecl.php.net
+
+# sudo pecl install sqlsrv-5.10.1
+wget http://pecl.php.net/get/sqlsrv-5.10.1.tgz
+sudo pear install sqlsrv-5.10.1.tgz
+
+# sudo pecl install pdo_sqlsrv-5.10.1
+wget http://pecl.php.net/get/pdo_sqlsrv-5.10.1.tgz
+sudo pear install pdo_sqlsrv-5.10.1.tgz
 
 echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
 echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini

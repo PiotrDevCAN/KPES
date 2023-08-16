@@ -3,7 +3,7 @@
 if(!function_exists("tryConnect")){
     function tryConnect($conn_string){
         error_log("Attempting Pconnect to DB2 from Pod:" . $_ENV['HOSTNAME'] . ":" . $conn_string);
-        $preConnect = microtime(true);  
+        $preConnect = microtime(true);
         $connection =  db2_pconnect( $conn_string, "", "" );
         $postConnect = microtime(true);
         error_log("Db2 Pconnect took:" . (float)($postConnect-$preConnect));
@@ -16,7 +16,6 @@ $serverName = 'srv-kpes-sql-dev-wus3-001.database.windows.net';
 $userName = 'kpesdev_db_admin';
 $password = 'Po)h5W7[tvpNNwWRaE5Tw';
 
-// $serverName = "serverName\\sqlexpress"; //serverName\instanceName
 $connectionInfo = array( "Database"=>"KPES", "UID"=>$userName, "PWD"=>$password);
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
@@ -27,8 +26,7 @@ if( $conn ) {
      die( print_r( sqlsrv_errors(), true));
 }
 
-if( isset($_ENV['ssldsn']) )
-{
+if( isset($_ENV['ssldsn']) ) {
     # Get database details from the VCAP_SERVICES environment variable
     #
     # *This can only work if you have used the Bluemix dashboard to
@@ -57,12 +55,13 @@ if( isset($_ENV['ssldsn']) )
         //     error_log("Failed attempt $attempts to connect to DB2");
         //     error_log("Msg:" . db2_conn_errormsg());
         //     error_log("Err:" . db2_conn_error());
-        //     sleep(3);
+        //     sleep(1);
+        // } else {
+        //     error_log("Connection successful on : $attempts Attempt");
         // }
     }
 
-    if( $conn )
-    {
+    if( $conn ) {
         $GLOBALS['conn'] = $conn;
         $schema = isset($GLOBALS['Db2Schema']) ? $GLOBALS['Db2Schema'] : 'REST';
         $Statement = "SET CURRENT SCHEMA='$schema';";
@@ -75,31 +74,22 @@ if( isset($_ENV['ssldsn']) )
             print_r($_SESSION);
             echo "</pre>";
 
-
             echo "<BR>" . db2_stmt_errormsg() . "<BR>";
             echo "<BR>" . db2_stmt_error() . "<BR>";
             exit("Set current schema failed");
         }
         db2_autocommit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
-    }
-    else
-    {
-        
+    } else {
         error_log(__FILE__ . __LINE__ . " Connect to DB2 Failed");
         // error_log(__FILE__ . __LINE__ . $conn_string);
         // error_log(__FILE__ . __LINE__ . db2_conn_errormsg());
         // error_log(__FILE__ . __LINE__ . db2_conn_error());
         // throw new \Exception('Failed to connect to DB2');
     }
-}
-else
-{
+} else {
     echo "<pre>";
     print_r($_ENV);
     echo "</pre>";
     echo "<p>No credentials.</p>";
 }
-
-
-
 ?>
