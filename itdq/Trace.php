@@ -164,10 +164,9 @@ class Trace extends Log{
 
 		$sql = "SELECT * FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE_CONTROL ;
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
-		if(!$rs)
-			{
-			echo "<BR>Error: " . sqlsrv_errors();
-			echo "<BR>Msg: " . sqlsrv_errors() . "<BR>";
+		if(!$rs) {
+			echo "<BR>Error: " . sqlsrv_errors()[0]['code'];
+			echo "<BR>Msg: " . sqlsrv_errors()[0]['message'] . "<BR>";
 			exit("Error in: " . __METHOD__ .  __LINE__ . "<BR>running: $sql");
 		}
 		$anyExcludes = FALSE;

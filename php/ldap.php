@@ -8,6 +8,8 @@ use itdq\BlueGroups;
 // email address.
 function bluegroups_subgroups($group)
 {
+    return false;
+
     // the group filter
     if (! is_array($group))
         $group = array(
@@ -58,7 +60,9 @@ function bluegroups_subgroups($group)
 // an email address.
 function employee_in_group($group, $employee, $depth = 2)
 {
-        return BlueGroups::inAGroup($group,$employee, $depth);       
+    return false;
+    
+    return BlueGroups::inAGroup($group,$employee, $depth);       
 }
 //     if (! is_array($group)) {
 //         $group = array(
@@ -126,6 +130,8 @@ function employee_in_group($group, $employee, $depth = 2)
 // note: seems slower than processing by UID filters
 function employee_by_dn($dn, $attr = null)
 {
+    return false;
+    
     if (! is_array($dn))
         $dn = array(
             $dn
@@ -176,6 +182,8 @@ function employee_by_dn($dn, $attr = null)
 // of bluepages attributes for the group owner and/or group admin
 function bluegroup_metadata($group, $attr = null)
 {
+    return false;
+    
     // build the search filter, basedn, and attr list
     $filter = "(cn=$group)";
     $basedn = "ou=metadata,ou=ibmgroups,o=ibm.com";
@@ -244,6 +252,8 @@ function bluegroup_metadata($group, $attr = null)
 // attributes to return for each employee.
 function bluegroup_employees($group, $attr = null, $maxdepth = 2)
 {
+    return false;
+    
     // get the group members
     if (! $members = bluegroup_members($group, $maxdepth))
         return FALSE;
@@ -263,6 +273,8 @@ function bluegroup_employees($group, $attr = null, $maxdepth = 2)
 // set to 0 then no sub-groups are checked
 function bluegroup_members($group, $maxdepth = 2, $depth = 0, $ds = FALSE)
 {
+    return false;
+    
     // setup basedn and attr array
     $basedn = "ou=memberlist,ou=ibmgroups,o=ibm.com";
     $attr = array(
@@ -330,6 +342,8 @@ function bluegroup_members($group, $maxdepth = 2, $depth = 0, $ds = FALSE)
 // an email address.
 function employee_bluegroups($employee)
 {
+    return false;
+    
     if (strpos($employee, "@") == TRUE) {
         // lookup the DN from an email address
         if (! $record = bluepages_search("(mail=$employee)")) {
@@ -379,6 +393,8 @@ function employee_bluegroups($employee)
 // WARNING: only the first value of an attribute is returned
 function bluepages_search($filter, $attr = null, $key_attr = 'dn')
 {
+    return false;
+    
     // setup filter array, attr list, and base dn
     if (! is_array($filter))
         $filter = array(
@@ -445,6 +461,8 @@ function bluepages_search($filter, $attr = null, $key_attr = 'dn')
 // WARNING: records with duplicate $keys are replaced by the last occrance of $key
 function ldap_key_by($i_array, $key)
 {
+    return false;
+    
     $o_array = array();
     foreach ($i_array as $record) {
         if (! isset($record[$key]))
@@ -460,6 +478,8 @@ function ldap_key_by($i_array, $key)
 // this operates directly on the results $array passed
 function ldap_sort_by(&$array, $attr)
 {
+    return false;
+    
     $sortfunc = create_function('$a,$b', 'return strcasecmp($a["' . $attr . '"], $b["' . $attr . '"]);');
     uasort($array, $sortfunc);
 }
@@ -469,11 +489,15 @@ function ldap_sort_by(&$array, $attr)
 // the value of the uid of the DN is returned
 function ibm_uid($dn)
 {
+    return false;
+    
     return dn2uid($dn);
 }
 
 function dn2uid($dn)
 {
+    return false;
+    
     list ($uid, ) = ldap_explode_dn($dn, 1);
     return stripslashes($uid);
 }
@@ -481,7 +505,8 @@ function dn2uid($dn)
 // emulate old user_info() function for compatablity
 function user_info($value, $key = "mail")
 {
-
+    return false;
+    
     // search for the employee using site wide attribs
     $attr = $GLOBALS['w3php']['ldap_attr'];
     if (! $result = bluepages_search("($key=$value)", $attr))
@@ -493,6 +518,8 @@ function user_info($value, $key = "mail")
 // internal funciton used to connect to ED server
 function _ldap_connect($host = "ldaps://bluepages.ibm.com:636")
 {
+    return false;
+    
     // use a previously opened connection
     if (isset($GLOBALS['ibm_ldap_ds']) && is_resource($GLOBALS['ibm_ldap_ds'])) {
         return $GLOBALS['ibm_ldap_ds'];
@@ -519,6 +546,8 @@ function _ldap_connect($host = "ldaps://bluepages.ibm.com:636")
 // $size = the number of items in each filter
 function make_ldap_filter($list, $attr, $size = '200')
 {
+    return false;
+    
     $map_func = create_function('$val', 'return "(' . $attr . '=$val)";');
     $list = array_map($map_func, $list);
     $f = array_chunk($list, $size);
@@ -531,6 +560,8 @@ function make_ldap_filter($list, $attr, $size = '200')
 // internal function used to for constructing filters
 function _uid_filter($dn)
 {
+    return false;
+    
     return "(uid=" . dn2uid($dn) . ")";
 }
 ?>

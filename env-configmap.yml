@@ -6,7 +6,7 @@ data:
   SERVER_ADMIN: piotr.tajanowicz@ocean.ibm.com
   SERVER_NAME: Azure kPES
   email: dev
-  environment: upes_newco_dev
+  environment: upes_newco
   devemailid: piotr.tajanowicz@ocean.ibm.com
   noreplyemailid: kpes@noreply.ibm.com
   noreplykyndrylemailid: kpesNoReply@kyndryl.com

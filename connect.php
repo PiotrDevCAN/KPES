@@ -69,7 +69,7 @@ if( isset($_ENV['db-server'])
         // error_log(__FILE__ . __LINE__ . $conn_string);
         // error_log(__FILE__ . __LINE__ . db2_conn_errormsg());
         // error_log(__FILE__ . __LINE__ . db2_conn_error());
-        // throw new \Exception('Failed to connect to DB2');
+        // throw new \Exception('Failed to connect to Azure SQL');
     }
 } else {
     echo "<pre>";
