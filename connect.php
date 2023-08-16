@@ -1,10 +1,10 @@
 <?php
 
 if(!function_exists("tryConnect")){
-    function tryConnect($serverName, $userName, $password){
+    function tryConnect($serverName, $dbName, $userName, $password){
         error_log("Attempting Pconnect to Azure SQL from Pod:" . $_ENV['HOSTNAME'] . ":" . $serverName . $userName . $password);
         $preConnect = microtime(true);    
-        $connectionInfo = array( "Database"=>"KPES", "UID"=>$userName, "PWD"=>$password);
+        $connectionInfo = array( "Database"=>$dbName, "UID"=>$userName, "PWD"=>$password);
         $connection = sqlsrv_connect( $serverName, $connectionInfo);
         $postConnect = microtime(true);
         // error_log("Db2 Pconnect took:" . (float)($postConnect-$preConnect));
@@ -13,11 +13,14 @@ if(!function_exists("tryConnect")){
     }
 }
 
-if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db-user-pw']) ) {
+if( isset($_ENV['db-server']) 
+    && isset($_ENV['db-name']) 
+    && isset($_ENV['db-user-name'])
+    && isset($_ENV['db-user-pw'])
+) {
     
     $serverName = $_ENV['db-server'];
     $dbName = $_ENV['db-name'];
-    $schemaName = $_ENV['db-schema'];
     $userName = $_ENV['db-user-name'];
     $password = $_ENV['db-user-pw'];
     
@@ -26,7 +29,7 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
 
     while(!$conn && ++$attempts < 3){
         // since Cirrus - we have the occasional problem connecting, so sleep and try again a couple of times 
-        $conn = tryConnect($serverName, $userName, $password);
+        $conn = tryConnect($serverName, $dbName, $userName, $password);
         if(!$conn){
             error_log("Failed attempt $attempts to connect to Azure SQL");
             error_log("Msg:" . sqlsrv_errors());
@@ -60,7 +63,7 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
         //     }
         //     exit("Set current schema failed");
         // }
-        sqlsrv_commit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
+        // sqlsrv_commit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
     } else {
         error_log(__FILE__ . __LINE__ . " Connect to Azure SQL Failed");
         // error_log(__FILE__ . __LINE__ . $conn_string);

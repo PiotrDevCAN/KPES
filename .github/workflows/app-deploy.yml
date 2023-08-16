@@ -64,6 +64,7 @@ jobs:
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
             kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 server | DB_SERVER ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 database | DB_NAME ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW
       - name: Login to ARO Cluster
@@ -91,7 +92,7 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-generic
           secret-type: 'generic'
-          arguments: --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }} --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}          
+          arguments: --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }}  --from-literal=db-name=${{ steps.import-secrets.outputs.DB_NAME }} --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}          
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
