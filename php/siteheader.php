@@ -4,9 +4,6 @@
 // ** session_cache_limiter('private');
 // ** for fpdf http://www.fpdf.org/ download of pdf files in https;
 
-use ByJG\Session\JwtSession;
-use itdq\BluePages;
-use itdq\BluePagesSLAPHAPI;
 use itdq\JwtSecureSession;
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 
@@ -276,11 +273,6 @@ function _microtime_float()
 if (!isset($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = 'azure';
 }
-
-// echo 'NEW VERSION OF CONTAINER CREATED - WITH SECRETS AND VARIABLES !!!';
-// echo '<pre>';
-// var_dump($_ENV);
-// echo '</pre>';
 
 $start = microtime(true);
 
