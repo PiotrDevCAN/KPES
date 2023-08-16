@@ -16,6 +16,8 @@ if(!function_exists("tryConnect")){
 if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db-user-pw']) ) {
     
     $serverName = $_ENV['db-server'];
+    $dbName = $_ENV['db-name'];
+    $schemaName = $_ENV['db-schema'];
     $userName = $_ENV['db-user-name'];
     $password = $_ENV['db-user-pw'];
     
@@ -37,27 +39,27 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
 
     if( $conn ) {
         $GLOBALS['conn'] = $conn;
-        $schema = isset($GLOBALS['Db2Schema']) ? $GLOBALS['Db2Schema'] : 'REST';
-        // $statement = "SET CURRENT SCHEMA='$schema';";
-        $statement = "ALTER USER ".$userName." WITH DEFAULT_SCHEMA = KPES;";
-        $rs = sqlsrv_query($conn, $statement);
+        // $schema = isset($GLOBALS['Db2Schema']) ? $GLOBALS['Db2Schema'] : 'REST';
+        // // $statement = "SET CURRENT SCHEMA='$schema';";
+        // $statement = "ALTER USER ".$userName." WITH DEFAULT_SCHEMA = KPES;";
+        // $rs = sqlsrv_query($conn, $statement);
 
-        if (! $rs) {
-            echo "<br/>" . $statement . "<br/>";
+        // if (! $rs) {
+        //     echo "<br/>" . $statement . "<br/>";
 
-            // echo "<pre>";
-            // print_r($_SESSION);
-            // echo "</pre>";
+        //     // echo "<pre>";
+        //     // print_r($_SESSION);
+        //     // echo "</pre>";
 
-            if( ($errors = sqlsrv_errors() ) != null) {
-                foreach( $errors as $error ) {
-                    echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
-                    echo "code: ".$error[ 'code']."<br />";
-                    echo "message: ".$error[ 'message']."<br />";
-                }
-            }
-            exit("Set current schema failed");
-        }
+        //     if( ($errors = sqlsrv_errors() ) != null) {
+        //         foreach( $errors as $error ) {
+        //             echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
+        //             echo "code: ".$error[ 'code']."<br />";
+        //             echo "message: ".$error[ 'message']."<br />";
+        //         }
+        //     }
+        //     exit("Set current schema failed");
+        // }
         sqlsrv_commit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
     } else {
         error_log(__FILE__ . __LINE__ . " Connect to Azure SQL Failed");
