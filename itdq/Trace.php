@@ -141,8 +141,8 @@ class Trace extends Log{
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
-			echo "<BR>Error: " . db2_stmt_error();
-			echo "<BR>Msg: " . db2_stmt_errormsg() . "<BR>";
+			echo "<BR>Error: " . sqlsrv_errors();
+			echo "<BR>Msg: " . sqlsrv_errors() . "<BR>";
 			exit("Error in: " . __METHOD__ .  __LINE__ . "<BR>running: $sql");
 		}
 	}
@@ -154,8 +154,8 @@ class Trace extends Log{
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
-			echo "<BR>Error: " . db2_stmt_error();
-			echo "<BR>Msg: " . db2_stmt_errormsg() . "<BR>";
+			echo "<BR>Error: " . sqlsrv_errors();
+			echo "<BR>Msg: " . sqlsrv_errors() . "<BR>";
 			exit("Error in: " . __METHOD__ .  __LINE__ . "<BR>running: $sql");
 		}
 	}
@@ -166,8 +166,8 @@ class Trace extends Log{
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
-			echo "<BR>Error: " . db2_stmt_error();
-			echo "<BR>Msg: " . db2_stmt_errormsg() . "<BR>";
+			echo "<BR>Error: " . sqlsrv_errors();
+			echo "<BR>Msg: " . sqlsrv_errors() . "<BR>";
 			exit("Error in: " . __METHOD__ .  __LINE__ . "<BR>running: $sql");
 		}
 		$anyExcludes = FALSE;

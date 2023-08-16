@@ -26,8 +26,8 @@ echo $GLOBALS['Db2Schema'];
 // $resultSet = $personTable->fetchPeopleList(" AND EMAIL_ADDRESS LIKE '%ocean.ibm.com%'");
 $resultSet = $personTable->fetchPeopleList();
 if (!$resultSet) {
-    echo db2_stmt_error();
-    echo db2_stmt_errormsg();
+    echo sqlsrv_errors();
+    echo sqlsrv_errors();
     throw new \Exception('Error reading People from PERSON');
 }
 

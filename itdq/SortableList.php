@@ -453,8 +453,8 @@ class SortableList
         ));
 
         if (! $rs) {
-            echo "<BR/> Error:" . db2_stmt_error();
-            echo "<BR/> Msg:" . db2_stmt_errormsg();
+            echo "<BR/> Error:" . sqlsrv_errors();
+            echo "<BR/> Msg:" . sqlsrv_errors();
             exit("<BR/>Error in " . __METHOD__ . " : $rs : $this->sql");
         }
         return $rs;

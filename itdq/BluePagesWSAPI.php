@@ -365,7 +365,7 @@ class BluePages {
 		}
 		set_time_limit(120);
 		$url = "https://bluepages.ibm.com/BpHttpApisv3/wsapi?byInternetAddr=INTRANET_ID_HERE";
-//echo "<BR/>" . str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url);
+		//echo "<BR/>" . str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url);
 		$ch = curl_init ( str_replace('INTRANET_ID_HERE',urlencode($intranetId),$url) );
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 
@@ -520,8 +520,8 @@ class BluePages {
 				if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
 					$rs = sqlsrv_queryute ( $this->preparedInsert, $data );
 					if (! $rs) {
-						echo "<BR>" . db2_stmt_error ();
-						echo "<BR>" . db2_stmt_errormsg () . "<BR>";
+						echo "<BR>" . sqlsrv_errors ();
+						echo "<BR>" . sqlsrv_errors () . "<BR>";
 						echo "<BR> Data :";
 						print_r ( $data );
 						exit ( "Unable to Execute $sql" );
@@ -539,8 +539,8 @@ class BluePages {
 			$rs = sqlsrv_query ( $_SESSION ['conn'], " COMMIT" );
 			if (! $rs) {
 				print_r ( $_SESSION );
-				echo "<BR>" . db2_stmt_error ();
-				echo "<BR>" . db2_stmt_errormsg () . "<BR>";
+				echo "<BR>" . sqlsrv_errors ();
+				echo "<BR>" . sqlsrv_errors () . "<BR>";
 				exit ( "Error in: " . __METHOD__ . " running: COMMIT " );
 			}
 		}
@@ -571,8 +571,8 @@ class BluePages {
 			if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
 				$rs = sqlsrv_queryute ( $this->preparedInsert, $data );
 				if (! $rs) {
-					echo "<BR>" . db2_stmt_error ();
-					echo "<BR>" . db2_stmt_errormsg () . "<BR>";
+					echo "<BR>" . sqlsrv_errors ();
+					echo "<BR>" . sqlsrv_errors () . "<BR>";
 					echo "<BR> Data :";
 					print_r ( $data );
 					exit ( "Unable to Execute $sql" );
@@ -586,8 +586,8 @@ class BluePages {
 //			$rs = sqlsrv_query ( $_SESSION ['conn'], " COMMIT" );
 //			if (! $rs) {
 //				print_r ( $_SESSION );
-//				echo "<BR>" . db2_stmt_error ();
-//				echo "<BR>" . db2_stmt_errormsg () . "<BR>";
+//				echo "<BR>" . sqlsrv_errors ();
+//				echo "<BR>" . sqlsrv_errors () . "<BR>";
 //				exit ( "Error in: " . __METHOD__ . " running: COMMIT " );
 //			}
 		}

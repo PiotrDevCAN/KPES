@@ -87,8 +87,8 @@ class Email
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
-                echo "<BR/>" . db2_stmt_error();
-                echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
+                echo "<BR/>" . sqlsrv_errors();
+                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
                 exit("Error in: " . __METHOD__ . " running: " . htmlspecialchars($sql, ENT_QUOTES));
             }
             $recordId = db2_last_insert_id($GLOBALS['conn']);
@@ -109,8 +109,8 @@ class Email
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
-                echo "<BR/>" . db2_stmt_error();
-                echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
+                echo "<BR/>" . sqlsrv_errors();
+                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
                 exit("Error in: " . __METHOD__ . " running: " . htmlspecialchars($sql, ENT_QUOTES));
             }
         }
@@ -136,8 +136,8 @@ class Email
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
-                echo "<BR/>" . db2_stmt_error();
-                echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
+                echo "<BR/>" . sqlsrv_errors();
+                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
                 exit("Error in: " . __METHOD__ . " running: " . htmlspecialchars($sql, ENT_QUOTES));
             }
         }
@@ -151,8 +151,8 @@ class Email
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
-                echo "<BR/>" . db2_stmt_error();
-                echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
+                echo "<BR/>" . sqlsrv_errors();
+                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
                 exit("Error in: " . __METHOD__ . " running: " . htmlspecialchars($sql, ENT_QUOTES));
             } else {
                 $row = sqlsrv_fetch_array($rs);
