@@ -102,7 +102,7 @@ jobs:
           # Path to the manifest files to be used for deployment. 
           manifests: |
             ./env-configmap.yml
-            # ./env-secrets.yml
+            ./env-secrets.yml
             ./myapp-deployment.yml
             ./myapp-service.yml
             ./myapp-sn-dev_route.yml
@@ -111,6 +111,5 @@ jobs:
           # Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
           imagepullsecrets: |
             env-configmap
-            # env-secrets
             kpes-app-docker-secrets
             kpes-app-docker-secrets-generic

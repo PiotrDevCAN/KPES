@@ -1,64 +1,38 @@
 <?php
 
 if(!function_exists("tryConnect")){
-    function tryConnect($conn_string){
-        error_log("Attempting Pconnect to DB2 from Pod:" . $_ENV['HOSTNAME'] . ":" . $conn_string);
-        $preConnect = microtime(true);
-        $connection =  db2_pconnect( $conn_string, "", "" );
+    function tryConnect($serverName, $userName, $password){
+        error_log("Attempting Pconnect to Azure SQL from Pod:" . $_ENV['HOSTNAME'] . ":" . $serverName . $userName . $password);
+        $preConnect = microtime(true);    
+        $connectionInfo = array( "Database"=>"KPES", "UID"=>$userName, "PWD"=>$password);
+        $connection = sqlsrv_connect( $serverName, $connectionInfo);
         $postConnect = microtime(true);
-        error_log("Db2 Pconnect took:" . (float)($postConnect-$preConnect));
-        error_log("Db2 Pconnection:" . print_r($connection,true));
+        // error_log("Db2 Pconnect took:" . (float)($postConnect-$preConnect));
+        // error_log("Db2 Pconnection:" . print_r($connection,true));
         return $connection;
     }
 }
 
-$serverName = 'srv-kpes-sql-dev-wus3-001.database.windows.net';
-$userName = 'kpesdev_db_admin';
-$password = 'Po)h5W7[tvpNNwWRaE5Tw';
-
-$connectionInfo = array( "Database"=>"KPES", "UID"=>$userName, "PWD"=>$password);
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
-
-if( $conn ) {
-     echo "Connection to Azure SQL database established.<br />";
-}else{
-     echo "Connection could not be established.<br />";
-     die( print_r( sqlsrv_errors(), true));
-}
-
-if( isset($_ENV['ssldsn']) ) {
-    # Get database details from the VCAP_SERVICES environment variable
-    #
-    # *This can only work if you have used the Bluemix dashboard to
-    # create a connection from your dashDB service to your PHP App.
-    #
-    //     $details  = json_decode( getenv( "VCAP_SERVICES" ), true );
-    //     $dsn      = $details [ "user-provided" ][0][ "credentials" ][ "dsn" ];
-    //     $ssl_dsn  = $details [ "user-provided" ][0][ "credentials" ][ "ssldsn" ];
-    $ssl_dsn  = $_ENV["ssldsn"]; // pick up from a secret
-
-    # Build the connection string
-    #
-    $driver = "DRIVER={IBM DB2 ODBC DRIVER};";
-    //    $conn_string = $driver . $dsn;     # Non-SSL
-    $conn_string = $driver . $ssl_dsn; # SSL
+if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db-user-pw']) ) {
     
-    error_log($conn_string);
+    $serverName = $_ENV['db-server'];
+    $userName = $_ENV['db-user-name'];
+    $password = $_ENV['db-user-pw'];
     
     $conn=false;
     $attempts = 0;
 
     while(!$conn && ++$attempts < 3){
         // since Cirrus - we have the occasional problem connecting, so sleep and try again a couple of times 
-        // $conn = tryConnect($conn_string);
-        // if(!$conn){
-        //     error_log("Failed attempt $attempts to connect to DB2");
-        //     error_log("Msg:" . db2_conn_errormsg());
-        //     error_log("Err:" . db2_conn_error());
-        //     sleep(1);
-        // } else {
-        //     error_log("Connection successful on : $attempts Attempt");
-        // }
+        $conn = tryConnect($serverName, $userName, $password);
+        if(!$conn){
+            error_log("Failed attempt $attempts to connect to Azure SQL");
+            error_log("Msg:" . sqlsrv_errors());
+            error_log("Err:" . sqlsrv_errors());
+            sleep(1);
+        } else {
+            error_log("Connection successful on : $attempts Attempt");
+        }
     }
 
     if( $conn ) {
