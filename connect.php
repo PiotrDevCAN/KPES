@@ -38,15 +38,16 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
     if( $conn ) {
         $GLOBALS['conn'] = $conn;
         $schema = isset($GLOBALS['Db2Schema']) ? $GLOBALS['Db2Schema'] : 'REST';
-        $statement = "SET CURRENT SCHEMA='$schema';";
+        // $statement = "SET CURRENT SCHEMA='$schema';";
+        $statement = "ALTER USER ".$userName." WITH DEFAULT_SCHEMA = KPES;";
         $rs = sqlsrv_query($conn, $statement);
 
         if (! $rs) {
             echo "<br/>" . $statement . "<br/>";
 
-            echo "<pre>";
-            print_r($_SESSION);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_SESSION);
+            // echo "</pre>";
 
             if( ($errors = sqlsrv_errors() ) != null) {
                 foreach( $errors as $error ) {
