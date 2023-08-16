@@ -330,7 +330,8 @@ if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
     // exit('ob_html_compress 2');
 }
 
-$GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+// $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
 $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
 // global var and config file
