@@ -23,7 +23,7 @@ $personTable = new personTable(AllTables::$PERSON);
 
 $loader = new Loader();
 
-db2_commit($GLOBALS['conn']);
+sqlsrv_commit($GLOBALS['conn']);
 
 $activeIbmErsPredicate = "   ( trim(BLUEPAGES_STATUS) = '' or BLUEPAGES_STATUS is null or trim(BLUEPAGES_STATUS) =  '" . PersonRecord::BLUEPAGES_STATUS_FOUND . "') ";
 $activeIbmErsPredicate.= " and ( lower(trim(EMAIL_ADDRESS)) like '%ibm.com%' )";
@@ -70,4 +70,4 @@ if($potentialLeaver){
 AuditTable::audit("Revalidation completed.",AuditTable::RECORD_TYPE_REVALIDATION);
 // $slack->sendMessageToChannel("Revalidation (" . $_ENV['environment']. ") completed.", slack::CHANNEL_UPES_AUDIT);
 
-db2_commit($GLOBALS['conn']);
+sqlsrv_commit($GLOBALS['conn']);

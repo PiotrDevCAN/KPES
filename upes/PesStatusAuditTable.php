@@ -21,7 +21,7 @@ class PesStatusAuditTable extends DbTable
         $resultSet ? null : die("SQL Failed");
         $allData = null;
 
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');
@@ -44,7 +44,7 @@ class PesStatusAuditTable extends DbTable
         $sql.= " ,'" . db2_escape_string($_SESSION['ssoEmail']) . "', CURRENT TIMESTAMP ";
         $sql.= " ) ";
         
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
        
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);  

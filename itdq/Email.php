@@ -84,7 +84,7 @@ class Email
             $sql .= " (TO,CC,SUBJECT,MESSAGE,REPLYTO,ENABLED, CREATOR ) ";
             $sql .= " VALUES ";
             $sql .= "('" . db2_escape_string($to) . "','" . db2_escape_string($cc) . "','" . db2_escape_string($subject) . "','" . $safeMessage . "','" . db2_escape_string($replyto) . "','" . db2_escape_string($ena) . "','" . db2_escape_string($_SESSION['ltcuser']['mail']) . "') ";
-            $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+            $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
                 echo "<BR/>" . db2_stmt_error();
@@ -106,7 +106,7 @@ class Email
             $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
             $sql .= " SET RESULT='" . db2_escape_string($res) . "' ";
             $sql .= " WHERE RECORD_ID='" . trim($recordId) . "' ";
-            $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+            $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
                 echo "<BR/>" . db2_stmt_error();
@@ -133,7 +133,7 @@ class Email
             }
             $sql = 'DELETE FROM ' . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
             $sql .= " WHERE CREATED < (CURRENT TIMESTAMP - $keepEmailsFor );";
-            $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+            $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
                 echo "<BR/>" . db2_stmt_error();
@@ -148,14 +148,14 @@ class Email
         if (isset(AllItdqTables::$EMAIL_LOG)) {
             $sql = " SELECT * FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
             $sql .= " WHERE RECORD_ID='" . trim($recordId) . "' ";
-            $rs = db2_exec($GLOBALS['conn'], $sql);
+            $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
                 echo "<BR/>" . db2_stmt_error();
                 echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
                 exit("Error in: " . __METHOD__ . " running: " . htmlspecialchars($sql, ENT_QUOTES));
             } else {
-                $row = db2_fetch_assoc($rs);
+                $row = sqlsrv_fetch_array($rs);
                 self::send_mail($row['TO'], $row['CC'], $row['SUBJECT'], $row['MESSAGE'], $row['REPLYTO']);
             }
         }

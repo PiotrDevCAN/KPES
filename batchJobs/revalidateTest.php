@@ -25,7 +25,7 @@ $loader = new Loader();
 $timeMeasurements = array();
 $start =  microtime(true);
 
-db2_commit($GLOBALS['conn']);
+sqlsrv_commit($GLOBALS['conn']);
 
 // get people currently flagged as found
 $startPhase1 = microtime(true);
@@ -87,4 +87,4 @@ if($potentialLeaver){
 AuditTable::audit("Revalidation completed.",AuditTable::RECORD_TYPE_REVALIDATION);
 // $slack->sendMessageToChannel("Revalidation (" . $_ENV['environment']. ") completed.", slack::CHANNEL_UPES_AUDIT);
 
-db2_commit($GLOBALS['conn']);
+sqlsrv_commit($GLOBALS['conn']);

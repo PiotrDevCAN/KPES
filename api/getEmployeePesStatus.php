@@ -32,7 +32,7 @@ $sql.= "on AP.UPES_REF = P.UPES_REF ";
 $sql.= " WHERE 1=1 " ;
 $sql.= !empty($predicate) ? " AND  $predicate " : null ;
 
-$rs = DB2_EXEC($GLOBALS['conn'], $sql);
+$rs = sqlsrv_query($GLOBALS['conn'], $sql);
 if (! $rs) {
     self::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;
@@ -40,7 +40,7 @@ if (! $rs) {
 
 $data = array();
 $count = 1;
-while(($row=db2_fetch_assoc($rs))==true){
+while(($row=sqlsrv_fetch_array($rs))==true){
     $row = array_map('trim',$row);
     $data[] = $row;
 }

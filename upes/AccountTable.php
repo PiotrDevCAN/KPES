@@ -34,7 +34,7 @@ class AccountTable extends DbTable
         $resultSet ? null : die("SQL Failed");
         $allData = null;
 
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');
@@ -73,15 +73,15 @@ class AccountTable extends DbTable
 
     static function getAccountNameFromId($accountId){
         $sql = " SELECT ACCOUNT FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
-        $rs = db2_exec($GLOBALS['conn'], $sql);
-        $row = db2_fetch_assoc($rs);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
+        $row = sqlsrv_fetch_array($rs);
         return $row ? trim($row['ACCOUNT']) : false;
     }
 
     static function getAccountIdFromName($accountName){
         $sql = " SELECT ACCOUNT_ID FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT='" . db2_escape_string($accountName) . "' ";
-        $rs = db2_exec($GLOBALS['conn'], $sql);
-        $row = db2_fetch_assoc($rs);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
+        $row = sqlsrv_fetch_array($rs);
         return $row ? trim($row['ACCOUNT_ID']) : false;
     }
 }

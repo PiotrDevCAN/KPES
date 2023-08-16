@@ -22,7 +22,7 @@ $personRecord->setFromArray(array('UPES_REF'=>$upesref));
 $personRecordData = $personTable->getRecord($personRecord);
 $names = explode(" ", $personRecordData['FULL_NAME']);
 
-db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
 
 try {
 

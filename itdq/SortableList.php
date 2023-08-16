@@ -432,12 +432,12 @@ class SortableList
 //     }
 
     /**
-     * Runs $this->sql and returns the result set from DB2_EXEC
+     * Runs $this->sql and returns the result set from sqlsrv_query
      *
      * Very basic. Most classes descended from this will need to develop a more comprehensive method. *
      *
      *
-     * @return resource resource returned by the DB2_EXEC
+     * @return resource resource returned by the sqlsrv_query
      */
     function fetchList()
     {
@@ -448,7 +448,7 @@ class SortableList
 
         Trace::traceVariable($this->sql2, __METHOD__, __LINE__);
 
-        $rs = db2_exec($GLOBALS['conn'], $this->sql2, array(
+        $rs = sqlsrv_query($GLOBALS['conn'], $this->sql2, array(
             'cursor' => DB2_SCROLLABLE
         ));
 
@@ -507,7 +507,7 @@ class SortableList
             echo "<div class='table-responsive'>";
 
             echo str_replace('wwwww', $width, $this->tableTag);
-            // if(db2_fetch_assoc($rs)){
+            // if(sqlsrv_fetch_array($rs)){
             echo "\n<thead>";
            // echo $this->tableTitle ? $this->tableTitle : null;
             $this->displayHeading($subTotal, $full, $editLink, $deleteLink, $rs);
@@ -606,7 +606,7 @@ class SortableList
         // $this->initialiseSubTotalArray($subTotalArray, $cols, $rs);
 
         $rowNumber = 1; // Get the first row first, as we fetched it already processing the header.
-        while ($row = db2_fetch_assoc($rs, $rowNumber)) {
+        while ($row = sqlsrv_fetch_array($rs, $rowNumber)) {
             // if($rowNumber==1 and $trackPreviousRow){
             // //initialise previous row here.
             // $this->updatePreviousRow($previousRow,$row);
@@ -688,7 +688,7 @@ class SortableList
 
         if ($this->displayTotals) {
             // Read 1st row again to get the column names for the Totals Row.
-            $row = db2_fetch_assoc($rs, 1);
+            $row = sqlsrv_fetch_array($rs, 1);
             echo "<HR/>";
             echo "<TR>";
             if ($editLink) {
@@ -1178,7 +1178,7 @@ class SortableList
      * is the CSV with the data in.
      *
      * @param resource $rs
-     *            Set from DB2_EXEC
+     *            Set from sqlsrv_query
      */
     function dumpToCsv($rs, $updateForms = true)
     {
@@ -1197,7 +1197,7 @@ class SortableList
             fputcsv($this->csv, $headings, ",", '"');
         }
         $rows = 0;
-        while ($row = db2_fetch_assoc($rs)) {
+        while ($row = sqlsrv_fetch_array($rs)) {
             Trace::traceVariable($row, __METHOD__);
             if ($this->displayRow($row)) {
                 foreach ($row as $column => $value) {
@@ -1227,7 +1227,7 @@ class SortableList
      * Override this method to perform any processing you need to display the contents of the "insert link" cell.
      *
      * @param array $row
-     *            Array containing the row being processed (frm DB2_FETCH_ASSOC)
+     *            Array containing the row being processed (frm sqlsrv_fetch_array)
      */
     function insertEdit($row)
     {
@@ -1239,7 +1239,7 @@ class SortableList
      *
      *
      * @param array $row
-     *            Array containing the row being processed (frm DB2_FETCH_ASSOC)
+     *            Array containing the row being processed (frm sqlsrv_fetch_array)
      */
     function insertDelete($row)
     {
@@ -1253,7 +1253,7 @@ class SortableList
      * In this method() you can build the table that will open/close when the toggle is clicked.
      *
      * @param array $row
-     *            $row from dB2_FETCH_ASSOC
+     *            $row from sqlsrv_fetch_array
      */
     function buildDetailDiv($row)
     {
@@ -1283,7 +1283,7 @@ class SortableList
      * Return TRUE and displayData will print out the row, return FALSE and it won't.
      *
      * @param array $row
-     *            Array containing the data from DB2_FETCH_ASSOC
+     *            Array containing the data from sqlsrv_fetch_array
      * @return boolean
      */
     function displayRow(&$row)
@@ -1778,7 +1778,7 @@ class SortableList
         $titles = '';
         $data = '';
 
-        while( ($row=db2_fetch_assoc($resultSet)) == true){
+        while( ($row=sqlsrv_fetch_array($resultSet)) == true){
             $row = $this->preProcessRowForCsv($row);
             $titles = empty($titles) ? $this->processRowForCsvTitles($row) . "\n" : $titles;
             $data .= $this->processRowForCsvData($row) . "\n";

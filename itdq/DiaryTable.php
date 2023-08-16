@@ -14,7 +14,7 @@ class DiaryTable  extends DbTable {
 		$sql = "INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$DIARY . " ( ENTRY, INTRANET_ID) ";
 		$sql .= " Values ('" . db2_escape_string(trim($entry)) . "','" . db2_escape_string($_SESSION['ssoEmail']) . "' ) ";
 
-		$rs = DB2_EXEC ( $_SESSION ['conn'], $sql );
+		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
 		if (! $rs) {
 			print_r ( $_SESSION );
 			echo "<BR/>" . db2_stmt_error ();

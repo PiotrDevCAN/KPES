@@ -29,7 +29,7 @@ class ContractTable extends DbTable
         $resultSet ? null : die("SQL Failed");
         $allData = null;
 
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');

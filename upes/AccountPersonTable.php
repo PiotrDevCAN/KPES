@@ -234,7 +234,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $sql = self::preparePesEventsStmt($records, $upesRef, $accountId, $start, $length);
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
@@ -244,7 +244,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         switch ($returnResultsAs) {
             case self::PES_TRACKER_RETURN_RESULTS_AS_ARRAY:
                 $report = array();
-                while(($row=db2_fetch_assoc($rs))==true){
+                while(($row=sqlsrv_fetch_array($rs))==true){
                     $report[] = array_map('trim',$row);
                 }
                
@@ -383,13 +383,13 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     static function recordsFiltered($records='Active',$returnResultsAs='array',$upesRef=null, $accountId=null, $predicate=null){
         $sql = self::preparePesEventsCountStmt($records, $upesRef, $accountId, $predicate);
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        $row=db2_fetch_assoc($rs);
+        $row=sqlsrv_fetch_array($rs);
 
         // return $row['RECORDSFILTERED'];
         return $row['COUNTER'];
@@ -398,13 +398,13 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     static function totalRows($records='Active',$returnResultsAs='array',$upesRef=null, $accountId=null){
         $sql = self::preparePesEventsCountStmt($records, $upesRef, $accountId);
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        $row=db2_fetch_assoc($rs);
+        $row=sqlsrv_fetch_array($rs);
 
         // return $row['TOTALROWS'];
         return $row['COUNTER'];
@@ -420,7 +420,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $allData['data'] = array();
 
         /*
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');
@@ -435,7 +435,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         */
 
         $today = new \DateTime();
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $row = array_map('trim',$row);
             
             $upesref = $row['UPES_REF'];
@@ -655,7 +655,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareStageUpdate($stage);
         $data = array($stageValue,$account_id, $upesref);
 
-        $rs = db2_execute($preparedStmt,$data);
+        $rs = sqlsrv_queryute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -702,7 +702,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " SET COMMENT='" . db2_escape_string($newComment) . "' ";
         $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($account_id) . "' ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
@@ -737,14 +737,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareGetPesCommentStmt();
         $data = array($uposref, $account_id);
 
-        $rs = db2_execute($preparedStmt,$data);
+        $rs = sqlsrv_queryute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'Prepared Stmt');
             throw new \Exception('Unable to getPesComment for ' . $uposref . ":" . $account_id );
         }
 
-        $row = db2_fetch_assoc($preparedStmt);
+        $row = sqlsrv_fetch_array($preparedStmt);
         
         $comment = isset($row['COMMENT']) ? $row['COMMENT'] : ""; // when boarding there is no comment to return yet.
         return  $comment;
@@ -758,7 +758,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= !empty($pesPriority) ? "'" . db2_escape_string($pesPriority) . "' " : " null, ";
         $sql.= " WHERE UPES_REF='" . db2_escape_string($upesRef) . "' and ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -920,7 +920,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareProcessStatusUpdate();
         $data = array($processStatus,$upesref,$accountid);
 
-        $rs = db2_execute($preparedStmt,$data);
+        $rs = sqlsrv_queryute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -936,7 +936,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " SET DATE_LAST_CHASED=DATE('" . db2_escape_string($dateLastChased) . "') ";
         $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountId)  . "' ";
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -953,8 +953,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $emails = $loader->loadIndexed('EMAIL_ADDRESS','UPES_REF',AllTables::$PERSON," UPES_REF='" . db2_escape_string($upesref) . "'");
         $accounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT," ACCOUNT_ID='" . db2_escape_string($accountid) . "'");
 
-        $db2AutoCommit = db2_autocommit($GLOBALS['conn']);
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        $db2AutoCommit = sqlsrv_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
         $now = new \DateTime();
 
         $dateToUse =  empty($dateToUse) ? $now->format('Y-m-d') : $dateToUse;
@@ -992,7 +992,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql .= trim($status)==AccountPersonRecord::PES_STATUS_STARTER_REQUESTED ? ", PES_REQUESTOR='" . db2_escape_string($requestor) . "' " : null;
         $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' and ACCOUNT_ID='" . db2_escape_string($accountid)  . "' ";
 
-        $result = db2_exec($GLOBALS['conn'], $sql);
+        $result = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$result){
             DbTable::displayErrorMessage($result, __CLASS__, __METHOD__, $sql);
@@ -1028,8 +1028,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
             $pesStatusAuditTable->saveRecord($pesStatusAuditRecord);
         }
         */
-        db2_commit($GLOBALS['conn']);
-        db2_autocommit($GLOBALS['conn'],$db2AutoCommit);
+        sqlsrv_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn'],$db2AutoCommit);
 
         return true;
     }
@@ -1060,14 +1060,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
             $sql  = " SELECT PES_CLEARED_DATE FROM  " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
             $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
             
-            $cleared = db2_exec($GLOBALS['conn'], $sql);
+            $cleared = sqlsrv_query($GLOBALS['conn'], $sql);
             
             if(!$cleared){
                 DbTable::displayErrorMessage($cleared, __CLASS__, __METHOD__, $sql);
                 return false;
             }
             
-            $row = db2_fetch_assoc($cleared);
+            $row = sqlsrv_fetch_array($cleared);
             
             $clearedDate = $row['PES_CLEARED_DATE'];
         }
@@ -1079,7 +1079,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql .= " SET PES_RECHECK_DATE = $pes_cleared_sql  +  $pesRecheckPeriod  years " ;
         $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
 
-        $result = db2_exec($GLOBALS['conn'], $sql);
+        $result = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$result){
             DbTable::displayErrorMessage($result, __CLASS__, __METHOD__, $sql);
@@ -1089,14 +1089,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql  = " SELECT PES_RECHECK_DATE FROM  " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
 
-        $res = db2_exec($GLOBALS['conn'], $sql);
+        $res = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$res){
             DbTable::displayErrorMessage($result, __CLASS__, __METHOD__, $sql);
             return false;
         }
 
-        $row = db2_fetch_assoc($res);
+        $row = sqlsrv_fetch_array($res);
 
         $pesTracker = new AccountPersonTable(AllTables::$ACCOUNT_PERSON);
         $pesTracker->savePesComment($upesref, $accountid, "PES_RECHECK_DATE set to :" .  $row['PES_RECHECK_DATE'] );
@@ -1217,14 +1217,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
     static function cancelPesRequest( $accountId=null, $upesref=null){
 
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET PES_STATUS='" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "' ";
         $sql.= " WHERE ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
         $sql.= " AND UPES_REF='" . db2_escape_string($upesref) . "' ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
@@ -1237,14 +1237,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " AND UPES_REF='" . db2_escape_string($upesref) . "' ";
 
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             return false;
         }
 
-        $accountPersonData = db2_fetch_assoc($rs);
+        $accountPersonData = sqlsrv_fetch_array($rs);
 
 
         $accountPersonRecord = new AccountPersonRecord();
@@ -1253,8 +1253,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $accountPersonRecord->sendPesStatusChangedEmail();
 
-        db2_commit($GLOBALS['conn']);
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        sqlsrv_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
     }
 
     function notifyRecheckDateApproaching(){
@@ -1273,14 +1273,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " AND AP.PES_STATUS = '" . AccountPersonRecord::PES_STATUS_CLEARED . "' ";
         $sql.= " and AP.PES_RECHECK_DATE is not null ";
         $sql.= " and AP.PES_RECHECK_DATE < CURRENT DATE + 56 DAYS ";
-        $rs = db2_exec($localConnection, $sql);
+        $rs = sqlsrv_query($localConnection, $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
         $allRecheckers = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $allRecheckers[] = $trimmedRow;
             $this->setPesStatus($trimmedRow['UPES_REF'],$trimmedRow['ACCOUNT_ID'],AccountPersonRecord::PES_STATUS_RECHECK_REQ);
@@ -1302,7 +1302,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareResetForRecheck();
         $data = array($accountId,$upesRef);
 
-        $rs = db2_execute($preparedStmt,$data);
+        $rs = sqlsrv_queryute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -1348,14 +1348,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, PES_STATUS ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce StatusByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1378,14 +1378,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, CONTRACT, PES_STATUS ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce StatusByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1406,14 +1406,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, PROCESSING_STATUS ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce ProcessStatusByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1436,14 +1436,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, CONTRACT, PROCESSING_STATUS ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce ProcessStatusByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1464,14 +1464,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, YEAR(PES_RECHECK_DATE), MONTH(PES_RECHECK_DATE) ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce upcomingRechecksByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1495,14 +1495,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " GROUP by ACCOUNT, CONTRACT, YEAR(PES_RECHECK_DATE), MONTH(PES_RECHECK_DATE) ";
         $sql.= " ORDER by ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce upcomingRechecksByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1523,14 +1523,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " group by ACCOUNT, YEAR(PES_CLEARED_DATE), MONTH(PES_CLEARED_DATE)";
         $sql.= " ORDER BY 1, 2 desc, 3 desc ";
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce miClearedByAccount result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1551,14 +1551,14 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " group by ACCOUNT, YEAR(PES_CLEARED_DATE), MONTH(PES_CLEARED_DATE)";
         $sql.= " ORDER BY 1, 2 desc, 3 desc ";
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce miClearedByContract result set');
         }
         $report = false;
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1577,13 +1577,13 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " WHERE AP.ACCOUNT_ID is not null ";
         $sql.= " ORDER BY EMAIL_ADDRESS, ACCOUNT ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce emailAddress Account Pes Status result set');
         }
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $personAccount = $trimmedRow['EMAIL_ADDRESS'] . " : " . $trimmedRow['ACCOUNT'];
             $upesAccountId = $trimmedRow['UPES_REF'] . ":" . $trimmedRow['ACCOUNT_ID'];
@@ -1596,7 +1596,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     
     static function offboardFromAccount( $accountId=null, $upesref=null){
         
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = current date ";
@@ -1604,7 +1604,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " WHERE ACCOUNT_ID = '" . db2_escape_string($accountId) . "' ";
         $sql.= " AND UPES_REF = '" . db2_escape_string($upesref) . "' ";
         
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
@@ -1612,13 +1612,13 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         }
         
        
-        db2_commit($GLOBALS['conn']);
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        sqlsrv_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
     }
     
     static function reboardToAccount( $accountId=null, $upesref=null){
         
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = null ";
@@ -1626,7 +1626,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " WHERE ACCOUNT_ID = '" . db2_escape_string($accountId) . "' ";
         $sql.= " AND UPES_REF = '" . db2_escape_string($upesref) . "' ";
         
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
@@ -1634,8 +1634,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         }
         
         
-        db2_commit($GLOBALS['conn']);
-        db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        sqlsrv_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
     }
     
     static function offboardedStatusFromEmail($email=null, $accountId=null){
@@ -1647,13 +1647,13 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " WHERE upper(P.EMAIL_ADDRESS) = upper('" . db2_escape_string(strtoupper(trim($email))) . "') " ;
         $sql.= " AND upper(A.ACCOUNT)=upper('" . db2_escape_string(strtoupper(trim($accountId))) . "') " ;
        
-        $resultSet = db2_exec($GLOBALS['conn'], $sql);
+        $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
             DbTable::displayErrorMessage($resultSet, __CLASS__, __METHOD__, $sql);
             return false;
         }
         
-        $row = db2_fetch_assoc($resultSet);
+        $row = sqlsrv_fetch_array($resultSet);
         return !empty($row['OFFBOARDED_DATE']);
     }
     
@@ -1675,7 +1675,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $columnHeaders = array();
         $recordData = array();
         $failedRecords = 0;
-        $autoCommit = db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        $autoCommit = sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
         for ($row = 1; $row <= $highestRow; $row++){
             set_time_limit(10);
             $time = -microtime(true);
@@ -1781,8 +1781,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
             }
         }
 
-        db2_commit($GLOBALS['conn']);  // Save what we have done.
-        db2_autocommit($GLOBALS['conn'],$autoCommit);
+        sqlsrv_commit($GLOBALS['conn']);  // Save what we have done.
+        sqlsrv_commit($GLOBALS['conn'],$autoCommit);
 
         $response = ob_get_clean();
         ob_start();

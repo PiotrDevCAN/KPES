@@ -59,7 +59,7 @@ class PersonTableCNUMsUpdater extends PersonTable
             $intranetId
         );
 
-        $result = db2_execute($this->preparedUpdateSqlStatements[$column], $data);
+        $result = sqlsrv_queryute($this->preparedUpdateSqlStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
@@ -72,7 +72,7 @@ class PersonTableCNUMsUpdater extends PersonTable
             $intranetId
         );
 
-        $result = db2_execute($this->preparedUpdateSqlStatements[$column], $data);
+        $result = sqlsrv_queryute($this->preparedUpdateSqlStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
@@ -99,11 +99,11 @@ class PersonTableCNUMsUpdater extends PersonTable
     function checkRecordExists($intranetId, $column){
         $data = array(trim($intranetId));
         
-        $result = db2_execute($this->preparedCheckExistsStatements[$column], $data);
+        $result = sqlsrv_queryute($this->preparedCheckExistsStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
-        $row=db2_fetch_assoc($this->preparedCheckExistsStatements[$column]);
+        $row=sqlsrv_fetch_array($this->preparedCheckExistsStatements[$column]);
         return $row['EXISTS']>0;
     }
 
@@ -147,7 +147,7 @@ class PersonTableCNUMsUpdater extends PersonTable
 		foreach ($batchOfIds as $intranetId){
             $this->updateTableFromBluePages($intranetId, $allDetails, $column);
         }
-        db2_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn']);
 	}
 
     /*
@@ -155,7 +155,7 @@ class PersonTableCNUMsUpdater extends PersonTable
 		foreach ($batchOfIds as $intranetId){
             $this->updateCNUMsFromBluePages($intranetId, $allDetails, $column);
         }
-        db2_commit($GLOBALS['conn']);
+        sqlsrv_commit($GLOBALS['conn']);
 	}
     */
 
@@ -164,7 +164,7 @@ class PersonTableCNUMsUpdater extends PersonTable
         $sql .= " FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName . " AS A ";
         $sql .= !empty($predicate) ? " WHERE 1=1 " . $predicate : null;
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if (! $rs) {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);

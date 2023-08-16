@@ -138,7 +138,7 @@ class Trace extends Log{
 			$sql .= " VALUES ('$db2Entry','$userid','$class','$method','$page'";
 			$sql .= empty($elapsed) ? ") " : ",'$elapsed') ";
 		}
-		$rs = DB2_EXEC($GLOBALS['conn'],$sql);
+		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
 			echo "<BR>Error: " . db2_stmt_error();
@@ -151,7 +151,7 @@ class Trace extends Log{
 		$sql = "DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE . " WHERE LASTUPDATED < (CURRENT TIMESTAMP - $keepDays DAYS) ";
 
 		Trace::traceVariable($keepDays);
-		$rs = DB2_EXEC($GLOBALS['conn'],$sql);
+		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
 			echo "<BR>Error: " . db2_stmt_error();
@@ -163,7 +163,7 @@ class Trace extends Log{
 	static function setTraceControls(){
 
 		$sql = "SELECT * FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE_CONTROL ;
-		$rs = DB2_EXEC($GLOBALS['conn'],$sql);
+		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
 			echo "<BR>Error: " . db2_stmt_error();
@@ -179,7 +179,7 @@ class Trace extends Log{
 		$_SESSION['classTimings'] = array(); // Allows you to make changes, by reseting the array before setting specific values later.
 		unset($_SESSION['trace']);
 
-		while($row = db2_fetch_assoc($rs)){
+		while($row = sqlsrv_fetch_array($rs)){
 			if(trim($row['TRACE_CONTROL_TYPE'])=='methodExclude' or trim($row['TRACE_CONTROL_TYPE'])=='classExclude'){
 				$anyExcludes = TRUE;
 			}

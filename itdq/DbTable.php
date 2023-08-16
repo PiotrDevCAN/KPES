@@ -180,7 +180,7 @@ class DbTable
             $uploadLogTable->saveRecord($uploadLogRecord);
             $this->uploadId = $uploadLogTable->lastId();
             $uploadLogRecord->setId($this->uploadId);
-            $db2CommitState = db2_autocommit($GLOBALS['conn'], DB2_AUTOCOMMIT_OFF);
+            $db2CommitState = sqlsrv_commit($GLOBALS['conn'], sqlsrv_commit_OFF);
             echo "<BR/>Log id is " . $this->uploadId;
         }
 
@@ -398,7 +398,7 @@ class DbTable
                             // print_r($insertArray);
                             if (! empty($insertArray)) {
                                 $preparedInsert = $this->prepareInsert($insertArray);
-                                if (db2_execute($preparedInsert, $insertArray)) {
+                                if (sqlsrv_queryute($preparedInsert, $insertArray)) {
                                     $this->inserted ++;
                                 } else {
                                     $this->failed ++;
@@ -459,8 +459,8 @@ class DbTable
 
         if ($withUploadLogId) {
             $uploadLogTable->setStatus($this->uploadId, UploadLogRecord::$statusLOADED);
-            db2_commit($GLOBALS['conn']);
-            db2_autocommit($GLOBALS['conn'], $db2CommitState);
+            sqlsrv_commit($GLOBALS['conn']);
+            sqlsrv_commit($GLOBALS['conn'], $db2CommitState);
             return $this->uploadId;
         } else {
             return TRUE;
@@ -474,7 +474,7 @@ class DbTable
     {
         Trace::traceComment(null, __METHOD__);
         $rs = db2_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], strtoupper($this->tableName), '%');
-        while ($row = db2_fetch_assoc($rs)) {
+        while ($row = sqlsrv_fetch_array($rs)) {
             Trace::traceVariable($row, __METHOD__, __LINE__);
             $this->columns[trim($row['COLUMN_NAME'])] = $row;
         }
@@ -485,7 +485,7 @@ class DbTable
     {
         Trace::traceComment(null, __METHOD__);
         $rs = db2_special_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName, 0);
-        while ($row = db2_fetch_assoc($rs)) {
+        while ($row = sqlsrv_fetch_array($rs)) {
             $this->special_columns[trim($row['COLUMN_NAME'])] = $row;
         }
     }
@@ -526,14 +526,14 @@ class DbTable
     {
         Trace::traceComment(null, __METHOD__);
         $rs = db2_primary_keys($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName);
-        while ($row = db2_fetch_assoc($rs)) {
+        while ($row = sqlsrv_fetch_array($rs)) {
             // print_r($row);
             $this->primary_keys[trim($row['COLUMN_NAME'])] = $row;
         }
     }
 
     /**
-     * Runs a simple select with the Predicate param and returns the Row returned by db2_fetch_assoc
+     * Runs a simple select with the Predicate param and returns the Row returned by sqlsrv_fetch_array
      *
      * @param string $predicate
      *            Valid DB2 predicate, without the leading WHERE
@@ -547,7 +547,7 @@ class DbTable
         $sql .= " WHERE " . $predicate;
         Trace::traceVariable($sql, __METHOD__);
         $rs = $this->execute($sql);
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
         return $row;
     }
 
@@ -568,7 +568,7 @@ class DbTable
         }
         $sql .= " WHERE " . $predicate;
         Trace::traceVariable($sql, __METHOD__);
-        $rs = db2_exec($GLOBALS['conn'], $sql, array(
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql, array(
             'cursor' => DB2_SCROLLABLE
         ));
         return $rs;
@@ -577,7 +577,7 @@ class DbTable
     /**
      * Issues a Select for the Record passed to it, using the values in the Key Fields in the Record to build a specific DB2 SELECT.
      *
-     * It does NOT populate the record with the result of the DB2_FETCH_ASSOC, rather it returns the data in an array.
+     * It does NOT populate the record with the result of the sqlsrv_fetch_array, rather it returns the data in an array.
      * You can then populate the record using the dbRecord function setFromArray();
      *
      * @param DbRecord $record
@@ -591,7 +591,7 @@ class DbTable
         $sql = $select . " WHERE " . $pred . $predicate;
         Trace::traceVariable($sql, __METHOD__);
 
-        $row = db2_fetch_assoc($this->execute($sql));
+        $row = sqlsrv_fetch_array($this->execute($sql));
         if (! $row) {
             DbTable::displayErrorMessage($row, __CLASS__, __METHOD__, $sql);
         } else {
@@ -755,7 +755,7 @@ class DbTable
     {
         $sql = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         Trace::traceVariable($sql, __METHOD__);
-        $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
             echo "<BR/>" . db2_stmt_error();
@@ -830,7 +830,7 @@ class DbTable
     }
 
     /**
-     * Calls DB2_EXEC on the sql passed in.
+     * Calls sqlsrv_query on the sql passed in.
      * Optionally creating a Log::logEntry recording the SQL (with any encryption password masked out)
      *
      * @param string $sql
@@ -842,7 +842,7 @@ class DbTable
     function execute($sql, $log = false)
     {
         Trace::traceVariable($sql, __METHOD__);
-        $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             $this->lastDb2StmtError = db2_stmt_error();
             $this->lastDb2StmtErrorMsg = db2_stmt_errormsg();
@@ -864,7 +864,7 @@ class DbTable
      * is created with ENCRYPT_RC2 around the encrypted column.
      *
      * It also knows to remove Date Time columns that are empty, as they won't insert. It actually removes them from insertArray, so they
-     * don't mess up the DB2_EXECUTE when it gets invoked, this is why $insertArray is declared as &$insertArray, as this method needs to be able to modify it.
+     * don't mess up the sqlsrv_queryUTE when it gets invoked, this is why $insertArray is declared as &$insertArray, as this method needs to be able to modify it.
      *
      * <B>NOTE</B> In one upgrade to the server, maintenance was applied that modified the values for some of the Datatypes, can't remember now if they changed from 98 to -3 or the other
      * way around, but that's why both values are specified in the switch. The 'symptom' was that we were inserting non-encrpyted values into columns that should have been encrypted.
@@ -958,7 +958,7 @@ class DbTable
         Trace::traceVariable($insertArray, __METHOD__, __LINE__);
         $preparedInsert = $this->prepareInsert($insertArray);
 
-        $rs = @db2_execute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_queryute($preparedInsert, $insertArray);
 
         if (! $rs) {
             $this->lastDb2StmtError = db2_stmt_error();
@@ -983,7 +983,7 @@ class DbTable
         $preparedInsert = $this->prepareInsert($insertArray);
 
         $insert = -microtime(true);
-        $rs = @db2_execute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_queryute($preparedInsert, $insertArray);
         $insert += microtime(true);
         echo $withTimings ?  "Db2 Insert Time:" . sprintf('%f', $insert) . PHP_EOL : null;
 
@@ -1136,7 +1136,7 @@ class DbTable
         }
         if ($cols['SERIAL_NUMBER'] != null) {
             $this->logRecord($preparedSelect, $cols, "<B>Before image </b>");
-            $rs = db2_execute($preparedUpdate, $db2Columns);
+            $rs = sqlsrv_queryute($preparedUpdate, $db2Columns);
             if (! $rs) {
                 echo "<BR/>" . db2_stmt_error();
                 echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
@@ -1270,7 +1270,7 @@ class DbTable
      *
      * @param DbRecord $record
      *            Record to be SELECTed. Requires those columns in DbRecord that are Primary Keys in the Table to be populated
-     * @return array Does not save the values to the DbRecord, rather it returns the array returned by DB2_FETCH_ASSOC
+     * @return array Does not save the values to the DbRecord, rather it returns the array returned by sqlsrv_fetch_array
      */
     function getFromDb(DbRecord $record)
     {
@@ -1279,13 +1279,13 @@ class DbTable
         $pred = $this->buildKeyPredicate($record);
         $sql = $select . " WHERE " . $pred;
         Trace::traceVariable($sql, __METHOD__);
-        $row = db2_fetch_assoc($this->execute($sql));
+        $row = sqlsrv_fetch_array($this->execute($sql));
         return $row;
     }
 
     /**
      * Uses the $predicate to build a SELECT * statement.
-     * Returns the result of db2_fetch_assoc()
+     * Returns the result of sqlsrv_fetch_array()
      *
      * @param string $predicate
      * @return array
@@ -1297,7 +1297,7 @@ class DbTable
         Trace::traceVariable($sql, __METHOD__);
         $resultSet = $this->execute($sql);
         if ($resultSet) {
-            $result = db2_fetch_assoc($resultSet);
+            $result = sqlsrv_fetch_array($resultSet);
         } else {
             return false;
         }
@@ -1306,11 +1306,11 @@ class DbTable
     }
 
     /**
-     * Calls DB2_EXEC on COMMIT
+     * Calls sqlsrv_query on COMMIT
      */
     function commitUpdates()
     {
-        $rs = DB2_EXEC($GLOBALS['conn'], " COMMIT");
+        $rs = sqlsrv_query($GLOBALS['conn'], " COMMIT");
         if (! $rs) {
             print_r($_SESSION);
             echo "<BR/>" . db2_stmt_error();
@@ -1626,7 +1626,7 @@ class DbTable
         if (! $rs) {
             return false;
         }
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
         Trace::traceVariable($row['RECORDS'], __METHOD__, __LINE__);
         if ($row['RECORDS'] > 0) {
             return TRUE;
@@ -1653,7 +1653,7 @@ class DbTable
             echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . str_replace($this->pwd, "******", $sql));
         }
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
         Trace::traceVariable($row['RECORDS'], __METHOD__, __LINE__);
         if ($row['RECORDS'] > 0) {
             return TRUE;
@@ -1680,7 +1680,7 @@ class DbTable
             echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . str_replace($this->pwd, "******", $sql));
         }
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
         Trace::traceVariable($row['RECORDS'], __METHOD__, __LINE__);
         if ($row['RECORDS'] > 0) {
             return $row['RECORDS'];
@@ -1820,14 +1820,14 @@ class DbTable
         $sql .= " WHERE TABLENAME='" . $tableName . "' ";
         $sql .= " GROUP BY TABLENAME ";
 
-        $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
             echo "<BR/>" . db2_stmt_error();
             echo "<BR/>" . db2_stmt_errormsg() . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: $sql");
         }
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
         return $row['TIMESTAMP'];
     }
 
@@ -1990,7 +1990,7 @@ class DbTable
             echo "<h4>An email has been sent to: $to informing them of this problem</h4>";
         }
 
-        $rs = @db2_exec($GLOBALS['conn'], $sql);
+        $rs = @sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             echo "<BR>Error: " . db2_stmt_error();
             echo "<BR>Msg: " . db2_stmt_errormsg() . "<BR>";
@@ -2099,7 +2099,7 @@ class DbTable
         $sql = " SELECT $column ";
         $sql .= " FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
 
-        $rs = DB2_EXEC($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
             echo "<BR/>" . db2_stmt_error();

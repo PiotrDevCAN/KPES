@@ -49,7 +49,7 @@ class Loader
 
         Trace::traceVariable($sql, __METHOD__, __LINE__);
         $preDb2Time = microtime(TRUE);
-        $rs5 = db2_exec($GLOBALS['conn'], $sql);
+        $rs5 = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs5) {
             DbTable::displayErrorMessage($rs5, __CLASS__, __METHOD__, $sql);
             return false;
@@ -101,7 +101,7 @@ class Loader
         $sql .= " order by 1 $order ";
         Trace::traceVariable($sql, __METHOD__, __LINE__);
 
-        $rs5 = db2_exec($GLOBALS['conn'], $sql);
+        $rs5 = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs5) {
             DbTable::displayErrorMessage($rs5, __CLASS__, __METHOD__, $sql);
         }
@@ -165,7 +165,7 @@ class Loader
 
         $sql .= " order by 1 $order ";
 
-        $rs5 = db2_exec($GLOBALS['conn'], $sql);
+        $rs5 = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs5) {
             DbTable::displayErrorMessage($rs5, __CLASS__, __METHOD__, $sql);
         }
@@ -208,7 +208,7 @@ class Loader
 
         $sql .= " order by 1 $order ";
 
-        $rs5 = db2_exec($GLOBALS['conn'], $sql);
+        $rs5 = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs5) {
             DbTable::displayErrorMessage($rs5, __CLASS__, __METHOD__, $sql);
         }
@@ -253,7 +253,7 @@ class Loader
 
         $sql .= " order by 1 $order ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }

@@ -20,7 +20,7 @@ class PersonTable extends DbTable
         $resultSet ? null : die("SQL Failed");
         $allData = null;
 
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');
@@ -46,9 +46,9 @@ class PersonTable extends DbTable
         $allEmail =  array();
 
         $sql = " Select distinct lower(EMAIL_ADDRESS) as EMAIL_ADDRESS from " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $allEmail[] = trim($row['EMAIL_ADDRESS']);
         }
         return $allEmail;
@@ -58,9 +58,9 @@ class PersonTable extends DbTable
         $allNames =  array();
 
         $sql = " Select distinct UPES_REF, FULL_NAME from " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $allNames[$row['UPES_REF']] = trim($row['FULL_NAME']);
         }
         return $allNames;
@@ -72,13 +72,13 @@ class PersonTable extends DbTable
         $sql.= " WHERE UPES_REF = '" . db2_escape_string(strtoupper(trim($upesref))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
-        $resultSet = db2_exec($GLOBALS['conn'], $sql);
+        $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
             DbTable::displayErrorMessage($resultSet, __CLASS__, __METHOD__, $sql);
             return false;
         }
 
-        $row = db2_fetch_assoc($resultSet);
+        $row = sqlsrv_fetch_array($resultSet);
 
         return $row ? trim($row['EMAIL_ADDRESS']) : false;
     }
@@ -88,13 +88,13 @@ class PersonTable extends DbTable
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " as P ";
         $sql.= " WHERE P.UPES_REF = '" . db2_escape_string(strtoupper(trim($upesref))) . "' ";
 
-        $resultSet = db2_exec($GLOBALS['conn'], $sql);
+        $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
             DbTable::displayErrorMessage($resultSet, __CLASS__, __METHOD__, $sql);
             return false;
         }
         $row = array();
-        $row = db2_fetch_assoc($resultSet);
+        $row = sqlsrv_fetch_array($resultSet);
         $names = array_map('trim', $row);
 
         return $names;
@@ -105,13 +105,13 @@ class PersonTable extends DbTable
         $sql.= " WHERE UPPER(CNUM) = '" . db2_escape_string(strtoupper(trim($cnum))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
-        $resultSet = db2_exec($GLOBALS['conn'], $sql);
+        $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
             DbTable::displayErrorMessage($resultSet, __CLASS__, __METHOD__, $sql);
             return false;
         }
 
-        $row = db2_fetch_assoc($resultSet);
+        $row = sqlsrv_fetch_array($resultSet);
 
         return $row ? trim($row['UPES_REF']) : false;
     }
@@ -121,13 +121,13 @@ class PersonTable extends DbTable
         $sql.= " WHERE LOWER(EMAIL_ADDRESS) = '" . db2_escape_string(strtolower(trim($email))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
-        $resultSet = db2_exec($GLOBALS['conn'], $sql);
+        $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
             DbTable::displayErrorMessage($resultSet, __CLASS__, __METHOD__, $sql);
             return false;
         }
 
-        $row = db2_fetch_assoc($resultSet);
+        $row = sqlsrv_fetch_array($resultSet);
 
         return $row ? trim($row['UPES_REF']) : false;
     }
@@ -141,7 +141,7 @@ class PersonTable extends DbTable
         $sql.= !empty($passportSurname) ? "'" . db2_escape_string($passportSurname) . "'  " : " null ";
         $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' ";
 
-        $rs = db2_exec($GLOBALS['conn'],$sql);
+        $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -161,7 +161,7 @@ class PersonTable extends DbTable
         $sql.= " SET BLUEPAGES_STATUS='" . PersonRecord::BLUEPAGES_STATUS_FOUND . "' ";
         $sql.= " WHERE BLUEPAGES_STATUS is null AND CNUM in " . $cnumString;
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
@@ -175,7 +175,7 @@ class PersonTable extends DbTable
         $sql.= " SET BLUEPAGES_STATUS='" . PersonRecord::BLUEPAGES_STATUS_NOT_FOUND . "' ";
         $sql.= " WHERE CNUM in " . $cnumString;
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
@@ -193,7 +193,7 @@ class PersonTable extends DbTable
         $sql.= "   WHERE P.CNUM in " . $cnumString;
         $sql.= " ) ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
@@ -211,7 +211,7 @@ class PersonTable extends DbTable
         $sql.= "   WHERE P.CNUM in " . $cnumString;
         $sql.= " ) ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
@@ -237,12 +237,12 @@ class PersonTable extends DbTable
         $sql.= "   WHERE P2.CNUM in " . $cnumString;
         $sql.= " ) ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        while(($row=db2_fetch_assoc($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $row = array_map('trim',$row);
             $accountPersonTable->savePesComment($row['UPES_REF'],$row['ACCOUNT_ID'], "PES Status was " . $row['PES_STATUS'] . " prior to leaving");
             $slack->sendMessageToChannel($row['FULL_NAME'] . "(" . $row['CNUM'] . ") -  PES Status on Account " . $row['ACCOUNT'] . " was " . $row['PES_STATUS'] . " prior to leaving", slack::CHANNEL_UPES_AUDIT);
@@ -263,12 +263,12 @@ class PersonTable extends DbTable
         $sql.= " ON A.ACCOUNT_ID =  AP.ACCOUNT_ID ";
         $sql.= " WHERE CNUM in " . $cnumString;
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
         $detailsOfLeavers = array();
-        while(($row = db2_fetch_assoc($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim',$row);
             $detailsOfLeavers[] = $trimmedRow;
         }

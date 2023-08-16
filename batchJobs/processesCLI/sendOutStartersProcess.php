@@ -50,12 +50,12 @@ try {
     $sql .= " ON AP.ACCOUNT_ID = A.ACCOUNT_ID ";
     $sql .= " WHERE 1=1 AND trim(AP.PES_STATUS) = '" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "' ";
 
-    $rs = db2_exec($GLOBALS['conn'], $sql);
+    $rs = sqlsrv_query($GLOBALS['conn'], $sql);
     if (!$rs) {
         DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     }
     $detailsOfStarters = array();
-    while (($row = db2_fetch_assoc($rs)) == true) {
+    while (($row = sqlsrv_fetch_array($rs)) == true) {
         $trimmedRow = array_map('trim', $row);
         $detailsOfStarters[] = $trimmedRow;
     }

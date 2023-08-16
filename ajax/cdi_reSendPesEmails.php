@@ -16,13 +16,13 @@ $sql .= " INNER JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " A
 $sql .= " ON AP.ACCOUNT_ID = A.ACCOUNT_ID";
 $sql .= " WHERE AP.COMMENT like '%sent:Errored%'";
 
-$rs = db2_exec($GLOBALS['conn'],$sql);
+$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
 if(!$rs){
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);    
 }
 
-while ($row=db2_fetch_assoc($rs)) {
+while ($row=sqlsrv_fetch_array($rs)) {
 
     $upesref = trim($row['UPES_REF']);
     $account = trim($row['ACCOUNT']);
@@ -41,7 +41,7 @@ while ($row=db2_fetch_assoc($rs)) {
 
     // $accountPersonTable = new AccountPersonTable(AllTables::$ACCOUNT_PERSON);
 
-    // db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+    // sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
 
     // $emailDetails = array();
 
@@ -76,8 +76,8 @@ while ($row=db2_fetch_assoc($rs)) {
     // $pesStatusField = AccountPersonRecord::getPesStatusWithButtons($data[0]);
     // $processingStatusField =  AccountPersonTable::formatProcessingStatusCell($data[0]);
 
-    // db2_commit($GLOBALS['conn']);
-    // db2_autocommit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+    // sqlsrv_commit($GLOBALS['conn']);
+    // sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
 
     // $pesCommentField = $data[0]['COMMENT'];
 

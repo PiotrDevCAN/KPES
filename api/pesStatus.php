@@ -32,14 +32,14 @@ $countSql.= "ON AP.PES_LEVEL = PL.PES_LEVEL_REF AND AP.ACCOUNT_ID = PL.ACCOUNT_I
 $countSql.= "WHERE AP.ACCOUNT_ID = ? ";
 
 $preparedCountStatement = db2_prepare($GLOBALS['conn'], $countSql);
-$rs = db2_execute($preparedCountStatement, $data);
+$rs = sqlsrv_queryute($preparedCountStatement, $data);
 if (! $rs) {
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;
 }
 
 $counter = 0;
-while($row = db2_fetch_assoc($preparedCountStatement)){
+while($row = sqlsrv_fetch_array($preparedCountStatement)){
     $counter = $row['COUNTER'];
 }
 
@@ -56,7 +56,7 @@ $sql.= "OPTIMIZE FOR " . $counter . " ROWS";
 // $sql.= "WHERE AP.ACCOUNT_ID = '" . db2_escape_string($_GET['accountid']) . "' ";
 
 $preparedStatement = db2_prepare($GLOBALS['conn'], $sql);
-$rs = db2_execute($preparedStatement, $data);
+$rs = sqlsrv_queryute($preparedStatement, $data);
 if (! $rs) {
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;
@@ -70,7 +70,7 @@ $startDataTrim = microtime(true);
 $data = array();
 
 $count = 1;
-while($row = db2_fetch_assoc($preparedStatement)){
+while($row = sqlsrv_fetch_array($preparedStatement)){
     if ($noTrim === false) {
         $row = array_map('trim',$row);
     }

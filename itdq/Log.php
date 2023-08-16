@@ -27,7 +27,7 @@ static function logEntry($entry,$pwd=null){
 	} else {
 		$sql .= " VALUES ('$db2Entry','$userid') ";
 	}
-	$rs = DB2_EXEC($GLOBALS['conn'],$sql);
+	$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 	if(!$rs)
 		{
 		echo "<BR>Error: " . db2_stmt_error();
@@ -38,7 +38,7 @@ static function logEntry($entry,$pwd=null){
 
 	static function deleteLogRecords($keepDays=1){
 		$sql = "DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$LOG . " WHERE LASTUPDATED < (CURRENT TIMESTAMP - $keepDays DAYS) ";
-		$rs = DB2_EXEC($GLOBALS['conn'],$sql);
+		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
 			echo "<BR>Error: " . db2_stmt_error();

@@ -20,14 +20,14 @@ class RcaCauseSubCategoryTable extends DbTableTable
         $sql .= " FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$RCA_CAUSE_SUB_CATEGORY;
         $sql .= " WHERE 1=1 " . $predicate;
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if (! $rs) {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
         $xmlString = "<rcaCategories>";
-        while (($row = db2_fetch_assoc($rs)) == true) {
+        while (($row = sqlsrv_fetch_array($rs)) == true) {
             $xmlString .= "<rcaSubCategory>";
             foreach ($row as $key => $value) {
                 $xmlString .= "<" . trim($key) . ">" . urlencode(trim($value)) . "</" . trim($key) . ">";

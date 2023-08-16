@@ -38,23 +38,28 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
     if( $conn ) {
         $GLOBALS['conn'] = $conn;
         $schema = isset($GLOBALS['Db2Schema']) ? $GLOBALS['Db2Schema'] : 'REST';
-        $Statement = "SET CURRENT SCHEMA='$schema';";
-        $rs = db2_exec($conn, $Statement);
+        $statement = "SET CURRENT SCHEMA='$schema';";
+        $rs = sqlsrv_query($conn, $statement);
 
         if (! $rs) {
-            echo "<br/>" . $Statement . "<br/>";
+            echo "<br/>" . $statement . "<br/>";
 
             echo "<pre>";
             print_r($_SESSION);
             echo "</pre>";
 
-            echo "<BR>" . db2_stmt_errormsg() . "<BR>";
-            echo "<BR>" . db2_stmt_error() . "<BR>";
+            if( ($errors = sqlsrv_errors() ) != null) {
+                foreach( $errors as $error ) {
+                    echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
+                    echo "code: ".$error[ 'code']."<br />";
+                    echo "message: ".$error[ 'message']."<br />";
+                }
+            }
             exit("Set current schema failed");
         }
-        db2_autocommit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
+        sqlsrv_commit($conn, TRUE); // This is how it was on the Wintel Box - so the code has no/few commit points.
     } else {
-        error_log(__FILE__ . __LINE__ . " Connect to DB2 Failed");
+        error_log(__FILE__ . __LINE__ . " Connect to Azure SQL Failed");
         // error_log(__FILE__ . __LINE__ . $conn_string);
         // error_log(__FILE__ . __LINE__ . db2_conn_errormsg());
         // error_log(__FILE__ . __LINE__ . db2_conn_error());

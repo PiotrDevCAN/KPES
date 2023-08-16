@@ -17,7 +17,7 @@ $sql.= " AND A.ACCOUNT is not null ";
 $sql.= " group by ACCOUNT, YEAR(PES_CLEARED_DATE), MONTH(PES_CLEARED_DATE)";
 $sql.= " ORDER BY 1, 2 desc, 3 desc ";
 
-$rs = db2_exec($GLOBALS['conn'],$sql);
+$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
 if(!$rs){
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);    
@@ -28,7 +28,7 @@ $allAccounts = array();
 $maxYear = 0;
 $minYear = 9999;
 
-while ($row=db2_fetch_assoc($rs)) {
+while ($row=sqlsrv_fetch_array($rs)) {
     
     $maxYear = $row['YEAR'] > $maxYear ? $row['YEAR'] : $maxYear;
     $minYear = $row['YEAR'] < $minYear ? $row['YEAR'] : $minYear;

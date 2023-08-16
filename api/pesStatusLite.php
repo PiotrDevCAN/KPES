@@ -102,7 +102,7 @@ ob_start();
 
 $startExec = microtime(true);
 
-$rs = DB2_EXEC($GLOBALS['conn'], $sql);
+$rs = sqlsrv_query($GLOBALS['conn'], $sql);
 if (! $rs) {
     self::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;
@@ -115,7 +115,7 @@ $startDataTrim = microtime(true);
 
 $data = array();
 $count = 1;
-while(($row=db2_fetch_assoc($rs))==true){
+while(($row=sqlsrv_fetch_array($rs))==true){
     if ($noTrim === false) {
         $row = array_map('trim',$row);
     }

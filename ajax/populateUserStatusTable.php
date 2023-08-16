@@ -41,14 +41,14 @@ $sql.= $_SESSION['isPesTeam'] ? null : $sqlToAllowPeopleToSeeRequestsForTheirAcc
 error_log(__FILE__ . __LINE__ . $_SESSION['ssoEmail']);
 error_log($sql);
 
-$rs = db2_exec($GLOBALS['conn'], $sql);
+$rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
 if(!$rs){
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
 }
 
 $data = array();
-while(($row=db2_fetch_assoc($rs))==true){
+while(($row=sqlsrv_fetch_array($rs))==true){
     $rowWithActionButtons = AccountPersonTable::addButtonsForPeopleReport(array_map('trim', $row));
     $data[] = $rowWithActionButtons;
 }

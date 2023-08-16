@@ -31,7 +31,7 @@ class CountryTable extends DbTable
         $resultSet ? null : die("SQL Failed");
         $allData = null;
 
-        while(($row = db2_fetch_assoc($resultSet))==true){
+        while(($row = sqlsrv_fetch_array($resultSet))==true){
             $testJson = json_encode($row);
             if(!$testJson){
                 die('Failed JSON Encode');
@@ -66,14 +66,14 @@ class CountryTable extends DbTable
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$COUNTRY;
         $sql.= " WHERE COUNTRY='" . db2_escape_string($country). "' ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception("Sql error in " . __METHOD__ );
         }
 
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
 
         if(empty($row['EMAIL_BODY_NAME'])){
             throw new \Exception("No EMAIL_BODY_NAME found for Country:$country");
@@ -86,14 +86,14 @@ class CountryTable extends DbTable
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$COUNTRY;
         $sql.= " WHERE COUNTRY='" . db2_escape_string($country). "' ";
 
-        $rs = db2_exec($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception("Sql error in " . __METHOD__ );
         }
 
-        $row = db2_fetch_assoc($rs);
+        $row = sqlsrv_fetch_array($rs);
 
         return array_map('trim', $row);
     }

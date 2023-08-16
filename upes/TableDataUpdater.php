@@ -20,7 +20,7 @@ class TableDataUpdater
         $rowCounter = 1;
         $batchOfCnums = false;
         while ($rowCounter <= $numberOfRowsToReturn) {
-            if (($row = db2_fetch_assoc($resultSet)) == false) {
+            if (($row = sqlsrv_fetch_array($resultSet)) == false) {
                 break;    /* You could also write 'break 1;' here. */
             } else {
                 $batchOfCnums[] = trim($row['INTRANET_ID']);
