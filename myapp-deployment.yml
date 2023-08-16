@@ -43,5 +43,5 @@ spec:
         - configMapRef:
             name: env-configmap
         - secretRef:
-            # name: kpes-app-docker-secrets-generic
-            name: env-secrets
+            name: kpes-app-docker-secrets-generic
+            # name: env-secrets

@@ -110,6 +110,7 @@ jobs:
           # that has already been setup within the cluster. 
           # Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
           imagepullsecrets: |
-            env-configmap
             kpes-app-docker-secrets
             kpes-app-docker-secrets-generic
+            env-configmap
+            env-secrets

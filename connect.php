@@ -64,6 +64,6 @@ if( isset($_ENV['db-server']) && isset($_ENV['db-user-name']) && isset($_ENV['db
     echo "<pre>";
     print_r($_ENV);
     echo "</pre>";
-    echo "<p>No credentials.</p>";
+    echo "<p>No database credentials.</p>";
 }
 ?>
