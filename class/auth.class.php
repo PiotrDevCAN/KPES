@@ -78,8 +78,10 @@
 			$token_response = json_decode($data);
 			if($token_response)
 			{
-				if(isset($token_response->error)) throw new \Exception('Error happened while authenticating. Please, try again later.');
-
+				if(isset($token_response->error)) {
+					var_dump($token_response->error);	
+					throw new \Exception('Error happened while authenticating. Please, try again later.');
+				}
 				if ( isset( $token_response->id_token ) ) {
 					$jwt_arr = explode('.', $token_response->id_token );
 					$encoded = $jwt_arr[1];
