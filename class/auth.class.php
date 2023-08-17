@@ -92,15 +92,12 @@
 					return false;
 				}
 
-				echo 'data from TOKEN ';
-				print_r($tokenData);
-
 				$userData = $this->getUserInfo($token_response->access_token);
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				echo 'data from USERINFO ';
 				print_r($userData);
-				die();
+				// die();
 
 				// {
 				// 	"sub": "00uid4BxXw6I6TV4m0g3",
@@ -119,21 +116,31 @@
 				// 	"phone_number":"+1 (425) 555-1212"
 				//   }
 
-				//if using this code on w3ID
+				// set session from TOKEN data
+				if(isset($userData) && !empty($userData)
+					&& isset($tokenData['ext']) && !empty($tokenData['ext'])
+					&& isset($tokenData['sub']) && !empty($tokenData['sub'])
+					)
+				{
+					$_SESSION['exp'] = $tokenData['exp'];
+					$_SESSION['uid'] = $tokenData['sub'];
+				}
+
+				// dummy user data
+				$_SESSION['ssoEmail'] = 'John.Doe@kyndry.com';
+				$_SESSION['firstName'] = 'John';
+				$_SESSION['lastName'] = 'Doe';
+				
+				// set session from USER data
 				if(isset($userData) && !empty($userData)
 					&& isset($userData['email']) && !empty($userData['email'])
 					&& isset($userData['given_name']) && !empty($userData['given_name'])
 					&& isset($userData['family_name']) && !empty($userData['family_name'])
-					&& isset($userData['expires_in']) && !empty($userData['expires_in'])
-					&& isset($userData['sub']) && !empty($userData['sub'])
 					)
 				{
 					$_SESSION['ssoEmail'] = $userData['email'];
 					$_SESSION['firstName'] = $userData['given_name'];
 					$_SESSION['lastName'] = $userData['family_name'];
-					$_SESSION['exp'] = $userData['expires_in'];
-					$_SESSION['uid'] = $userData['sub'];
-					return true;
 				}
 				//if something in the future gets changed and the strict checking on top of this is not working any more
 				//please note, that you should always use strict matching in this function on your prod app so that you can handle changes correctly and not fill in the session with all the data
@@ -145,6 +152,7 @@
 					$_SESSION['somethingChanged'] = true;
 					return true;
 				}
+				return true;
 			}
 			return false;
 		}
@@ -234,9 +242,8 @@
 
 			curl_close($ch);
 
-			// return $this->processOpenIDConnectCallback($result);
 			// return json_decode($result, true);
-			return $result;
+			return json_decode($result);
 		}
 	}
 ?>

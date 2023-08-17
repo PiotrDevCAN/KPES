@@ -33,9 +33,6 @@ $config_openidconnect->introspect_url = $_ENV['sso_introspect_url'];
 
 error_log('Authorising to:' . $config_openidconnect->authorize_url . " as (" . $config_openidconnect->client_id . ") ");
 
-
-
-
 // $config_openidconnect->client_id['staging']      = "ZWMwMTNkYTEtYmEzMC00";
 // $config_openidconnect->client_secret['staging']  = "ZWVlYzZjYzktNzUwOS00";
 
