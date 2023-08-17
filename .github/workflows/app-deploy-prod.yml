@@ -1,5 +1,5 @@
 ---
-name: ci-build-and-deploy
+name: ci-build-and-deploy-production
 on:
   push:
     branches:
