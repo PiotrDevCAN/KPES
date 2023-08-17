@@ -87,49 +87,70 @@
 					$decoded = "";
 					for ($i=0; $i < ceil(strlen($encoded)/4); $i++)
 						$decoded = $decoded . base64_decode(substr($encoded,$i*4,4));
-					$userData = json_decode( $decoded, true );
+					$tokenData = json_decode( $decoded, true );
 				} else {
 					return false;
 				}
 
-				$userData = $this->getUserInfo($token_response->token_response);
+				echo 'data from TOKEN';
+				var_dump($tokenData);
+
+				$userData = $this->getUserInfo($token_response->access_token);
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
+				echo 'data from USERINFO';
 				var_dump($userData);
 				die();
 
+				// {
+				// 	"sub": "00uid4BxXw6I6TV4m0g3",
+				// 	"name" :"John Doe",
+				// 	"nickname":"Jimmy",
+				// 	"given_name":"John",
+				// 	"middle_name":"James",
+				// 	"family_name":"Doe",
+				// 	"profile":"https://example.com/john.doe",
+				// 	"zoneinfo":"America/Los_Angeles",
+				// 	"locale":"en-US",
+				// 	"updated_at":1311280970,
+				// 	"email":"john.doe@example.com",
+				// 	"email_verified":true,
+				// 	"address" : { "street_address":"123 Hollywood Blvd.", "locality":"Los Angeles", "region":"CA", "postal_code":"90210", "country":"US" },
+				// 	"phone_number":"+1 (425) 555-1212"
+				//   }
+
 				//if using this code on w3ID
 				if(isset($userData) && !empty($userData)
-					&& isset($userData['emailAddress']) && !empty($userData['emailAddress'])
-					&& isset($userData['firstName']) && !empty($userData['firstName'])
-					&& isset($userData['lastName']) && !empty($userData['lastName'])
-					&& isset($userData['exp']) && !empty($userData['exp'])
-					&& isset($userData['uid']) && !empty($userData['uid'])
-					)
-				{
-					$_SESSION['ssoEmail'] = $userData['emailAddress'];
-					$_SESSION['firstName'] = $userData['firstName'];
-					$_SESSION['lastName'] = $userData['lastName'];
-					$_SESSION['exp'] = $userData['exp'];
-					$_SESSION['uid'] = $userData['uid'];
-					return true;
-				}
-				//if using this code on IBM ID
-				else if(isset($userData) && !empty($userData)
-					&& isset($userData['ssoEmail']) && !empty($userData['email'])
+					&& isset($userData['email']) && !empty($userData['email'])
 					&& isset($userData['given_name']) && !empty($userData['given_name'])
 					&& isset($userData['family_name']) && !empty($userData['family_name'])
-					&& isset($userData['exp']) && !empty($userData['exp'])
-					&& isset($userData['uniqueSecurityName']) && !empty($userData['uniqueSecurityName'])
+					&& isset($userData['expires_in']) && !empty($userData['expires_in'])
+					&& isset($userData['sub']) && !empty($userData['sub'])
 					)
 				{
 					$_SESSION['ssoEmail'] = $userData['email'];
 					$_SESSION['firstName'] = $userData['given_name'];
 					$_SESSION['lastName'] = $userData['family_name'];
-					$_SESSION['exp'] = $userData['exp'];
-					$_SESSION['uid'] = $userData['uniqueSecurityName'];
+					$_SESSION['exp'] = $userData['expires_in'];
+					$_SESSION['uid'] = $userData['sub'];
 					return true;
 				}
+				//if using this code on IBM ID
+				// else if(isset($userData) && !empty($userData)
+				// 	&& isset($userData['ssoEmail']) && !empty($userData['email'])
+				// 	&& isset($userData['given_name']) && !empty($userData['given_name'])
+				// 	&& isset($userData['family_name']) && !empty($userData['family_name'])
+				// 	&& isset($userData['exp']) && !empty($userData['exp'])
+				// 	&& isset($userData['uniqueSecurityName']) && !empty($userData['uniqueSecurityName'])
+				// 	)
+				// {
+				// 	$_SESSION['ssoEmail'] = $userData['email'];
+				// 	$_SESSION['firstName'] = $userData['given_name'];
+				// 	$_SESSION['lastName'] = $userData['family_name'];
+				// 	$_SESSION['exp'] = $userData['exp'];
+				// 	$_SESSION['uid'] = $userData['uniqueSecurityName'];
+				// 	return true;
+				// }
 				//if something in the future gets changed and the strict checking on top of this is not working any more
 				//please note, that you should always use strict matching in this function on your prod app so that you can handle changes correctly and not fill in the session with all the data
 				//so basically, if you get to the else below, adjust it, open an issue on github so that the strict matching can be adjusted and it doesnt get to the else below
@@ -230,7 +251,7 @@
 			curl_close($ch);
 
 			// return $this->processOpenIDConnectCallback($result);
-			return $result;
+			return json_decode($result, true);
 		}
 	}
 ?>
