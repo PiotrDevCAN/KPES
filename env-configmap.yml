@@ -16,4 +16,5 @@ data:
   sso_client_secret: '6ww8PuYNWR9XhfMpzRrJeL-4ODUUn1eozIlD1511'
   sso_authorize_url: https://connect.kyndryl.net/oauth2/v1/authorize
   sso_token_url: https://connect.kyndryl.net/oauth2/v1/token
+  sso_userinfo_url: https://connect.kyndryl.net/oauth2/v1/userinfo
   sso_introspect_url: https://connect.kyndryl.net/oauth2/v1/introspect

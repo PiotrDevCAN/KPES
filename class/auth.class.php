@@ -56,11 +56,6 @@
 				'grant_type' => 'authorization_code'
 			);
 
-			echo '<pre>';
-			echo $url;
-			var_dump($fields);
-			echo '</pre>';
-
 			$postvars = http_build_query($fields);
 			$ch = curl_init();
 
@@ -84,7 +79,6 @@
 			if($token_response)
 			{
 				if(isset($token_response->error)) {
-					var_dump($token_response->error);	
 					throw new \Exception('Error happened while authenticating. Please, try again later.');
 				}
 				if ( isset( $token_response->id_token ) ) {
@@ -97,6 +91,8 @@
 				} else {
 					return false;
 				}
+
+				$userData = $this->getUserInfo($token_response->token_response);
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				var_dump($userData);
@@ -201,6 +197,7 @@
 			if(isset($config) && !empty($config)
 			    && isset($config->authorize_url) && !empty($config->authorize_url)
 			    && isset($config->token_url) && !empty($config->token_url)
+				&& isset($config->userinfo_url) && !empty($config->userinfo_url)
 			    && isset($config->introspect_url) && !empty($config->introspect_url)
 				&& isset($config->client_id) && !empty($config->client_id)
 				&& isset($config->client_secret) && !empty($config->client_secret)
@@ -213,6 +210,27 @@
 			{
 				return false;
 			}
+		}
+
+		// Returns information about the currently signed-in user.
+		private function getUserInfo($token)
+		{
+			$url = $this->config->userinfo_url;
+
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_URL, $url);
+			$authorization = "Authorization: Bearer ".$token; // Prepare the authorisation token
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$result = curl_exec($ch);
+
+			curl_close($ch);
+
+			// return $this->processOpenIDConnectCallback($result);
+			return $result;
 		}
 	}
 ?>
