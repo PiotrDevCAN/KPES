@@ -19,8 +19,8 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 
 $sqlToAllowPeopleToSeeRequestsForTheirAccounts = " AND A.ACCOUNT_ID in ( ";
 $sqlToAllowPeopleToSeeRequestsForTheirAccounts.= "     SELECT DISTINCT ACCOUNT_ID from " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON . " as AP ";
-$sqlToAllowPeopleToSeeRequestsForTheirAccounts.= "     WHERE AP.PES_REQUESTOR='" . db2_escape_string($_SESSION['ssoEmail']) . "' ) " ;
-$sqlToAllowPeopleToSeeRequestsForTheirAccounts.= " OR P.EMAIL_ADDRESS = '" . db2_escape_string($_SESSION['ssoEmail']) . "' ";
+$sqlToAllowPeopleToSeeRequestsForTheirAccounts.= "     WHERE AP.PES_REQUESTOR='" . htmlspecialchars($_SESSION['ssoEmail']) . "' ) " ;
+$sqlToAllowPeopleToSeeRequestsForTheirAccounts.= " OR P.EMAIL_ADDRESS = '" . htmlspecialchars($_SESSION['ssoEmail']) . "' ";
 
 $sql = " SELECT '' AS ACTION, P.EMAIL_ADDRESS, P.CNUM,  P.FULL_NAME, A.ACCOUNT, PL.PES_LEVEL, PL.PES_LEVEL_DESCRIPTION, PL.PES_LEVEL_REF ";
 $sql.= " , AP.PES_STATUS,AP.PES_CLEARED_DATE, AP.ACCOUNT_ID, A.ACCOUNT_TYPE, AP.UPES_REF, AP.PES_REQUESTOR, AP.PES_DATE_REQUESTED,AP.COUNTRY_OF_RESIDENCE, AP.PROCESSING_STATUS, ADD_HOURS(AP.PROCESSING_STATUS_CHANGED, 1) AS PROCESSING_STATUS_CHANGED, AP.PES_RECHECK_DATE ";

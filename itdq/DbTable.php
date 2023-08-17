@@ -398,7 +398,7 @@ class DbTable
                             // print_r($insertArray);
                             if (! empty($insertArray)) {
                                 $preparedInsert = $this->prepareInsert($insertArray);
-                                if (sqlsrv_queryute($preparedInsert, $insertArray)) {
+                                if (sqlsrv_execute($preparedInsert, $insertArray)) {
                                     $this->inserted ++;
                                 } else {
                                     $this->failed ++;
@@ -929,7 +929,7 @@ class DbTable
             // So best prepare a new statement, which we will save in the hope of reusing
             Trace::traceVariable($sql, __METHOD__, __LINE__);
             $this->preparedInsertSQL = $sql;
-            $this->preparedInsert = db2_prepare($GLOBALS['conn'], $sql);
+            $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql);
             if (! $this->preparedInsert) {
                 echo "<BR/>" . sqlsrv_errors();
                 echo "<BR/>" . sqlsrv_errors() . "<BR/>";
@@ -958,7 +958,7 @@ class DbTable
         Trace::traceVariable($insertArray, __METHOD__, __LINE__);
         $preparedInsert = $this->prepareInsert($insertArray);
 
-        $rs = @sqlsrv_queryute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_execute($preparedInsert, $insertArray);
 
         if (! $rs) {
             $this->lastDb2StmtError = sqlsrv_errors();
@@ -983,7 +983,7 @@ class DbTable
         $preparedInsert = $this->prepareInsert($insertArray);
 
         $insert = -microtime(true);
-        $rs = @sqlsrv_queryute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_execute($preparedInsert, $insertArray);
         $insert += microtime(true);
         echo $withTimings ?  "Db2 Insert Time:" . sprintf('%f', $insert) . PHP_EOL : null;
 
@@ -1068,14 +1068,14 @@ class DbTable
                         if (empty($updateArray[$key]) or $updateArray[$key] == 'null') {
                             $values .= ", $key = 0 ";
                         } else {
-                            $values .= ", $key = '" . db2_escape_string($updateArray[$key]) . "' ";
+                            $values .= ", $key = '" . htmlspecialchars($updateArray[$key]) . "' ";
                         }
                         break;
                     default:
                         if (empty($updateArray[$key])) {
                             $values .= ", $key = null ";
                         } else {
-                            $values .= ", $key = '" . db2_escape_string($updateArray[$key]) . "' ";
+                            $values .= ", $key = '" . htmlspecialchars($updateArray[$key]) . "' ";
                         }
                         break;
                 }
@@ -1136,7 +1136,7 @@ class DbTable
         }
         if ($cols['SERIAL_NUMBER'] != null) {
             $this->logRecord($preparedSelect, $cols, "<B>Before image </b>");
-            $rs = sqlsrv_queryute($preparedUpdate, $db2Columns);
+            $rs = sqlsrv_execute($preparedUpdate, $db2Columns);
             if (! $rs) {
                 echo "<BR/>" . sqlsrv_errors();
                 echo "<BR/>" . sqlsrv_errors() . "<BR/>";
@@ -1167,7 +1167,7 @@ class DbTable
         //
         // // $sql = " SELECT DECRYPT_CHAR((CHAR)?,'$this->pwd') FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName ;
         //
-        // $this->preparedSelect = db2_prepare ( $_SESSION ['conn'], $sql );
+        // $this->preparedSelect = sqlsrv_prepare ( $_SESSION ['conn'], $sql );
         // if (! $preparedStmt) {
         // echo "<BR/>" . sqlsrv_errors ();
         // echo "<BR/>" . sqlsrv_errors () . "<BR/>";
@@ -1578,7 +1578,7 @@ class DbTable
             } elseif ($this->columns[$key]['DATA_TYPE'] == 93) {
                 $predicate .= " AND $key = TIMESTAMP('" . $record->getValue($key) . "') ";
             } else {
-                $predicate .= " AND $key='" . db2_escape_string($record->getValue($key)) . "' ";
+                $predicate .= " AND $key='" . htmlspecialchars($record->getValue($key)) . "' ";
             }
         }
         Trace::traceVariable(str_replace('define a primary key AND', ' ', str_replace("=''", " is null", $predicate)), __METHOD__);
@@ -1962,7 +1962,7 @@ class DbTable
         $backtrace = ob_get_contents();
         @ob_end_clean();
 
-        $backtrace = strlen(db2_escape_string($backtrace)) > 1024 ? substr(db2_escape_string($backtrace), 0, 1000) : db2_escape_string($backtrace);
+        $backtrace = strlen(htmlspecialchars($backtrace)) > 1024 ? substr(htmlspecialchars($backtrace), 0, 1000) : htmlspecialchars($backtrace);
 
         ob_start();
         print_r($_REQUEST);
@@ -1975,7 +1975,7 @@ class DbTable
             $request .= ":data:" . ob_get_contents();
             @ob_end_clean();
         }
-        $request = strlen(db2_escape_string($request)) > 1024 ? substr(db2_escape_string($request), 0, 1000) : db2_escape_string($request);
+        $request = strlen(htmlspecialchars($request)) > 1024 ? substr(htmlspecialchars($request), 0, 1000) : htmlspecialchars($request);
         
         $sqlsrv_errors = str_replace(['"',"'"], "", sqlsrv_errors());
         $sqlsrv_errors = str_replace(['"',"'"], "", sqlsrv_errors());

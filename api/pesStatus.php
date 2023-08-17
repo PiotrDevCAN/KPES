@@ -31,8 +31,8 @@ $countSql.= "LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_LEVELS 
 $countSql.= "ON AP.PES_LEVEL = PL.PES_LEVEL_REF AND AP.ACCOUNT_ID = PL.ACCOUNT_ID ";
 $countSql.= "WHERE AP.ACCOUNT_ID = ? ";
 
-$preparedCountStatement = db2_prepare($GLOBALS['conn'], $countSql);
-$rs = sqlsrv_queryute($preparedCountStatement, $data);
+$preparedCountStatement = sqlsrv_prepare($GLOBALS['conn'], $countSql);
+$rs = sqlsrv_execute($preparedCountStatement, $data);
 if (! $rs) {
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;
@@ -53,10 +53,10 @@ $sql.= "LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_LEVELS . " A
 $sql.= "ON AP.PES_LEVEL = PL.PES_LEVEL_REF AND AP.ACCOUNT_ID = PL.ACCOUNT_ID ";
 $sql.= "WHERE AP.ACCOUNT_ID = ? ";
 $sql.= "OPTIMIZE FOR " . $counter . " ROWS";
-// $sql.= "WHERE AP.ACCOUNT_ID = '" . db2_escape_string($_GET['accountid']) . "' ";
+// $sql.= "WHERE AP.ACCOUNT_ID = '" . htmlspecialchars($_GET['accountid']) . "' ";
 
-$preparedStatement = db2_prepare($GLOBALS['conn'], $sql);
-$rs = sqlsrv_queryute($preparedStatement, $data);
+$preparedStatement = sqlsrv_prepare($GLOBALS['conn'], $sql);
+$rs = sqlsrv_execute($preparedStatement, $data);
 if (! $rs) {
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
     return false;

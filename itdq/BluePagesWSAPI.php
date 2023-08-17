@@ -495,7 +495,7 @@ class BluePages {
 		if (isset ( $this->dept )) {
 		//	$sql = " INSERT INTO " . $_SESSION ['prefix'] . "." . $this->table . " ( NAME, SERIAL, COUNTRY_CODE, LOCATION, MGR_SERIAL, MGR_CTRY_CODE, REG_OR_SUBCO, INTERNET, EMPTYPE, HRACTIVE, HREMPLOYEETYPE, DEPT, HRFAMILYNAME, NOTESID, JOBRESPONSIB) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)  ";
 
-		//	$preparedInsert = db2_prepare ( $_SESSION ['conn'], $sql );
+		//	$preparedInsert = sqlsrv_prepare ( $_SESSION ['conn'], $sql );
 			$actual = 0;
 			foreach ( $this->dept ['NAME'] as $key => $value ) {
 				$data [0] = substr ( $value, 0, 50 ); // Name from BP
@@ -518,7 +518,7 @@ class BluePages {
 				$data[13] = $this->dept['NOTESID'][$key];
 				$data[14] = $this->dept['JOBRESPONSIB'][$key];
 				if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
-					$rs = sqlsrv_queryute ( $this->preparedInsert, $data );
+					$rs = sqlsrv_execute ( $this->preparedInsert, $data );
 					if (! $rs) {
 						echo "<BR>" . sqlsrv_errors ();
 						echo "<BR>" . sqlsrv_errors () . "<BR>";
@@ -569,7 +569,7 @@ class BluePages {
 			$data[13] = $this->person['NOTESID'];
 			$data[14] = $this->person['JOBRESPONSIB'];
 			if ((stripos ( $data [0], '*FUN' ) === false)) { // Don't record the Functional Ids.
-				$rs = sqlsrv_queryute ( $this->preparedInsert, $data );
+				$rs = sqlsrv_execute ( $this->preparedInsert, $data );
 				if (! $rs) {
 					echo "<BR>" . sqlsrv_errors ();
 					echo "<BR>" . sqlsrv_errors () . "<BR>";

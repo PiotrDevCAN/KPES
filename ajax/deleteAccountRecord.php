@@ -16,7 +16,7 @@ if(empty($_POST['accountid'])){
 
 
 $sql = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT ;
-$sql.= " WHeRE ACCOUNT_ID='" . db2_escape_string($_POST['accountid']) . "' ";
+$sql.= " WHeRE ACCOUNT_ID='" . htmlspecialchars($_POST['accountid']) . "' ";
 
 $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 

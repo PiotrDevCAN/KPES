@@ -18,7 +18,7 @@ class AuditTable extends DbTable {
             $sql = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT;
             $sql . " ('TIMESTAMP','EMAIL_ADDRESS','DATA','TYPE') ";
             $sql .= " VALUES ";
-            $sql .= " ( CURRENT TIMESTAMP, '" . db2_escape_string($_SESSION['ssoEmail']) . "','" . db2_escape_string($statement) . "','" . db2_escape_string($type) . "' )";
+            $sql .= " ( CURRENT TIMESTAMP, '" . htmlspecialchars($_SESSION['ssoEmail']) . "','" . htmlspecialchars($statement) . "','" . htmlspecialchars($type) . "' )";
 
             $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
@@ -35,9 +35,9 @@ class AuditTable extends DbTable {
 
             $sql  = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT ;
             $sql .= " WHERE " ;
-            $sql .= " (TYPE='" . self::RECORD_TYPE_AUDIT . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . db2_escape_string($auditLifeSpan) . " )) ";
+            $sql .= " (TYPE='" . self::RECORD_TYPE_AUDIT . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . htmlspecialchars($auditLifeSpan) . " )) ";
             $sql .= " OR " ;
-            $sql .= " (TYPE='" . self::RECORD_TYPE_DETAILS . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . db2_escape_string($detailsLifeSpan) . " ))  ";
+            $sql .= " (TYPE='" . self::RECORD_TYPE_DETAILS . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . htmlspecialchars($detailsLifeSpan) . " ))  ";
 
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 

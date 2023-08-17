@@ -26,15 +26,18 @@ function myErrorHandler($code, $message, $file, $line) {
     // $mailError->SMTPAuth = false;
     // $mailError->SMTPAutoTLS = false;
     // $mailError->Port = 25;
+    // $replyto = $_ENV['noreplyemailid'];
 
-    $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
+    $mailError->SMTPDebug = SMTP::DEBUG_LOWLEVEL; // Enable verbose debug output ; SMTP::DEBUG_OFF
     $mailError->isSMTP(); // Send using SMTP
-    $mailError->Host = 'na.relay.ibm.com'; // Set the SMTP server to send through
-    $mailError->SMTPAuth = false;
-    $mailError->SMTPAutoTLS = false;
-    $mailError->Port = 25;
+    $mailError->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
+    $mailError->SMTPAuth = true;
+    $mailError->SMTPAutoTLS = true;
+    $mailError->Port = 465; // 25, 465, or 587
+    $mailError->Username = "55745349-a422-4d7c-aa40-5c52dab03574";             
+    $mailError->Password = "mG46S=caDv+G"; 
 
-    $replyto = $_ENV['noreplyemailid'];
+    $replyto = 'UKI.Business.Intelligence@kyndryl.com';
     $mailError->setFrom($replyto);
     $mailError->isHTML(true);
     $mailError->Subject = "**" . $_ENV['environment'] . "**" . 'Error has occurred while running PHP script';

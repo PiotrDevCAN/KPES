@@ -19,7 +19,7 @@ class PersonTableDataUpdater extends PersonTable
     function prepareCheckExistsStatement($column){
         $sql = " SELECT count(*) AS EXISTS FROM "  . $GLOBALS['Db2Schema'] . "." . $this->tableName . " AS R ";
         $sql .= " WHERE R.".$column." = ? ";
-        $this->preparedCheckExistsStatements[$column] = db2_prepare($GLOBALS['conn'], $sql);
+        $this->preparedCheckExistsStatements[$column] = sqlsrv_prepare($GLOBALS['conn'], $sql);
         
         if(!$this->preparedCheckExistsStatements[$column]){
             DBTable::displayErrorMessage($this->preparedCheckExistsStatements[$column], __CLASS__, __METHOD__, $sql);
@@ -43,7 +43,7 @@ class PersonTableDataUpdater extends PersonTable
             R.IBM_EMAIL_ADDRESS = ?,
             R.IBM_NOTES_ID = ?";
         $sql .= " WHERE R.".$column." = ? ";
-        $this->preparedUpdateSqlStatements[$column] = db2_prepare($GLOBALS['conn'], $sql);
+        $this->preparedUpdateSqlStatements[$column] = sqlsrv_prepare($GLOBALS['conn'], $sql);
         
         if(!$this->preparedUpdateSqlStatements[$column]){
             DBTable::displayErrorMessage($this->preparedUpdateSqlStatements[$column], __CLASS__, __METHOD__, $sql);
@@ -106,7 +106,7 @@ class PersonTableDataUpdater extends PersonTable
             }
         }
         
-        $result = sqlsrv_queryute($this->preparedUpdateSqlStatements[$column], $data);
+        $result = sqlsrv_execute($this->preparedUpdateSqlStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
@@ -127,7 +127,7 @@ class PersonTableDataUpdater extends PersonTable
             $intranetId
         );
 
-        $result = sqlsrv_queryute($this->preparedUpdateSqlStatements[$column], $data);
+        $result = sqlsrv_execute($this->preparedUpdateSqlStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
@@ -154,7 +154,7 @@ class PersonTableDataUpdater extends PersonTable
     function checkRecordExists($intranetId, $column){
         $data = array(trim($intranetId));
         
-        $result = sqlsrv_queryute($this->preparedCheckExistsStatements[$column], $data);
+        $result = sqlsrv_execute($this->preparedCheckExistsStatements[$column], $data);
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }

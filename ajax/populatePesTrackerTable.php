@@ -19,7 +19,7 @@ $length = isset($_REQUEST['length']) ? $_REQUEST['length'] : 50;
 
 $predicate = '';
 if(!empty($_REQUEST['search']['value'])) {
-    $searchValue = db2_escape_string(trim($_REQUEST['search']['value']));
+    $searchValue = htmlspecialchars(trim($_REQUEST['search']['value']));
     $predicate .= " AND (REGEXP_LIKE(P.PASSPORT_FIRST_NAME, '". $searchValue . "', 'i')";
     $predicate .= " OR REGEXP_LIKE(P.PASSPORT_LAST_NAME, '". $searchValue . "', 'i')";
     $predicate .= " OR REGEXP_LIKE(P.CNUM, '". $searchValue . "', 'i')";

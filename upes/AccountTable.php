@@ -72,14 +72,14 @@ class AccountTable extends DbTable
 
 
     static function getAccountNameFromId($accountId){
-        $sql = " SELECT ACCOUNT FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
+        $sql = " SELECT ACCOUNT FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT_ID='" . htmlspecialchars($accountId) . "' ";
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         $row = sqlsrv_fetch_array($rs);
         return $row ? trim($row['ACCOUNT']) : false;
     }
 
     static function getAccountIdFromName($accountName){
-        $sql = " SELECT ACCOUNT_ID FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT='" . db2_escape_string($accountName) . "' ";
+        $sql = " SELECT ACCOUNT_ID FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT . " WHERE ACCOUNT='" . htmlspecialchars($accountName) . "' ";
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         $row = sqlsrv_fetch_array($rs);
         return $row ? trim($row['ACCOUNT_ID']) : false;

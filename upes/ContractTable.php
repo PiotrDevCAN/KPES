@@ -66,7 +66,7 @@ class ContractTable extends DbTable
         $allContracts = $loader->loadIndexed('CONTRACT','CONTRACT_ID',AllTables::$CONTRACT);
         $allContractAccountMapping = $loader->loadIndexed('ACCOUNT_ID','CONTRACT_ID',AllTables::$CONTRACT);
 
-        $predicate = !empty($upesref) ? " UPES_REF='" . db2_escape_string($upesref) . "' " : null;
+        $predicate = !empty($upesref) ? " UPES_REF='" . htmlspecialchars($upesref) . "' " : null;
         $allAccountsForPerson = $loader->loadIndexed('ACCOUNT_ID','UPES_REF',AllTables::$ACCOUNT_PERSON, $predicate );
 
          $filteredContracts = !empty($upesref) ?  array_diff($allContractAccountMapping, $allAccountsForPerson) : $allContractAccountMapping;

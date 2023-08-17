@@ -16,7 +16,7 @@ if(empty($_POST['contractid'])){
 
 
 $sql = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$CONTRACT ;
-$sql.= " WHERE CONTRACT_ID='" . db2_escape_string($_POST['contractid']) . "' ";
+$sql.= " WHERE CONTRACT_ID='" . htmlspecialchars($_POST['contractid']) . "' ";
 
 $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 

@@ -1638,7 +1638,7 @@ class SortableList
     {
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES)) { // They are setup to have saved profiles.
             $loader = new Loader();
-            $myProfiles = $loader->load('PROFILE_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' or INTRANET='global' ) AND PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' ");
+            $myProfiles = $loader->load('PROFILE_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' or INTRANET='global' ) AND PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' ");
             echo "<TABLE class=$this->dropSelectTableClass style='width:25%'>";
             if (! empty($myProfiles)) {
                 $this->profileSelectionBar->selectBox('Load Profile', 'Select...', 'SELECTED_PROFILE', $myProfiles);
@@ -1660,7 +1660,7 @@ class SortableList
 
             if (isset($_REQUEST['sbsLoad_Profile'])) {
                 if (! empty($_REQUEST['sbsLoad_Profile'])) {
-                    $allFields = $loader->loadIndexed('FIELD_VALUE', 'FIELD_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global')  AND PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "'  AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbsLoad_Profile'])) . "' ");
+                    $allFields = $loader->loadIndexed('FIELD_VALUE', 'FIELD_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global')  AND PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "'  AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' ");
                     foreach ($allFields as $key => $value) {
                         $_REQUEST[$key] = $value;
                         if (! isset($_SESSION[$key])) {
@@ -1679,15 +1679,15 @@ class SortableList
         $this->profilePredicate = false;
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES)) { // They are setup to have saved profiles.
             $loader = new Loader();
-            $myProfiles = $loader->load('PROFILE_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global') AND PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' ");
+            $myProfiles = $loader->load('PROFILE_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global') AND PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' ");
             if (isset($_REQUEST['sbsLoad_Profile'])) {
                 $this->profilePredicate = null;
                 if (! empty($_REQUEST['sbsLoad_Profile'])) {
-                    $allFields = $loader->loadIndexed('FIELD_VALUE', 'FIELD_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global') AND PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "'  AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbsLoad_Profile'])) . "' ");
+                    $allFields = $loader->loadIndexed('FIELD_VALUE', 'FIELD_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' OR INTRANET='global') AND PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "'  AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' ");
                     foreach ($allFields as $key => $value) {
                         if (substr($key, 0, 3) == 'sbs') {
                             $fieldName = substr($key, 3);
-                            $this->profilePredicate .= " and $fieldName='" . db2_escape_string(trim($value)) . "' ";
+                            $this->profilePredicate .= " and $fieldName='" . htmlspecialchars(trim($value)) . "' ";
                         }
                     }
                     $this->profilePredicate = substr($this->profilePredicate, 4); // Drop the first AND
@@ -1715,13 +1715,13 @@ class SortableList
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES) && isset($_REQUEST['sbifProfile_Name']) && isset($_REQUEST['sbbSave_Profile'])) {
             if (! empty($_REQUEST['sbifProfile_Name']) && ! empty($_REQUEST['sbbSave_Profile'])) {
                 $table = new DbTable(AllITdqTables::$PROFILES);
-                $predicate = " PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' ";
+                $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
                     if (employee_in_group($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
-                                $predicate = " PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='global' ";
+                                $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='global' ";
                                 $userid = 'global';
                             }
                         }
@@ -1747,13 +1747,13 @@ class SortableList
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES) && isset($_REQUEST['sbsLoad_Profile']) && isset($_REQUEST['sbbDelete_Profile'])) {
             if (! empty($_REQUEST['sbsLoad_Profile']) && ! empty($_REQUEST['sbbDelete_Profile'])) {
                 $table = new DbTable(AllITdqTables::$PROFILES);
-                $predicate = " PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='" . db2_escape_string(trim($_SESSION['ssoEmail'])) . "' ";
+                $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
                     if (employee_in_group($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
-                                $predicate = " PAGE='" . db2_escape_string(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . db2_escape_string(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='global' ";
+                                $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='global' ";
                                 $userid = 'global';
                             }
                         }

@@ -782,7 +782,7 @@ class AccountPersonRecord extends DbRecord
 
         $loader = new Loader();
         $allAccounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT);
-        $allPeople   = $loader->loadIndexed('FULL_NAME','UPES_REF',AllTables::$PERSON, " UPES_REF='" . db2_escape_string($this->UPES_REF) ."' ");
+        $allPeople   = $loader->loadIndexed('FULL_NAME','UPES_REF',AllTables::$PERSON, " UPES_REF='" . htmlspecialchars($this->UPES_REF) ."' ");
         $allPesTaskid = $loader->loadIndexed('TASKID','ACCOUNT_ID',AllTables::$ACCOUNT);
 
         $name  = $allPeople[$this->UPES_REF];

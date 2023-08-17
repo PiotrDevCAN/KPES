@@ -22,8 +22,8 @@ if(empty($emailId) && empty($CNUM)) {
 }
 
 $predicate = " 1=1 ";
-$predicate .= ! empty($emailId) ? " AND lower(P.EMAIL_ADDRESS)='" . db2_escape_string(strtolower($emailId)) . "' " : null;
-$predicate .= ! empty($CNUM) ? " AND P.CNUM='" . db2_escape_string($CNUM) . "' " : null;
+$predicate .= ! empty($emailId) ? " AND lower(P.EMAIL_ADDRESS)='" . htmlspecialchars(strtolower($emailId)) . "' " : null;
+$predicate .= ! empty($CNUM) ? " AND P.CNUM='" . htmlspecialchars($CNUM) . "' " : null;
 
 $sql = " select AP.PES_STATUS ";
 $sql.= "from " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON . " as AP "; 

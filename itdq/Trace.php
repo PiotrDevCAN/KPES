@@ -120,13 +120,13 @@ class Trace extends Log{
  	* @param string $pwd		Password for encrypted logs or null
  	*/
 	static function logEntry($entry,$class=null, $method=null, $page=null, $pwd=null){
-		$userid = isset($_SESSION['ssoEmail']) ? db2_escape_string($_SESSION['ssoEmail']) : "unknown";
+		$userid = isset($_SESSION['ssoEmail']) ? htmlspecialchars($_SESSION['ssoEmail']) : "unknown";
 		$elapsed = isset($_SESSION['tracePageOpenTime']) ? microtime(true) - $_SESSION['tracePageOpenTime'] : null;
 		$elapsed =  ($elapsed > 3600) ? 0 : $elapsed ; // Fix for long page opening times.
 
 		$sql  = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE . " ( LOG_ENTRY,LASTUPDATER,CLASS,METHOD,PAGE ";
 		$sql .= empty($elapsed) ? ") " : ",ELAPSED) ";
-		$db2Entry = db2_escape_string($entry);
+		$db2Entry = htmlspecialchars($entry);
 
 		$db2Entry = strlen($db2Entry)>31000 ? "**TRUNCATED**" . substr($db2Entry, 0,31000) : $db2Entry;
 

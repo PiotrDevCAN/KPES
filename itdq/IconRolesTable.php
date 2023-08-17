@@ -56,7 +56,7 @@ class IconRolesTable extends DbTable {
 // 		$sql = " SELECT distinct CUSTOMER_REF, CUSTOMER_ID ";
 // 		$sql .= " FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$ICON_ACCOUNT_ROLES;
 // 		$sql .= " WHERE UPPER(PERSON_INTRANET)='" . strtoupper ( $GLOBALS ['ltcuser'] ['mail'] ) . "'  ";
-// 		$sql .= empty ( $country ) ? null : " AND COUNTRY = '" . db2_escape_string ( trim ( $country ) ) . "' ";
+// 		$sql .= empty ( $country ) ? null : " AND COUNTRY = '" . htmlspecialchars ( trim ( $country ) ) . "' ";
 
 // //		$sql .= empty ( $roles ) ? null : " AND ( ";
 // 		$sql .= empty ( $rolesStr ) ? "AND ( ROLE is null " : " AND ( ROLE in ('" . trim ( $rolesStr ) . "') "; // the ROLE is null is just to make the OR syntax work regardless if there are any roles that donthave the wildcard or not.
@@ -86,8 +86,8 @@ class IconRolesTable extends DbTable {
 // 		$sql = " SELECT distinct ROLE ";
 // 		$sql .= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ICON_ACCOUNT_ROLES;
 // 		$sql .= " WHERE ROLE is not null ";
-// 		$sql .= empty ( $customerId ) ? null : " AND CUSTOMER_ID='" . db2_escape_string ( trim ( $customerId ) ) . "' ";
-// 		$sql .= empty ( $country ) ? null : " AND COUNTRY = '" . db2_escape_string ( trim ( $country ) ) . "' ";
+// 		$sql .= empty ( $customerId ) ? null : " AND CUSTOMER_ID='" . htmlspecialchars ( trim ( $customerId ) ) . "' ";
+// 		$sql .= empty ( $country ) ? null : " AND COUNTRY = '" . htmlspecialchars ( trim ( $country ) ) . "' ";
 // 		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
 // 		if (! $rs) {
 // 			DBTable::displayErrorMessage ( $rs, __CLASS__, __METHOD__, $sql );
@@ -110,7 +110,7 @@ class IconRolesTable extends DbTable {
 // 		if ($rolesArray) {
 // 			$sql .= " AND ROLE in (";
 // 			foreach ( $rolesArray as $key => $value ) {
-// 				$sql .= "'" . db2_escape_string ( trim ( $value ) ) . "',";
+// 				$sql .= "'" . htmlspecialchars ( trim ( $value ) ) . "',";
 // 			}
 // 			$sql = substr ( $sql, 0, strlen ( $sql ) - 1 ) . ") "; // Remove that last ,
 // 		}
@@ -118,7 +118,7 @@ class IconRolesTable extends DbTable {
 // 		if ($customerIdArray) {
 // 			$sql .= " AND CUSTOMER_ID in (";
 // 			foreach ( $customerIdArray as $key => $value ) {
-// 				$sql .= "'" . db2_escape_string ( trim ( $value ) ) . "',";
+// 				$sql .= "'" . htmlspecialchars ( trim ( $value ) ) . "',";
 // 			}
 // 			$sql = substr ( $sql, 0, strlen ( $sql ) - 1 ) . ") "; // Remove that last ,
 // 		}

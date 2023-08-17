@@ -254,7 +254,7 @@ class DbRecord extends FormClass {
 		$columns = null;
 		foreach ( $this as $key => $val ) {
 			if($db2){
-				$value = db2_escape_string($val);
+				$value = htmlspecialchars($val);
 			} else {
 				$value = $val;
 			}

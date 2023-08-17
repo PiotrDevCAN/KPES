@@ -53,7 +53,7 @@ $noTrim = !empty($_REQUEST['noTrim']) ? true : false;
 // $sql.= "ON AP.UPES_REF = P.UPES_REF ";
 // $sql.= "LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_LEVELS . " AS PL ";
 // $sql.= "ON AP.PES_LEVEL = PL.PES_LEVEL_REF AND AP.ACCOUNT_ID = PL.ACCOUNT_ID ";
-// $sql.= "WHERE AP.ACCOUNT_ID = '" . db2_escape_string($_GET['accountid']) . "' ";
+// $sql.= "WHERE AP.ACCOUNT_ID = '" . htmlspecialchars($_GET['accountid']) . "' ";
 
 $sql = " SELECT P.EMAIL_ADDRESS, PROCESSING_STATUS, PROCESSING_STATUS_CHANGED ";
 $sql.= ", PES_DATE_REQUESTED, PES_REQUESTOR, PES_DATE_RESPONDED, PES_STATUS_DETAILS, PES_STATUS";
@@ -63,7 +63,7 @@ $sql.= "LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " AS P 
 $sql.= "ON AP.UPES_REF = P.UPES_REF ";
 $sql.= "LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_LEVELS . " AS PL ";
 $sql.= "ON AP.PES_LEVEL = PL.PES_LEVEL_REF AND AP.ACCOUNT_ID = PL.ACCOUNT_ID ";
-$sql.= "WHERE AP.ACCOUNT_ID = '" . db2_escape_string($_GET['accountid']) . "' ";
+$sql.= "WHERE AP.ACCOUNT_ID = '" . htmlspecialchars($_GET['accountid']) . "' ";
 
 // $adapter->query($sql);
 // echo 'passed';

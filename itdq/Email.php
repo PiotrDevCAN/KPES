@@ -78,12 +78,12 @@ class Email
     static function prelog($to, $cc, $subject, $message, $replyto)
     {
         if (isset(AllItdqTables::$EMAIL_LOG)) {
-            $safeMessage = trim(substr(db2_escape_string($message), 0, 15900));
+            $safeMessage = trim(substr(htmlspecialchars($message), 0, 15900));
             $ena = $_SESSION['email'] ? 'TRUE' : 'FALSE';
             $sql = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
             $sql .= " (TO,CC,SUBJECT,MESSAGE,REPLYTO,ENABLED, CREATOR ) ";
             $sql .= " VALUES ";
-            $sql .= "('" . db2_escape_string($to) . "','" . db2_escape_string($cc) . "','" . db2_escape_string($subject) . "','" . $safeMessage . "','" . db2_escape_string($replyto) . "','" . db2_escape_string($ena) . "','" . db2_escape_string($_SESSION['ltcuser']['mail']) . "') ";
+            $sql .= "('" . htmlspecialchars($to) . "','" . htmlspecialchars($cc) . "','" . htmlspecialchars($subject) . "','" . $safeMessage . "','" . htmlspecialchars($replyto) . "','" . htmlspecialchars($ena) . "','" . htmlspecialchars($_SESSION['ltcuser']['mail']) . "') ";
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {
                 print_r($_SESSION);
@@ -104,7 +104,7 @@ class Email
         if (isset(AllItdqTables::$EMAIL_LOG)) {
             $res = $result ? 'TRUE' : 'FALSE';
             $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
-            $sql .= " SET RESULT='" . db2_escape_string($res) . "' ";
+            $sql .= " SET RESULT='" . htmlspecialchars($res) . "' ";
             $sql .= " WHERE RECORD_ID='" . trim($recordId) . "' ";
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
             if (! $rs) {

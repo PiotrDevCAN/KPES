@@ -39,9 +39,9 @@ class PesStatusAuditTable extends DbTable
         $sql = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_STATUS_AUDIT;
         $sql.= " (CNUM, EMAIL_ADDRESS, ACCOUNT, PES_STATUS, PES_CLEARED_DATE, UPDATER, UPDATED ) ";
         $sql.= " VALUES ";
-        $sql.= " ('" . db2_escape_string($cnum) . "','" . db2_escape_string($email_address) . "','" . db2_escape_string($account) . "' ";
-        $sql.= " ,'" . db2_escape_string($pesStatus) . "','" . db2_escape_string($pesClearedDate) .  "' ";
-        $sql.= " ,'" . db2_escape_string($_SESSION['ssoEmail']) . "', CURRENT TIMESTAMP ";
+        $sql.= " ('" . htmlspecialchars($cnum) . "','" . htmlspecialchars($email_address) . "','" . htmlspecialchars($account) . "' ";
+        $sql.= " ,'" . htmlspecialchars($pesStatus) . "','" . htmlspecialchars($pesClearedDate) .  "' ";
+        $sql.= " ,'" . htmlspecialchars($_SESSION['ssoEmail']) . "', CURRENT TIMESTAMP ";
         $sql.= " ) ";
         
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);

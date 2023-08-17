@@ -69,7 +69,7 @@ class PersonTable extends DbTable
 
     static function getEmailFromUpesref($upesref){
         $sql = " SELECT EMAIL_ADDRESS FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
-        $sql.= " WHERE UPES_REF = '" . db2_escape_string(strtoupper(trim($upesref))) . "' ";
+        $sql.= " WHERE UPES_REF = '" . htmlspecialchars(strtoupper(trim($upesref))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
         $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -86,7 +86,7 @@ class PersonTable extends DbTable
     static function getNamesFromUpesref($upesref){
         $sql = " SELECT case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else P.PASSPORT_FIRST_NAME concat ' ' concat P.PASSPORT_LAST_NAME end as FULL_NAME ";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " as P ";
-        $sql.= " WHERE P.UPES_REF = '" . db2_escape_string(strtoupper(trim($upesref))) . "' ";
+        $sql.= " WHERE P.UPES_REF = '" . htmlspecialchars(strtoupper(trim($upesref))) . "' ";
 
         $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){
@@ -102,7 +102,7 @@ class PersonTable extends DbTable
 
     static function getUpesrefFromCNUM($cnum){
         $sql = " SELECT UPES_REF FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
-        $sql.= " WHERE UPPER(CNUM) = '" . db2_escape_string(strtoupper(trim($cnum))) . "' ";
+        $sql.= " WHERE UPPER(CNUM) = '" . htmlspecialchars(strtoupper(trim($cnum))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
         $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -118,7 +118,7 @@ class PersonTable extends DbTable
 
     static function getUpesrefFromEmail($email){
         $sql = " SELECT UPES_REF FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
-        $sql.= " WHERE LOWER(EMAIL_ADDRESS) = '" . db2_escape_string(strtolower(trim($email))) . "' ";
+        $sql.= " WHERE LOWER(EMAIL_ADDRESS) = '" . htmlspecialchars(strtolower(trim($email))) . "' ";
         $sql.= " FETCH FIRST 1 ROW ONLY ";
 
         $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -136,10 +136,10 @@ class PersonTable extends DbTable
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql.= " SET PASSPORT_FIRST_NAME=";
-        $sql.= !empty($passportFirstname) ? "'" . db2_escape_string($passportFirstname) . "', " : " null, ";
+        $sql.= !empty($passportFirstname) ? "'" . htmlspecialchars($passportFirstname) . "', " : " null, ";
         $sql.= " PASSPORT_SURNAME=";
-        $sql.= !empty($passportSurname) ? "'" . db2_escape_string($passportSurname) . "'  " : " null ";
-        $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' ";
+        $sql.= !empty($passportSurname) ? "'" . htmlspecialchars($passportSurname) . "'  " : " null ";
+        $sql.= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 

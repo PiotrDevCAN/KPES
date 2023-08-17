@@ -64,7 +64,7 @@ class CountryTable extends DbTable
     static function getEmailBodyNameForCountry($country){
         $sql = " SELECT COUNTRY, EMAIL_BODY_NAME";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$COUNTRY;
-        $sql.= " WHERE COUNTRY='" . db2_escape_string($country). "' ";
+        $sql.= " WHERE COUNTRY='" . htmlspecialchars($country). "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -84,7 +84,7 @@ class CountryTable extends DbTable
     static function getAdditionalAttachmentsNameCountry($country){
         $sql = " SELECT COUNTRY, ADDITIONAL_APPLICATION_FORM ";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$COUNTRY;
-        $sql.= " WHERE COUNTRY='" . db2_escape_string($country). "' ";
+        $sql.= " WHERE COUNTRY='" . htmlspecialchars($country). "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 

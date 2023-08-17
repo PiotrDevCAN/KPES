@@ -177,8 +177,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " and (AP.UPES_REF is not null or ( AP.UPES_REF is null  AND AP.PES_STATUS_DETAILS is null )) "; // it has a tracker record
         $sql.= " AND " . $pesStatusPredicate;
         $sql.= !empty($predicate) ? " $predicate " : null;
-        $sql.= !empty($upesRef) ? " AND AP.UPES_REF='" . db2_escape_string($upesRef)  . "' " : null;
-        $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . db2_escape_string($accountId)  . "' " : null;
+        $sql.= !empty($upesRef) ? " AND AP.UPES_REF='" . htmlspecialchars($upesRef)  . "' " : null;
+        $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . htmlspecialchars($accountId)  . "' " : null;
 
         if ($length != '-1') {
             $sql.= " LIMIT " . $length . ' OFFSET ' . $start;
@@ -225,8 +225,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " and (AP.UPES_REF is not null or ( AP.UPES_REF is null  AND AP.PES_STATUS_DETAILS is null )) "; // it has a tracker record
         $sql.= " AND " . $pesStatusPredicate;
         $sql.= !empty($predicate) ? " $predicate " : null;
-        $sql.= !empty($upesRef) ? " AND AP.UPES_REF='" . db2_escape_string($upesRef)  . "' " : null;
-        $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . db2_escape_string($accountId)  . "' " : null;
+        $sql.= !empty($upesRef) ? " AND AP.UPES_REF='" . htmlspecialchars($upesRef)  . "' " : null;
+        $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . htmlspecialchars($accountId)  . "' " : null;
         return $sql;
     }
 
@@ -655,7 +655,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareStageUpdate($stage);
         $data = array($stageValue,$account_id, $upesref);
 
-        $rs = sqlsrv_queryute($preparedStmt,$data);
+        $rs = sqlsrv_execute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -665,19 +665,19 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     }
 
     function prepareStageUpdate($stage){
-//         if(!empty($_SESSION['preparedStageUpdateStmts'][strtoupper(db2_escape_string($stage))] )) {
-//             return $_SESSION['preparedStageUpdateStmts'][strtoupper(db2_escape_string($stage))];
+//         if(!empty($_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))] )) {
+//             return $_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))];
 //         }
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql.= " SET " . strtoupper(db2_escape_string($stage)) . " = ? ";
+        $sql.= " SET " . strtoupper(htmlspecialchars($stage)) . " = ? ";
         $sql.= " WHERE ACCOUNT_ID= ? and UPES_REF=? ";
 
         $this->preparedSelectSQL = $sql;
 
-        $preparedStmt = db2_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
 
         if($preparedStmt){
-            $_SESSION['preparedStageUpdateStmts'][strtoupper(db2_escape_string($stage))] = $preparedStmt;
+            $_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))] = $preparedStmt;
         }
         return $preparedStmt;
     }
@@ -699,8 +699,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql.= " SET COMMENT='" . db2_escape_string($newComment) . "' ";
-        $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($account_id) . "' ";
+        $sql.= " SET COMMENT='" . htmlspecialchars($newComment) . "' ";
+        $sql.= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' AND ACCOUNT_ID='" . htmlspecialchars($account_id) . "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -720,7 +720,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql = " SELECT COMMENT FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql.= " WHERE UPES_REF=?  and ACCOUNT_ID = ? ";
 
-        $preparedStmt = db2_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
         
         $this->lastSelectSql = $sql;
 
@@ -737,7 +737,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareGetPesCommentStmt();
         $data = array($uposref, $account_id);
 
-        $rs = sqlsrv_queryute($preparedStmt,$data);
+        $rs = sqlsrv_execute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'Prepared Stmt');
@@ -755,8 +755,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql.= " SET PRIORITY=";
-        $sql.= !empty($pesPriority) ? "'" . db2_escape_string($pesPriority) . "' " : " null, ";
-        $sql.= " WHERE UPES_REF='" . db2_escape_string($upesRef) . "' and ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
+        $sql.= !empty($pesPriority) ? "'" . htmlspecialchars($pesPriority) . "' " : " null, ";
+        $sql.= " WHERE UPES_REF='" . htmlspecialchars($upesRef) . "' and ACCOUNT_ID='" . htmlspecialchars($accountId) . "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
@@ -907,7 +907,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $this->preparedSelectSQL = $sql;
 
-        $preparedStmt = db2_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
 
         if($preparedStmt){
             $_SESSION['prepareProcessStatusUpdate'] = $preparedStmt;
@@ -920,7 +920,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareProcessStatusUpdate();
         $data = array($processStatus,$upesref,$accountid);
 
-        $rs = sqlsrv_queryute($preparedStmt,$data);
+        $rs = sqlsrv_execute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -933,8 +933,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     function setPesDateLastChased($upesref, $accountId, $dateLastChased){
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql.= " SET DATE_LAST_CHASED=DATE('" . db2_escape_string($dateLastChased) . "') ";
-        $sql.= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountId)  . "' ";
+        $sql.= " SET DATE_LAST_CHASED=DATE('" . htmlspecialchars($dateLastChased) . "') ";
+        $sql.= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' AND ACCOUNT_ID='" . htmlspecialchars($accountId)  . "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
@@ -949,9 +949,9 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     function setPesStatus($upesref=null, $accountid= null, $status=null, $requestor=null, $pesStatusDetails=null, $dateToUse=null){
         
         $loader = new Loader();
-        $cnums = $loader->loadIndexed('CNUM','UPES_REF',AllTables::$PERSON," UPES_REF='" . db2_escape_string($upesref) . "'");
-        $emails = $loader->loadIndexed('EMAIL_ADDRESS','UPES_REF',AllTables::$PERSON," UPES_REF='" . db2_escape_string($upesref) . "'");
-        $accounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT," ACCOUNT_ID='" . db2_escape_string($accountid) . "'");
+        $cnums = $loader->loadIndexed('CNUM','UPES_REF',AllTables::$PERSON," UPES_REF='" . htmlspecialchars($upesref) . "'");
+        $emails = $loader->loadIndexed('EMAIL_ADDRESS','UPES_REF',AllTables::$PERSON," UPES_REF='" . htmlspecialchars($upesref) . "'");
+        $accounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT," ACCOUNT_ID='" . htmlspecialchars($accountid) . "'");
 
         $db2AutoCommit = sqlsrv_commit($GLOBALS['conn']);
         sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
@@ -959,7 +959,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $dateToUse =  empty($dateToUse) ? $now->format('Y-m-d') : $dateToUse;
         
-        $db2DateToUse =" date('" . db2_escape_string($dateToUse) . "') ";
+        $db2DateToUse =" date('" . htmlspecialchars($dateToUse) . "') ";
 
         if(!$upesref or !$accountid or !$status){
             throw new \Exception('One or more of UPESREF/ACCOUNTID/STATUS not provided in ' . __METHOD__);
@@ -987,10 +987,10 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
                 break;
         }
         $sql  = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql .= " SET $dateField = $db2DateToUse , PES_STATUS='" . db2_escape_string($status)  . "' ";
-        $sql .= !empty($pesStatusDetails) ? " , PES_STATUS_DETAILS='" . db2_escape_string($pesStatusDetails) . "' " : null;
-        $sql .= trim($status)==AccountPersonRecord::PES_STATUS_STARTER_REQUESTED ? ", PES_REQUESTOR='" . db2_escape_string($requestor) . "' " : null;
-        $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' and ACCOUNT_ID='" . db2_escape_string($accountid)  . "' ";
+        $sql .= " SET $dateField = $db2DateToUse , PES_STATUS='" . htmlspecialchars($status)  . "' ";
+        $sql .= !empty($pesStatusDetails) ? " , PES_STATUS_DETAILS='" . htmlspecialchars($pesStatusDetails) . "' " : null;
+        $sql .= trim($status)==AccountPersonRecord::PES_STATUS_STARTER_REQUESTED ? ", PES_REQUESTOR='" . htmlspecialchars($requestor) . "' " : null;
+        $sql .= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' and ACCOUNT_ID='" . htmlspecialchars($accountid)  . "' ";
 
         $result = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -1042,7 +1042,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $requestor = empty($requestor) ? $_SESSION['ssoEmail'] : $requestor;
 
         $loader = new Loader();
-        $predicate = " UPES_REF='" . db2_escape_string(trim($upesref)) . "' AND ACCOUNT_ID = '" . db2_escape_string($accountid) . "' ";
+        $predicate = " UPES_REF='" . htmlspecialchars(trim($upesref)) . "' AND ACCOUNT_ID = '" . htmlspecialchars($accountid) . "' ";
         $pesLevels = $loader->loadIndexed('PES_LEVEL','UPES_REF',AllTables::$ACCOUNT_PERSON,$predicate);
         $pesRecheckPeriods = $loader->loadIndexed('RECHECK_YEARS','PES_LEVEL_REF',AllTables::$PES_LEVELS);
 
@@ -1058,7 +1058,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         if(empty($clearedDate)){
             // They've not supplied one, so go get it.
             $sql  = " SELECT PES_CLEARED_DATE FROM  " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-            $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
+            $sql .= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' AND ACCOUNT_ID='" . htmlspecialchars($accountid) . "' ";
             
             $cleared = sqlsrv_query($GLOBALS['conn'], $sql);
             
@@ -1077,7 +1077,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $sql  = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql .= " SET PES_RECHECK_DATE = $pes_cleared_sql  +  $pesRecheckPeriod  years " ;
-        $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
+        $sql .= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' AND ACCOUNT_ID='" . htmlspecialchars($accountid) . "' ";
 
         $result = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -1087,7 +1087,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         }
 
         $sql  = " SELECT PES_RECHECK_DATE FROM  " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql .= " WHERE UPES_REF='" . db2_escape_string($upesref) . "' AND ACCOUNT_ID='" . db2_escape_string($accountid) . "' ";
+        $sql .= " WHERE UPES_REF='" . htmlspecialchars($upesref) . "' AND ACCOUNT_ID='" . htmlspecialchars($accountid) . "' ";
 
         $res = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -1221,8 +1221,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET PES_STATUS='" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "' ";
-        $sql.= " WHERE ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
-        $sql.= " AND UPES_REF='" . db2_escape_string($upesref) . "' ";
+        $sql.= " WHERE ACCOUNT_ID='" . htmlspecialchars($accountId) . "' ";
+        $sql.= " AND UPES_REF='" . htmlspecialchars($upesref) . "' ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -1233,8 +1233,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
         $sql = " SELECT * ";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
-        $sql.= " WHERE ACCOUNT_ID='" . db2_escape_string($accountId) . "' ";
-        $sql.= " AND UPES_REF='" . db2_escape_string($upesref) . "' ";
+        $sql.= " WHERE ACCOUNT_ID='" . htmlspecialchars($accountId) . "' ";
+        $sql.= " AND UPES_REF='" . htmlspecialchars($upesref) . "' ";
 
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -1302,7 +1302,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $preparedStmt = $this->prepareResetForRecheck();
         $data = array($accountId,$upesRef);
 
-        $rs = sqlsrv_queryute($preparedStmt,$data);
+        $rs = sqlsrv_execute($preparedStmt,$data);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -1325,7 +1325,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " ,  PROCESSING_STATUS_CHANGED= current timestamp, DATE_LAST_CHASED = null ";
         $sql.= " WHERE ACCOUNT_ID = ?  AND UPES_REF = ? ";
 
-        $preparedStmt = db2_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
 
         if($preparedStmt){
             $this->preparedResetForRecheck = $preparedStmt;
@@ -1600,9 +1600,9 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = current date ";
-        $sql.= "     ,OFFBOARDED_BY = '" . db2_escape_string($_SESSION['ssoEmail']) . "' ";
-        $sql.= " WHERE ACCOUNT_ID = '" . db2_escape_string($accountId) . "' ";
-        $sql.= " AND UPES_REF = '" . db2_escape_string($upesref) . "' ";
+        $sql.= "     ,OFFBOARDED_BY = '" . htmlspecialchars($_SESSION['ssoEmail']) . "' ";
+        $sql.= " WHERE ACCOUNT_ID = '" . htmlspecialchars($accountId) . "' ";
+        $sql.= " AND UPES_REF = '" . htmlspecialchars($upesref) . "' ";
         
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         
@@ -1623,8 +1623,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = null ";
         $sql.= "     ,OFFBOARDED_BY = null ";
-        $sql.= " WHERE ACCOUNT_ID = '" . db2_escape_string($accountId) . "' ";
-        $sql.= " AND UPES_REF = '" . db2_escape_string($upesref) . "' ";
+        $sql.= " WHERE ACCOUNT_ID = '" . htmlspecialchars($accountId) . "' ";
+        $sql.= " AND UPES_REF = '" . htmlspecialchars($upesref) . "' ";
         
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         
@@ -1644,8 +1644,8 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $sql.= " ON AP.UPES_REF = P.UPES_REF ";
         $sql.= " LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . allTables::$ACCOUNT . " AS A ";
         $sql.= " ON AP.ACCOUNT_ID = A.ACCOUNT_ID ";
-        $sql.= " WHERE upper(P.EMAIL_ADDRESS) = upper('" . db2_escape_string(strtoupper(trim($email))) . "') " ;
-        $sql.= " AND upper(A.ACCOUNT)=upper('" . db2_escape_string(strtoupper(trim($accountId))) . "') " ;
+        $sql.= " WHERE upper(P.EMAIL_ADDRESS) = upper('" . htmlspecialchars(strtoupper(trim($email))) . "') " ;
+        $sql.= " AND upper(A.ACCOUNT)=upper('" . htmlspecialchars(strtoupper(trim($accountId))) . "') " ;
        
         $resultSet = sqlsrv_query($GLOBALS['conn'], $sql);
         if(!$resultSet){

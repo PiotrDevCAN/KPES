@@ -16,7 +16,7 @@ if(empty($_POST['peslevelref'])){
 
 
 $sql = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PES_LEVELS ;
-$sql.= " WHERE PES_LEVEL_REF='" . db2_escape_string($_POST['peslevelref']) . "' ";
+$sql.= " WHERE PES_LEVEL_REF='" . htmlspecialchars($_POST['peslevelref']) . "' ";
 
 $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 

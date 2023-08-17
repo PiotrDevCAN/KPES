@@ -81,7 +81,7 @@ class SelectionBar
                 switch (trim($type)) {
                     case 'char':
                         echo " selected ";
-                        $preparedValue = db2_escape_string(str_replace('AMP;', '', htmlspecialchars_decode(trim($value), ENT_QUOTES)));
+                        $preparedValue = htmlspecialchars(str_replace('AMP;', '', htmlspecialchars_decode(trim($value), ENT_QUOTES)));
                         Trace::traceComment("Value: $value Prepared: $preparedValue ", __METHOD__, __LINE__);
                         if ($preparedValue != 'NULL') {
                             $this->predicate .= "AND UPPER($column)$operator";
