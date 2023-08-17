@@ -8,6 +8,7 @@ jobs:
   Build:
     runs-on:
       - aro-dev-westus3
+    environment: development
     steps:
       - name: Get JFROG Credentials
         id: import-secrets
@@ -38,13 +39,14 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: | 
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:devel_${{ github.run_number }}
   Deploy:
     name: Deploy
     needs:
       - Build
     runs-on:
       - aro-dev-westus3
+    environment: development
     steps:
       - name: Checkout Sourcecode
         uses: actions/checkout@v3
@@ -99,7 +101,7 @@ jobs:
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:devel_${{ github.run_number }}
           # Path to the manifest files to be used for deployment. 
           manifests: |
             ./env-configmap.yml

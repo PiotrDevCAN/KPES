@@ -39,7 +39,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: | 
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:testqa_${{ github.run_number }}
   Deploy:
     name: Deploy
     needs:
@@ -101,7 +101,7 @@ jobs:
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:dev_${{ github.run_number }}
+            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:testqa_${{ github.run_number }}
           # Path to the manifest files to be used for deployment. 
           manifests: |
             ./env-configmap.yml
