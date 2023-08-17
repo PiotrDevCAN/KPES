@@ -7,7 +7,8 @@ if($auth->verifyResponse($_GET))
 {
     // header("Access-Control-Allow-Origin: *");
     // header("Location: ".$_GET['state']);
-    echo 'redirect to the finall page '.$_GET['state'];
+    $landingPage = urldecode($_GET['state']);
+    echo 'Redirect to the final page '.$landingPage;
     echo 'Logged in successfully';
 	exit();
 }

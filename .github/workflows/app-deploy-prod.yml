@@ -8,6 +8,7 @@ jobs:
   Build:
     runs-on:
       - aro-dev-westus3
+    environment: production
     steps:
       - name: Get JFROG Credentials
         id: import-secrets
@@ -45,6 +46,7 @@ jobs:
       - Build
     runs-on:
       - aro-dev-westus3
+    environment: production
     steps:
       - name: Checkout Sourcecode
         uses: actions/checkout@v3
