@@ -1,6 +1,4 @@
 <?php
-use itdq\Trace;
-use itdq\BlueGroups;
 use itdq\BlueMail;
 
 $to = array();
