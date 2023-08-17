@@ -5,9 +5,9 @@ include realpath(dirname(__FILE__))."/../class/include.php";
 $auth = new Auth();
 if($auth->verifyResponse($_GET))
 {
-    header("Access-Control-Allow-Origin: *");
-    echo $_GET['state'];
-    sleep(20);
-    header("Location: ".$_GET['state']);
+    // header("Access-Control-Allow-Origin: *");
+    // header("Location: ".$_GET['state']);
+    echo 'redirect to the finall page '.$_GET['state'];
+    echo 'Logged in successfully';
 	exit();
 }
