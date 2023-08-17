@@ -56,6 +56,10 @@
 				'grant_type' => 'authorization_code'
 			);
 
+			echo '<pre>';
+			var_dump($fields);
+			echo '</pre>';
+
 			$postvars = http_build_query($fields);
 			$ch = curl_init();
 
