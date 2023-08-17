@@ -99,8 +99,8 @@
 				}
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
-				//var_dump($userData);
-				//die();
+				var_dump($userData);
+				die();
 
 				//if using this code on w3ID
 				if(isset($userData) && !empty($userData)
