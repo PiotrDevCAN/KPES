@@ -117,7 +117,7 @@
 				//   }
 
 				// set session from TOKEN data
-				if(isset($userData) && !empty($userData)
+				if(isset($tokenData) && !empty($tokenData)
 					&& isset($tokenData['ext']) && !empty($tokenData['ext'])
 					&& isset($tokenData['sub']) && !empty($tokenData['sub'])
 					)
@@ -242,8 +242,7 @@
 
 			curl_close($ch);
 
-			// return json_decode($result, true);
-			return json_decode($result);
+			return json_decode($result, true);
 		}
 	}
 ?>
