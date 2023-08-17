@@ -20,6 +20,12 @@
 		//returns boolean
 		public function ensureAuthorized()
 		{
+			
+			echo 'ensureAuthorized session variables ';
+			var_dump($_SESSION['uid']);
+			var_dump($_SESSION['exp']);
+			sleep(20);
+
 			if(isset($_SESSION['uid']) && isset($_SESSION['exp']) && ($_SESSION['exp']-300) > time()) return true;
 
 			switch ($this->technology) {
@@ -125,6 +131,11 @@
 					$_SESSION['exp'] = $tokenData['exp'];
 					$_SESSION['uid'] = $tokenData['sub'];
 				}
+
+				echo 'TEST SET session variables ';
+				var_dump($_SESSION['uid']);
+				var_dump($_SESSION['exp']);
+				sleep(20);
 
 				// dummy user data
 				$_SESSION['ssoEmail'] = 'John.Doe@kyndry.com';
