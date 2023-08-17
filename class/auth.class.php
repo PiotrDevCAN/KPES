@@ -57,6 +57,7 @@
 			);
 
 			echo '<pre>';
+			echo $url;
 			var_dump($fields);
 			echo '</pre>';
 
