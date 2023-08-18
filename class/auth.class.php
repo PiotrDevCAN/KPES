@@ -104,6 +104,10 @@
 				}
 
 				$userData = $this->getUserInfo($token_response->access_token);
+				// dummy user data
+				$userData['email'] = 'John.Doe@kyndry.com';
+				$userData['given_name'] = 'John';
+				$userData['family_name'] = 'Doe';
 
 				error_log('data from TOKEN');
 				error_log(__FILE__ . "TOKEN:" . print_r($tokenData,true));
@@ -144,11 +148,6 @@
 				error_log($_SESSION['uid']);
 				error_log($_SESSION['exp']);
 
-				// dummy user data
-				$_SESSION['ssoEmail'] = 'John.Doe@kyndry.com';
-				$_SESSION['firstName'] = 'John';
-				$_SESSION['lastName'] = 'Doe';
-				
 				// set session from USER data
 				if(isset($userData) && !empty($userData)
 					&& isset($userData['email']) && !empty($userData['email'])
