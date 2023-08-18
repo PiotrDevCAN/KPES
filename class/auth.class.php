@@ -104,8 +104,8 @@
 				$userData = $this->getUserInfo($token_response->access_token);
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
-				echo 'data from USERINFO ';
-				var_dump($userData);
+				error_log('data from USERINFO');
+				error_log($userData);
 				// die();
 
 				// {
@@ -154,12 +154,11 @@
 					$_SESSION['ssoEmail'] = $userData['email'];
 					$_SESSION['firstName'] = $userData['given_name'];
 					$_SESSION['lastName'] = $userData['family_name'];
-				}
-				//if something in the future gets changed and the strict checking on top of this is not working any more
-				//please note, that you should always use strict matching in this function on your prod app so that you can handle changes correctly and not fill in the session with all the data
-				//so basically, if you get to the else below, adjust it, open an issue on github so that the strict matching can be adjusted and it doesnt get to the else below
-				else
-				{
+				} else {
+					//if something in the future gets changed and the strict checking on top of this is not working any more
+					//please note, that you should always use strict matching in this function on your prod app so that you can handle changes correctly and not fill in the session with all the data
+					//so basically, if you get to the else below, adjust it, open an issue on github so that the strict matching can be adjusted and it doesnt get to the else below
+					
 					//throw new \Exception('OpenIDConnect returned values were not correct.');
 					$_SESSION = $userData;
 					$_SESSION['somethingChanged'] = true;
