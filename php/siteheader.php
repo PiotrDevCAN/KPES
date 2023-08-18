@@ -276,123 +276,129 @@ if (!isset($_SERVER['SERVER_NAME'])) {
 
 $start = microtime(true);
 
-error_log("First page entrance");
-error_log($_SERVER['HTTP_USER_AGENT']);
+if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
 
-set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
-
-include ('vendor/autoload.php');
-include ('splClassLoader.php');
-
-// $sessionConfig = (new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']))
-// ->withTimeoutMinutes(120)
-// ->withSecret($_ENV['jwt_token']);
-
-$sessionConfig = new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']);
-$sessionConfig->withTimeoutMinutes(120);
-$sessionConfig->withSecret($_ENV['jwt_token']);
-
-$handler = new JwtSecureSession($sessionConfig);
-session_set_save_handler($handler, true);
-
-session_start();
-
-error_log(__FILE__ . "server_name:" . $_SERVER['SERVER_NAME']);
-error_log(__FILE__ . "jwt_token:" . $_ENV['jwt_token']);
-error_log(__FILE__ . "session ID:" . session_id());
-error_log(__FILE__ . "session:" . print_r($_SESSION,true));
-
-$_SESSION['MY_TEST'] = 'passed';
-
-error_log('Session works check');
-error_log(__FILE__ . "session:" . print_r($_SESSION,true));
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
-ini_set('memory_limit', '512M');
-ini_set('max_execution_time', 360);
-
-error_reporting(E_ALL);
-date_default_timezone_set('UTC');
-
-while(ob_get_level()>0){
-    ob_end_clean();
-}
-
-// ob_start();
-if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
-    if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
-        ob_start("ob_gzhandler");
-        // exit('ob_gzhandler');
+    error_log("First page entrance");
+    error_log($_SERVER['HTTP_USER_AGENT']);
+    
+    set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
+    
+    include ('vendor/autoload.php');
+    include ('splClassLoader.php');
+    
+    // $sessionConfig = (new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']))
+    // ->withTimeoutMinutes(120)
+    // ->withSecret($_ENV['jwt_token']);
+    
+    $sessionConfig = new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']);
+    $sessionConfig->withTimeoutMinutes(120);
+    $sessionConfig->withSecret($_ENV['jwt_token']);
+    
+    $handler = new JwtSecureSession($sessionConfig);
+    session_set_save_handler($handler, true);
+    
+    session_start();
+    
+    error_log(__FILE__ . "server_name:" . $_SERVER['SERVER_NAME']);
+    error_log(__FILE__ . "jwt_token:" . $_ENV['jwt_token']);
+    error_log(__FILE__ . "session ID:" . session_id());
+    error_log(__FILE__ . "session:" . print_r($_SESSION,true));
+    
+    $_SESSION['MY_TEST'] = 'passed';
+    
+    error_log('Session works check');
+    error_log(__FILE__ . "session:" . print_r($_SESSION,true));
+    
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    
+    ini_set('memory_limit', '512M');
+    ini_set('max_execution_time', 360);
+    
+    error_reporting(E_ALL);
+    date_default_timezone_set('UTC');
+    
+    while(ob_get_level()>0){
+        ob_end_clean();
+    }
+    
+    // ob_start();
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+        if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+            ob_start("ob_gzhandler");
+            // exit('ob_gzhandler');
+        } else {
+            ob_start("ob_html_compress");
+            // exit('ob_html_compress 1');
+        }
     } else {
         ob_start("ob_html_compress");
-        // exit('ob_html_compress 1');
+        // exit('ob_html_compress 2');
     }
-} else {
-    ob_start("ob_html_compress");
-    // exit('ob_html_compress 2');
-}
-
-// $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
-$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
-$https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
-
-// global var and config file
-include_once ('w3config.php');
-$content = array();
-$page_template = "interior";
-$header_done = FALSE;
-$page_timestamp = filemtime($_SERVER['SCRIPT_FILENAME']);
-$meta['source'] = "w3php v0.5.8, w3v8, 19 June 2008";
-
-// initalize w3v8 navigation
-
-// error reporting
-if ($w3php['debug']) {
-    ini_set("error_reporting", E_ALL);
-    ini_set("display_errors", '1');
-}
-
-// CGI or CLI check
-// $sapi_type = php_sapi_name();
-// if (substr($sapi_type, 0, 3) == 'cgi') {
-//     error_log("You are using CGI PHP - MAIN SITEHEADER.PHP");
-// } else {
-//     error_log("You are not using CGI PHP - MAIN SITEHEADER.PHP");
-// }
-
-$elapsed = microtime(true);
-error_log("Pre do_Auth():" . (float)($elapsed-$start));
-
-do_auth();
-
-$elapsed = microtime(true);
-error_log("Post do_Auth():" . (float)($elapsed-$start));
-
-include ('php/ldap.php');
-
-$helper = new Sample();
-if ($helper->isCli()) {
-    // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
-} else {
-    include ('php/templates/interior.header.html');
-    include ('itdq/java/scripts.html');
-    include ('upes/java/scripts.html');
-}
-
-$elapsed = microtime(true);
-error_log("Pre connect:" . (float)($elapsed-$start));
-include ('connect.php');
-
-if ($helper->isCli()) {
-    // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
-} else {
-    $elapsed = microtime(true);
-    error_log("Post connect:" . (float)($elapsed-$start));
-    include('displayNavbar.php');
+    
+    // $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+    $GLOBALS['Db2Schema'] = 'UPES_NEWCO';
+    $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
+    
+    // global var and config file
+    include_once ('w3config.php');
+    $content = array();
+    $page_template = "interior";
+    $header_done = FALSE;
+    $page_timestamp = filemtime($_SERVER['SCRIPT_FILENAME']);
+    $meta['source'] = "w3php v0.5.8, w3v8, 19 June 2008";
+    
+    // initalize w3v8 navigation
+    
+    // error reporting
+    if ($w3php['debug']) {
+        ini_set("error_reporting", E_ALL);
+        ini_set("display_errors", '1');
+    }
+    
+    // CGI or CLI check
+    // $sapi_type = php_sapi_name();
+    // if (substr($sapi_type, 0, 3) == 'cgi') {
+    //     error_log("You are using CGI PHP - MAIN SITEHEADER.PHP");
+    // } else {
+    //     error_log("You are not using CGI PHP - MAIN SITEHEADER.PHP");
+    // }
     
     $elapsed = microtime(true);
-    error_log("Post Navbar:" . (float)($elapsed-$start));
+    error_log("Pre do_Auth():" . (float)($elapsed-$start));
+    
+    do_auth();
+    
+    $elapsed = microtime(true);
+    error_log("Post do_Auth():" . (float)($elapsed-$start));
+    
+    include ('php/ldap.php');
+    
+    $helper = new Sample();
+    if ($helper->isCli()) {
+        // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
+    } else {
+        include ('php/templates/interior.header.html');
+        include ('itdq/java/scripts.html');
+        include ('upes/java/scripts.html');
+    }
+    
+    $elapsed = microtime(true);
+    error_log("Pre connect:" . (float)($elapsed-$start));
+    include ('connect.php');
+    
+    if ($helper->isCli()) {
+        // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
+    } else {
+        $elapsed = microtime(true);
+        error_log("Post connect:" . (float)($elapsed-$start));
+        include('displayNavbar.php');
+        
+        $elapsed = microtime(true);
+        error_log("Post Navbar:" . (float)($elapsed-$start));
+    }
+} else {
+    error_log('response for the automated requests');
+    die();
 }
 ?>
