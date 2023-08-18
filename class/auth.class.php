@@ -21,10 +21,13 @@
 		public function ensureAuthorized()
 		{
 			
-			echo 'ensureAuthorized session variables ';
-			var_dump($_SESSION['uid']);
-			var_dump($_SESSION['exp']);
-			sleep(20);
+			error_log('ensureAuthorized session variables ');
+			if(isset($_SESSION['uid'])) {
+				error_log($_SESSION['uid']);
+			}
+			if(isset($_SESSION['uid'])) {
+				error_log($_SESSION['exp']);
+			}
 
 			if(isset($_SESSION['uid']) && isset($_SESSION['exp']) && ($_SESSION['exp']-300) > time()) return true;
 
@@ -102,7 +105,7 @@
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				echo 'data from USERINFO ';
-				print_r($userData);
+				var_dump($userData);
 				// die();
 
 				// {
@@ -132,10 +135,9 @@
 					$_SESSION['uid'] = $tokenData['sub'];
 				}
 
-				echo 'TEST SET session variables ';
-				var_dump($_SESSION['uid']);
-				var_dump($_SESSION['exp']);
-				sleep(20);
+				error_log('TEST SET session variables ');
+				error_log($_SESSION['uid']);
+				error_log($_SESSION['exp']);
 
 				// dummy user data
 				$_SESSION['ssoEmail'] = 'John.Doe@kyndry.com';
