@@ -33,6 +33,7 @@ function myErrorHandler($code, $message, $file, $line) {
     $mailError->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
     $mailError->SMTPAuth = true;
     $mailError->SMTPAutoTLS = true;
+    $mailError->SMTPSecure = 'ssl';
     $mailError->Port = 465; // 25, 465, or 587
     $mailError->Username = "55745349-a422-4d7c-aa40-5c52dab03574";             
     $mailError->Password = "mG46S=caDv+G"; 
