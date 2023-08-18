@@ -97,15 +97,20 @@
 					for ($i=0; $i < ceil(strlen($encoded)/4); $i++)
 						$decoded = $decoded . base64_decode(substr($encoded,$i*4,4));
 					$tokenData = json_decode( $decoded, true );
+					error_log('TOKEN OK');
 				} else {
+					error_log('WRONG TOKEN');
 					return false;
 				}
 
 				$userData = $this->getUserInfo($token_response->access_token);
 
+				error_log('data from TOKEN');
+				error_log(__FILE__ . "TOKEN:" . print_r($tokenData,true));
+
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				error_log('data from USERINFO');
-				error_log($userData);
+				error_log(__FILE__ . "USERINFO:" . print_r($userData,true));
 				// die();
 
 				// {
