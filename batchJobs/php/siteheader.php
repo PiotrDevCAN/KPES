@@ -29,10 +29,10 @@ error_reporting(E_ALL);
 ini_set('memory_limit', '512M');
 ini_set('max_execution_time', 360);
 
-require_once("php/errorHandlers.php");
+// require_once("php/errorHandlers.php");
 
-set_error_handler('myErrorHandler');
-register_shutdown_function('fatalErrorShutdownHandler');
+// set_error_handler('myErrorHandler');
+// register_shutdown_function('fatalErrorShutdownHandler');
 
 date_default_timezone_set('UTC');
 set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
