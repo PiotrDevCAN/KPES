@@ -304,11 +304,6 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     error_log(__FILE__ . "session ID:" . session_id());
     error_log(__FILE__ . "session:" . print_r($_SESSION,true));
     
-    $_SESSION['MY_TEST'] = 'passed';
-    
-    error_log('Session works check');
-    error_log(__FILE__ . "session:" . print_r($_SESSION,true));
-    
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     
