@@ -132,7 +132,7 @@
 
 				// set session from TOKEN data
 				if(isset($tokenData) && !empty($tokenData)
-					&& isset($tokenData['ext']) && !empty($tokenData['ext'])
+					&& isset($tokenData['exp']) && !empty($tokenData['exp'])
 					&& isset($tokenData['sub']) && !empty($tokenData['sub'])
 					)
 				{
