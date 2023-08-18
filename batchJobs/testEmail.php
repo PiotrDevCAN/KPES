@@ -14,12 +14,14 @@ try {
     $cmd .= '-d auto_prepend_file=' . $scriptsDirectory . 'php/siteheader.php ';
     $cmd .= '-d auto_append_file=' . $scriptsDirectory . 'php/sitefooter.php ';
     $cmd .= '-f ' . $scriptsDirectory . $processDirectory. $processFile;
-    $process = new Process($cmd);
-    $pid = $process->getPid();
-    echo "The kPES Starters Send Out Script has succeed to be executed: " . $scriptsDirectory . $processDirectory . $processFile;
-    error_log("The kPES Starters Send Out Script has succeed to be executed: " . $scriptsDirectory . $processDirectory . $processFile);
+    echo $cmd;
+    // $process = new Process($cmd);
+    // $pid = $process->getPid();
+    // echo "The kPES Starters Send Out Script has succeed to be executed: " . $scriptsDirectory . $processDirectory . $processFile;
+    // error_log("The kPES Starters Send Out Script has succeed to be executed: " . $scriptsDirectory . $processDirectory . $processFile);
 } catch (Exception $exception) {
-    echo $exception->getMessage();
-    echo "The kPES Starters Send Out Script has failed to be executed: " . $scriptsDirectory . $processDirectory . $processFile;
-    error_log("The kPES Starters Send Out Script has failed to be executed: " . $scriptsDirectory . $processDirectory . $processFile);
+    echo 'test 2';
+    // echo $exception->getMessage();
+    // echo "The kPES Starters Send Out Script has failed to be executed: " . $scriptsDirectory . $processDirectory . $processFile;
+    // error_log("The kPES Starters Send Out Script has failed to be executed: " . $scriptsDirectory . $processDirectory . $processFile);
 }

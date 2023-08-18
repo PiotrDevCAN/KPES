@@ -129,6 +129,7 @@ class BlueMail
                 $mail->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
                 $mail->SMTPAuth = true;
                 $mail->SMTPAutoTLS = true;
+                $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465; // 25, 465, or 587
                 $mail->Username = "55745349-a422-4d7c-aa40-5c52dab03574";             
                 $mail->Password = "mG46S=caDv+G"; 
