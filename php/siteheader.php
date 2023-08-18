@@ -354,12 +354,12 @@ if ($w3php['debug']) {
 }
 
 // CGI or CLI check
-$sapi_type = php_sapi_name();
-if (substr($sapi_type, 0, 3) == 'cgi') {
-    error_log("You are using CGI PHP - MAIN SITEHEADER.PHP");
-} else {
-    error_log("You are not using CGI PHP - MAIN SITEHEADER.PHP");
-}
+// $sapi_type = php_sapi_name();
+// if (substr($sapi_type, 0, 3) == 'cgi') {
+//     error_log("You are using CGI PHP - MAIN SITEHEADER.PHP");
+// } else {
+//     error_log("You are not using CGI PHP - MAIN SITEHEADER.PHP");
+// }
 
 $elapsed = microtime(true);
 error_log("Pre do_Auth():" . (float)($elapsed-$start));
