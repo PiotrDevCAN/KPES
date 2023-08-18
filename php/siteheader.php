@@ -277,6 +277,7 @@ if (!isset($_SERVER['SERVER_NAME'])) {
 $start = microtime(true);
 
 error_log("First page entrance");
+error_log($_SERVER['HTTP_USER_AGENT']);
 
 set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
 
