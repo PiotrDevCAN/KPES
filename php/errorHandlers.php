@@ -30,13 +30,13 @@ function myErrorHandler($code, $message, $file, $line) {
 
     $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
     $mailError->isSMTP(); // Send using SMTP
-    $mailError->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
+    $mailError->Host = $_ENV['smtp-server']; // Set the SMTP server to send through
     $mailError->SMTPAuth = true;
     $mailError->SMTPAutoTLS = true;
     $mailError->SMTPSecure = 'ssl';
     $mailError->Port = 465; // 25, 465, or 587
-    $mailError->Username = "55745349-a422-4d7c-aa40-5c52dab03574";             
-    $mailError->Password = "mG46S=caDv+G"; 
+    $mailError->Username = $_ENV['smtp-user-name'];             
+    $mailError->Password = $_ENV['smtp-user-pw']; 
 
     $replyto = 'UKI.Business.Intelligence@kyndryl.com';
     $mailError->setFrom($replyto);
