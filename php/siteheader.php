@@ -7,10 +7,6 @@
 use itdq\JwtSecureSession;
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 
-function ob_html_compress($buf){
-    return str_replace(array("\n","\r"),'',$buf);
-}
-
 # Takes a hash of values and files in a text template
 function build_template($template, $vals) {
     $file = dirname(__FILE__) . "/templates/" . $template;
@@ -280,25 +276,29 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
 
     error_log("First page entrance");
     error_log($_SERVER['HTTP_USER_AGENT']);
-    
+
     set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PATH_SEPARATOR . "../../../" . PATH_SEPARATOR);
-    
+
+    include ('includes/obHtmlCompress.php');
     include ('vendor/autoload.php');
     include ('splClassLoader.php');
-    
+
+    include ('includes/startsWith.php');
+    include ('includes/endsWith.php');
+
     // $sessionConfig = (new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']))
     // ->withTimeoutMinutes(120)
     // ->withSecret($_ENV['jwt_token']);
-    
+
     $sessionConfig = new \ByJG\Session\SessionConfig($_SERVER['SERVER_NAME']);
     $sessionConfig->withTimeoutMinutes(120);
     $sessionConfig->withSecret($_ENV['jwt_token']);
-    
+
     $handler = new JwtSecureSession($sessionConfig);
     session_set_save_handler($handler, true);
-    
+
     session_start();
-    
+
     error_log(__FILE__ . "server_name:" . $_SERVER['SERVER_NAME']);
     error_log(__FILE__ . "jwt_token:" . $_ENV['jwt_token']);
     error_log(__FILE__ . "session ID:" . session_id());
@@ -306,22 +306,22 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    
+    error_reporting(E_ALL);
+
     ini_set('memory_limit', '512M');
     ini_set('max_execution_time', 360);
-        
+
     require_once("php/errorHandlers.php");
 
     set_error_handler('myErrorHandler');
     register_shutdown_function('fatalErrorShutdownHandler');
 
-    error_reporting(E_ALL);
     date_default_timezone_set('UTC');
-    
+
     while(ob_get_level()>0){
         ob_end_clean();
     }
-    
+
     // ob_start();
     if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
         if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
@@ -335,11 +335,11 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
         ob_start("ob_html_compress");
         // exit('ob_html_compress 2');
     }
-    
+
     // $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
     $GLOBALS['Db2Schema'] = 'UPES_NEWCO';
     $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
-    
+
     // global var and config file
     include_once ('w3config.php');
     $content = array();
@@ -347,9 +347,9 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     $header_done = FALSE;
     $page_timestamp = filemtime($_SERVER['SCRIPT_FILENAME']);
     $meta['source'] = "w3php v0.5.8, w3v8, 19 June 2008";
-    
+
     // initalize w3v8 navigation
-    
+
     // error reporting
     if ($w3php['debug']) {
         ini_set("error_reporting", E_ALL);
@@ -366,14 +366,12 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     
     $elapsed = microtime(true);
     error_log("Pre do_Auth():" . (float)($elapsed-$start));
-    
+
     do_auth();
-    
+
     $elapsed = microtime(true);
     error_log("Post do_Auth():" . (float)($elapsed-$start));
-    
     include ('php/ldap.php');
-    
     $helper = new Sample();
     if ($helper->isCli()) {
         // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
