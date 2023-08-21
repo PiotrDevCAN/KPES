@@ -97,10 +97,10 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-db
           secret-type: 'generic'
-          arguments: |
-            --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }} 
-            --from-literal=db-name=${{ steps.import-secrets.outputs.DB_NAME }} 
-            --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} 
+          arguments: \
+            --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }} \ 
+            --from-literal=db-name=${{ steps.import-secrets.outputs.DB_NAME }} \
+            --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} \
             --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}
       - name: Set ImagePullSecrets SMTP
         id: image_secret-smtp
@@ -110,9 +110,9 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-smtp
           secret-type: 'generic'
-          arguments: |
-            --from-literal=smtp-server=${{ steps.import-secrets.outputs.SMTP_HOST }} 
-            --from-literal=smtp-user-name=${{ steps.import-secrets.outputs.SMTP_USER_NAME }} 
+          arguments: \
+            --from-literal=smtp-server=${{ steps.import-secrets.outputs.SMTP_HOST }} \ 
+            --from-literal=smtp-user-name=${{ steps.import-secrets.outputs.SMTP_USER_NAME }} \ 
             --from-literal=smtp-user-pw=${{ steps.import-secrets.outputs.SMTP_USER_PW }}
       - name: Deploy application
         id: deploy-app
