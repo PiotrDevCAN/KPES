@@ -48,3 +48,5 @@ spec:
             name: kpes-app-docker-secrets-db
         - secretRef:
             name: kpes-app-docker-secrets-smtp
+        - secretRef:
+            name: kpes-app-docker-secrets-sso
