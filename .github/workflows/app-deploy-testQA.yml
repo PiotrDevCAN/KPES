@@ -71,7 +71,10 @@ jobs:
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver host | SMTP_HOST ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver username | SMTP_USER_NAME ;
-            kps-gd-app-kpes/data/dev/w3us/smtpserver password | SMTP_USER_PW 
+            kps-gd-app-kpes/data/dev/w3us/smtpserver password | SMTP_USER_PW ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver host | SSO_HOST ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver client_id | SSO_CLIENT_ID ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
@@ -89,7 +92,7 @@ jobs:
           container-registry-url: kyndryl.jfrog.io
           container-registry-username: ${{ steps.import-secrets.outputs.JFROG_USER }}
           container-registry-password: ${{ steps.import-secrets.outputs.JFROG_TOKEN }}
-      - name: Set ImagePullSecrets database
+      - name: Set ImagePullSecrets DB
         id: image_secret-db
         uses: azure/k8s-actions/k8s-create-secret@master
         # uses: Azure/k8s-create-secret@v4.0
@@ -97,11 +100,7 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-db
           secret-type: 'generic'
-          arguments: |
-            --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }} 
-            --from-literal=db-name=${{ steps.import-secrets.outputs.DB_NAME }} 
-            --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} 
-            --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}
+          arguments: --from-literal=db-server=${{ steps.import-secrets.outputs.DB_SERVER }} --from-literal=db-name=${{ steps.import-secrets.outputs.DB_NAME }} --from-literal=db-user-name=${{ steps.import-secrets.outputs.DB_USER_NAME }} --from-literal=db-user-pw=${{ steps.import-secrets.outputs.DB_USER_PW }}
       - name: Set ImagePullSecrets SMTP
         id: image_secret-smtp
         uses: azure/k8s-actions/k8s-create-secret@master
@@ -110,10 +109,16 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-smtp
           secret-type: 'generic'
-          arguments: |
-            --from-literal=smtp-server=${{ steps.import-secrets.outputs.SMTP_HOST }} 
-            --from-literal=smtp-user-name=${{ steps.import-secrets.outputs.SMTP_USER_NAME }} 
-            --from-literal=smtp-user-pw=${{ steps.import-secrets.outputs.SMTP_USER_PW }}
+          arguments: --from-literal=smtp-server=${{ steps.import-secrets.outputs.SMTP_HOST }} --from-literal=smtp-user-name=${{ steps.import-secrets.outputs.SMTP_USER_NAME }} --from-literal=smtp-user-pw=${{ steps.import-secrets.outputs.SMTP_USER_PW }}
+      - name: Set ImagePullSecrets SSO
+        id: image_secret-sso
+        uses: azure/k8s-actions/k8s-create-secret@master
+        # uses: Azure/k8s-create-secret@v4.0
+        with:
+          namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+          secret-name: kpes-app-docker-secrets-sso
+          secret-type: 'generic'
+          arguments: --from-literal=sso_host=${{ steps.import-secrets.outputs.SSO_HOST }} --from-literal=sso_client_id=${{ steps.import-secrets.outputs.SSO_CLIENT_ID }} --from-literal=sso_client_secret=${{ steps.import-secrets.outputs.SSO_CLIENT_SECRET }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
@@ -135,5 +140,6 @@ jobs:
             kpes-app-docker-secrets
             kpes-app-docker-secrets-db
             kpes-app-docker-secrets-smtp
+            kpes-app-docker-secrets-sso
             env-configmap
             env-secrets
