@@ -124,7 +124,7 @@ class BlueMail
                 // $mail->SMTPAutoTLS = false;
                 // $mail->Port = 25;
 
-                $mail->SMTPDebug = SMTP::DEBUG_LOWLEVEL; // Enable verbose debug output ; SMTP::DEBUG_OFF
+                $mail->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
                 $mail->isSMTP(); // Send using SMTP
                 $mail->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
                 $mail->SMTPAuth = true;

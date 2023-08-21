@@ -28,7 +28,7 @@ function myErrorHandler($code, $message, $file, $line) {
     // $mailError->Port = 25;
     // $replyto = $_ENV['noreplyemailid'];
 
-    $mailError->SMTPDebug = SMTP::DEBUG_LOWLEVEL; // Enable verbose debug output ; SMTP::DEBUG_OFF
+    $mailError->SMTPDebug = SMTP::DEBUG_OFF; // Enable verbose debug output ; SMTP::DEBUG_OFF
     $mailError->isSMTP(); // Send using SMTP
     $mailError->Host = 'authnz.proofpoint.com'; // Set the SMTP server to send through
     $mailError->SMTPAuth = true;
