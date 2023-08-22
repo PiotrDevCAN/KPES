@@ -41,7 +41,7 @@ while ($row=sqlsrv_fetch_array($rs)) {
 
     // $accountPersonTable = new AccountPersonTable(AllTables::$ACCOUNT_PERSON);
 
-    // sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+    // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
 
     // $emailDetails = array();
 
@@ -77,7 +77,7 @@ while ($row=sqlsrv_fetch_array($rs)) {
     // $processingStatusField =  AccountPersonTable::formatProcessingStatusCell($data[0]);
 
     // sqlsrv_commit($GLOBALS['conn']);
-    // sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
+    // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
 
     // $pesCommentField = $data[0]['COMMENT'];
 

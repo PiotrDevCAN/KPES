@@ -180,7 +180,7 @@ class DbTable
             $uploadLogTable->saveRecord($uploadLogRecord);
             $this->uploadId = $uploadLogTable->lastId();
             $uploadLogRecord->setId($this->uploadId);
-            $db2CommitState = sqlsrv_commit($GLOBALS['conn'], sqlsrv_commit_OFF);
+            $db2CommitState = sqlsrv_commit($GLOBALS['conn'], DB2_AUTOCOMMIT_OFF);
             echo "<BR/>Log id is " . $this->uploadId;
         }
 

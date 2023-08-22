@@ -954,7 +954,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $accounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT," ACCOUNT_ID='" . htmlspecialchars($accountid) . "'");
 
         $db2AutoCommit = sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         $now = new \DateTime();
 
         $dateToUse =  empty($dateToUse) ? $now->format('Y-m-d') : $dateToUse;
@@ -1217,7 +1217,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
 
     static function cancelPesRequest( $accountId=null, $upesref=null){
 
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET PES_STATUS='" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "' ";
@@ -1254,7 +1254,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $accountPersonRecord->sendPesStatusChangedEmail();
 
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
 
     function notifyRecheckDateApproaching(){
@@ -1596,7 +1596,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
     
     static function offboardFromAccount( $accountId=null, $upesref=null){
         
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = current date ";
@@ -1613,12 +1613,12 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         
        
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
     
     static function reboardToAccount( $accountId=null, $upesref=null){
         
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = null ";
@@ -1635,7 +1635,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         
         
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
+        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
     
     static function offboardedStatusFromEmail($email=null, $accountId=null){
@@ -1675,7 +1675,7 @@ const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF
         $columnHeaders = array();
         $recordData = array();
         $failedRecords = 0;
-        $autoCommit = sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+        $autoCommit = sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         for ($row = 1; $row <= $highestRow; $row++){
             set_time_limit(10);
             $time = -microtime(true);

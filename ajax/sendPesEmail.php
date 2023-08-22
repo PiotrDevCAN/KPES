@@ -16,7 +16,7 @@ $personRecord->setFromArray(array('UPES_REF'=>$_POST['upesref']));
 $personRecordData = $personTable->getRecord($personRecord);
 $names = explode(" ", $personRecordData['FULL_NAME']);
 
-sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_OFF);
+sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
 
 $emailDetails = array();
 
@@ -52,7 +52,7 @@ $pesStatusField = AccountPersonRecord::getPesStatusWithButtons($data[0]);
 $processingStatusField =  AccountPersonTable::formatProcessingStatusCell($data[0]);
 
 sqlsrv_commit($GLOBALS['conn']);
-sqlsrv_commit($GLOBALS['conn'],sqlsrv_commit_ON);
+sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
 
 $pesCommentField = $data[0]['COMMENT'];
 

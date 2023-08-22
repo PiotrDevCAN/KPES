@@ -28,7 +28,7 @@ class BlueMail
         // if (isset(AllItdqTables::$EMAIL_LOG)) {
         //     $emailLogRecordID = self::prelog($cleanedTo, $subject, $message, null, $cleanedCc, $cleanedBcc);
         // }
-        $emailLogRecordID = false;
+        $emailLogRecordID = null;
 
         $status = '';
         $resp = true;
@@ -288,8 +288,6 @@ class BlueMail
 
         self::logStatus($recordId, $status);
         return $status;
-
-
     }
 
     static function resend($recordId, $resendUrl)

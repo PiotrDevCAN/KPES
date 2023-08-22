@@ -8,7 +8,7 @@ function myErrorHandler($code, $message, $file, $line) {
     $mailError = new PHPMailer();
     // We're in DEV mode for emails - override the recipients.
     // But if we're in "batch" mode, the ssoEmail doesn't contain a valid email address, so send it to devemailid or me.
-    if (filter_var($_SESSION['ssoEmail'], FILTER_VALIDATE_EMAIL)) {
+    if (isSet($_SESSION['ssoEmail']) && filter_var($_SESSION['ssoEmail'], FILTER_VALIDATE_EMAIL)) {
         $localEmail = $_SESSION['ssoEmail'];
     } else {
         $localEmail = ! empty($_ENV['devemailid']) ? $_ENV['devemailid'] : 'piotr.tajanowicz@ocean.ibm.com';
@@ -41,7 +41,30 @@ function myErrorHandler($code, $message, $file, $line) {
     $replyto = 'UKI.Business.Intelligence@kyndryl.com';
     $mailError->setFrom($replyto);
     $mailError->isHTML(true);
-    $mailError->Subject = "**" . $_ENV['environment'] . "**" . 'Error has occurred while running PHP script';
+    // $mailError->Subject = "**" . $_ENV['environment'] . "**" . 'Error has occurred while running PHP script';
+
+    switch($code) {
+        case E_ERROR:
+            // fatal error
+            $subject = "**" . $_ENV['environment'] . "**" . 'Error has occurred while running PHP script';
+            break;
+        case E_USER_ERROR:
+            $subject = "**" . $_ENV['environment'] . "**" . 'User Error has occurred while running PHP script';
+            break;
+        case E_USER_NOTICE:
+            $subject = "**" . $_ENV['environment'] . "**" . 'User Notice has occurred while running PHP script';
+            break;
+        case E_USER_WARNING:
+            $subject = "**" . $_ENV['environment'] . "**" . 'User Warning has occurred while running PHP script';
+            break;
+        case E_USER_DEPRECATED:
+            $subject = "**" . $_ENV['environment'] . "**" . 'User Deprecated has occurred while running PHP script';
+            break;
+        default:
+            $subject = "**" . $_ENV['environment'] . "**" . 'Default event has occurred while running PHP script';
+            break;
+    }
+    $mailError->Subject = $subject;
 
     $response = array(
         'code' => $code, 
@@ -58,9 +81,13 @@ function myErrorHandler($code, $message, $file, $line) {
 function fatalErrorShutdownHandler() {
     $last_error = error_get_last();
     if (!is_null($last_error)) {
-        if ($last_error['type'] === E_ERROR) {
-            // fatal error
-            myErrorHandler(E_ERROR, $last_error['message'].'FROM fatalErrorShutdownHandler', $last_error['file'], $last_error['line']);
-        }    
+        switch($last_error['type']) {
+            case E_ERROR:
+                // fatal error
+                myErrorHandler(E_ERROR, $last_error['message'].' FROM fatalErrorShutdownHandler', $last_error['file'], $last_error['line']);
+                break;
+            default:
+                break;
+        }  
     }
 }
