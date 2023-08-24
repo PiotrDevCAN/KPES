@@ -39,7 +39,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: | 
-            kyndryl.jfrog.io/uki-business-intelligence-qa-docker-local/kpes:testqa_${{ github.run_number }}
+            ${{ vars.JFROG_URL }}/${{ vars.JFROG_CONTAINER }}/kpes:${{ vars.SHORT_NAME }}_${{ github.run_number }}
   Deploy:
     name: Deploy
     needs:
@@ -62,19 +62,16 @@ jobs:
           secrets: |
             kps-gd-app-kpes/data/testqa/w3us/jfrog_piotr JFROG_USER | JFROG_USER ;
             kps-gd-app-kpes/data/testqa/w3us/jfrog_piotr JFROG_TOKEN | JFROG_TOKEN ;
-            kps-gd-app-kpes/data/testqa/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
-            kps-gd-app-kpes/data/testqa/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
-            kps-gd-app-kpes/data/testqa/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
-
+            kps-gd-app-kpes/data/testqa/w3us/openshift-sa SERVER_URL | SERVER_URL ;
+            kps-gd-app-kpes/data/testqa/w3us/openshift-sa SA_TOKEN | SA_TOKEN ;
+            kps-gd-app-kpes/data/testqa/w3us/openshift-sa NAMESPACE | NAMESPACE ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 server | DB_SERVER ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 database | DB_NAME ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW ;
-
             kps-gd-app-kpes/data/dev/w3us/smtpserver host | SMTP_HOST ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver username | SMTP_USER_NAME ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver password | SMTP_USER_PW ;
-
             kps-gd-app-kpes/data/dev/w3us/SSOserver host | SSO_HOST ;
             kps-gd-app-kpes/data/dev/w3us/SSOserver client_id | SSO_CLIENT_ID ;
             kps-gd-app-kpes/data/dev/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
@@ -128,7 +125,7 @@ jobs:
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
-            kyndryl.jfrog.io/uki-business-intelligence-qa-docker-local/kpes:testqa_${{ github.run_number }}
+            ${{ vars.JFROG_URL }}/${{ vars.JFROG_CONTAINER }}/kpes:${{ vars.SHORT_NAME }}_${{ github.run_number }}
           # Path to the manifest files to be used for deployment. 
           manifests: |
             ./env-configmap.yml

@@ -39,7 +39,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: | 
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:devel_${{ github.run_number }}
+            ${{ vars.JFROG_URL }}/${{ vars.JFROG_CONTAINER }}/kpes:${{ vars.SHORT_NAME }}_${{ github.run_number }}
   Deploy:
     name: Deploy
     needs:
@@ -62,9 +62,9 @@ jobs:
           secrets: |
             kps-gd-app-kpes/data/dev/w3us/jfrog_piotr JFROG_USER | JFROG_USER ;
             kps-gd-app-kpes/data/dev/w3us/jfrog_piotr JFROG_TOKEN | JFROG_TOKEN ;
-            kps-gd-app-kpes/data/dev/w3us/openshift-sa  SERVER_URL | SERVER_URL ;
-            kps-gd-app-kpes/data/dev/w3us/openshift-sa  SA_TOKEN | SA_TOKEN ;
-            kps-gd-app-kpes/data/dev/w3us/openshift-sa  NAMESPACE | NAMESPACE ;
+            kps-gd-app-kpes/data/dev/w3us/openshift-sa SERVER_URL | SERVER_URL ;
+            kps-gd-app-kpes/data/dev/w3us/openshift-sa SA_TOKEN | SA_TOKEN ;
+            kps-gd-app-kpes/data/dev/w3us/openshift-sa NAMESPACE | NAMESPACE ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 server | DB_SERVER ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 database | DB_NAME ;
             kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
@@ -125,7 +125,7 @@ jobs:
         with:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           images: |
-            kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:devel_${{ github.run_number }}
+            ${{ vars.JFROG_URL }}/${{ vars.JFROG_CONTAINER }}/kpes:${{ vars.SHORT_NAME }}_${{ github.run_number }}
           # Path to the manifest files to be used for deployment. 
           manifests: |
             ./env-configmap.yml
