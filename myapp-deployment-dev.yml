@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpes
+spec:
+  selector:
+    matchLabels:
+      app: kpes
+  template:
+    metadata:
+      labels:
+        app: kpes
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      securityContext: {}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      containers:
+      - name: kpes
+        image: kyndryl.jfrog.io/uki-business-intelligence-test-docker-local/kpes:latest
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 32m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        imagePullPolicy: Always
+        terminationMessagePolicy: File
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TEMP_INLINE_VALUE
+          # we can also pass env variables like in this way 
+          value: Linux
+        envFrom:
+        - configMapRef:
+            name: env-configmap
+        - secretRef:
+            name: kpes-app-docker-secrets
+        - secretRef:
+            name: kpes-app-docker-secrets-db
+        - secretRef:
+            name: kpes-app-docker-secrets-smtp
+        - secretRef:
+            name: kpes-app-docker-secrets-sso
