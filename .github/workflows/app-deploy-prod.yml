@@ -7,7 +7,7 @@ on:
 jobs:
   Build:
     runs-on:
-      - aro-prd-westus3
+      - aro-prod-westus3
     environment: production
     steps:
       - name: Get JFROG Credentials
@@ -45,7 +45,7 @@ jobs:
     needs:
       - Build
     runs-on:
-      - aro-prd-westus3
+      - aro-prod-westus3
     environment: production
     steps:
       - name: Checkout Sourcecode
