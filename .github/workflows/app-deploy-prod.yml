@@ -65,16 +65,16 @@ jobs:
             kps-gd-app-kpes/data/prod/w3us/openshift-sa SERVER_URL | SERVER_URL ;
             kps-gd-app-kpes/data/prod/w3us/openshift-sa SA_TOKEN | SA_TOKEN ;
             kps-gd-app-kpes/data/prod/w3us/openshift-sa NAMESPACE | NAMESPACE ;
-            kps-gd-app-kpes/data/prod/w3us/sqlserver_wus3 server | DB_SERVER ;
-            kps-gd-app-kpes/data/prod/w3us/sqlserver_wus3 database | DB_NAME ;
-            kps-gd-app-kpes/data/prod/w3us/sqlserver_wus3 username | DB_USER_NAME ;
-            kps-gd-app-kpes/data/prod/w3us/sqlserver_wus3 password | DB_USER_PW ;
-            kps-gd-app-kpes/data/prod/w3us/smtpserver host | SMTP_HOST ;
-            kps-gd-app-kpes/data/prod/w3us/smtpserver username | SMTP_USER_NAME ;
-            kps-gd-app-kpes/data/prod/w3us/smtpserver password | SMTP_USER_PW ;
-            kps-gd-app-kpes/data/prod/w3us/SSOserver host | SSO_HOST ;
-            kps-gd-app-kpes/data/prod/w3us/SSOserver client_id | SSO_CLIENT_ID ;
-            kps-gd-app-kpes/data/prod/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 server | DB_SERVER ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 database | DB_NAME ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
+            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW ;
+            kps-gd-app-kpes/data/dev/w3us/smtpserver host | SMTP_HOST ;
+            kps-gd-app-kpes/data/dev/w3us/smtpserver username | SMTP_USER_NAME ;
+            kps-gd-app-kpes/data/dev/w3us/smtpserver password | SMTP_USER_PW ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver host | SSO_HOST ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver client_id | SSO_CLIENT_ID ;
+            kps-gd-app-kpes/data/dev/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
