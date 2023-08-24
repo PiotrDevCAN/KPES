@@ -7,7 +7,7 @@ RUN dnf -y install php-zip
 RUN dnf remove nginx-filesystem -y
 WORKDIR /var/www/html/
 RUN composer install --no-interaction
-USER root
+USER root 
 ADD ./patch2.sh /patch2.sh
 RUN bash /patch2.sh && rm /patch2.sh
 ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
