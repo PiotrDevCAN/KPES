@@ -65,10 +65,10 @@ jobs:
             kps-gd-app-kpes/data/testqa/w3us/openshift-sa SERVER_URL | SERVER_URL ;
             kps-gd-app-kpes/data/testqa/w3us/openshift-sa SA_TOKEN | SA_TOKEN ;
             kps-gd-app-kpes/data/testqa/w3us/openshift-sa NAMESPACE | NAMESPACE ;
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 server | DB_SERVER ;
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 database | DB_NAME ;
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 username | DB_USER_NAME ;
-            kps-gd-app-kpes/data/dev/w3us/sqlserver_wus3 password | DB_USER_PW ;
+            kps-gd-app-kpes/data/testqa/w3us/sqlserver_wus3 server | DB_SERVER ;
+            kps-gd-app-kpes/data/testqa/w3us/sqlserver_wus3 database | DB_NAME ;
+            kps-gd-app-kpes/data/testqa/w3us/sqlserver_wus3 username | DB_USER_NAME ;
+            kps-gd-app-kpes/data/testqa/w3us/sqlserver_wus3 password | DB_USER_PW ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver host | SMTP_HOST ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver username | SMTP_USER_NAME ;
             kps-gd-app-kpes/data/dev/w3us/smtpserver password | SMTP_USER_PW ;
