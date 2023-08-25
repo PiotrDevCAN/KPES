@@ -75,6 +75,12 @@ jobs:
             kps-gd-app-kpes/data/testqa/w3us/SSOserver host | SSO_HOST ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_id | SSO_CLIENT_ID ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
+      - name: Preview SSO settings
+        run: |
+          echo "NAMESPACE: ${{ steps.import-secrets.outputs.NAMESPACE }}"
+          echo "SSO_HOST: ${{ steps.import-secrets.outputs.SSO_HOST }}"
+          echo "SSO_CLIENT_ID: ${{ steps.import-secrets.outputs.SSO_CLIENT_ID }}"
+          echo "SSO_CLIENT_SECRET: ${{ steps.import-secrets.outputs.SSO_CLIENT_SECRET }}"
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
