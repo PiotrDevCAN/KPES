@@ -97,6 +97,8 @@
 					for ($i=0; $i < ceil(strlen($encoded)/4); $i++)
 						$decoded = $decoded . base64_decode(substr($encoded,$i*4,4));
 					$tokenData = json_decode( $decoded, true );
+					error_log('data from TOKEN');
+					error_log(__FILE__ . "TOKEN:" . print_r($tokenData,true));
 					error_log('TOKEN OK');
 				} else {
 					error_log('WRONG TOKEN');
@@ -104,16 +106,6 @@
 				}
 
 				$userData = $this->getUserInfo($token_response->access_token);
-				error_log('data from RAW USERINFO');
-				error_log(__FILE__ . "RAW USERINFO:" . print_r($userData,true));
-
-				// dummy user data
-				$userData['email'] = 'John.Doe@kyndry.com';
-				$userData['given_name'] = 'John';
-				$userData['family_name'] = 'Doe';
-
-				error_log('data from TOKEN');
-				error_log(__FILE__ . "TOKEN:" . print_r($tokenData,true));
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				error_log('data from USERINFO');
@@ -156,11 +148,13 @@
 					&& isset($userData['email']) && !empty($userData['email'])
 					&& isset($userData['given_name']) && !empty($userData['given_name'])
 					&& isset($userData['family_name']) && !empty($userData['family_name'])
+					&& isset($userData['name']) && !empty($userData['name'])
 					)
 				{
 					$_SESSION['ssoEmail'] = $userData['email'];
 					$_SESSION['firstName'] = $userData['given_name'];
 					$_SESSION['lastName'] = $userData['family_name'];
+					$_SESSION['fullName'] = $userData['name'];
 				} else {
 					//if something in the future gets changed and the strict checking on top of this is not working any more
 					//please note, that you should always use strict matching in this function on your prod app so that you can handle changes correctly and not fill in the session with all the data
