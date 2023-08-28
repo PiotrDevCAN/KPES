@@ -104,6 +104,9 @@
 				}
 
 				$userData = $this->getUserInfo($token_response->access_token);
+				error_log('data from RAW USERINFO');
+				error_log(__FILE__ . "RAW USERINFO:" . print_r($userData,true));
+
 				// dummy user data
 				$userData['email'] = 'John.Doe@kyndry.com';
 				$userData['given_name'] = 'John';
