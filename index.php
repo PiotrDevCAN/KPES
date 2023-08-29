@@ -11,6 +11,7 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 
 echo '<pre>';
 var_dump($_ENV);
+var_dump($_SESSION);
 echo '</pre>';
 
 ?>
