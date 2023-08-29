@@ -50,3 +50,5 @@ spec:
             name: kpes-app-docker-secrets-smtp
         - secretRef:
             name: kpes-app-docker-secrets-sso
+        - secretRef:
+            name: kpes-app-docker-secrets-worker-api

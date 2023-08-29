@@ -75,6 +75,18 @@ jobs:
             kps-gd-app-kpes/data/testqa/w3us/SSOserver host | SSO_HOST ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_id | SSO_CLIENT_ID ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_secret | SSO_CLIENT_SECRET 
+      - name: Get Worker API Credentials
+        id: import-secrets-worker-api
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://vault.kyndryl.net
+          method: token
+          namespace: kyndryl/Non-CIO-Kyndryl/
+          token: ${{ secrets.VAULT_TOKEN__WORKER_API }}
+          tlsSkipVerify: false
+          secrets: |
+            kv-kpes-qa/data/azsp/apim AZURE_CLIENT_ID | CLIENT_ID ; 
+            kv-kpes-qa/data/azsp/apim AZURE_CLIENT_SECRET | CLIENT_SECRET   
       - name: Preview SSO settings
         run: |
           echo "NAMESPACE: ${{ steps.import-secrets.outputs.NAMESPACE }}"
@@ -125,6 +137,15 @@ jobs:
           secret-name: kpes-app-docker-secrets-sso
           secret-type: 'generic'
           arguments: --from-literal=sso_host=${{ steps.import-secrets.outputs.SSO_HOST }} --from-literal=sso_client_id=${{ steps.import-secrets.outputs.SSO_CLIENT_ID }} --from-literal=sso_client_secret=${{ steps.import-secrets.outputs.SSO_CLIENT_SECRET }}
+      - name: Set ImagePullSecrets Worker API
+        id: image_secret-worker-api
+        uses: azure/k8s-actions/k8s-create-secret@master
+        # uses: Azure/k8s-create-secret@v4.0
+        with:
+          namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+          secret-name: kpes-app-docker-secrets-worker-api
+          secret-type: 'generic'
+          arguments: --from-literal=worker_api_client_id=${{ steps.import-secrets-worker-api.outputs.CLIENT_ID }} --from-literal=worker_api_client_secret=${{ steps.import-secrets-worker-api.outputs.CLIENT_SECRET }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
@@ -147,5 +168,6 @@ jobs:
             kpes-app-docker-secrets-db
             kpes-app-docker-secrets-smtp
             kpes-app-docker-secrets-sso
+            kpes-app-docker-secrets-worker-api
             env-configmap
             env-secrets
