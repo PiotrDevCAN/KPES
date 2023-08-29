@@ -371,7 +371,7 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
 
     $elapsed = microtime(true);
     error_log("Post do_Auth():" . (float)($elapsed-$start));
-    include ('php/ldap.php');
+    // include ('php/ldap.php');
     $helper = new Sample();
     if ($helper->isCli()) {
         // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);

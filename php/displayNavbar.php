@@ -4,6 +4,7 @@ use itdq\Navbar;
 use itdq\NavbarMenu;
 use itdq\NavbarOption;
 use itdq\NavbarDivider;
+use itdq\OKTAGroups;
 
 include ('itdq/PlannedOutages.php');
 include ('itdq/DbTable.php');
@@ -100,8 +101,8 @@ $navbar->addOption($outages);
 
 $navbar->createNavbar($page);
 
-$isCdi       = employee_in_group($_SESSION['cdiBg'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
-$isPesTeam   = employee_in_group($_SESSION['pesTeamBg'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
+$isCdi       = OKTAGroups::inAGroup($_SESSION['cdiBg'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
+$isPesTeam   = OKTAGroups::inAGroup($_SESSION['pesTeamBg'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
 $isUser      = ".not('.accessUser')";
 
 $isCdi        = stripos($_ENV['environment'], 'dev') ? ".not('.accessCdi')"        : $isCdi;

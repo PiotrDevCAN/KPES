@@ -1,6 +1,8 @@
 <?php
 namespace itdq;
 
+use itdq\OKTAGroups;
+
 /**
  * This class knows how to call a SELECT against a Table or View and display all the columns that are returned to it.
  *
@@ -1652,7 +1654,7 @@ class SortableList
             $this->profileSelectionBar->submitButton('Save Profile');
             $this->profileSelectionBar->submitButton('Delete Profile');
             if (isset($_SESSION['adminBg'])) {
-                if (employee_in_group($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                     $this->profileSelectionBar->checkBox('Global', 'global');
                 }
             }
@@ -1718,7 +1720,7 @@ class SortableList
                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
-                    if (employee_in_group($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                    if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
                                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='global' ";
@@ -1750,7 +1752,7 @@ class SortableList
                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
-                    if (employee_in_group($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                    if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
                                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='global' ";
