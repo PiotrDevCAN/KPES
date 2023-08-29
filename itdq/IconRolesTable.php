@@ -1,5 +1,8 @@
 <?php
 namespace itdq;
+
+use itdq\OKTAGroups;
+
 /**
  * Interfaces to ICON_as_a_Service.
  *
@@ -359,7 +362,7 @@ class IconRolesTable extends DbTable {
 	static function calculateAccessPredicate($verbose= true, $jobRoleColumn='JOB_ROLE', $intranetColumn=null, $fullAccessBluegroup=null){
 
 		if($fullAccessBluegroup!=null){
-			if(employee_in_group($fullAccessBluegroup, $_SESSION['ssoEmail'])){
+			if(OKTAGroups::inAGroup($fullAccessBluegroup, $_SESSION['ssoEmail'])){
 				echo $verbose ? "<h4 style='color:blue'>" . $_SESSION['ssoEmail'] . " is a member of " . $fullAccessBluegroup . ", therefore you have full access to this view</h4>" : null;
 				return null;
 			}
