@@ -9,6 +9,10 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 // echo '</pre>';
 // exit;
 
+echo '<pre>';
+var_dump($_ENV);
+echo '</pre>';
+
 ?>
 <style type="text/css" class="init">
 body {
