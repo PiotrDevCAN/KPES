@@ -110,24 +110,6 @@
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				error_log('data from USERINFO');
 				error_log(__FILE__ . "USERINFO:" . print_r($userData,true));
-				// die();
-
-				// {
-				// 	"sub": "00uid4BxXw6I6TV4m0g3",
-				// 	"name" :"John Doe",
-				// 	"nickname":"Jimmy",
-				// 	"given_name":"John",
-				// 	"middle_name":"James",
-				// 	"family_name":"Doe",
-				// 	"profile":"https://example.com/john.doe",
-				// 	"zoneinfo":"America/Los_Angeles",
-				// 	"locale":"en-US",
-				// 	"updated_at":1311280970,
-				// 	"email":"john.doe@example.com",
-				// 	"email_verified":true,
-				// 	"address" : { "street_address":"123 Hollywood Blvd.", "locality":"Los Angeles", "region":"CA", "postal_code":"90210", "country":"US" },
-				// 	"phone_number":"+1 (425) 555-1212"
-				//   }
 
 				// set session from TOKEN data
 				if(isset($tokenData) && !empty($tokenData)
@@ -138,10 +120,6 @@
 					$_SESSION['exp'] = $tokenData['exp'];
 					$_SESSION['uid'] = $tokenData['sub'];
 				}
-
-				error_log('TEST SET session variables ');
-				error_log($_SESSION['uid']);
-				error_log($_SESSION['exp']);
 
 				// set session from USER data
 				if(isset($userData) && !empty($userData)
