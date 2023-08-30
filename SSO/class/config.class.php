@@ -52,7 +52,7 @@
 		//gets auth config for openidconnect technology
 		private function getAuthConfigForOpenID()
 		{
-			include realpath(dirname(__FILE__))."/../SSO/cfg/openidconnect.inc.php";
+			include realpath(dirname(__FILE__))."/../cfg/openidconnect.inc.php";
 			return $config_openidconnect;
 		}
 	}
