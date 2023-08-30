@@ -25,7 +25,7 @@
 		//returns string
 		public function getTechnology()
 		{
-			include "SSO/cfg/auth-technology.inc.php";
+			include realpath(dirname(__FILE__))."/../cfg/auth-technology.inc.php";
 			return $auth_technology;
 		}
 

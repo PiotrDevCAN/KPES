@@ -1,3 +1,2 @@
 <?php
-include "SSO/cfg/auth-technology.inc.php";
-
+include realpath(dirname(__FILE__))."/../cfg/auth-technology.inc.php";
