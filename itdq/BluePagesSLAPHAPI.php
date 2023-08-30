@@ -47,7 +47,6 @@ class BluePagesSLAPHAPI {
 	static private $objectIbmVenture = "ibmVenture";
 	static private $objectIbmWorkLocation = "ibmWorkLocation";
 	
-
 	// Filter
 	// (mail=balibora@us.ibm.com)
 

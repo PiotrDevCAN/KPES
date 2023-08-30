@@ -141,7 +141,7 @@ function do_auth($group = null)
             // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
             $_SESSION['ssoEmail'] = $_ENV['SERVER_ADMIN'];
         } else {
-            include_once "class/include.php";
+            include_once "SSO/class/include.php";
             $auth = new Auth();
             if(!$auth->ensureAuthorized()){
                 die('Invalid logon attempt');
@@ -311,10 +311,10 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     ini_set('memory_limit', '512M');
     ini_set('max_execution_time', 360);
 
-    require_once("php/errorHandlers.php");
+    // require_once("php/errorHandlers.php");
 
-    set_error_handler('myErrorHandler');
-    register_shutdown_function('fatalErrorShutdownHandler');
+    // set_error_handler('myErrorHandler');
+    // register_shutdown_function('fatalErrorShutdownHandler');
 
     date_default_timezone_set('UTC');
 

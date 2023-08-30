@@ -25,7 +25,7 @@
 		//returns string
 		public function getTechnology()
 		{
-			include "cfg/auth-technology.inc.php";
+			include "SSO/cfg/auth-technology.inc.php";
 			return $auth_technology;
 		}
 
@@ -52,7 +52,7 @@
 		//gets auth config for openidconnect technology
 		private function getAuthConfigForOpenID()
 		{
-			include realpath(dirname(__FILE__))."/../cfg/openidconnect.inc.php";
+			include realpath(dirname(__FILE__))."/../SSO/cfg/openidconnect.inc.php";
 			return $config_openidconnect;
 		}
 	}

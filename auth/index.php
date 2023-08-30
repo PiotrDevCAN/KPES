@@ -1,7 +1,7 @@
 <?php
 //used to verify and process login
 
-include realpath(dirname(__FILE__))."/../class/include.php";
+include realpath(dirname(__FILE__))."/../SSO/class/include.php";
 $auth = new Auth();
 if($auth->verifyResponse($_GET))
 {

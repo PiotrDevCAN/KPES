@@ -101,13 +101,15 @@ $navbar->addOption($outages);
 
 $navbar->createNavbar($page);
 
-$isCdi       = OKTAGroups::inAGroup($_SESSION['cdiBg'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
-$isPesTeam   = OKTAGroups::inAGroup($_SESSION['pesTeamBg'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
+// $isCdi       = OKTAGroups::inAGroup($_SESSION['cdiBg'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
+// $isPesTeam   = OKTAGroups::inAGroup($_SESSION['pesTeamBg'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
+$isCdi       = ".not('.accessUser')";
+$isPesTeam   = ".not('.accessUser')";
 $isUser      = ".not('.accessUser')";
 
 $isCdi        = stripos($_ENV['environment'], 'dev') ? ".not('.accessCdi')"        : $isCdi;
-$isPesTeam    = stripos($_ENV['environment'], 'dev')  ? ".not('.accessPesTeam')"   : $isPesTeam;
-$isUser       = stripos($_ENV['environment'], 'dev')  ? ".not('.accessUser')"      : $isUser;
+$isPesTeam    = stripos($_ENV['environment'], 'dev') ? ".not('.accessPesTeam')"   : $isPesTeam;
+$isUser       = stripos($_ENV['environment'], 'dev') ? ".not('.accessUser')"      : $isUser;
 
 $_SESSION['isCdi']       = !empty($isCdi)     ? true : false;
 $_SESSION['isPesTeam']   = !empty($isPesTeam) ? true : false;

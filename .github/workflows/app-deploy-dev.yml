@@ -145,7 +145,7 @@ jobs:
           namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
           secret-name: kpes-app-docker-secrets-worker-api
           secret-type: 'generic'
-          arguments: --from-literal=worker_api_client_id=${{ steps.import-secrets-worker-api.outputs.CLIENT_ID }} --from-literal=worker_api_client_secret=${{ steps.import-secrets-worker-api.outputs.CLIENT_ID }}
+          arguments: --from-literal=worker_api_host_int=${{ vars.WORKER_API_URL_INT }} --from-literal=worker_api_host_ext=${{ vars.WORKER_API_URL_EXT }} --from-literal=worker_api_client_id=${{ steps.import-secrets-worker-api.outputs.CLIENT_ID }} --from-literal=worker_api_client_secret=${{ steps.import-secrets-worker-api.outputs.CLIENT_SECRET }}
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4

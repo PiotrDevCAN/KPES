@@ -1,146 +1,188 @@
 <?php
 namespace itdq;
+
+use WorkerApi\Auth;
+
+include_once "WorkerAPI/class/include.php";
+
 /*
  *  Handles Worker API.
  */
+
 class WorkerAPI {
 	
-	private $api_url = 'https://login.microsoftonline.com/f260df36-bc43-424c-8f44-c85226657b01/oauth2/v2.0/token';
-	private $api_key = '';
-	private $error_message = '';
-	private $connected = null;
+	private $token = null;
+	private $hostname_int = null;
+	private $hostname_ext = null;
 
-	public function __construct($api_key)
+	public function __construct()
 	{
-		$this->api_key = $api_key;
+		$auth = new Auth();
+		$auth->ensureAuthorized();
 
-		if(strpos($api_key, '-') !== false) {
-			$this->api_url = 'https://' . substr($api_key, -3) . '.api.mailchimp.com/2.0/';
-		}
+		$this->hostname_int = $_ENV['worker_api_host_int'];
+		$this->hostname_ext = $_ENV['worker_api_host_ext'];
+
+		// echo $_SESSION['worker_token'];
+		$this->token = $_SESSION['worker_token'];
 	}
 
-	public function is_connected()
-	{
-		if($this->connected === null) {
-			$result = $this->call('helper/ping');
-			$this->connected = ($result && isset($result->msg) && $result->msg === "Everything's Chimpy!");
-		}
+	private function createCurl($type = "GET"){
+		// create a new cURL resource
+		$ch = curl_init();
+		$authorization = "Authorization: Bearer ".$this->token; // Prepare the authorisation token
+		$headers = [
+			'Content-type: Not defined',
+			'Accept: application/json, text/json, application/xml, text/xml',
+			$authorization,
+		];
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
-		return $this->connected;
+		return $ch;
 	}
 
-	public function subscribe($list_id, $email, array $merge_vars = array(), $email_type = 'html', $double_optin = true, $update_existing = false, $replace_interests = true, $send_welcome = false )
-	{	
-		$data = array(
-			'id' => $list_id,
-			'email' => array( 'email' => $email),
-			'merge_vars' => $merge_vars,
-			'email_type' => $email_type,
-			'double_optin' => $double_optin,
-			'update_existing' => $update_existing,
-			'replace_interests' => $replace_interests,
-			'send_welcome' => $send_welcome
-		);
-
-		$result = $this->call('lists/subscribe', $data);
-
-		if($result) {
-
-			if(!isset($result->error)) {
-				return true;
+	private function processURL($url, $type = 'GET'){
+		$url = $this->hostname_ext . $url;
+		$ch = $this->createCurl($type);
+		// echo "<BR>Processing";
+		// echo " URL:" . $url;
+		$ret = curl_setopt($ch, CURLOPT_URL, $url);
+		$ret = curl_exec($ch);
+		if (empty($ret)) {
+			// some kind of an error happened
+			die(curl_error($ch));
+			curl_close($ch); // close cURL handler
+		} else {
+			$info = curl_getinfo($ch);
+			if (empty($info['http_code'])) {
+				die("No HTTP code was returned");
 			} else {
-				// check error
-				if($result->code == 214) {  return 'already_subscribed'; } 
-				
-				// store error message
-				$this->error_message = $result->error;
-				return 'error';
+				// So Bluegroups has processed our URL - What was the result.
+				$bgapiRC  = substr($ret,0,1);
+				if($bgapiRC!=0){
+					// Bluegroups has NOT returned a ZERO - so there was a problem
+					echo "<H3>Error processing Bluegroup URL </H3>";
+					echo "<H2>Please take a screen print of this page and send to the ITDQ Team ASAP.</H2>";
+					echo "<BR>URL<BR>";
+					print_r($url);
+					echo "<BR>Info<BR>";
+					print_r($info);
+					echo "<BR>";
+					exit ("<B>Unsuccessful RC: $ret</B>");
+				} else {
+					// echo " Successful RC: $ret";
+					sleep(1); // Give BG a chance to process the request.
+				}
 			}
-
-		} else {
-			return 'error';
 		}
+		return $ret;
 	}
 
-	public function get_list_groupings($list_id)
+	// Individual Worker Profile Data
+	// Below endpoints will return extended worker data model
+
+	// Worker Profile By Worker Id : GET /workers/wid/{wid}
+	public function getworkerByWId($wid)
 	{
-		$result = $this->call('lists/interest-groupings', array('id' => $list_id) );
-		if($result && is_array($result)) {
-			return $result;
-		} else {
-			return false;
-		}
+		$url = "/workers/wid" . urlencode($wid);
+		return $this->processURL($url);
 	}
 
-	public function get_lists()
+	// Worker Profile By CNUM : GET /workers/cnum/{cnum}
+	public function getworkerByCNUM($cnum)
 	{
-		$result = $this->call('lists/list', array('limit' => 100));
-
-		if($result && isset($result->data)) {
-			return $result->data;
-		} else {
-			return false;
-		}
+		$url = "/workers/cnum/" . urlencode($cnum);
+		return $this->processURL($url);
 	}
 
-	public function get_lists_with_merge_vars($list_ids) 
+	// Worker Profile By Email : GET /workers/email/{email}
+	public function getworkerByEmail($email)
 	{
-		$result = $this->call('lists/merge-vars', array('id' => $list_ids));
-		
-		if($result && isset($result->data)) {
-			return $result->data;
-		} else {
-			return false;
-		}
+		$url = "/workers/email/" . urlencode($email);
+		return $this->processURL($url);
+	}
+
+	// Worker Profile By Dynamic Id : GET /workers/dynamicid/{Dynamic_id}
+	public function getworkerByDynamicId($dynamicId)
+	{
+		$url = "/workers/dynamicid" . urlencode($dynamicId);
+		return $this->processURL($url);
+	}
+
+	// Manager Profile By Dynamic Id : GET /workers/dynamicid/{Dynamic_id}/manager
+	public function getManager($dynamicId)
+	{
+		$url = "/workers/dynamicid/" . urlencode($dynamicId) . "/manager";
+		return $this->processURL($url);
+	}
+
+	public function getReports($dynamicId)
+	{
+		$url = "/workers/dynamicid/" . urlencode($dynamicId) . "/reports";
+		return $this->processURL($url);
+	}
+
+	public function getPhoto($dynamicId)
+	{
+		$url = "/workers/dynamicid/" . urlencode($dynamicId) . "/photo";
+		return $this->processURL($url);
+	}
+
+	// Worker Profile By Attribute Search : GET /workers/search/
+	public function getworkerByAttributeSearch($search)
+	{
+		$url = "/workers/search";
+		return $this->processURL($url);
+	}
+
+	// Worker Profile By Multi Attribute Search : POST /workers/search/
+	public function getworkerByMultiAttributeSearch($search)
+	{
+		$url = "/workers/search";
+		return $this->processURL($url, 'POST');
+	}
+
+	public function typeaheadSearch()
+	{
+		$url = "/workers/typeahead";
+		return $this->processURL($url);
+	}
+
+	public function typeaheadSearchPost()
+	{
+		$url = "/workers/typeahead";
+		return $this->processURL($url, 'POST');
 	}
 	
-	public function get_member_info($id, $emails) {
-		$result = $this->call('lists/member-info', array('id' => $id, 'emails'  => $emails));
-		
-		if($result && isset($result->data)) {
-			return $result->data;
-		} else {
-			return false;
-		}
-	}
+	// Direct Reports Profile Data
+	// To return a worker's direct reports data alone, the below endpoint will return an array of basic worker profiles for all direct reports.
 
-	public function call($method, array $data = array())
+	// Reports Profile By Dynamic Id : GET /workers/dynamicid/{Dynamic_id}/reports
+	public function getReportsFromDynamicId($dynamicId)
 	{
-		// only proceed to making the api call if we have a valid api key
-		if(empty($this->api_key)) { return false; }
-
-		$data['apikey'] = $this->api_key;
-		$url = $this->api_url . $method . '.json';
-
-		$response = wp_remote_post($url, array( 
-			'body' => $data,
-			'timeout' => 20,
-			'headers' => array('Accept-Encoding' => ''),
-			'sslverify' => false
-			) 
-		); 
-	
-		if(is_wp_error($response)) {
-			return false;
-		} else {
-			// dirty fix for older WP version
-			if($method == 'helper/ping' && isset($response['headers']['content-length']) && (int) $response['headers']['content-length'] == '44') { 
-				return (object) array( 'msg' => "Everything's Chimpy!");
-			}
-			
-			$body = wp_remote_retrieve_body($response);
-			return json_decode($body);
-		}
+		$url = "/workers/dynamicid/" . urlencode($dynamicId) . "/reports";
+		return $this->processURL($url);
 	}
 
-	public function has_error()
+	// Bulk Data/ File Cache Return
+	// To return a larger object of bulk data from the larger worker collection, the below endpoint will query a periodically-updated flat file.
+
+	// Download Worker File : GET /tools/download_worker_file
+	public function getWorkerFile()
 	{
-		return (!empty($this->error_message));
+		$url = "/tools/download_worker_file";
+		return $this->processURL($url);
 	}
 
-	public function get_error_message()
+	// Delta File Cache Return
+	// Return any delta in data including added, updated, deleted worker records at set intervals.
+
+	// Download Worker File Delta : GET /tools/download_worker_file_delta
+	public function getWorkerFileDelta()
 	{
-		return $this->error_message;
+		$url = "/tools/download_worker_file_delta";
+		return $this->processURL($url);
 	}
-
 }
