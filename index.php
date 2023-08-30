@@ -4,18 +4,15 @@ use itdq\WorkerAPI;
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
-$host = 'https://login.microsoftonline.com/f260df36-bc43-424c-8f44-c85226657b01/oauth2/v2.0';
-$client_id = 'ab8fd819-a2a7-417e-a6bf-0116d8a29ecb';
-$client_secret = '-3Q8Q~6mgkg0KJtOYC3duR4lncHSPF953aOAeaY0';
-
-$_ENV['worker_api_host'] = $host;
-$_ENV['worker_api_client_id'] = $client_id;
-$_ENV['worker_api_client_secret'] = $client_secret;
-
 $workerAPI = new WorkerAPI();
 $workerData = json_decode($workerAPI->getworkerByEmail('piotr.tajanowicz@kyndryl.com'));
 
 echo '<pre>';
+echo 'ENVIRONMENT <br>';
+var_dump($_ENV);
+echo 'SESSION <br>';
+var_dump($_SESSION);
+echo 'WORKER DATA <br>';
 var_dump($workerData);
 echo '</pre>';
 
