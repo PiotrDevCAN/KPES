@@ -52,6 +52,9 @@ class OKTAGroups {
 	}
 
 	public static function inAGroup($groupName, $ssoEmail, $depth=1){
+
+		return false;
+
 	    // https://bluepages.ibm.com/tools/groups/groupsxml.wss?task=inAGroup&email=MEMBER_EMAIL_ADDRESS&group=GROUP_NAME[&depth=DEPTH]
 	    $url = "https://bluepages.ibm.com/tools/groups/groupsxml.wss?task=inAGroup&email=" . urlencode($ssoEmail) . "&group=" . urlencode($groupName) . "&depth=" . urlencode($depth);
 	    $myXMLData =  self::getBgResponseXML($url);

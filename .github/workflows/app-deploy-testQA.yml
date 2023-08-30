@@ -87,12 +87,6 @@ jobs:
           secrets: |
             kv-kpes-qa/data/azsp/apim AZURE_CLIENT_ID | CLIENT_ID ; 
             kv-kpes-qa/data/azsp/apim AZURE_CLIENT_SECRET | CLIENT_SECRET   
-      - name: Preview SSO settings
-        run: |
-          echo "NAMESPACE: ${{ steps.import-secrets.outputs.NAMESPACE }}"
-          echo "SSO_HOST: ${{ steps.import-secrets.outputs.SSO_HOST }}"
-          echo "SSO_CLIENT_ID: ${{ steps.import-secrets.outputs.SSO_CLIENT_ID }}"
-          echo "SSO_CLIENT_SECRET: ${{ steps.import-secrets.outputs.SSO_CLIENT_SECRET }}"
       - name: Login to ARO Cluster
         id: set-aro-context
         uses: redhat-actions/oc-login@v1
