@@ -30,8 +30,8 @@ static function logEntry($entry,$pwd=null){
 	$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 	if(!$rs)
 		{
-		echo "<BR>Error: " . print_r(sqlsrv_errors());
-		echo "<BR>Msg: " . print_r(sqlsrv_errors()) . "<BR>";
+		echo "<BR>Error: " . json_encode(sqlsrv_errors());
+		echo "<BR>Msg: " . json_encode(sqlsrv_errors()) . "<BR>";
 		exit("Error in: " . __FILE__ . ":" .  __METHOD__ . "-" .  __LINE__ . "<BR>running: $sql");
 	}
 }
@@ -41,8 +41,8 @@ static function logEntry($entry,$pwd=null){
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);
 		if(!$rs)
 			{
-			echo "<BR>Error: " . print_r(sqlsrv_errors());
-			echo "<BR>Msg: " . print_r(sqlsrv_errors()) . "<BR>";
+			echo "<BR>Error: " . json_encode(sqlsrv_errors());
+			echo "<BR>Msg: " . json_encode(sqlsrv_errors()) . "<BR>";
 			exit("Error in: " . __METHOD__ .  __LINE__ . "<BR>running: $sql");
 		}
 	}
