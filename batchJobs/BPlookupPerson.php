@@ -19,10 +19,6 @@ $updater = new TableDataUpdater($personTable);
 
 ?><h3>First Pass - People Lookup by EMAIL_ADDRESS</h3><hr/><?php
 
-$GLOBALS['Db2Schema'] = 'UPES_NEWCO_DEV';
-
-echo $GLOBALS['Db2Schema'];
-
 // $resultSet = $personTable->fetchPeopleList(" AND EMAIL_ADDRESS LIKE '%ocean.ibm.com%'");
 $resultSet = $personTable->fetchPeopleList();
 if (!$resultSet) {
@@ -37,5 +33,3 @@ $column = 'EMAIL_ADDRESS';
 $personTable->prepareCheckExistsStatement($column);
 $personTable->prepareUpdateSqlStatement($column);
 $updater->populateDataFromBluepages($resultSet, $callback, $column);
-
-$GLOBALS['Db2Schema'] = 'UPES_NEWCO_DEV';

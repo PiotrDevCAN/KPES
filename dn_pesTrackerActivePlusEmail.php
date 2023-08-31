@@ -7,8 +7,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// $GLOBALS['Db2Schema'] = 'UPES_NEWCO';
-
 $email = $_SESSION['ssoEmail'];
 $type = AccountPersonTable::PES_TRACKER_RECORDS_ACTIVE_PLUS;
 $scriptsDirectory = '/var/www/html/batchJobs/';

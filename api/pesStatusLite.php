@@ -19,30 +19,6 @@ if($_REQUEST['token']!= $token) {
     return;    
 }
 
-// ssldsn=
-// DATABASE=BLUDB;
-// HOSTNAME=541923aa-a2a2-40a4-9e67-94eb6e88d5f5.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;
-// PORT=30725;
-// PROTOCOL=TCPIP;
-// UID=iae2chzk;
-// PWD=voJchMHqPNqo3mVk;
-// Security=SSL;
-
-// ;UID=iae2chzk;PWD=voJchMHqPNqo3mVk
-
-// $config = [
-//     'driver'   => 'IbmDb2',
-//     'database' => 'BLUDB',
-//     'username' => 'iae2chzk',
-//     'password' => 'voJchMHqPNqo3mVk',
-//     'hostname' =>'541923aa-a2a2-40a4-9e67-94eb6e88d5f5.bs2io90l08kqb1od8lcg.databases.appdomain.cloud',
-//     'port'     => 30725
-// ];
-// $driver = new Adapter($config);
-// var_dump($adapter);
-
-// $GLOBALS['Db2Schema'] = 'UPES_NEWCO';
-
 $noTrim = !empty($_REQUEST['noTrim']) ? true : false;
 
 // $sql = " SELECT AP.ACCOUNT_ID, P.CNUM, P.EMAIL_ADDRESS, PROCESSING_STATUS, PROCESSING_STATUS_CHANGED ";

@@ -10,10 +10,6 @@ use itdq\slack;
 
 // $slack = new slack();
 
-$GLOBALS['Db2Schema'] = 'UPES_NEWCO';
-
-echo $GLOBALS['Db2Schema'];
-
 AuditTable::audit("Revalidation invoked.",AuditTable::RECORD_TYPE_REVALIDATION);
 // $slack->sendMessageToChannel("Revalidation invoked.(" . $_ENV['environment']. ") ", slack::CHANNEL_UPES_AUDIT);
 

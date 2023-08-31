@@ -336,8 +336,7 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
         // exit('ob_html_compress 2');
     }
 
-    // $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
-    $GLOBALS['Db2Schema'] = 'UPES_NEWCO';
+    $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
     $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
     // global var and config file
