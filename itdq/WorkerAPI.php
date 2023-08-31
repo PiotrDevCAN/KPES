@@ -20,8 +20,8 @@ class WorkerAPI {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		$this->hostname_int = $_ENV['worker_api_host_int'];
-		$this->hostname_ext = $_ENV['worker_api_host_ext'];
+		$this->hostname_int = trim($_ENV['worker_api_host_int']);
+		$this->hostname_ext = trim($_ENV['worker_api_host_ext']);
 
 		// echo $_SESSION['worker_token'];
 		$this->token = $_SESSION['worker_token'];
