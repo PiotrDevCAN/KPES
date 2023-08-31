@@ -52,9 +52,8 @@ class WorkerAPI {
 		$ret = curl_exec($ch);
 		if (empty($ret)) {
 			// some kind of an error happened
-			echo $this->hostname_int.PHP_EOL;
-			echo $this->hostname_ext.PHP_EOL;
-			echo $this->token.PHP_EOL;
+			var_dump($this->hostname_int).PHP_EOL;
+			var_dump($this->hostname_ext).PHP_EOL;
 			die(curl_error($ch));
 			curl_close($ch); // close cURL handler
 		} else {
