@@ -455,8 +455,8 @@ class SortableList
         ));
 
         if (! $rs) {
-            echo "<BR/> Error:" . sqlsrv_errors();
-            echo "<BR/> Msg:" . sqlsrv_errors();
+            echo "<BR/> Error:" . print_r(sqlsrv_errors());
+            echo "<BR/> Msg:" . print_r(sqlsrv_errors());
             exit("<BR/>Error in " . __METHOD__ . " : $rs : $this->sql");
         }
         return $rs;

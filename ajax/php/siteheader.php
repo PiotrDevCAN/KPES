@@ -19,7 +19,7 @@ set_include_path("./" . PATH_SEPARATOR . "../" . PATH_SEPARATOR . "../../" . PAT
 include ('vendor/autoload.php');
 include ('splClassLoader.php');
 
-$GLOBALS['Db2Schema'] = strtoupper($_ENV['db-name']);
+$GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
 
 if (!isset($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = 'cli';

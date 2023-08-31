@@ -32,8 +32,8 @@ if( isset($_ENV['db-server'])
         $conn = tryConnect($serverName, $dbName, $userName, $password);
         if(!$conn){
             error_log("Failed attempt $attempts to connect to Azure SQL");
-            error_log("Msg:" . sqlsrv_errors());
-            error_log("Err:" . sqlsrv_errors());
+            error_log("Msg:" . print_r(sqlsrv_errors()));
+            error_log("Err:" . print_r(sqlsrv_errors()));
             sleep(1);
         } else {
             error_log("Connection successful on : $attempts Attempt");
@@ -54,7 +54,7 @@ if( isset($_ENV['db-server'])
         //     // print_r($_SESSION);
         //     // echo "</pre>";
 
-        //     if( ($errors = sqlsrv_errors() ) != null) {
+        //     if( ($errors = print_r(sqlsrv_errors()) ) != null) {
         //         foreach( $errors as $error ) {
         //             echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
         //             echo "code: ".$error[ 'code']."<br />";

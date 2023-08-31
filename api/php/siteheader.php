@@ -24,7 +24,7 @@ session_start();
 error_log(__FILE__ . "session:" . session_id());
 
 $token = $_ENV['api_token'];
-$GLOBALS['Db2Schema'] = strtoupper($_ENV['db-name']);
+$GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
 $_SESSION['ssoEmail'] = empty($_SESSION['ssoEmail']) ? 'API Invocation' : $_SESSION['ssoEmail'];
 include "connect.php";
 

@@ -402,12 +402,12 @@ class DbTable
                                     $this->inserted ++;
                                 } else {
                                     $this->failed ++;
-                                    echo "<BR/><B>Insert Failed</B> Error msg: " . sqlsrv_errors() . " Error:" . sqlsrv_errors();
+                                    echo "<BR/><B>Insert Failed</B> Error msg: " . print_r(sqlsrv_errors()) . " Error:" . print_r(sqlsrv_errors());
                                     echo "<BR/><B>Record #:</B>" . $this->processed . " <BR/><B>Data :</B>";
                                     echo "<BR/><B>Prepared Insert:</B>" . $this->preparedInsertSQL . "<BR/>";
                                     print_r($insertArray);
                                     echo "</HR>";
-                                    $sqlstate = sqlsrv_errors();
+                                    $sqlstate = print_r(sqlsrv_errors());
                                     if (! isset($sqlStates[$sqlstate])) {
                                         $sqlStates[$sqlstate] = 1;
                                     } else {
@@ -758,8 +758,8 @@ class DbTable
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . $sql);
         }
         if ($announce) {
@@ -808,8 +808,8 @@ class DbTable
         $rs = $this->execute($sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . str_replace($this->pwd, "******", $sql));
         }
     }
@@ -844,8 +844,8 @@ class DbTable
         Trace::traceVariable($sql, __METHOD__);
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
-            $this->lastDb2StmtError = sqlsrv_errors();
-            $this->lastDb2StmtErrorMsg = sqlsrv_errors();
+            $this->lastDb2StmtError = print_r(sqlsrv_errors());
+            $this->lastDb2StmtErrorMsg = print_r(sqlsrv_errors());
             self::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             return false;
         } else {
@@ -931,8 +931,8 @@ class DbTable
             $this->preparedInsertSQL = $sql;
             $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql);
             if (! $this->preparedInsert) {
-                echo "<BR/>" . sqlsrv_errors();
-                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+                echo "<BR/>" . print_r(sqlsrv_errors());
+                echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
                 exit("Unable to Prepare $sql");
             }
         }
@@ -961,8 +961,8 @@ class DbTable
         $rs = @sqlsrv_execute($preparedInsert, $insertArray);
 
         if (! $rs) {
-            $this->lastDb2StmtError = sqlsrv_errors();
-            $this->lastDb2StmtErrorMsg = sqlsrv_errors();
+            $this->lastDb2StmtError = print_r(sqlsrv_errors());
+            $this->lastDb2StmtErrorMsg = print_r(sqlsrv_errors());
 
             echo "<BR/>Insert Array@<pre>" . __METHOD__ . __LINE__ ;
             print_r($insertArray);
@@ -988,8 +988,8 @@ class DbTable
         echo $withTimings ?  "Db2 Insert Time:" . sprintf('%f', $insert) . PHP_EOL : null;
 
         if (! $rs) {
-            $this->lastDb2StmtError = sqlsrv_errors();
-            $this->lastDb2StmtErrorMsg = sqlsrv_errors();
+            $this->lastDb2StmtError = print_r(sqlsrv_errors());
+            $this->lastDb2StmtErrorMsg = print_r(sqlsrv_errors());
 
             echo "<br/>Method:" . __METHOD__ . " Line:" .  __LINE__ ;
             echo "<br/>Insert Array:";
@@ -1095,8 +1095,8 @@ class DbTable
             Trace::traceVariable($rs, __METHOD__, __LINE__);
 
             if (! $rs) {
-                $this->lastDb2StmtError = sqlsrv_errors();
-                $this->lastDb2StmtErrorMsg = sqlsrv_errors();
+                $this->lastDb2StmtError = print_r(sqlsrv_errors());
+                $this->lastDb2StmtErrorMsg = print_r(sqlsrv_errors());
     
                 echo "<BR/>Insert Array@<pre>" . __METHOD__ . __LINE__ ;
                 print_r($updateArray);
@@ -1138,8 +1138,8 @@ class DbTable
             $this->logRecord($preparedSelect, $cols, "<B>Before image </b>");
             $rs = sqlsrv_execute($preparedUpdate, $db2Columns);
             if (! $rs) {
-                echo "<BR/>" . sqlsrv_errors();
-                echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+                echo "<BR/>" . print_r(sqlsrv_errors());
+                echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
                 echo "<BR/> Cols: " . var_export($cols, true) . "<BR/>Db2Columns : " . var_export($cols, true) . "<BR/> ex Serial: $exSerial";
             }
             $this->inserted ++;
@@ -1313,8 +1313,8 @@ class DbTable
         $rs = sqlsrv_query($GLOBALS['conn'], " COMMIT");
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: COMMIT ");
         }
     }
@@ -1649,8 +1649,8 @@ class DbTable
         $rs = $this->execute($sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . str_replace($this->pwd, "******", $sql));
         }
         $row = sqlsrv_fetch_array($rs);
@@ -1676,8 +1676,8 @@ class DbTable
         $rs = $this->execute($sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: " . str_replace($this->pwd, "******", $sql));
         }
         $row = sqlsrv_fetch_array($rs);
@@ -1823,8 +1823,8 @@ class DbTable
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: $sql");
         }
         $row = sqlsrv_fetch_array($rs);
@@ -1914,8 +1914,8 @@ class DbTable
 
     static function displayErrorMessage($rs, $class, $method, $sql, $pwd = null, $db2Error = null, $db2ErrorMsg = null, $data = null, $rollback = true)
     {
-        $db2Error = empty($db2Error) ? sqlsrv_errors() : $db2Error;
-        $db2ErrorMsg = empty($db2ErrorMsg) ? sqlsrv_errors() : $db2ErrorMsg;
+        $db2Error = empty($db2Error) ? print_r(sqlsrv_errors()) : $db2Error;
+        $db2ErrorMsg = empty($db2ErrorMsg) ? print_r(sqlsrv_errors()) : $db2ErrorMsg;
         $rollback ? db2_rollback($GLOBALS['conn']) : null; // Roll back to last commit point.
 
         if (isset(AllItdqTables::$DB2_ERRORS)) {
@@ -1977,14 +1977,14 @@ class DbTable
         }
         $request = strlen(htmlspecialchars($request)) > 1024 ? substr(htmlspecialchars($request), 0, 1000) : htmlspecialchars($request);
         
-        $sqlsrv_errors = str_replace(['"',"'"], "", sqlsrv_errors());
-        $sqlsrv_errors = str_replace(['"',"'"], "", sqlsrv_errors());
+        $sqlsrv_errors = str_replace(['"',"'"], "", print_r(sqlsrv_errors()));
+        $sqlsrv_errors = str_replace(['"',"'"], "", print_r(sqlsrv_errors()));
         $sql .= " VALUES ('" . $userid . "','" . $_SERVER['PHP_SELF'] . "','" . $sqlsrv_errors . "','" . $sqlsrv_errors . "','" . $backtrace . "','" . $request . "')";
 
         if (isset($_SESSION['phoneHome']) && class_exists('Email')) {
             $to = $_SESSION['phoneHome'];
             $subject = $GLOBALS['Db2Schema'] . " Bug : User: $userid Page:" . $_SERVER['PHP_SELF'];
-            $summary = "<BR/>Page:" . $_SERVER['PHP_SELF'] . "<BR/>DB2 Error:<B>" . sqlsrv_errors() . "</B><BR/>Db2 Error Message<B>" . sqlsrv_errors() . "</B>";
+            $summary = "<BR/>Page:" . $_SERVER['PHP_SELF'] . "<BR/>DB2 Error:<B>" . print_r(sqlsrv_errors()) . "</B><BR/>Db2 Error Message<B>" . print_r(sqlsrv_errors()) . "</B>";
             $body = $summary . "<BR/>$backtrace<HR/>$request<HR/>";
             Email::send_mail($to, null, $subject, $body, null, false);
             echo "<h4>An email has been sent to: $to informing them of this problem</h4>";
@@ -1992,8 +1992,8 @@ class DbTable
 
         $rs = @sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
-            echo "<BR>Error: " . sqlsrv_errors();
-            echo "<BR>Msg: " . sqlsrv_errors() . "<BR>";
+            echo "<BR>Error: " . print_r(sqlsrv_errors());
+            echo "<BR>Msg: " . print_r(sqlsrv_errors()) . "<BR>";
             throw new \Exception("Error in: " . __METHOD__ . __LINE__ . "<BR>running: $sql");
         }
     }
@@ -2102,8 +2102,8 @@ class DbTable
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
         if (! $rs) {
             print_r($_SESSION);
-            echo "<BR/>" . sqlsrv_errors();
-            echo "<BR/>" . sqlsrv_errors() . "<BR/>";
+            echo "<BR/>" . print_r(sqlsrv_errors());
+            echo "<BR/>" . print_r(sqlsrv_errors()) . "<BR/>";
             exit("Error in: " . __METHOD__ . " running: $sql");
         }
 

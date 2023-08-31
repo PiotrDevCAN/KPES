@@ -22,8 +22,8 @@ $updater = new TableDataUpdater($personTable);
 // $resultSet = $personTable->fetchPeopleList(" AND EMAIL_ADDRESS LIKE '%ocean.ibm.com%'");
 $resultSet = $personTable->fetchPeopleList();
 if (!$resultSet) {
-    echo sqlsrv_errors();
-    echo sqlsrv_errors();
+    echo print_r(sqlsrv_errors());
+    echo print_r(sqlsrv_errors());
     throw new \Exception('Error reading People from PERSON');
 }
 
