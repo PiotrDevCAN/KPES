@@ -3,10 +3,16 @@
 
 include realpath(dirname(__FILE__))."/../SSO/class/include.php";
 $auth = new Auth();
-if($auth->verifyResponse($_GET))
+if(isset($_GET['code']))
 {
-    $landingPage = urldecode($_GET['state']);
-    header("Access-Control-Allow-Origin: *");
-    header("Location: ".$landingPage);
-	exit();
+    if($auth->verifyResponse($_GET))
+    {
+        $landingPage = urldecode($_GET['state']);
+        header("Access-Control-Allow-Origin: *");
+        header("Location: ".$landingPage);
+        exit();
+    }
+} else {
+    echo 'Authentication attempt has failed';
+    exit();
 }
