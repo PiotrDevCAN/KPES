@@ -41,56 +41,10 @@ class Auth {
 		return false;
 	}
 
-	//verifies response from authentication service depending on technologies
-	//returns boolean
-	// public function verifyResponse($response)
-	// {
-	// 	switch ($this->technology) {
-	// 		case "openidconnect":
-	// 			return $this->verifyCodeOpenIDConnect($response['code']);
-	// 			break;
-	// 	}
-	// }
-
-	/********* OPEN ID CONNECT RELATED FUNCTIONS *********/
-
-	//verifies openID response
-	// private function verifyCodeOpenIDConnect($code)
-	// {
-	//     $url = $this->config->token_url;
-
-	//     $fields = array(
-	// 		'code' => $code,
-	// 		'client_id' => $this->config->client_id,
-	// 		'client_secret' => $this->config->client_secret,
-	// 		'redirect_uri' => $this->config->redirect_url,
-	// 		'grant_type' => 'authorization_code'
-	// 	);
-
-	// 	$postvars = http_build_query($fields);
-	// 	$ch = curl_init();
-
-	// 	curl_setopt($ch, CURLOPT_URL, $url);
-	// 	curl_setopt($ch, CURLOPT_POST, count($fields));
-	// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
-
-	// 	$result = curl_exec($ch);
-
-	// 	curl_close($ch);
-
-	// 	return $this->processOpenIDConnectCallback($result);
-	// }
-
 	//processes openid data and sets session
 	//returns boolean
 	private function processOpenIDConnectCallback($data)
 	{
-		// token_type
-		// expires_in
-		// ext_expires_in
-		// access_token
-		
 		$token_response = json_decode($data,);
 		$token_response_arr = json_decode($data, true);
 		if($token_response)
@@ -158,7 +112,7 @@ class Auth {
 			'client_id' => $this->config->client_id,
 			'client_secret' => $this->config->client_secret,
 			'grant_type' => 'client_credentials',
-			'scope' => 'api://51d4cf5d-b248-4e4f-b6dd-5897e73e247f/.default'
+			'scope' => $this->config->token_scope
 		);
 
 		$postvars = http_build_query($fields);
@@ -204,6 +158,7 @@ class Auth {
 			&& isset($config->introspect_url) && !empty($config->introspect_url)
 			&& isset($config->client_id) && !empty($config->client_id)
 			&& isset($config->client_secret) && !empty($config->client_secret)
+			&& isset($config->token_scope) && !empty($config->token_scope)
 			&& isset($config->redirect_url) && !empty($config->redirect_url)
 			)
 		{
