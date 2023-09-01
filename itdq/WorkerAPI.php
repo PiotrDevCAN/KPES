@@ -12,16 +12,14 @@ include_once "WorkerAPI/class/include.php";
 class WorkerAPI {
 	
 	private $token = null;
-	private $hostname_int = null;
-	private $hostname_ext = null;
+	private $hostname = null;
 
 	public function __construct()
 	{
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		$this->hostname_int = trim($_ENV['worker_api_host_int']);
-		$this->hostname_ext = trim($_ENV['worker_api_host_ext']);
+		$this->hostname = trim($_ENV['worker_api_host']);
 
 		// echo $_SESSION['worker_token'];
 		$this->token = $_SESSION['worker_token'];
@@ -44,7 +42,7 @@ class WorkerAPI {
 	}
 
 	private function processURL($url, $type = 'GET'){
-		$url = $this->hostname_ext . $url;
+		$url = $this->hostname . $url;
 		$ch = $this->createCurl($type);
 		// echo "<BR>Processing";
 		// echo " URL:" . $url;
@@ -52,8 +50,6 @@ class WorkerAPI {
 		$ret = curl_exec($ch);
 		if (empty($ret)) {
 			// some kind of an error happened
-			var_dump($this->hostname_int).PHP_EOL;
-			var_dump($this->hostname_ext).PHP_EOL;
 			die(curl_error($ch));
 			curl_close($ch); // close cURL handler
 		} else {
