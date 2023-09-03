@@ -3,7 +3,7 @@ name: ci-build-and-deploy-production
 on:
   push:
     branches:
-      - cirrus
+      - prod
 jobs:
   Build:
     runs-on:

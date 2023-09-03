@@ -3,7 +3,7 @@ name: ci-build-and-deploy-testQA
 on:
   push:
     branches:
-      - cirrus
+      - testqa
 jobs:
   Build:
     runs-on:
