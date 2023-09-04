@@ -132,7 +132,7 @@ function do_error($page = array())
 
 function do_auth($group = null)
 {
-    if(stripos($_ENV['environment'], 'dev')) {
+    if(stripos($_ENV['environment'], 'local')) {
         $_SESSION['ssoEmail'] = $_ENV['SERVER_ADMIN'];
     } else {
         // batchJobs
