@@ -41,7 +41,7 @@ spec:
           value: Linux
         envFrom:
         - configMapRef:
-            name: env-configmap
+            name: env-configmap-testqa
         - secretRef:
             name: kpes-app-docker-secrets
         - secretRef:
