@@ -25,7 +25,11 @@ class Process{
         $command = 'nohup '.$this->command;
         $op = null;
         exec($command ,$op, $retval);
-        $this->pid = (int)$op[0];
+        if (isSet($op[0])) {
+            $this->pid = (int) $op[0];
+        } else {
+            $this->pid = null;
+        }
     }
 
     public function setPid($pid){
