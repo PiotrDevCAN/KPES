@@ -1205,7 +1205,7 @@ class AccountPersonTable extends DbTable {
         $accountPersonRecord->sendPesStatusChangedEmail();
 
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
 
     function notifyRecheckDateApproaching(){
@@ -1563,7 +1563,7 @@ class AccountPersonTable extends DbTable {
         
        
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
     
     static function reboardToAccount( $accountId=null, $upesref=null){
@@ -1585,7 +1585,7 @@ class AccountPersonTable extends DbTable {
         
         
         sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
     }
     
     static function offboardedStatusFromEmail($email=null, $accountId=null){

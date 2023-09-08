@@ -52,7 +52,7 @@ $pesStatusField = AccountPersonRecord::getPesStatusWithButtons($data[0]);
 $processingStatusField =  AccountPersonTable::formatProcessingStatusCell($data[0]);
 
 sqlsrv_commit($GLOBALS['conn']);
-sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
+// sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_ON);
 
 $pesCommentField = $data[0]['COMMENT'];
 
