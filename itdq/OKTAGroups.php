@@ -18,10 +18,12 @@ class OKTAGroups {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		$this->hostname = trim($_ENV['worker_api_host']);
+		// $this->hostname = trim($_ENV['sso_host']);
+		$this->hostname = 'https://connect.kyndryl.net';
 
 		// echo $_SESSION['worker_token'];
-		$this->token = $_SESSION['worker_token'];
+		// $this->token = $_SESSION['sso_api_token'];
+		$this->token = '001GvGE4m4VjLGEtlFh4Ivi55PNDsKmeE0YUByU8tQ';
 	}
 
 	private function createCurl($type = "POST")
