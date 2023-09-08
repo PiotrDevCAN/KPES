@@ -16,7 +16,7 @@ $personRecord->setFromArray(array('UPES_REF'=>$_POST['upesref']));
 $personRecordData = $personTable->getRecord($personRecord);
 $names = explode(" ", $personRecordData['FULL_NAME']);
 
-sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+// sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
 
 $emailDetails = array();
 

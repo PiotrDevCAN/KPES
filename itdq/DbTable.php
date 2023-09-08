@@ -220,7 +220,7 @@ class DbTable
             $uploadLogTable->saveRecord($uploadLogRecord);
             $this->uploadId = $uploadLogTable->lastId();
             $uploadLogRecord->setId($this->uploadId);
-            $db2CommitState = sqlsrv_commit($GLOBALS['conn'], DB2_AUTOCOMMIT_OFF);
+            // $db2CommitState = sqlsrv_commit($GLOBALS['conn'], DB2_AUTOCOMMIT_OFF);
             echo "<BR/>Log id is " . $this->uploadId;
         }
 
@@ -500,7 +500,7 @@ class DbTable
         if ($withUploadLogId) {
             $uploadLogTable->setStatus($this->uploadId, UploadLogRecord::$statusLOADED);
             sqlsrv_commit($GLOBALS['conn']);
-            sqlsrv_commit($GLOBALS['conn'], $db2CommitState);
+            // sqlsrv_commit($GLOBALS['conn'], $db2CommitState);
             return $this->uploadId;
         } else {
             return TRUE;

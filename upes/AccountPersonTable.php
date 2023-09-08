@@ -905,7 +905,7 @@ class AccountPersonTable extends DbTable {
         $accounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT," ACCOUNT_ID='" . htmlspecialchars($accountid) . "'");
 
         $db2AutoCommit = sqlsrv_commit($GLOBALS['conn']);
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         $now = new \DateTime();
 
         $dateToUse =  empty($dateToUse) ? $now->format('Y-m-d') : $dateToUse;
@@ -1168,7 +1168,7 @@ class AccountPersonTable extends DbTable {
 
     static function cancelPesRequest( $accountId=null, $upesref=null){
 
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
 
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET PES_STATUS='" . AccountPersonRecord::PES_STATUS_CANCEL_REQ . "' ";
@@ -1546,7 +1546,7 @@ class AccountPersonTable extends DbTable {
     
     static function offboardFromAccount( $accountId=null, $upesref=null){
         
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = current date ";
@@ -1568,7 +1568,7 @@ class AccountPersonTable extends DbTable {
     
     static function reboardToAccount( $accountId=null, $upesref=null){
         
-        sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
         $sql.= " SET OFFBOARDED_DATE = null ";
@@ -1625,7 +1625,7 @@ class AccountPersonTable extends DbTable {
         $columnHeaders = array();
         $recordData = array();
         $failedRecords = 0;
-        $autoCommit = sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
+        // $autoCommit = sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         for ($row = 1; $row <= $highestRow; $row++){
             set_time_limit(10);
             $time = -microtime(true);
@@ -1732,7 +1732,7 @@ class AccountPersonTable extends DbTable {
         }
 
         sqlsrv_commit($GLOBALS['conn']);  // Save what we have done.
-        sqlsrv_commit($GLOBALS['conn'],$autoCommit);
+        // sqlsrv_commit($GLOBALS['conn'],$autoCommit);
 
         $response = ob_get_clean();
         ob_start();
