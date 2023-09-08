@@ -18,12 +18,8 @@ class OKTAGroups {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		// $this->hostname = trim($_ENV['sso_host']);
-		$this->hostname = 'https://connect.kyndryl.net';
-
-		// echo $_SESSION['worker_token'];
-		// $this->token = $_SESSION['sso_api_token'];
-		$this->token = '001GvGE4m4VjLGEtlFh4Ivi55PNDsKmeE0YUByU8tQ';
+		$this->hostname = trim($_ENV['sso_host']);
+		$this->token = trim($_SESSION['sso_api_token']);
 	}
 
 	private function createCurl($type = "POST")
@@ -206,9 +202,9 @@ class OKTAGroups {
 		$this->processURL($url);
 	}
 
-	public function listMembers($groupName)
+	public function listMembers($groupId)
 	{
-		$url = "/api/v1/groups";
+		$url = "/api/v1/groups/$groupId/users";
 		return $this->processURL($url);
 
 	    // $url = "https://bluepages.ibm.com/tools/groups/groupsxml.wss?task=listMembers&group=" . urlencode($groupName) . "&depth=1";
