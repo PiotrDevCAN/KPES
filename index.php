@@ -6,10 +6,10 @@ use itdq\OKTAGroups;
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
 $workerAPI = new WorkerAPI();
-$workerData = json_decode($workerAPI->getworkerByEmail('piotr.tajanowicz@kyndryl.com'));
+$workerData = json_decode($workerAPI->getworkerByEmail($_SESSION['ssoEmail']);
 
-// $OKTAGroups = new OKTAGroups();
-// $OKTAGroups->listMembers('aaa');
+$OKTAGroups = new OKTAGroups();
+$OKTAGroups->listMembers('aaa');
 
 // echo '<pre>';
 // echo 'ENVIRONMENT <br>';
