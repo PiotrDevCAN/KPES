@@ -25,7 +25,7 @@
 			if(isset($_SESSION['uid'])) {
 				error_log($_SESSION['uid']);
 			}
-			if(isset($_SESSION['uid'])) {
+			if(isset($_SESSION['exp'])) {
 				error_log($_SESSION['exp']);
 			}
 

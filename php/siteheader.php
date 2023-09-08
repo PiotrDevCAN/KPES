@@ -132,7 +132,7 @@ function do_error($page = array())
 
 function do_auth($group = null)
 {
-    if(stripos($_ENV['environment'], 'dev')) {
+    if(stripos($_ENV['environment'], 'local')) {
         $_SESSION['ssoEmail'] = $_ENV['SERVER_ADMIN'];
     } else {
         // batchJobs
@@ -311,10 +311,10 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     ini_set('memory_limit', '512M');
     ini_set('max_execution_time', 360);
 
-    // require_once("php/errorHandlers.php");
+    require_once("php/errorHandlers.php");
 
-    // set_error_handler('myErrorHandler');
-    // register_shutdown_function('fatalErrorShutdownHandler');
+    set_error_handler('myErrorHandler');
+    register_shutdown_function('fatalErrorShutdownHandler');
 
     date_default_timezone_set('UTC');
 
@@ -337,6 +337,8 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     }
 
     $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+    $GLOBALS['Db2Schema'] = str_replace('_LOCAL', '_DEV', $GLOBALS['Db2Schema']);
+
     $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
     // global var and config file

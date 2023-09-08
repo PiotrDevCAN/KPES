@@ -44,5 +44,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include "php/w3config.php";
 include "connect.php";
+
 $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+$GLOBALS['Db2Schema'] = str_replace('_LOCAL', '_DEV', $GLOBALS['Db2Schema']);
+
 $_SESSION['ssoEmail'] = 'Scheduled Job';

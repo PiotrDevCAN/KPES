@@ -3,7 +3,7 @@ use itdq\JwtSecureSession;
 
 function do_auth($group = null)
 {
-    if(stripos($_ENV['environment'], 'dev')) {
+    if(stripos($_ENV['environment'], 'local')) {
         $_SESSION['ssoEmail'] = $_ENV['SERVER_ADMIN'];
     } else {
         // $_SESSION['ssoEmail'] = $_SESSION['ssoEmail'];
@@ -20,6 +20,7 @@ include ('vendor/autoload.php');
 include ('splClassLoader.php');
 
 $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+$GLOBALS['Db2Schema'] = str_replace('_LOCAL', '_DEV', $GLOBALS['Db2Schema']);
 
 if (!isset($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = 'cli';

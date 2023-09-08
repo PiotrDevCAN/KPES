@@ -48,14 +48,6 @@ div.editable {
 	</div>
 <div class='row'>
 <div class='col-sm-6'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<hr>
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-=======
-<hr>
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 <h1>Addresses</h1>
 <table id='Addresses' class='table table-stripped table-responsive'>
 <thead>

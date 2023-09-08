@@ -451,7 +451,7 @@ class SortableList
         Trace::traceVariable($this->sql2, __METHOD__, __LINE__);
 
         $rs = sqlsrv_query($GLOBALS['conn'], $this->sql2, array(
-            'cursor' => DB2_SCROLLABLE
+            'cursor' => SQLSRV_CURSOR_DYNAMIC
         ));
 
         if (! $rs) {

@@ -8,7 +8,6 @@ include_once "WorkerAPI/class/include.php";
 /*
  *  Handles Worker API.
  */
-
 class WorkerAPI {
 	
 	private $token = null;
@@ -25,7 +24,8 @@ class WorkerAPI {
 		$this->token = $_SESSION['worker_token'];
 	}
 
-	private function createCurl($type = "GET"){
+	private function createCurl($type = "GET")
+	{
 		// create a new cURL resource
 		$ch = curl_init();
 		$authorization = "Authorization: Bearer ".$this->token; // Prepare the authorisation token
@@ -41,21 +41,27 @@ class WorkerAPI {
 		return $ch;
 	}
 
-	private function processURL($url, $type = 'GET'){
+	private function processURL($url, $type = 'GET')
+	{
 		$url = $this->hostname . $url;
 		$ch = $this->createCurl($type);
 		// echo "<BR>Processing";
 		// echo " URL:" . $url;
 		$ret = curl_setopt($ch, CURLOPT_URL, $url);
 		$ret = curl_exec($ch);
+
+		$result = json_decode($ret, true);
+
 		if (empty($ret)) {
 			// some kind of an error happened
-			die(curl_error($ch));
+			// die(curl_error($ch));
 			curl_close($ch); // close cURL handler
 		} else {
 			$info = curl_getinfo($ch);
 			if (empty($info['http_code'])) {
-				die("No HTTP code was returned");
+				// die("No HTTP code was returned");
+			} else if ($info['http_code'] == 500) {
+				echo $result['message'];
 			} else {
 				// So Bluegroups has processed our URL - What was the result.
 				$bgapiRC  = substr($ret,0,1);
