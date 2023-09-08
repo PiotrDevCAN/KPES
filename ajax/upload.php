@@ -1,6 +1,5 @@
 <?php
 <<<<<<< HEAD
-<<<<<<< HEAD
 $target_dir = "../ots_uploads/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $uploadOk = 1;
@@ -8,8 +7,6 @@ $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 ob_clean();
 =======
-=======
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
 use itdq\BluePages;
 
@@ -34,15 +31,12 @@ $scrap = ob_get_contents();
 $now = new DateTime();
 
 echo $now->format('Y-m-d H:i:s');
-<<<<<<< HEAD
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 
 // Check if file already exists
 if (file_exists($target_file)) {
     $uploadOk = unlink($target_file);
-<<<<<<< HEAD
 <<<<<<< HEAD
     echo $uploadOk ? "Previous File deleted." : "Problem deleting previous file";
 
@@ -69,8 +63,6 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 =======
-=======
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
     echo $uploadOk ? "<br/>Previous File deleted." : "<br/>Problem deleting previous file";
 }
 
@@ -299,8 +291,6 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 
-<<<<<<< HEAD
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 =======
 >>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
 }

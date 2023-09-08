@@ -42,29 +42,6 @@ class AccountPersonTable extends DbTable {
     const PES_TRACKER_RETURN_RESULTS_AS_ARRAY      = 'array';
     const PES_TRACKER_RETURN_RESULTS_AS_RESULT_SET = 'resultSet';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const PES_TRACKER_STAGE_CONSENT        = 'Consent Form';
-    const PES_TRACKER_STAGE_WORK           = 'Right to Work';
-    const PES_TRACKER_STAGE_ID             = 'Proof of Id';
-    const PES_TRACKER_STAGE_RESIDENCY      = 'Residency';
-    const PES_TRACKER_STAGE_CREDIT         = 'Credit Check';
-    const PES_TRACKER_STAGE_SANCTIONS      = 'Financial Sanctions';
-    const PES_TRACKER_STAGE_CRIMINAL       = 'Criminal Records Check';
-    const PES_TRACKER_STAGE_ACTIVITY       = 'Activity';
-    const PES_TRACKER_STAGE_QUALIFICATIONS = 'Qualifications';
-    const PES_TRACKER_STAGE_CIFAS          = 'CIFAS';
-    const PES_TRACKER_STAGE_DIRECTORS      = 'Directors';
-    const PES_TRACKER_STAGE_MEDIA          = 'Media';
-    const PES_TRACKER_STAGE_MEMBERSHIP     = 'Membership';
-    const PES_TRACKER_STAGE_NI_EVIDENCE    = 'NI Evidence';
-=======
-const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-=======
-const PES_TRACKER_STAGES =  array('CONSENT','RIGHT_TO_WORK','PROOF_OF_ID','PROOF_OF_RESIDENCY','RAG_STATUS','CREDIT_CHECK','FINANCIAL_SANCTIONS','CRIMINAL_RECORDS_CHECK','PROOF_OF_ACTIVITY','QUALIFICATIONS','DIRECTORS','MEDIA','MEMBERSHIP','NI_EVIDENCE');
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-
     const PES_TRACKER_STAGES =  array(
         'CONSENT',
         'RIGHT_TO_WORK',

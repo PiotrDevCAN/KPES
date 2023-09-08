@@ -20,6 +20,7 @@ include ('vendor/autoload.php');
 include ('splClassLoader.php');
 
 $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
+$GLOBALS['Db2Schema'] = str_replace('_LOCAL', '_DEV', $GLOBALS['Db2Schema']);
 
 if (!isset($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = 'cli';

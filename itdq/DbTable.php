@@ -1,6 +1,12 @@
 <?php
 namespace itdq;
 
+// DATA_TYPE - The SQL data type for the column represented as an integer value.
+// Type	- The numeric value for the SQL type.
+
+// TYPE_NAME - A string representing the data type for the column.
+// Type_name_new - map to a proper value from MS documentation
+
 /**
  * Class for interfacing with a DB2 Table.
  * Can handle tables with Encrypted Columns, simply call the __construct with the encryption password as the 2nd Parm.
@@ -134,6 +140,40 @@ class DbTable
         'OCT' => '10',
         'NOV' => '11',
         'DEC' => '12'
+    );
+
+    public static $typeNames = array(
+        -155 => 'datetimeoffset',
+        -154 => 'time',
+        -152 => 'xml',
+        -151 => 'udt',
+        -150 => 'sql_variant',
+        -11  => 'uniqueidentifier',
+        -10	 => 'ntext',
+        -9	 => 'nvarchar',
+        -8	 => 'bit',
+        -8	 => 'nchar',
+        -6	 => 'tinyint',
+        -5	 => 'bigint',
+        -4	 => 'image',
+        -3	 => 'varbinary',
+        -2	 => 'binary',
+        -2	 => 'timestamp',
+        -1	 => 'text',
+        1	 => 'char',
+        2	 => 'numeric',
+        3	 => 'decimal',
+        3	 => 'money',
+        3	 => 'Smallmoney',
+        4	 => 'int',
+        5	 => 'smallint',
+        6	 => 'float',
+        7	 => 'real',
+        12	 => 'varchar',
+        91	 => 'date',
+        93	 => 'datetime',
+        93	 => 'datetime2',
+        93	 => 'smalldatetime',
     );
 
     const ROLLBACK_YES = true;
@@ -276,8 +316,8 @@ class DbTable
                                     if (! isset($data[$csvCol])) {
                                         $data[$csvCol] = null;
                                     }
-                                    // echo "<BR/><B>Type:</B>" . $this->columns [$key] ['DATA_TYPE'] . ":" . trim($data [$csvCol]);
-                                    switch ($this->columns[$key]['DATA_TYPE']) {
+                                    // echo "<BR/><B>Type:</B>" . $this->columns [$key] ['Type'] . ":" . trim($data [$csvCol]);
+                                    switch ($this->columns[$key]['Type']) {
                                         case 93: // It's a TIMESTAMP
                                             $valid = FALSE;
                                             foreach (self::$dateFormats as $dateFormat) {
@@ -473,21 +513,35 @@ class DbTable
     function getDBColumns()
     {
         Trace::traceComment(null, __METHOD__);
-        $rs = db2_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], strtoupper($this->tableName), '%');
-        while ($row = sqlsrv_fetch_array($rs)) {
-            Trace::traceVariable($row, __METHOD__, __LINE__);
-            $this->columns[trim($row['COLUMN_NAME'])] = $row;
+        
+        // $rs = db2_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], strtoupper($this->tableName), '%');
+        // while ($row = sqlsrv_fetch_array($rs)) {
+        //     Trace::traceVariable($row, __METHOD__, __LINE__);
+        //     $this->columns[trim($row['Name'])] = $row;
+        // }
+
+        $sql = "SELECT * FROM ".$GLOBALS['Db2Schema'].'.'.strtoupper($this->tableName);
+        $stmt = sqlsrv_prepare( $GLOBALS['conn'], $sql );
+        foreach( sqlsrv_field_metadata( $stmt ) as $row ) {
+            foreach( $row as $name => $value) {
+                if($name == 'Name') {
+                    Trace::traceVariable($row, __METHOD__, __LINE__);
+                    $row['Type_name_new'] = self::$typeNames[$row["Type"]];
+                    $this->columns[trim($value)] = $row;
+                }
+            }
         }
+
         Trace::traceVariable($this->columns, __METHOD__, __LINE__);
     }
 
     function getSpecialColumns()
     {
-        Trace::traceComment(null, __METHOD__);
-        $rs = db2_special_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName, 0);
-        while ($row = sqlsrv_fetch_array($rs)) {
-            $this->special_columns[trim($row['COLUMN_NAME'])] = $row;
-        }
+        // Trace::traceComment(null, __METHOD__);
+        // $rs = db2_special_columns($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName, 0);
+        // while ($row = sqlsrv_fetch_array($rs)) {
+        //     $this->special_columns[trim($row['Name'])] = $row;
+        // }
     }
 
     function isSpecialColumn($colName)
@@ -497,17 +551,20 @@ class DbTable
 
     function getColumnType($columnName)
     {
-        return $this->columns[$columnName]['TYPE_NAME'];
+        // return $this->columns[$columnName]['TYPE_NAME'];
+        return $this->columns[$columnName]['Type_name_new'];
     }
 
     function getColumnLength($columnName)
     {
-        return $this->columns[$columnName]['COLUMN_SIZE'];
+        // return $this->columns[$columnName]['COLUMN_SIZE'];
+        return $this->columns[$columnName]['Size'];
     }
 
     function getNullable($columnName)
     {
-        if ($this->columns[$columnName]['NULLABLE'] == 1) {
+        // if ($this->columns[$columnName]['NULLABLE'] == 1) {
+        if ($this->columns[$columnName]['Nullable'] == 1) {
             return TRUE;
         } else {
             return FALSE;
@@ -516,7 +573,8 @@ class DbTable
 
     function getColumnDef($columnName)
     {
-        return $this->columns[$columnName]['COLUMN_DEF'];
+        // return $this->columns[$columnName]['COLUMN_DEF'];
+        return '';
     }
 
     /**
@@ -525,18 +583,18 @@ class DbTable
     function getPrimaryKeys()
     {
         Trace::traceComment(null, __METHOD__);
-        $rs = db2_primary_keys($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName);
-        while ($row = sqlsrv_fetch_array($rs)) {
-            // print_r($row);
-            $this->primary_keys[trim($row['COLUMN_NAME'])] = $row;
-        }
+        // $rs = db2_primary_keys($GLOBALS['conn'], null, $GLOBALS['Db2Schema'], $this->tableName);
+        // while ($row = sqlsrv_fetch_array($rs)) {
+        //     // print_r($row);
+        //     $this->primary_keys[trim($row['Name'])] = $row;
+        // }
     }
 
     /**
      * Runs a simple select with the Predicate param and returns the Row returned by sqlsrv_fetch_array
      *
      * @param string $predicate
-     *            Valid DB2 predicate, without the leading WHERE
+     * Valid DB2 predicate, without the leading WHERE
      * @return multitype:
      */
     function getPredicate($predicate = null)
@@ -555,7 +613,7 @@ class DbTable
      * Runs a simple select with the Predicate param and returns the ResultSet for further processing.
      *
      * @param string $predicate
-     *            Valid DB2 predicate, without the leading WHERE
+     * Valid DB2 predicate, without the leading WHERE
      * @return multitype:
      */
     function getRsWithPredicate($predicate = null, $distinct = false)
@@ -569,7 +627,7 @@ class DbTable
         $sql .= " WHERE " . $predicate;
         Trace::traceVariable($sql, __METHOD__);
         $rs = sqlsrv_query($GLOBALS['conn'], $sql, array(
-            'cursor' => DB2_SCROLLABLE
+            'cursor' => SQLSRV_CURSOR_DYNAMIC
         ));
         return $rs;
     }
@@ -577,7 +635,7 @@ class DbTable
     /**
      * Issues a Select for the Record passed to it, using the values in the Key Fields in the Record to build a specific DB2 SELECT.
      *
-     * It does NOT populate the record with the result of the sqlsrv_fetch_array, rather it returns the data in an array.
+     * It does NOT populate the record with the result of the DB2_FETCH_ASSOC, rather it returns the data in an array.
      * You can then populate the record using the dbRecord function setFromArray();
      *
      * @param DbRecord $record
@@ -593,7 +651,7 @@ class DbTable
 
         $row = sqlsrv_fetch_array($this->execute($sql));
         if (! $row) {
-            DbTable::displayErrorMessage($row, __CLASS__, __METHOD__, $sql);
+            self::displayErrorMessage($row, __CLASS__, __METHOD__, $sql);
         } else {
             foreach ($row as $key => $value) {
                 $row[$key] = trim($value);
@@ -620,10 +678,10 @@ class DbTable
         foreach ($this->columns as $key => $array) {
             // print_r($array);
             echo "<BR/>$key : $array[DATA_TYPE]";
-            if ($this->columns[$key]['DATA_TYPE'] == 98 or $this->columns[$key]['DATA_TYPE'] == - 3) {
+            if ($this->columns[$key]['Type'] == 98 or $this->columns[$key]['Type'] == - 3) {
                 echo " Is encrypted";
             }
-            if ($this->columns[$key]['DATA_TYPE'] == 9) {
+            if ($this->columns[$key]['Type'] == 9) {
                 echo "<B>Is Date</B><BR/>";
                 echo "Format to be used is : " . $_REQUEST['date_format'];
             }
@@ -720,7 +778,7 @@ class DbTable
             if (isset($csvMap[$columnNumb])) {
                 // echo "<BR/>" . __LINE__ . "<BR/>";
                 $db2Col .= "<TD style='background-color:yellow;text-align:center'>" . $csvMap[$columnNumb];
-                switch ($this->columns[$csvMap[$columnNumb]]['DATA_TYPE']) {
+                switch ($this->columns[$csvMap[$columnNumb]]['Type']) {
                     case 9:
                         $db2Col .= "<BR/>" . $_REQUEST['date_format'];
                         break;
@@ -729,7 +787,7 @@ class DbTable
                         $db2Col .= "<BR/>Encrypted";
                         break;
                     default:
-                        $db2Col .= "<BR/>" . $this->columns[$csvMap[$columnNumb]]['TYPE_NAME'] . " (" . $this->columns[$csvMap[$columnNumb]]['DATA_TYPE'] . ")<BR/> Size:" . $this->columns[$csvMap[$columnNumb]]['BUFFER_LENGTH'];
+                        $db2Col .= "<BR/>" . $this->columns[$csvMap[$columnNumb]]['Type_name_new'] . " (" . $this->columns[$csvMap[$columnNumb]]['Type'] . ")<BR/> Size:" . $this->columns[$csvMap[$columnNumb]]['BUFFER_LENGTH'];
                         break;
                 }
                 $db2Col .= "</TD>";
@@ -830,7 +888,7 @@ class DbTable
     }
 
     /**
-     * Calls sqlsrv_query on the sql passed in.
+     * Calls DB2_EXEC on the sql passed in.
      * Optionally creating a Log::logEntry recording the SQL (with any encryption password masked out)
      *
      * @param string $sql
@@ -864,7 +922,7 @@ class DbTable
      * is created with ENCRYPT_RC2 around the encrypted column.
      *
      * It also knows to remove Date Time columns that are empty, as they won't insert. It actually removes them from insertArray, so they
-     * don't mess up the sqlsrv_queryUTE when it gets invoked, this is why $insertArray is declared as &$insertArray, as this method needs to be able to modify it.
+     * don't mess up the DB2_EXECUTE when it gets invoked, this is why $insertArray is declared as &$insertArray, as this method needs to be able to modify it.
      *
      * <B>NOTE</B> In one upgrade to the server, maintenance was applied that modified the values for some of the Datatypes, can't remember now if they changed from 98 to -3 or the other
      * way around, but that's why both values are specified in the switch. The 'symptom' was that we were inserting non-encrpyted values into columns that should have been encrypted.
@@ -883,14 +941,18 @@ class DbTable
         $colNames = " (";
         $values = " (";
         foreach ($this->columns as $key => $properties) {
-            if ((($insertArray != null && isset($insertArray[$key])) or (($insertArray == null)) && (! isset($this->nonMandatoryColumns[$key])))) {
-                Trace::traceComment('Processing' . $key . "type " . $properties['DATA_TYPE'] . "Len:" . strlen($insertArray[$key]), __METHOD__, __LINE__);
+            if ((
+                ($insertArray != null && isset($insertArray[$key])) 
+                or (($insertArray == null)) 
+                && (! isset($this->nonMandatoryColumns[$key]))
+            )) {
+                Trace::traceComment('Processing' . $key . "type " . $properties['Type'] . "Len:" . strlen($insertArray[$key]), __METHOD__, __LINE__);
                 // They have passed us an Array to use - AND - This field has a value in that array
                 // or
                 // Thet did NOT pass a field (so we're using ALL the fields defind in uppercase in the Class
                 // AND
                 // THIS field is NOT defined as one that can be ignored becuase it's "non mandatory"
-                switch ($properties['DATA_TYPE']) {
+                switch ($properties['Type']) {
                     case 98:
                     case - 3:
                         $colNames .= "," . $key;
@@ -947,14 +1009,14 @@ class DbTable
      * @param DbRecord $record
      * @return boolean
      */
-    function insert(DbRecord $record, $populatedColumns = true, $nullColumns = true)
+    function insert(DbRecord $record)
     {
         Trace::traceComment(null, __METHOD__, __LINE__);
-        // $populatedColumns = false; // Only get columns that have values in them. 20130820 Move it to a Parm - so SAVE can set the value, so we can save zeros and nulls
+        $populated = false; // Only get columns that have values in them. 20130820 Move it to a Parm - so SAVE can set the value, so we can save zeros and nulls
         $key = true; // We need KEY fields for the Insert to work
-        // $nullColumns = false; // Don't return empty columns
+        $null = false; // Don't return empty columns
         $db2 = FALSE;
-        $insertArray = $record->getColumns($populatedColumns, $key, $nullColumns, $db2);
+        $insertArray = $record->getColumns($populated, $key, $null, $db2);
         Trace::traceVariable($insertArray, __METHOD__, __LINE__);
         $preparedInsert = $this->prepareInsert($insertArray);
 
@@ -963,7 +1025,6 @@ class DbTable
         if (! $rs) {
             $this->lastDb2StmtError = json_encode(sqlsrv_errors());
             $this->lastDb2StmtErrorMsg = json_encode(sqlsrv_errors());
-
             echo "<BR/>Insert Array@<pre>" . __METHOD__ . __LINE__ ;
             print_r($insertArray);
             echo "</pre>";
@@ -982,6 +1043,7 @@ class DbTable
     {
         $preparedInsert = $this->prepareInsert($insertArray);
 
+
         $insert = -microtime(true);
         $rs = @sqlsrv_execute($preparedInsert, $insertArray);
         $insert += microtime(true);
@@ -990,7 +1052,6 @@ class DbTable
         if (! $rs) {
             $this->lastDb2StmtError = json_encode(sqlsrv_errors());
             $this->lastDb2StmtErrorMsg = json_encode(sqlsrv_errors());
-
             echo "<br/>Method:" . __METHOD__ . " Line:" .  __LINE__ ;
             echo "<br/>Insert Array:";
             echo "<pre>";
@@ -1016,11 +1077,8 @@ class DbTable
     {
         Trace::traceComment(null, __METHOD__, __LINE__);
         $pred = $this->buildKeyPredicate($record);
-        // $populatedColumns = false; // Only get columns that have values in them. 20130820 Move it to a Parm - so SAVE can set the value, so we can save zeros and nulls
-        $key = true; // We need KEY fields for the Update to work
-        // $nullColumns = false; // Don't return empty columns
         $db2 = FALSE;
-        $updateArray = $record->getColumns($populatedColumns, $key, $nullColumns, $db2);
+        $updateArray = $record->getColumns($populatedColumns, true, $nullColumns, $db2);
         Trace::traceVariable($updateArray, __METHOD__, __LINE__);
         $values = " SET";
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . ".$this->tableName ";
@@ -1038,7 +1096,7 @@ class DbTable
              *
              */
             if (isset($updateArray[$key]) && (! isset($this->primary_keys[$key]))) {
-                switch ($properties['DATA_TYPE']) {
+                switch ($properties['Type']) {
                     case 13: // BLOB
                         $values .= ", $key = BLOB('$updateArray[$key]')";
                         break;
@@ -1095,19 +1153,7 @@ class DbTable
             Trace::traceVariable($rs, __METHOD__, __LINE__);
 
             if (! $rs) {
-                $this->lastDb2StmtError = json_encode(sqlsrv_errors());
-                $this->lastDb2StmtErrorMsg = json_encode(sqlsrv_errors());
-    
-                echo "<BR/>Insert Array@<pre>" . __METHOD__ . __LINE__ ;
-                print_r($updateArray);
-                echo "</pre>";
-                self::displayErrorMessage($rs, __CLASS__, __METHOD__, $this->preparedInsertSQL, $this->pwd, $this->lastDb2StmtError, $this->lastDb2StmtErrorMsg, $updateArray);
-            } else {
-                $this->lastId = db2_last_insert_id($GLOBALS['conn']);
-            }
-            if (isset($_SESSION['log'])) {
-                Log::logEntry("DBTABLE SQL:" . str_replace($this->pwd, 'password', $this->preparedInsertSql), $this->pwd);
-                Log::logEntry("DBTABLE Data:" . serialize($updateArray), $this->pwd);
+                self::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             }
             return $rs==true;
         } else {
@@ -1156,7 +1202,7 @@ class DbTable
         // $select = " SELECT " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         // $colNames = " ";
         // foreach ( $this->columns as $key => $properties ) {
-        // if ($properties ['DATA_TYPE'] == 98) {
+        // if ($properties ['Type'] == 98) {
         // $colNames .= ", DECRYPT_CHAR(CAST(? as VARCHAR(" . $properties ['CHAR_OCTET_LENGTH'] . ")),'$this->pwd')";
         // } else {
         // $values .= ", ? ";
@@ -1169,8 +1215,8 @@ class DbTable
         //
         // $this->preparedSelect = sqlsrv_prepare ( $_SESSION ['conn'], $sql );
         // if (! $preparedStmt) {
-        // echo "<BR/>" . sqlsrv_errors ();
-        // echo "<BR/>" . sqlsrv_errors () . "<BR/>";
+        // echo "<BR/>" . json_encode(sqlsrv_errors());
+        // echo "<BR/>" . json_encode(sqlsrv_errors()) . "<BR/>";
         // exit ( "Unable to Prepare $sql" );
         // }
         // return $preparedSelect;
@@ -1199,7 +1245,7 @@ class DbTable
                 $columnName = $key;
             }
 
-            if ($properties['DATA_TYPE'] == 98 or $properties['DATA_TYPE'] == - 3) {
+            if ($properties['Type'] == 98 or $properties['Type'] == - 3) {
                 $select .= ", DECRYPT_CHAR(" . $columnName . ",'$this->pwd') as " . $key;
             } else {
                 $select .= ", " . $columnName . " as " . $key;
@@ -1215,7 +1261,7 @@ class DbTable
     }
 
     /**
-     * Returns an array where both KEY and VALUE are the COLUMN_NAME
+     * Returns an array where both KEY and VALUE are the Name
      *
      * Steps through the array $this->columns (built by getDbColumn(), invoked in __contruct.
      *
@@ -1227,9 +1273,9 @@ class DbTable
         $columns = array();
         foreach ($this->columns as $key => $properties) {
             if ($prefix != NULL) {
-                $columns[$properties['COLUMN_NAME']] = $prefix . "." . $properties['COLUMN_NAME'];
+                $columns[$properties['Name']] = $prefix . "." . $properties['Name'];
             } else {
-                $columns[$properties['COLUMN_NAME']] = $properties['COLUMN_NAME'];
+                $columns[$properties['Name']] = $properties['Name'];
             }
         }
         return $columns;
@@ -1270,7 +1316,7 @@ class DbTable
      *
      * @param DbRecord $record
      *            Record to be SELECTed. Requires those columns in DbRecord that are Primary Keys in the Table to be populated
-     * @return array Does not save the values to the DbRecord, rather it returns the array returned by sqlsrv_fetch_array
+     * @return array Does not save the values to the DbRecord, rather it returns the array returned by DB2_FETCH_ASSOC
      */
     function getFromDb(DbRecord $record)
     {
@@ -1306,7 +1352,7 @@ class DbTable
     }
 
     /**
-     * Calls sqlsrv_query on COMMIT
+     * Calls DB2_EXEC on COMMIT
      */
     function commitUpdates()
     {
@@ -1532,7 +1578,7 @@ class DbTable
             $inserted = false;
         } else {
             Trace::traceComment('Attempting Insert', __METHOD__, __LINE__);
-            $inserted = $this->insert($record, $populatedColumns, $nullColumns);
+            $inserted = $this->insert($record);
             $inserted = $inserted ? $inserted : null;
             $this->lastId = db2_last_insert_id($GLOBALS['conn']);
         }
@@ -1573,9 +1619,9 @@ class DbTable
         Trace::traceComment(null, __METHOD__);
         $predicate = "define a primary key";
         foreach ($this->primary_keys as $key => $value) {
-            if ($this->columns[$key]['DATA_TYPE'] == 98 or $this->columns[$key]['DATA_TYPE'] == - 3) {
+            if ($this->columns[$key]['Type'] == 98 or $this->columns[$key]['Type'] == - 3) {
                 $predicate .= " AND $key = ENCRYPT_RC2('" . $record->getValue($key) . "','$this->pwd') ";
-            } elseif ($this->columns[$key]['DATA_TYPE'] == 93) {
+            } elseif ($this->columns[$key]['Type'] == 93) {
                 $predicate .= " AND $key = TIMESTAMP('" . $record->getValue($key) . "') ";
             } else {
                 $predicate .= " AND $key='" . htmlspecialchars($record->getValue($key)) . "' ";
@@ -1585,8 +1631,7 @@ class DbTable
 
         // var_dump($predicate);
 
-        // return str_replace('define a primary key AND', ' ', str_replace("=''", " is null", $predicate));
-        return str_replace('define a primary key AND', ' ', str_replace("=''", " = ''", $predicate));
+        return str_replace('define a primary key AND', ' ', str_replace("=''", " is null", $predicate));
     }
 
     /**
@@ -1601,7 +1646,7 @@ class DbTable
         Trace::traceComment(null, __METHOD__);
         $predicate = "define a primary key";
         foreach ($this->columns as $key => $value) {
-            if ($this->columns[$key]['DATA_TYPE'] == 98 or $this->columns[$key]['DATA_TYPE'] == - 3) {
+            if ($this->columns[$key]['Type'] == 98 or $this->columns[$key]['Type'] == - 3) {
                 $predicate .= " , DECRYPT_CHAR($key,'$this->pwd') as $key ";
             } else {
                 $predicate .= " , $key ";
@@ -1699,7 +1744,7 @@ class DbTable
         echo "<TABLE class='sortable' >";
         echo "<TR><TH>Column</TH><TH>Definition</TH><TH>Type</TH></TR>";
         foreach ($this->columns as $column => $details) {
-            echo "<TR bgcolor='$color' ><TH>" . $column . "</TH><TD>" . $details['REMARKS'] . "<TD><TD>" . $details['DATA_TYPE'] . "</TD></TR>";
+            echo "<TR bgcolor='$color' ><TH>" . $column . "</TH><TD>" . $details['REMARKS'] . "<TD><TD>" . $details['Type'] . "</TD></TR>";
             if ($color == '#eeeeee') {
                 $color = '#ffffff';
             } else {
@@ -1916,11 +1961,13 @@ class DbTable
     {
         $db2Error = empty($db2Error) ? json_encode(sqlsrv_errors()) : $db2Error;
         $db2ErrorMsg = empty($db2ErrorMsg) ? json_encode(sqlsrv_errors()) : $db2ErrorMsg;
-        $rollback ? db2_rollback($GLOBALS['conn']) : null; // Roll back to last commit point.
+        $rollback ? sqlsrv_rollback($GLOBALS['conn']) : null; // Roll back to last commit point.
 
         if (isset(AllItdqTables::$DB2_ERRORS)) {
             echo "<BR/>" . $method . "<B>DB2 Error:</B><span style='color:red'>" . $db2Error . "</span><B>Message:</B><span style='color:red'>" . $db2ErrorMsg . "</span>$sql";
+            $printableSql = empty($pwd) ? $sql : str_replace($pwd, "******", $sql);
             DbTable::logDb2Error($data);
+            trigger_error("Error in: '$method' running: $printableSql code: $db2Error", E_USER_ERROR);
             return array(
                 'Db2Error' => $db2Error,
                 'Db2ErrorMsg' => $db2ErrorMsg
@@ -1939,7 +1986,6 @@ class DbTable
                     $field = preg_split($pattern, $db2ErrorMsg);
                     var_dump($field);
                     break;
-
                 default:
                     ;
                     break;
@@ -1950,6 +1996,7 @@ class DbTable
 
     static function logDb2Error($data = null)
     {
+        $table = new DbTable(AllItdqTables::$DB2_ERRORS);
         $userid = isset($_SESSION['ssoEmail']) ? $_SESSION['ssoEmail'] : 'userNotDefined';
         $elapsed = isset($_SESSION['tracePageOpenTime']) ? microtime(true) - $_SESSION['tracePageOpenTime'] : null;
 
@@ -1962,7 +2009,8 @@ class DbTable
         $backtrace = ob_get_contents();
         @ob_end_clean();
 
-        $backtrace = strlen(htmlspecialchars($backtrace)) > 1024 ? substr(htmlspecialchars($backtrace), 0, 1000) : htmlspecialchars($backtrace);
+        // $backtrace = strlen(htmlspecialchars($backtrace)) > 1024 ? substr(htmlspecialchars($backtrace), 0, 1000) : htmlspecialchars($backtrace);
+        $backtrace = $table->truncateValueToFitColumn(htmlspecialchars($backtrace), 'BACKTRACE');
 
         ob_start();
         print_r($_REQUEST);
@@ -1975,11 +2023,18 @@ class DbTable
             $request .= ":data:" . ob_get_contents();
             @ob_end_clean();
         }
-        $request = strlen(htmlspecialchars($request)) > 1024 ? substr(htmlspecialchars($request), 0, 1000) : htmlspecialchars($request);
-        
-        $sqlsrv_errors = str_replace(['"',"'"], "", json_encode(sqlsrv_errors()));
-        $sqlsrv_errors = str_replace(['"',"'"], "", json_encode(sqlsrv_errors()));
-        $sql .= " VALUES ('" . $userid . "','" . $_SERVER['PHP_SELF'] . "','" . $sqlsrv_errors . "','" . $sqlsrv_errors . "','" . $backtrace . "','" . $request . "')";
+        // $request = strlen(htmlspecialchars($request)) > 1024 ? substr(htmlspecialchars($request), 0, 1000) : htmlspecialchars($request);
+        $request = $table->truncateValueToFitColumn(htmlspecialchars($request), 'REQUEST');
+
+        $db2StmtError = json_encode(sqlsrv_errors());
+        // $db2StmtError = strlen(htmlspecialchars($db2StmtError)) > 50 ? substr(htmlspecialchars($db2StmtError), 0, 50) : htmlspecialchars($db2StmtError);
+        $db2StmtError = $table->truncateValueToFitColumn(htmlspecialchars($db2StmtError), 'DB2_ERROR');
+
+        $db2StmeErrorMsg = json_encode(sqlsrv_errors());
+        // $db2StmeErrorMsg = strlen(htmlspecialchars($db2StmeErrorMsg)) > 50 ? substr(htmlspecialchars($db2StmeErrorMsg), 0, 50) : htmlspecialchars($db2StmeErrorMsg);
+        $db2StmeErrorMsg = $table->truncateValueToFitColumn(htmlspecialchars($db2StmeErrorMsg), 'DB2_MESSAGE');
+
+        $sql .= " VALUES ('" . $userid . "','" . $_SERVER['PHP_SELF'] . "','" . $db2StmtError . "','" . $db2StmeErrorMsg . "','" . $backtrace . "','" . $request . "')";
 
         if (isset($_SESSION['phoneHome']) && class_exists('Email')) {
             $to = $_SESSION['phoneHome'];
@@ -2032,7 +2087,15 @@ class DbTable
     function truncateValueToFitColumn($columnValue, $columnName)
     {
         $lengthOfValue = strlen(trim($columnValue));
-        $lengthColumnWillSupport = $this->columns[strtoupper($columnName)]['COLUMN_SIZE'];
+        $type = $this->columns[strtoupper($columnName)]['Type_name_new'];
+        switch ($type) {
+            case 'CLOB':
+                $lengthColumnWillSupport = 32672;
+                break;
+            default :
+                $lengthColumnWillSupport = $this->columns[strtoupper($columnName)]['Size'];
+                break;
+        }
         $truncatedValue = substr(trim($columnValue), 0, $lengthColumnWillSupport);
         return $truncatedValue;
     }
@@ -2171,7 +2234,7 @@ class DbTable
         $obj = new \stdClass();
         $obj->data = array();
 
-        while (($row = sqlsrv_fetch_($resultSet))==true) {
+        while (($row = sqlsrv_fetch_array($resultSet))==true) {
             $obj->data[] = $row;
             ;
         }
@@ -2202,6 +2265,13 @@ class DbTable
         </div>
         <?php
     }
-
-
+    
+    function headerRowForDatatable(){
+        $headerRow = "<tr>";
+        foreach ($this->columns as $columnName => $db2ColumnProperties) {
+            $headerRow.= "<th>" . str_replace("_"," ", $columnName );
+        }
+        $headerRow.= "</th><th>HAS_DELEGATES</tr></tr>";
+        return $headerRow;
+    }
 }
