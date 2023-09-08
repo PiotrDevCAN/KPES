@@ -70,7 +70,7 @@ class IconRolesTable extends DbTable {
 // 			$sql .= " ) ";
 // 		}
 
-// 		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
+// 		$rs = sqlsrv_query( $_SESSION ['conn'], $sql );
 
 // 		if (! $rs) {
 // 			DBTable::displayErrorMessage ( $rs, __CLASS__, __METHOD__, $sql );
@@ -91,7 +91,7 @@ class IconRolesTable extends DbTable {
 // 		$sql .= " WHERE ROLE is not null ";
 // 		$sql .= empty ( $customerId ) ? null : " AND CUSTOMER_ID='" . htmlspecialchars ( trim ( $customerId ) ) . "' ";
 // 		$sql .= empty ( $country ) ? null : " AND COUNTRY = '" . htmlspecialchars ( trim ( $country ) ) . "' ";
-// 		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
+// 		$rs = sqlsrv_query( $_SESSION ['conn'], $sql );
 // 		if (! $rs) {
 // 			DBTable::displayErrorMessage ( $rs, __CLASS__, __METHOD__, $sql );
 // 			return false;
@@ -126,7 +126,7 @@ class IconRolesTable extends DbTable {
 // 			$sql = substr ( $sql, 0, strlen ( $sql ) - 1 ) . ") "; // Remove that last ,
 // 		}
 // 		Trace::traceComment ( $sql, __METHOD__, __LINE__ );
-// 		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
+// 		$rs = sqlsrv_query( $_SESSION ['conn'], $sql );
 // 		if (! $rs) {
 // 			DBTable::displayErrorMessage ( $rs, __CLASS__, __METHOD__, $sql );
 // 			return false;

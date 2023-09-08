@@ -629,10 +629,10 @@ class AccountPersonTable extends DbTable {
     }
 
     function setPesStageValue($upesref,$account_id, $stage,$stageValue){
-        $preparedStmt = $this->prepareStageUpdate($stage);
         $data = array($stageValue,$account_id, $upesref);
-
-        $rs = sqlsrv_execute($preparedStmt,$data);
+        $preparedStmt = $this->prepareStageUpdate($stage, $data);
+        
+        $rs = sqlsrv_execute($preparedStmt);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -641,7 +641,7 @@ class AccountPersonTable extends DbTable {
         return true;
     }
 
-    function prepareStageUpdate($stage){
+    function prepareStageUpdate($stage, $data){
 //         if(!empty($_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))] )) {
 //             return $_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))];
 //         }
@@ -651,7 +651,7 @@ class AccountPersonTable extends DbTable {
 
         $this->preparedSelectSQL = $sql;
 
-        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
 
         if($preparedStmt){
             $_SESSION['preparedStageUpdateStmts'][strtoupper(htmlspecialchars($stage))] = $preparedStmt;
@@ -689,7 +689,7 @@ class AccountPersonTable extends DbTable {
         return $newComment;
     }
 
-    function prepareGetPesCommentStmt(){
+    function prepareGetPesCommentStmt($data){
 //         if(!empty($_SESSION['preparedGetPesCommentStmt'])){
 //             return $_SESSION['preparedGetPesCommentStmt'];
 //         }
@@ -697,7 +697,7 @@ class AccountPersonTable extends DbTable {
         $sql = " SELECT COMMENT FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
         $sql.= " WHERE UPES_REF=?  and ACCOUNT_ID = ? ";
 
-        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
         
         $this->lastSelectSql = $sql;
 
@@ -711,10 +711,10 @@ class AccountPersonTable extends DbTable {
 
 
     function getPesComment($uposref, $account_id){
-        $preparedStmt = $this->prepareGetPesCommentStmt();
         $data = array($uposref, $account_id);
+        $preparedStmt = $this->prepareGetPesCommentStmt($data);
 
-        $rs = sqlsrv_execute($preparedStmt,$data);
+        $rs = sqlsrv_execute($preparedStmt);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'Prepared Stmt');
@@ -777,9 +777,6 @@ class AccountPersonTable extends DbTable {
                 $alertClass='alert-info';
                 break;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
         $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
 
         $formattedField = $emailAddress . "<br/><small>";
@@ -796,29 +793,6 @@ class AccountPersonTable extends DbTable {
             <button class='btn btn-xs btn-success btnPesPriority accessPes accessCdi' data-pespriority='3' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Low'><span class='glyphicon glyphicon-pawn' ></button>
             <button class='btn btn-xs btn-info    btnPesPriority accessPes accessCdi' data-pespriority='99'    data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Unknown'><span class='glyphicon glyphicon-erase' ></button>
             </span>";
-=======
-=======
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-
-       $emailAddress = strlen($row['EMAIL_ADDRESS']) > 20 ? substr($row['EMAIL_ADDRESS'],0,20) . "....." : $row['EMAIL_ADDRESS'];
-
-       $formattedField = $emailAddress . "<br/><small>";
-       $formattedField.= "<i>" . $row['PASSPORT_FIRST_NAME'] . "&nbsp;<b>" . $row['PASSPORT_LAST_NAME'] . "</b></i><br/>";
-       $formattedField.= $row['FULL_NAME'] . "</b></small><br/>Ref: " . $row['UPES_REF'];
-       $formattedField.= "<br/>CNUM: " . $row['CNUM'];
-       $formattedField.= "<br/>" . $row['IBM_STATUS'] . ":" . $row['COUNTRY'];
-       $formattedField.= "<br/>Resides:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
-       $formattedField.= "<br/>RAG Status:&nbsp;" . $row['COUNTRY_OF_RESIDENCE'];
-       $formattedField.= "<div class='alert $alertClass priorityDiv'>Priority:" . $priority . "</div>";
-
-       $formattedField.="<span style='white-space:nowrap' >
-           <button class='btn btn-xs btn-danger  btnPesPriority accessPes accessCdi' data-pespriority='1'  data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='High' ><span class='glyphicon glyphicon-king' ></button>
-           <button class='btn btn-xs btn-warning btnPesPriority accessPes accessCdi' data-pespriority='2' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Medium' ><span class='glyphicon glyphicon-knight' ></button>
-           <button class='btn btn-xs btn-success btnPesPriority accessPes accessCdi' data-pespriority='3' data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Low'><span class='glyphicon glyphicon-pawn' ></button>
-           <button class='btn btn-xs btn-info    btnPesPriority accessPes accessCdi' data-pespriority='99'    data-upesref='" . $row['UPES_REF'] ."' data-accountid='" . $row['ACCOUNT_ID'] . "' data-accounttype='" . $row['ACCOUNT_TYPE'] . "' data-toggle='tooltip'  title='Unknown'><span class='glyphicon glyphicon-erase' ></button>
-           </span>";
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-
 
         return $formattedField;
     }
@@ -874,7 +848,7 @@ class AccountPersonTable extends DbTable {
         return $content;
     }
 
-    function prepareProcessStatusUpdate(){
+    function prepareProcessStatusUpdate($data){
         if(!empty($_SESSION['preparedProcessStatusUpdate'] )) {
             return $_SESSION['prepareProcessStatusUpdate'];
         }
@@ -884,7 +858,7 @@ class AccountPersonTable extends DbTable {
 
         $this->preparedSelectSQL = $sql;
 
-        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
 
         if($preparedStmt){
             $_SESSION['prepareProcessStatusUpdate'] = $preparedStmt;
@@ -894,10 +868,10 @@ class AccountPersonTable extends DbTable {
     }
 
     function setPesProcessStatus($upesref, $accountid, $processStatus){
-        $preparedStmt = $this->prepareProcessStatusUpdate();
         $data = array($processStatus,$upesref,$accountid);
-
-        $rs = sqlsrv_execute($preparedStmt,$data);
+        $preparedStmt = $this->prepareProcessStatusUpdate($data);
+        
+        $rs = sqlsrv_execute($preparedStmt);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -1275,11 +1249,10 @@ class AccountPersonTable extends DbTable {
     }
 
     function resetForRecheck($upesRef=null, $accountId=null){
-
-        $preparedStmt = $this->prepareResetForRecheck();
         $data = array($accountId,$upesRef);
-
-        $rs = sqlsrv_execute($preparedStmt,$data);
+        $preparedStmt = $this->prepareResetForRecheck($data);
+        
+        $rs = sqlsrv_execute($preparedStmt);
 
         if(!$rs){
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, 'prepared sql');
@@ -1287,7 +1260,7 @@ class AccountPersonTable extends DbTable {
         }
     }
 
-    function prepareResetForRecheck(){
+    function prepareResetForRecheck($data){
         if(isset($this->preparedResetForRecheck)) {
             return $this->preparedResetForRecheck;
         }
@@ -1302,7 +1275,7 @@ class AccountPersonTable extends DbTable {
         $sql.= " ,  PROCESSING_STATUS_CHANGED= current timestamp, DATE_LAST_CHASED = null ";
         $sql.= " WHERE ACCOUNT_ID = ?  AND UPES_REF = ? ";
 
-        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql);
+        $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
 
         if($preparedStmt){
             $this->preparedResetForRecheck = $preparedStmt;

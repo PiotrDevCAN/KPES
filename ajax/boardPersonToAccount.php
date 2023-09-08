@@ -15,10 +15,6 @@ ob_start();
 $loader = new Loader();
 $allAccounts = $loader->loadIndexed('ACCOUNT','ACCOUNT_ID',AllTables::$ACCOUNT);
 
-<<<<<<< HEAD
-
-=======
-
 $UPES_REF = !empty($_POST['UPES_REF']) ? trim($_POST['UPES_REF']) : '';
 $FULL_NAME = !empty($_POST['FULL_NAME']) ? trim($_POST['FULL_NAME']) : '';
 $CONTRACT_ID = !empty($_POST['CONTRACT_ID']) ? trim($_POST['CONTRACT_ID']) : '';
@@ -31,8 +27,6 @@ $PES_STATUS = !empty($_POST['PES_STATUS']) ? trim($_POST['PES_STATUS']) : '';
 
 if (empty($UPES_REF) || empty($FULL_NAME) || empty($CONTRACT_ID) || empty($ACCOUNT_ID) || empty($PES_LEVEL) || empty($COUNTRY_OF_RESIDENCE) || empty($PES_REQUESTOR) || empty($PES_CREATOR) || empty($PES_STATUS)) {
     $invalidOtherParameters = true;
-
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
     echo 'Significant parameters from form are missing.';
 } else {
     $invalidOtherParameters = false;

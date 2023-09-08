@@ -198,8 +198,8 @@ class BlueMail
         $sql.= !empty($bcc) ? " ,? " : null ;
         $sql.= " ); ";
 
-        $preparedStatement = sqlsrv_prepare($GLOBALS['conn'], $sql);
         $data = array(serialize($to),$subject,$message,$data_json);
+        $preparedStatement = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
 
         !empty($cc)  ? $data[] = serialize($cc) : null;
         !empty($bcc) ? $data[] = serialize($bcc) : null;

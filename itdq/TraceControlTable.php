@@ -14,7 +14,7 @@ class TraceControlTable extends DbTable {
 	 */
 	static function deleteTraceControl($traceControlType, $traceControlValue){
 		$sql = "Delete from " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE_CONTROL . " WHERE TRACE_CONTROL_TYPE = '$traceControlType' and TRACE_CONTROL_VALUE = '$traceControlValue' ";
-		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
+		$rs = sqlsrv_query( $_SESSION ['conn'], $sql );
 		if (! $rs) {
 			print_r ( $_SESSION );
 			echo "<BR/>" . sqlsrv_errors ();
@@ -33,7 +33,7 @@ class TraceControlTable extends DbTable {
 		self::deleteTraceControl($traceControlType, $traceControlValue);
 		$sql = "INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE_CONTROL . " ( TRACE_CONTROL_TYPE, TRACE_CONTROL_VALUE) ";
 		$sql .= " Values ('$traceControlType','$traceControlValue') ";
-		$rs = sqlsrv_query ( $_SESSION ['conn'], $sql );
+		$rs = sqlsrv_query( $_SESSION ['conn'], $sql );
 		if (! $rs) {
 			print_r ( $_SESSION );
 			echo "<BR/>" . sqlsrv_errors ();

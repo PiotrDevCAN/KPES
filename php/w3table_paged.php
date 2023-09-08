@@ -122,7 +122,7 @@ class w3_Table_Paged extends w3_Table {
 		$this->pager_var = $name;
 	}
 
-	function _append_query ($new_key, $new_val, $id) {
+	function _append_query($new_key, $new_val, $id) {
 		$url = $_SERVER['PHP_SELF'] . "?";
 		$query = "";
 		foreach ($_GET as $key => $val) {

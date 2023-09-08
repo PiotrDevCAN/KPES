@@ -438,7 +438,7 @@ class DbTable
                             // print_r($insertArray);
                             if (! empty($insertArray)) {
                                 $preparedInsert = $this->prepareInsert($insertArray);
-                                if (sqlsrv_execute($preparedInsert, $insertArray)) {
+                                if (sqlsrv_execute($preparedInsert)) {
                                     $this->inserted ++;
                                 } else {
                                     $this->failed ++;
@@ -991,7 +991,7 @@ class DbTable
             // So best prepare a new statement, which we will save in the hope of reusing
             Trace::traceVariable($sql, __METHOD__, __LINE__);
             $this->preparedInsertSQL = $sql;
-            $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql);
+            $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql, $insertArray);
             if (! $this->preparedInsert) {
                 echo "<BR/>" . json_encode(sqlsrv_errors());
                 echo "<BR/>" . json_encode(sqlsrv_errors()) . "<BR/>";
@@ -1020,7 +1020,7 @@ class DbTable
         Trace::traceVariable($insertArray, __METHOD__, __LINE__);
         $preparedInsert = $this->prepareInsert($insertArray);
 
-        $rs = @sqlsrv_execute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_execute($preparedInsert);
 
         if (! $rs) {
             $this->lastDb2StmtError = json_encode(sqlsrv_errors());
@@ -1043,9 +1043,8 @@ class DbTable
     {
         $preparedInsert = $this->prepareInsert($insertArray);
 
-
         $insert = -microtime(true);
-        $rs = @sqlsrv_execute($preparedInsert, $insertArray);
+        $rs = @sqlsrv_execute($preparedInsert);
         $insert += microtime(true);
         echo $withTimings ?  "Db2 Insert Time:" . sprintf('%f', $insert) . PHP_EOL : null;
 
@@ -1182,7 +1181,7 @@ class DbTable
         }
         if ($cols['SERIAL_NUMBER'] != null) {
             $this->logRecord($preparedSelect, $cols, "<B>Before image </b>");
-            $rs = sqlsrv_execute($preparedUpdate, $db2Columns);
+            $rs = sqlsrv_execute($preparedUpdate);
             if (! $rs) {
                 echo "<BR/>" . json_encode(sqlsrv_errors());
                 echo "<BR/>" . json_encode(sqlsrv_errors()) . "<BR/>";
@@ -1195,31 +1194,6 @@ class DbTable
             print_r($cols);
             $this->empty ++;
         }
-    }
-
-    function prepareSelect()
-    {
-        // $select = " SELECT " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        // $colNames = " ";
-        // foreach ( $this->columns as $key => $properties ) {
-        // if ($properties ['Type'] == 98) {
-        // $colNames .= ", DECRYPT_CHAR(CAST(? as VARCHAR(" . $properties ['CHAR_OCTET_LENGTH'] . ")),'$this->pwd')";
-        // } else {
-        // $values .= ", ? ";
-        // }
-        // }
-        // $sql = str_replace ( "SELECT ,","SELECT ", "SELECT" . $colNames . " FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName );
-        // echo "<BR/>" . __METHOD__ . __LINE__ . "<BR/>" . $sql;
-        //
-        // // $sql = " SELECT DECRYPT_CHAR((CHAR)?,'$this->pwd') FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName ;
-        //
-        // $this->preparedSelect = sqlsrv_prepare ( $_SESSION ['conn'], $sql );
-        // if (! $preparedStmt) {
-        // echo "<BR/>" . json_encode(sqlsrv_errors());
-        // echo "<BR/>" . json_encode(sqlsrv_errors()) . "<BR/>";
-        // exit ( "Unable to Prepare $sql" );
-        // }
-        // return $preparedSelect;
     }
 
     /**
@@ -2236,7 +2210,6 @@ class DbTable
 
         while (($row = sqlsrv_fetch_array($resultSet))==true) {
             $obj->data[] = $row;
-            ;
         }
         return json_encode($obj);
     }

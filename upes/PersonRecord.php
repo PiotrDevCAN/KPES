@@ -61,18 +61,9 @@ class PersonRecord extends DbRecord
 
         ?>
         <form id='personForm' class="form-horizontal" method='post'>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div class="form-group required " >
             <label for='CNUM' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='<?=$cnumTitle?>'><?=$cnumLabel?></label>
-=======
-=======
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-        <hr>
-        <div class="form-group required " >
-            <label for='CNUM' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='IBM CNUM if applicable'><?=$ibmerLabel?></label>
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-        	<div class='col-md-4'>
+            <div class='col-md-4'>
 				<input id='ibmer' name='ibmer' type='<?=$showIbmer?>' class='form-control typeahead' <?=$notEditable;?>  value='<?=!empty($this->FULL_NAME) ? $this->FULL_NAME :null ; ?>' required='required' />
 				<input id='CNUM' name='CNUM' type='<?=$showCnum?>' class='form-control'  <?=$cnumEditable;?> value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
 				<input id='oldCNUM' name='oldCNUM' type='hidden' class='form-control'  value='<?=!empty($this->CNUM) ? $this->CNUM :null ; ?>' />
@@ -81,15 +72,7 @@ class PersonRecord extends DbRecord
         <div class="form-group required " >
             <label for='EMAIL_ADDRESS' class='col-sm-2 control-label ceta-label-left' data-toggle='tooltip' data-placement='top' title='Email Address'>Email Address</label>
         	<div class='col-md-4'>
-<<<<<<< HEAD
-<<<<<<< HEAD
 				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' type='email' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
-=======
-				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
-=======
-				<input id='EMAIL_ADDRESS' name='EMAIL_ADDRESS' class='form-control' value='<?=!empty($this->EMAIL_ADDRESS) ? $this->EMAIL_ADDRESS :null ; ?>' required='required' />
->>>>>>> 481c0dfe9947cef192191baa1c37e1d1ccd89b8e
             </div>
         </div>
         <div class="form-group required " >
