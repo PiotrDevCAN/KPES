@@ -19,8 +19,6 @@ class WorkerAPI {
 		$auth->ensureAuthorized();
 
 		$this->hostname = trim($_ENV['worker_api_host']);
-
-		// echo $_SESSION['worker_token'];
 		$this->token = $_SESSION['worker_token'];
 	}
 
@@ -81,7 +79,7 @@ class WorkerAPI {
 				}
 			}
 		}
-		return $ret;
+		return $result;
 	}
 
 	// Individual Worker Profile Data
