@@ -13,7 +13,7 @@ $country = 'E4';
 include_once 'connect.php';
 
 
-do_auth($_SESSION['cdiBg']);
+do_auth($_SESSION['cdiBgAz']);
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 

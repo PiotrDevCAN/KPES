@@ -101,8 +101,9 @@ $navbar->addOption($outages);
 
 $navbar->createNavbar($page);
 
-$isCdi       = OKTAGroups::inAGroup($_SESSION['cdiBg'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
-$isPesTeam   = OKTAGroups::inAGroup($_SESSION['pesTeamBg'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
+$OKTAGroups = new OKTAGroups();
+$isCdi       = $OKTAGroups->inAGroup($_SESSION['cdiBgAz'],  $_SESSION['ssoEmail']) ? ".not('.accessCdi')" : null;
+$isPesTeam   = $OKTAGroups->inAGroup($_SESSION['pesTeamBgAz'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
 $isUser      = ".not('.accessUser')";
 
 $isCdi        = stripos($_ENV['environment'], 'dev') ? ".not('.accessCdi')"        : $isCdi;

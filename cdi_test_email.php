@@ -7,15 +7,15 @@ ob_clean();
 
 $emailBody = "Testing 1 2 3";
 
-$sendResponse = BlueMail::send_mail(array('piotr.tajanowicz@ocean.ibm.com'), "uPES Notification of Leavers"
-    , $emailBody,'piotr.tajanowicz@ocean.ibm.com');
+$sendResponse = BlueMail::send_mail(array('piotr.tajanowicz@kyndryl.com'), "uPES Notification of Leavers"
+    , $emailBody,'piotr.tajanowicz@kyndryl.com');
 
 var_dump($sendResponse);
 
 $data_json = '   {
-	"contact": "piotr.tajanowicz@ocean.ibm.com",
+	"contact": "piotr.tajanowicz@kyndryl.com",
 	"recipients": [
-		{"recipient": "piotr.tajanowicz@ocean.ibm.com"}
+		{"recipient": "piotr.tajanowicz@kyndryl.com"}
 	],
 	"subject": "Bluemix BlueMail Test Wed Sept 22 11:44:51 EDT 2015",
 	"message": "Testing the email service. Defaults selected."

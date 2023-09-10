@@ -361,8 +361,9 @@ class IconRolesTable extends DbTable {
 	 */
 	static function calculateAccessPredicate($verbose= true, $jobRoleColumn='JOB_ROLE', $intranetColumn=null, $fullAccessBluegroup=null){
 
+		$OKTAGroups = new OKTAGroups();
 		if($fullAccessBluegroup!=null){
-			if(OKTAGroups::inAGroup($fullAccessBluegroup, $_SESSION['ssoEmail'])){
+			if($OKTAGroups->inAGroup($fullAccessBluegroup, $_SESSION['ssoEmail'])){
 				echo $verbose ? "<h4 style='color:blue'>" . $_SESSION['ssoEmail'] . " is a member of " . $fullAccessBluegroup . ", therefore you have full access to this view</h4>" : null;
 				return null;
 			}

@@ -5,7 +5,7 @@ use itdq\TraceRecord;
 
 
 $pwd=null;
-do_auth($_SESSION['cdiBg']);
+do_auth($_SESSION['cdiBgAz']);
 echo "<div class='container'>";
 Trace::pageOpening(__FILE__);
 

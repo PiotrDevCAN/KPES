@@ -19,7 +19,7 @@ $site = array(
     'bread_crumbs' => TRUE,
 
     // url to send feedback too. See meta tags below as well
-    'feedback_uri' => 'mailto:piotr.tajanowicz@ocean.ibm.com',
+    'feedback_uri' => 'mailto:piotr.tajanowicz@kyndryl.com',
 
     // base location of css, js, and images
     'assets' => '/ui',
@@ -50,12 +50,14 @@ $site = array(
     'csvPrefix' => $_ENV['environment'],
 
     'cdiBg'       => 'ventus_cdi',
+    'cdiBgAz'     => 'the kPES tool - production-ventus_cdi',
     'pesTeamBg'   => 'upes_pesTeam',
+    'pesTeamBgAz' => 'the kPES tool - production-upes_pesTeam',
     'nullBg'      => null,
 
     'email' => false,
     'emailId' => 'DoNotReply_upes@uk.ibm.com',
-    'devEmailId' => 'piotr.tajanowicz@ocean.ibm.com',
+    'devEmailId' => 'piotr.tajanowicz@kyndryl.com',
 
     'AuditLife' => '13 months',
     'AuditDetailsLife' => '6 months',
@@ -88,7 +90,7 @@ $meta = array(
     // feedback email received through the central Intranet Feedback
     // Form (w3.ibm.com/feedback) to the correct handler, without human
     // intervention.
-    'feedback' => 'piotr.tajanowicz@ocean.ibm.com',
+    'feedback' => 'piotr.tajanowicz@kyndryl.com',
 
     // security class for this web site
     'security' => 'IBM internal use only',

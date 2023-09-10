@@ -106,6 +106,9 @@
 				}
 
 				$userData = $this->getUserInfo($token_response->access_token);
+				echo 'Okta SSO user info</br>';
+				var_dump($userData);
+				echo '</pre>';
 
 				//use this to debug returned values from w3id/IBM ID service if you got to else in the condition below
 				error_log('data from USERINFO');

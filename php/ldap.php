@@ -1,6 +1,6 @@
 <?php
 
-use itdq\BlueGroups;
+use itdq\OKTAGroups;
 
 // bool return = employee_in_group ( string group, string employee, [string depth] )
 // returns true if $employee is in the bluegroup $group. $depth defaults to 2
@@ -62,7 +62,8 @@ function employee_in_group($group, $employee, $depth = 2)
 {
     return false;
     
-    return BlueGroups::inAGroup($group,$employee, $depth);       
+    $OKTAGroups = new OKTAGroups();
+    return $OKTAGroups->inAGroup($group,$employee, $depth);       
 }
 //     if (! is_array($group)) {
 //         $group = array(

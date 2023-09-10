@@ -1638,6 +1638,7 @@ class SortableList
      */
     function displayProfileOptions()
     {
+        $OKTAGroups = new OKTAGroups();
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES)) { // They are setup to have saved profiles.
             $loader = new Loader();
             $myProfiles = $loader->load('PROFILE_NAME', AllITdqTables::$PROFILES, " (INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' or INTRANET='global' ) AND PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' ");
@@ -1654,7 +1655,7 @@ class SortableList
             $this->profileSelectionBar->submitButton('Save Profile');
             $this->profileSelectionBar->submitButton('Delete Profile');
             if (isset($_SESSION['adminBg'])) {
-                if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                if ($OKTAGroups->inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                     $this->profileSelectionBar->checkBox('Global', 'global');
                 }
             }
@@ -1714,13 +1715,14 @@ class SortableList
      */
     function saveProfile()
     {
+        $OKTAGroups = new OKTAGroups();
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES) && isset($_REQUEST['sbifProfile_Name']) && isset($_REQUEST['sbbSave_Profile'])) {
             if (! empty($_REQUEST['sbifProfile_Name']) && ! empty($_REQUEST['sbbSave_Profile'])) {
                 $table = new DbTable(AllITdqTables::$PROFILES);
                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
-                    if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                    if ($OKTAGroups->inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
                                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbifProfile_Name'])) . "' AND INTRANET='global' ";
@@ -1746,13 +1748,14 @@ class SortableList
      */
     function deleteProfile()
     {
+        $OKTAGroups = new OKTAGroups();
         if ($this->profileSaveable && isset(AllITdqTables::$PROFILES) && isset($_REQUEST['sbsLoad_Profile']) && isset($_REQUEST['sbbDelete_Profile'])) {
             if (! empty($_REQUEST['sbsLoad_Profile']) && ! empty($_REQUEST['sbbDelete_Profile'])) {
                 $table = new DbTable(AllITdqTables::$PROFILES);
                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='" . htmlspecialchars(trim($_SESSION['ssoEmail'])) . "' ";
                 $userid = $_SESSION['ssoEmail'];
                 if (isset($_SESSION['adminBg'])) {
-                    if (OKTAGroups::inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
+                    if ($OKTAGroups->inAGroup($_SESSION['adminBg'], $_SESSION['ssoEmail'])) {
                         if (isset($_REQUEST['sbcGlobal'])) {
                             if ($_REQUEST['sbcGlobal'] == 'Y') {
                                 $predicate = " PAGE='" . htmlspecialchars(trim($_SERVER['PHP_SELF'])) . "' AND PROFILE_NAME='" . htmlspecialchars(trim($_REQUEST['sbsLoad_Profile'])) . "' AND INTRANET='global' ";

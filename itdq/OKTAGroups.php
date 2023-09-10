@@ -18,11 +18,8 @@ class OKTAGroups {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		// $this->hostname = trim($_ENV['sso_host']);
-		// $this->token = trim($_SESSION['sso_api_token']);
-	
-		$this->hostname = 'https://connect.kyndryl.net';
-		$this->token = '001GvGE4m4VjLGEtlFh4Ivi55PNDsKmeE0YUByU8tQ';
+		$this->hostname = trim($_ENV['sso_host']);
+		$this->token = trim($_ENV['sso_api_token']);
 	}
 
 	private function createCurl($type = "GET")
@@ -127,6 +124,13 @@ class OKTAGroups {
 		return $this->processURL($url, 'GET');
 	}
 
+	public function getGroupByName($groupName)
+	{
+		$groupName = urlencode($groupName);
+		$url = "/api/v1/groups?q=$groupName&limit=10";
+		return $this->processURL($url, 'GET');
+	}
+
 	public function updateGroup($groupId, $groupName, $description)
 	{
 		$profile = [
@@ -215,15 +219,29 @@ class OKTAGroups {
 	* Auxiliary operations
  	*/
 
-	public static function inAGroup($groupName, $ssoEmail, $depth=1)
+	public function inAGroup($groupName, $ssoEmail)
 	{
+		$found = false;
 
-		return true;
+		$groupId = $this->getGroupId($groupName);
+		$groupMembers = $this->listMembers($groupId);
+		
+		foreach($groupMembers as $key => $row) {
+			$email = $row['profile']['email'];
+			if (strtolower(trim($email)) == strtolower(trim($ssoEmail))) {
+				$found = true;
+			}
+		}
+		echo $groupName.' '.$ssoEmail;
+		var_dump($found);
+		return $found;
 	}
 
 	public function getGroupId($groupName)
 	{
-		
+		$groupData = $this->getGroupByName($groupName);
+		$groupId = 	$groupData[0]['id'];
+		return $groupId;
 	}
 
 	public function getUserID($email)

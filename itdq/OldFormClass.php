@@ -772,7 +772,7 @@ class OldFormClass {
 	    echo "<script>
 	           var config = {
 	               //API Key [REQUIRED]
-	               key: 'esoft;piotr.tajanowicz@ocean.ibm.com',
+	               key: 'esoft;piotr.tajanowicz@kyndryl.com',
 	               faces: {
 	                   //The handler for clicking a person in the drop-down.
 	                   onclick: function(person) {
@@ -835,7 +835,7 @@ class OldFormClass {
 			echo "<div class='" . $fieldName . "Details'>";
 			echo "<input id='faces-input$fieldName' name='$name' class='typeahead' size='30'  $state value='" . htmlspecialchars(trim($nameValue),ENT_QUOTES) . "' />";
 			echo "      <script>";
-			echo "		var config = { key: 'esoft;piotr.tajanowicz@ocean.ibm.com',";
+			echo "		var config = { key: 'esoft;piotr.tajanowicz@kyndryl.com',";
 			echo "			           faces: {";
 			echo "			              onclick: function(person) {";
 			echo "			     		  document.getElementById('callback-target$fieldName').innerHTML = person['bio'];";

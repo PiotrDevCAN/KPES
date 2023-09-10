@@ -10,6 +10,7 @@ function employee_in_group($group, $employee, $depth = 2)
 {
     return false;
     
-    return OKTAGroups::inAGroup($group, $employee, $depth);       
+    $OKTAGroups = new OKTAGroups();
+    return $OKTAGroups->inAGroup($group, $employee, $depth);       
 }
 ?>

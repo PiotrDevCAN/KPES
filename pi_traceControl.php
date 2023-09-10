@@ -4,7 +4,7 @@ use itdq\TraceControlRecord;
 use itdq\TraceControlList;
 use itdq\FormClass;
 use itdq\AllItdqTables;
-do_auth($_SESSION['cdiBg']);
+do_auth($_SESSION['cdiBgAz']);
 
 
 ?><div class='container'><?php

@@ -3,12 +3,12 @@ kind: ConfigMap
 metadata:
   name: env-configmap-dev
 data:
-  SERVER_ADMIN: piotr.tajanowicz@ocean.ibm.com
+  SERVER_ADMIN: piotr.tajanowicz@kyndryl.com
   SERVER_NAME: Azure kPES
   email: dev
   environment: upes_newco_dev
   jwt_token: "dGhpcyBpcyBhIHN0cmluZyB0aGF0IHdpbGwgYmUgdXNlZCB0byBzZWN1cmUgdmJhYydzIHNlc3Npb25zLiBUaGUgbW9yZSBjaGFyYWN0ZXJzIEkga2V5IGludG8gdGhpcyB0aGUgbW9yZSBzZWN1cmUgaXQgaXMg"
-  devemailid: piotr.tajanowicz@ocean.ibm.com
+  devemailid: piotr.tajanowicz@kyndryl.com
   noreplyemailid: kpes@noreply.ibm.com
   noreplykyndrylemailid: kpesNoReply@kyndryl.com
   upes_audit: https://hooks.slack.com/services/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
