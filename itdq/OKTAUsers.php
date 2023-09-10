@@ -18,7 +18,8 @@ class OKTAUsers {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		$this->hostname = trim($_ENV['sso_host']);
+		// $this->hostname = trim($_ENV['sso_host']);
+		$this->hostname = 'https://connect.kyndryl.net';
 		$this->token = trim($_SESSION['sso_api_token']);
 	
 		// $this->hostname = 'https://connect.kyndryl.net';

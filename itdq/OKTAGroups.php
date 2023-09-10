@@ -18,7 +18,8 @@ class OKTAGroups {
 		$auth = new Auth();
 		$auth->ensureAuthorized();
 
-		$this->hostname = trim($_ENV['sso_host']);
+		// $this->hostname = trim($_ENV['sso_host']);
+		$this->hostname = 'https://connect.kyndryl.net';
 		$this->token = trim($_ENV['sso_api_token']);
 	}
 
@@ -232,8 +233,6 @@ class OKTAGroups {
 				$found = true;
 			}
 		}
-		echo $groupName.' '.$ssoEmail;
-		var_dump($found);
 		return $found;
 	}
 
