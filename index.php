@@ -35,6 +35,7 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 
 // echo '</pre>';
 
+
 echo 'Emails status: '.trim($_ENV['email']);
 
 // $contractRecord = new ContractRecord();
