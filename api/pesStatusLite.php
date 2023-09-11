@@ -91,7 +91,7 @@ $startDataTrim = microtime(true);
 
 $data = array();
 $count = 1;
-while(($row=sqlsrv_fetch_array($rs))==true){
+while(($row = sqlsrv_fetch_array($rs))==true){
     if ($noTrim === false) {
         $row = array_map('trim',$row);
     }

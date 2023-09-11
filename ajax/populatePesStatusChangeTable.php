@@ -29,7 +29,7 @@ if(!$rs){
 }
 
 
-while(($row=sqlsrv_fetch_array($rs))==true){
+while(($row = sqlsrv_fetch_array($rs))==true){
      $data[] = $row;
 }
 

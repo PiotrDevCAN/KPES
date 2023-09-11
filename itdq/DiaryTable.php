@@ -22,7 +22,6 @@ class DiaryTable  extends DbTable {
 			exit ( "Error in: " . __METHOD__ . " running: " . $sql );
 		}
 		return	db2_last_insert_id($_SESSION ['conn']);
-
 	}
 }
 

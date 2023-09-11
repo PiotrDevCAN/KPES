@@ -2,6 +2,9 @@
 use itdq\Trace;
 use itdq\WorkerAPI;
 use itdq\OKTAGroups;
+use upes\AllTables;
+use upes\ContractRecord;
+use upes\ContractTable;
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
@@ -33,6 +36,18 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 // echo '</pre>';
 
 echo 'Emails status: '.trim($_ENV['email']);
+
+$contractRecord = new ContractRecord();
+$contractTable = new ContractTable(AllTables::$CONTRACT);
+$data = array(
+	'ACCOUNT_ID' => 900,
+	'CONTRACT' => 'TEST INDEX'
+);
+$contractRecordData = array_map('trim', $data);
+$contractRecordData['CONTRACT_ID'] = null;
+$contractRecord->setFromArray($contractRecordData);
+
+$contractTable->insert($contractRecord, false, false);
 
 ?>
 <style type="text/css" class="init">

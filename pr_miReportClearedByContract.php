@@ -30,7 +30,7 @@ $allContracts = array();
 $maxYear = 0;
 $minYear = 9999;
 
-while ($row=sqlsrv_fetch_array($rs)) {
+while ($row = sqlsrv_fetch_array($rs)) {
     
     $maxYear = $row['YEAR'] > $maxYear ? $row['YEAR'] : $maxYear;
     $minYear = $row['YEAR'] < $minYear ? $row['YEAR'] : $minYear;

@@ -50,9 +50,11 @@ $site = array(
     'csvPrefix' => $_ENV['environment'],
 
     'cdiBg'       => 'ventus_cdi',
-    'cdiBgAz'     => 'the kPES tool - production-ventus_cdi',
     'pesTeamBg'   => 'upes_pesTeam',
+
+    'cdiBgAz'     => 'the kPES tool - production-ventus_cdi',
     'pesTeamBgAz' => 'the kPES tool - production-upes_pesTeam',
+    
     'nullBg'      => null,
 
     'email' => false,

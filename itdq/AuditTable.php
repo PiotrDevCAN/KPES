@@ -82,7 +82,7 @@ class AuditTable extends DbTable {
         $data = array();
         $data['rows'] = array();
 
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $data['rows'][] = $trimmedRow;
         }
@@ -103,7 +103,7 @@ class AuditTable extends DbTable {
              DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
          }
 
-         $row=sqlsrv_fetch_array($rs);
+         $row = sqlsrv_fetch_array($rs);
 
          return $row['RECORDSFILTERED'];
 
@@ -121,7 +121,7 @@ class AuditTable extends DbTable {
              DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
          }
 
-         $row=sqlsrv_fetch_array($rs);
+         $row = sqlsrv_fetch_array($rs);
 
          return $row['TOTALROWS'];
      }

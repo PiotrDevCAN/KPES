@@ -158,7 +158,7 @@ class PersonTableDataUpdater extends PersonTable
         if(!$result){
             DBTable::displayErrorMessage($result, __CLASS__, __METHOD__, "prepared sql statement");
         }
-        $row=sqlsrv_fetch_array($this->preparedCheckExistsStatements[$column]);
+        $row = sqlsrv_fetch_array($this->preparedCheckExistsStatements[$column]);
         return $row['EXISTS']>0;
     }
 

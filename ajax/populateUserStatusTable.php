@@ -48,7 +48,7 @@ if(!$rs){
 }
 
 $data = array();
-while(($row=sqlsrv_fetch_array($rs))==true){
+while(($row = sqlsrv_fetch_array($rs))==true){
     $rowWithActionButtons = AccountPersonTable::addButtonsForPeopleReport(array_map('trim', $row));
     $data[] = $rowWithActionButtons;
 }

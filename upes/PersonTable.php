@@ -48,7 +48,7 @@ class PersonTable extends DbTable
         $sql = " Select distinct lower(EMAIL_ADDRESS) as EMAIL_ADDRESS from " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $allEmail[] = trim($row['EMAIL_ADDRESS']);
         }
         return $allEmail;
@@ -60,7 +60,7 @@ class PersonTable extends DbTable
         $sql = " Select distinct UPES_REF, FULL_NAME from " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON;
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $allNames[$row['UPES_REF']] = trim($row['FULL_NAME']);
         }
         return $allNames;
@@ -242,7 +242,7 @@ class PersonTable extends DbTable
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $row = array_map('trim',$row);
             $accountPersonTable->savePesComment($row['UPES_REF'],$row['ACCOUNT_ID'], "PES Status was " . $row['PES_STATUS'] . " prior to leaving");
             $slack->sendMessageToChannel($row['FULL_NAME'] . "(" . $row['CNUM'] . ") -  PES Status on Account " . $row['ACCOUNT'] . " was " . $row['PES_STATUS'] . " prior to leaving", slack::CHANNEL_UPES_AUDIT);

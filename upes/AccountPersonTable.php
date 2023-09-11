@@ -221,7 +221,7 @@ class AccountPersonTable extends DbTable {
         switch ($returnResultsAs) {
             case self::PES_TRACKER_RETURN_RESULTS_AS_ARRAY:
                 $report = array();
-                while(($row=sqlsrv_fetch_array($rs))==true){
+                while(($row = sqlsrv_fetch_array($rs))==true){
                     $report[] = array_map('trim',$row);
                 }
                
@@ -366,7 +366,7 @@ class AccountPersonTable extends DbTable {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        $row=sqlsrv_fetch_array($rs);
+        $row = sqlsrv_fetch_array($rs);
 
         // return $row['RECORDSFILTERED'];
         return $row['COUNTER'];
@@ -381,7 +381,7 @@ class AccountPersonTable extends DbTable {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
         }
 
-        $row=sqlsrv_fetch_array($rs);
+        $row = sqlsrv_fetch_array($rs);
 
         // return $row['TOTALROWS'];
         return $row['COUNTER'];
@@ -1231,7 +1231,7 @@ class AccountPersonTable extends DbTable {
         }
 
         $allRecheckers = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $allRecheckers[] = $trimmedRow;
             $this->setPesStatus($trimmedRow['UPES_REF'],$trimmedRow['ACCOUNT_ID'],AccountPersonRecord::PES_STATUS_RECHECK_REQ);
@@ -1305,7 +1305,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce StatusByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1335,7 +1335,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce StatusByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1363,7 +1363,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce ProcessStatusByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1393,7 +1393,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce ProcessStatusByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1421,7 +1421,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce upcomingRechecksByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1452,7 +1452,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce upcomingRechecksByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1480,7 +1480,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce miClearedByAccount result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1508,7 +1508,7 @@ class AccountPersonTable extends DbTable {
             throw new \Exception('Unable to produce miClearedByContract result set');
         }
         $report = false;
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $report[] = $trimmedRow;
         }
@@ -1533,7 +1533,7 @@ class AccountPersonTable extends DbTable {
             DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
             throw new \Exception('Unable to produce emailAddress Account Pes Status result set');
         }
-        while(($row=sqlsrv_fetch_array($rs))==true){
+        while(($row = sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $personAccount = $trimmedRow['EMAIL_ADDRESS'] . " : " . $trimmedRow['ACCOUNT'];
             $upesAccountId = $trimmedRow['UPES_REF'] . ":" . $trimmedRow['ACCOUNT_ID'];

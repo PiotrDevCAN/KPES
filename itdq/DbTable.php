@@ -588,6 +588,16 @@ class DbTable
         //     // print_r($row);
         //     $this->primary_keys[trim($row['Name'])] = $row;
         // }
+
+        $sql = "SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME AS PK_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE TABLE_NAME = '" . $this->tableName ."'";        
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
+        if(!$rs){
+            DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
+        }
+        while(($row = sqlsrv_fetch_array($rs))==true){
+            // print_r($row);
+            $this->primary_keys[trim($row['COLUMN_NAME'])] = $row;
+        }
     }
 
     /**
@@ -991,7 +1001,8 @@ class DbTable
             // So best prepare a new statement, which we will save in the hope of reusing
             Trace::traceVariable($sql, __METHOD__, __LINE__);
             $this->preparedInsertSQL = $sql;
-            $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql, $insertArray);
+            $insertArrayValues = array_values($insertArray);
+            $this->preparedInsert = sqlsrv_prepare($GLOBALS['conn'], $sql, $insertArrayValues);
             if (! $this->preparedInsert) {
                 echo "<BR/>" . json_encode(sqlsrv_errors());
                 echo "<BR/>" . json_encode(sqlsrv_errors()) . "<BR/>";
@@ -1030,7 +1041,8 @@ class DbTable
             echo "</pre>";
             self::displayErrorMessage($rs, __CLASS__, __METHOD__, $this->preparedInsertSQL, $this->pwd, $this->lastDb2StmtError, $this->lastDb2StmtErrorMsg, $insertArray);
         } else {
-            $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            // $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            $this->lastId = $this->lastId();
         }
         if (isset($_SESSION['log'])) {
             Log::logEntry("DBTABLE SQL:" . str_replace($this->pwd, 'password', $this->preparedInsertSql), $this->pwd);
@@ -1059,7 +1071,8 @@ class DbTable
             self::displayErrorMessage($rs, __CLASS__, __METHOD__, $this->preparedInsertSQL, $this->pwd, $this->lastDb2StmtError, $this->lastDb2StmtErrorMsg, $insertArray, $rollbackIfError);
             return false;
         } else {
-            $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            // $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            $this->lastId = $this->lastId();
             return true;
         }
     }
@@ -1554,7 +1567,8 @@ class DbTable
             Trace::traceComment('Attempting Insert', __METHOD__, __LINE__);
             $inserted = $this->insert($record);
             $inserted = $inserted ? $inserted : null;
-            $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            // $this->lastId = db2_last_insert_id($GLOBALS['conn']);
+            $this->lastId = $this->lastId();
         }
         if ($commit) {
             $this->commitUpdates();
@@ -1735,11 +1749,18 @@ class DbTable
      */
     function lastId()
     {
-        // $id = db2_last_insert_id($_SESSION ['conn']);
-        $trace = "Table " . $this->tableName . " Last ID:" . $this->lastId;
-        Trace::traceComment($trace, __METHOD__);
-        return $this->lastId;
-        // return $id;
+        $id = null;
+        foreach ($this->primary_keys as $key => $value) {
+            $id = $value['COLUMN_NAME'];
+        }
+
+        $sql = "SELECT TOP (1) " . $id . " AS ID FROM " . $GLOBALS['Db2Schema'] . "." . $this->tableName . " ORDER BY " . $id . " DESC";
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql);
+        if(!$rs){
+            DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
+        }
+        $row = sqlsrv_fetch_array($rs);
+        return $row['ID'];
     }
 
     /**

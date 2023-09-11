@@ -22,7 +22,7 @@ if(!$rs){
     DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);    
 }
 
-while ($row=sqlsrv_fetch_array($rs)) {
+while ($row = sqlsrv_fetch_array($rs)) {
 
     $upesref = trim($row['UPES_REF']);
     $account = trim($row['ACCOUNT']);

@@ -205,7 +205,6 @@ class BlueMail
         !empty($bcc) ? $data[] = serialize($bcc) : null;
         $rs = sqlsrv_execute($preparedStatement, $data);
 
-
 //         $sql  = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
 //         $sql .= " (TO, SUBJECT, MESSAGE, DATA_JSON ) VALUES ( '" . htmlspecialchars(serialize($to)) ."','" . htmlspecialchars($subject) . "'";
 //         $sql .= " ,'" . htmlspecialchars($message) . "','" . htmlspecialchars($data_json) . "'); ";

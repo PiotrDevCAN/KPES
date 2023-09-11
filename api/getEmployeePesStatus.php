@@ -40,7 +40,7 @@ if (! $rs) {
 
 $data = array();
 $count = 1;
-while(($row=sqlsrv_fetch_array($rs))==true){
+while(($row = sqlsrv_fetch_array($rs))==true){
     $row = array_map('trim',$row);
     $data[] = $row;
 }
