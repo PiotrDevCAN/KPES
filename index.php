@@ -37,17 +37,17 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 
 echo 'Emails status: '.trim($_ENV['email']);
 
-$contractRecord = new ContractRecord();
-$contractTable = new ContractTable(AllTables::$CONTRACT);
-$data = array(
-	'ACCOUNT_ID' => 900,
-	'CONTRACT' => 'TEST INDEX'
-);
-$contractRecordData = array_map('trim', $data);
-$contractRecordData['CONTRACT_ID'] = null;
-$contractRecord->setFromArray($contractRecordData);
+// $contractRecord = new ContractRecord();
+// $contractTable = new ContractTable(AllTables::$CONTRACT);
+// $data = array(
+// 	'ACCOUNT_ID' => 900,
+// 	'CONTRACT' => 'TEST INDEX'
+// );
+// $contractRecordData = array_map('trim', $data);
+// $contractRecordData['CONTRACT_ID'] = null;
+// $contractRecord->setFromArray($contractRecordData);
 
-$contractTable->insert($contractRecord, false, false);
+// $contractTable->insert($contractRecord, false, false);
 
 ?>
 <style type="text/css" class="init">
