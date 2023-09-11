@@ -5,7 +5,7 @@ metadata:
 data:
   SERVER_ADMIN: piotr.tajanowicz@kyndryl.com
   SERVER_NAME: Azure kPES
-  email: dev
+  email: user
   environment: upes_newco_ut
   jwt_token: "dGhpcyBpcyBhIHN0cmluZyB0aGF0IHdpbGwgYmUgdXNlZCB0byBzZWN1cmUgdmJhYydzIHNlc3Npb25zLiBUaGUgbW9yZSBjaGFyYWN0ZXJzIEkga2V5IGludG8gdGhpcyB0aGUgbW9yZSBzZWN1cmUgaXQgaXMg"
   devemailid: piotr.tajanowicz@kyndryl.com
