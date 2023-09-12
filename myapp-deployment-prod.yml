@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kpes
 spec:
-  replicas: 5
+  replicas: 1
   revisionHistoryLimit: 0 # Default to 10 if not specified
   selector:
     matchLabels:
