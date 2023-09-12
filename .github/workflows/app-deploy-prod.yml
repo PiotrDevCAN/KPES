@@ -9,6 +9,7 @@ jobs:
     runs-on:
       - aro-prod-westus3
     environment: production
+    timeout-minutes: 60
     steps:
       - name: Get JFROG Credentials
         id: import-secrets
@@ -47,6 +48,7 @@ jobs:
     runs-on:
       - aro-prod-westus3
     environment: production
+    timeout-minutes: 60
     steps:
       - name: Checkout Sourcecode
         uses: actions/checkout@v3
