@@ -5,872 +5,884 @@
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 430B 0.0s done
-#2 DONE 0.1s
+#2 transferring dockerfile: 557B 0.0s done
+#2 DONE 0.0s
 
 #3 [internal] load metadata for registry.access.redhat.com/ubi8/php-74:latest
-#3 DONE 0.5s
+#3 DONE 0.7s
 
-#4 [ 1/10] FROM registry.access.redhat.com/ubi8/php-74@sha256:0b132c7a8e7dab79fb6ee309d0c4e6583505d7fed1dcfcd1070cd972cb4a206e
+#4 [ 1/14] FROM registry.access.redhat.com/ubi8/php-74@sha256:0b132c7a8e7dab79fb6ee309d0c4e6583505d7fed1dcfcd1070cd972cb4a206e
 #4 CACHED
 
 #5 [internal] load build context
-#5 transferring context: 1.19MB 2.5s done
-#5 DONE 2.7s
+#5 transferring context: 1.60MB 2.2s done
+#5 DONE 2.3s
 
-#6 [ 2/10] ADD . /var/www/html/
-#6 DONE 8.2s
+#6 [ 2/14] ADD . /var/www/html/
+#6 DONE 2.8s
 
-#7 [ 3/10] ADD ./patch1.sh /patch1.sh
-#7 DONE 0.1s
+#7 [ 3/14] ADD ./patch1.sh /patch1.sh
+#7 DONE 0.0s
 
-#8 [ 4/10] RUN bash /patch1.sh && rm /patch1.sh
-#8 8.278 Updating Subscription Management repositories.
-#8 8.278 Unable to read consumer identity
-#8 8.279 Subscription Manager is operating in container mode.
-#8 8.305 
-#8 8.305 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 8.305 
-#8 10.45 Dependencies resolved.
-#8 10.46 ========================================================================================================================
-#8 10.46  Package            Arch    Version                                             Repository                          Size
-#8 10.46 ========================================================================================================================
-#8 10.46 Removing:
-#8 10.46  nodejs             x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   37 M
-#8 10.46 Removing dependent packages:
-#8 10.46  npm                x86_64  1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6 @rhel-8-for-x86_64-appstream-rpms   16 M
-#8 10.46 Removing unused dependencies:
-#8 10.46  nodejs-docs        noarch  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   60 M
-#8 10.46  nodejs-full-i18n   x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   28 M
-#8 10.46 
-#8 10.46 Transaction Summary
-#8 10.46 ========================================================================================================================
-#8 10.46 Remove  4 Packages
-#8 10.46 
-#8 10.46 Freed space: 141 M
-#8 10.47 Running transaction check
-#8 10.50 Transaction check succeeded.
-#8 10.50 Running transaction test
-#8 10.77 Transaction test succeeded.
-#8 10.78 Running transaction
-#8 12.51   Preparing        :                                                        1/1 
-#8 12.64   Erasing          : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
-#8 14.53   Erasing          : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   2/4 
-#8 14.73   Erasing          : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   3/4 
-#8 14.78   Erasing          : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   4/4 
-#8 15.18   Verifying        : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
-#8 15.18   Verifying        : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   2/4 
-#8 15.18   Verifying        : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   3/4 
-#8 15.18   Verifying        : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   4/4 
-#8 15.90 Installed products updated.
-#8 15.94 
-#8 15.94 Removed:
-#8 15.94   nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64                       
-#8 15.94   nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.noarch                  
-#8 15.94   nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64             
-#8 15.94   npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6.x86_64                
-#8 15.94 
-#8 15.94 Complete!
-#8 17.07 Updating Subscription Management repositories.
-#8 17.07 Unable to read consumer identity
-#8 17.07 Subscription Manager is operating in container mode.
-#8 17.08 
-#8 17.08 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 17.08 
-#8 17.10 0 files removed
-#8 17.83 Updating Subscription Management repositories.
-#8 17.83 Unable to read consumer identity
-#8 17.83 Subscription Manager is operating in container mode.
-#8 17.83 
-#8 17.83 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 17.83 
-#8 18.69 Red Hat Universal Base Image 8 (RPMs) - BaseOS  1.0 MB/s | 716 kB     00:00    
-#8 20.02 Red Hat Universal Base Image 8 (RPMs) - AppStre 3.1 MB/s | 2.9 MB     00:00    
-#8 22.57 Red Hat Universal Base Image 8 (RPMs) - CodeRea 309 kB/s |  99 kB     00:00    
-#8 23.41 Dependencies resolved.
-#8 23.42 ===================================================================================================
-#8 23.42  Package            Arch    Version                                     Repository             Size
-#8 23.42 ===================================================================================================
-#8 23.42 Upgrading:
-#8 23.42  httpd              x86_64  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms  1.4 M
-#8 23.42  httpd-filesystem   noarch  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms   43 k
-#8 23.42  httpd-tools        x86_64  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms  110 k
-#8 23.42  mod_ssl            x86_64  1:2.4.37-56.module+el8.8.0+19808+379766d6.7 ubi-8-appstream-rpms  140 k
-#8 23.42 
-#8 23.42 Transaction Summary
-#8 23.42 ===================================================================================================
-#8 23.42 Upgrade  4 Packages
-#8 23.42 
-#8 23.42 Total download size: 1.7 M
-#8 23.42 Downloading Packages:
-#8 23.61 (1/4): httpd-filesystem-2.4.37-56.module+el8.8. 240 kB/s |  43 kB     00:00    
-#8 23.68 (2/4): httpd-tools-2.4.37-56.module+el8.8.0+198 427 kB/s | 110 kB     00:00    
-#8 23.70 (3/4): mod_ssl-2.4.37-56.module+el8.8.0+19808+3 1.4 MB/s | 140 kB     00:00    
-#8 23.84 (4/4): httpd-2.4.37-56.module+el8.8.0+19808+379 3.4 MB/s | 1.4 MB     00:00    
-#8 23.85 --------------------------------------------------------------------------------
-#8 23.85 Total                                           4.0 MB/s | 1.7 MB     00:00     
-#8 23.97 Running transaction check
-#8 24.01 Transaction check succeeded.
-#8 24.01 Running transaction test
-#8 24.37 Transaction test succeeded.
-#8 24.38 Running transaction
-#8 24.44   Preparing        :                                                        1/1 
-#8 24.54   Running scriptlet: httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/1 
-#8 24.56   Running scriptlet: httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/8 
-#8 24.59   Upgrading        : httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/8 
-#8 24.63   Upgrading        : httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.   2/8 
-#8 25.26   Upgrading        : httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   3/8 
-#8 25.30   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   3/8 
-#8 25.36   Upgrading        : mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.   4/8 
-#8 25.42   Cleanup          : mod_ssl-1:2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.   5/8 
-#8 25.45   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
-#8 25.56   Cleanup          : httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
-#8 25.57   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
-#8 25.60   Cleanup          : httpd-filesystem-2.4.37-56.module+el8.8.0+18758+b3a9   7/8 
-#8 25.62   Cleanup          : httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   8/8 
-#8 25.64   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   8/8 
-#8 25.73   Running scriptlet: httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   8/8 
-#8 26.12   Verifying        : httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   1/8 
-#8 26.12   Verifying        : httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   2/8 
-#8 26.12   Verifying        : httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   3/8 
-#8 26.12   Verifying        : httpd-filesystem-2.4.37-56.module+el8.8.0+18758+b3a9   4/8 
-#8 26.12   Verifying        : httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.   5/8 
-#8 26.12   Verifying        : httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   6/8 
-#8 26.12   Verifying        : mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.   7/8 
-#8 26.12   Verifying        : mod_ssl-1:2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.   8/8 
-#8 26.61 Installed products updated.
-#8 26.64 
-#8 26.64 Upgraded:
-#8 26.64   httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                        
-#8 26.64   httpd-filesystem-2.4.37-56.module+el8.8.0+19808+379766d6.7.noarch             
-#8 26.64   httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                  
-#8 26.64   mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                    
-#8 26.64 
-#8 26.64 Complete!
-#8 27.20 Updating Subscription Management repositories.
-#8 27.20 Unable to read consumer identity
-#8 27.20 Subscription Manager is operating in container mode.
-#8 27.21 
-#8 27.21 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 27.21 
-#8 27.30 Last metadata expiration check: 0:00:05 ago on Tue Sep 12 06:10:44 2023.
-#8 27.51 Dependencies resolved.
-#8 27.52 Nothing to do.
-#8 27.52 Complete!
-#8 28.08 Updating Subscription Management repositories.
-#8 28.08 Unable to read consumer identity
-#8 28.08 Subscription Manager is operating in container mode.
-#8 28.08 
-#8 28.08 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 28.08 
-#8 28.19 Last metadata expiration check: 0:00:06 ago on Tue Sep 12 06:10:44 2023.
-#8 28.41 Package unzip-6.0-46.el8.x86_64 is already installed.
-#8 28.41 Package zip-3.0-23.el8.x86_64 is already installed.
-#8 28.44 Dependencies resolved.
-#8 28.44 ==========================================================================================
-#8 28.44  Package     Arch    Version                                   Repository             Size
-#8 28.44 ==========================================================================================
-#8 28.44 Installing:
-#8 28.44  php-devel   x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa    ubi-8-appstream-rpms  730 k
-#8 28.44  php-pear    noarch  1:1.10.13-1.module+el8.7.0+15127+a450a8db ubi-8-appstream-rpms  362 k
-#8 28.44  sudo        x86_64  1.8.29-10.el8                             ubi-8-baseos-rpms     926 k
-#8 28.44  yum-utils   noarch  4.0.21-19.el8_8                           ubi-8-baseos-rpms      75 k
-#8 28.44 Installing dependencies:
-#8 28.44  libtool     x86_64  2.4.6-25.el8                              ubi-8-appstream-rpms  709 k
-#8 28.44 
-#8 28.44 Transaction Summary
-#8 28.44 ==========================================================================================
-#8 28.44 Install  5 Packages
-#8 28.44 
-#8 28.45 Total download size: 2.7 M
-#8 28.45 Installed size: 13 M
-#8 28.45 Downloading Packages:
-#8 28.68 (1/5): yum-utils-4.0.21-19.el8_8.noarch.rpm     323 kB/s |  75 kB     00:00    
-#8 28.78 (2/5): sudo-1.8.29-10.el8.x86_64.rpm            2.8 MB/s | 926 kB     00:00    
-#8 28.82 (3/5): libtool-2.4.6-25.el8.x86_64.rpm          1.9 MB/s | 709 kB     00:00    
-#8 28.86 (4/5): php-pear-1.10.13-1.module+el8.7.0+15127+ 4.7 MB/s | 362 kB     00:00    
-#8 28.87 (5/5): php-devel-7.4.33-1.module+el8.8.0+17865+ 3.7 MB/s | 730 kB     00:00    
-#8 28.88 --------------------------------------------------------------------------------
-#8 28.88 Total                                           6.3 MB/s | 2.7 MB     00:00     
-#8 29.03 Running transaction check
-#8 29.10 Transaction check succeeded.
-#8 29.10 Running transaction test
-#8 29.24 Transaction test succeeded.
-#8 29.24 Running transaction
-#8 29.30   Preparing        :                                                        1/1 
-#8 29.49   Installing       : libtool-2.4.6-25.el8.x86_64                            1/5 
-#8 29.50   Running scriptlet: libtool-2.4.6-25.el8.x86_64                            1/5 
-#8 29.73   Installing       : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/5 
-#8 29.85   Installing       : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/5 
-#8 29.88   Installing       : yum-utils-4.0.21-19.el8_8.noarch                       4/5 
-#8 30.02   Installing       : sudo-1.8.29-10.el8.x86_64                              5/5 
-#8 30.04   Running scriptlet: sudo-1.8.29-10.el8.x86_64                              5/5 
-#8 30.16   Running scriptlet: php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   5/5 
-#8 31.09   Verifying        : sudo-1.8.29-10.el8.x86_64                              1/5 
-#8 31.09   Verifying        : yum-utils-4.0.21-19.el8_8.noarch                       2/5 
-#8 31.09   Verifying        : libtool-2.4.6-25.el8.x86_64                            3/5 
-#8 31.09   Verifying        : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   4/5 
-#8 31.09   Verifying        : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   5/5 
-#8 31.31 Installed products updated.
-#8 31.33 
-#8 31.33 Installed:
-#8 31.33   libtool-2.4.6-25.el8.x86_64                                                   
-#8 31.33   php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                       
-#8 31.33   php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.noarch                     
-#8 31.33   sudo-1.8.29-10.el8.x86_64                                                     
-#8 31.33   yum-utils-4.0.21-19.el8_8.noarch                                              
-#8 31.33 
-#8 31.33 Complete!
-#8 31.51   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-#8 31.51                                  Dload  Upload   Total   Spent    Left  Speed
-#8 31.51   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   192  100   192    0     0    631      0 --:--:-- --:--:-- --:--:--   633
-#8 31.81 [packages-microsoft-com-prod]
-#8 31.81 name=packages-microsoft-com-prod
-#8 31.81 baseurl=https://packages.microsoft.com/rhel/8/prod/
-#8 31.81 enabled=1
-#8 31.81 gpgcheck=1
-#8 31.81 gpgkey=https://packages.microsoft.com/keys/microsoft.ascUpdating Subscription Management repositories.
-#8 32.48 Unable to read consumer identity
-#8 32.48 Subscription Manager is operating in container mode.
-#8 32.49 
-#8 32.49 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 32.49 
-#8 32.84 No match for argument: unixODBC-utf16
-#8 32.84 No match for argument: unixODBC-utf16-devel
-#8 32.84 No packages marked for removal.
-#8 32.85 Dependencies resolved.
-#8 32.85 Nothing to do.
-#8 32.85 Complete!
-#8 33.72 Updating Subscription Management repositories.
-#8 33.72 Unable to read consumer identity
-#8 33.72 Subscription Manager is operating in container mode.
-#8 33.73 
-#8 33.73 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 33.73 
-#8 34.99 packages-microsoft-com-prod                     7.5 MB/s | 8.2 MB     00:01    
-#8 39.29 Last metadata expiration check: 0:00:05 ago on Tue Sep 12 06:10:56 2023.
-#8 39.70 Dependencies resolved.
-#8 39.70 ================================================================================
-#8 39.70  Package        Arch      Version          Repository                      Size
-#8 39.70 ================================================================================
-#8 39.70 Installing:
-#8 39.70  msodbcsql18    x86_64    18.3.1.1-1       packages-microsoft-com-prod    925 k
-#8 39.70 Installing dependencies:
-#8 39.70  unixODBC       x86_64    2.3.11-1.rh      packages-microsoft-com-prod    274 k
-#8 39.70 
-#8 39.70 Transaction Summary
-#8 39.70 ================================================================================
-#8 39.70 Install  2 Packages
-#8 39.70 
-#8 39.70 Total download size: 1.2 M
-#8 39.70 Installed size: 2.9 M
-#8 39.70 Downloading Packages:
-#8 40.28 (1/2): unixODBC-2.3.11-1.rh.x86_64.rpm          486 kB/s | 274 kB     00:00    
-#8 40.33 (2/2): msodbcsql18-18.3.1.1-1.x86_64.rpm        1.4 MB/s | 925 kB     00:00    
-#8 40.34 --------------------------------------------------------------------------------
-#8 40.34 Total                                           1.8 MB/s | 1.2 MB     00:00     
-#8 40.62 packages-microsoft-com-prod                     4.0 kB/s | 983  B     00:00    
-#8 40.76 Importing GPG key 0xBE1229CF:
-#8 40.76  Userid     : "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
-#8 40.76  Fingerprint: BC52 8686 B50D 79E3 39D3 721C EB3E 94AD BE12 29CF
-#8 40.76  From       : https://packages.microsoft.com/keys/microsoft.asc
-#8 40.77 Key imported successfully
-#8 40.81 Running transaction check
-#8 40.82 Transaction check succeeded.
-#8 40.82 Running transaction test
-#8 40.87 Transaction test succeeded.
-#8 40.87 Running transaction
-#8 40.90   Preparing        :                                                        1/1 
-#8 40.94   Installing       : unixODBC-2.3.11-1.rh.x86_64                            1/2 
-#8 40.96   Running scriptlet: unixODBC-2.3.11-1.rh.x86_64                            1/2 
-#8 40.98   Running scriptlet: msodbcsql18-18.3.1.1-1.x86_64                          2/2 
-#8 41.03   Installing       : msodbcsql18-18.3.1.1-1.x86_64                          2/2 
-#8 41.04   Running scriptlet: msodbcsql18-18.3.1.1-1.x86_64                          2/2 
-#8 41.07 odbcinst: Driver installed. Usage count increased to 1. 
-#8 41.07     Target directory is /etc
-#8 41.07 
-#8 41.21   Verifying        : msodbcsql18-18.3.1.1-1.x86_64                          1/2 
-#8 41.21   Verifying        : unixODBC-2.3.11-1.rh.x86_64                            2/2 
-#8 41.42 Installed products updated.
-#8 41.45 
-#8 41.45 Installed:
-#8 41.45   msodbcsql18-18.3.1.1-1.x86_64           unixODBC-2.3.11-1.rh.x86_64          
-#8 41.45 
-#8 41.45 Complete!
-#8 42.31 Updating Subscription Management repositories.
-#8 42.31 Unable to read consumer identity
-#8 42.31 Subscription Manager is operating in container mode.
-#8 42.31 
-#8 42.31 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 42.31 
-#8 42.44 Last metadata expiration check: 0:00:08 ago on Tue Sep 12 06:10:56 2023.
-#8 42.70 Dependencies resolved.
-#8 42.70 ================================================================================
-#8 42.70  Package          Arch      Version        Repository                      Size
-#8 42.70 ================================================================================
-#8 42.70 Installing:
-#8 42.70  mssql-tools18    x86_64    18.2.1.1-1     packages-microsoft-com-prod    292 k
-#8 42.70 
-#8 42.70 Transaction Summary
-#8 42.70 ================================================================================
-#8 42.70 Install  1 Package
-#8 42.70 
-#8 42.70 Total download size: 292 k
-#8 42.70 Installed size: 718 k
-#8 42.70 Downloading Packages:
-#8 43.15 mssql-tools18-18.2.1.1-1.x86_64.rpm             651 kB/s | 292 kB     00:00    
-#8 43.15 --------------------------------------------------------------------------------
-#8 43.16 Total                                           642 kB/s | 292 kB     00:00     
-#8 43.17 Running transaction check
-#8 43.18 Transaction check succeeded.
-#8 43.18 Running transaction test
-#8 43.19 Transaction test succeeded.
-#8 43.20 Running transaction
-#8 43.21   Preparing        :                                                        1/1 
-#8 43.22   Running scriptlet: mssql-tools18-18.2.1.1-1.x86_64                        1/1 
-#8 43.24   Installing       : mssql-tools18-18.2.1.1-1.x86_64                        1/1 
-#8 43.33   Verifying        : mssql-tools18-18.2.1.1-1.x86_64                        1/1 
-#8 43.51 Installed products updated.
-#8 43.54 
-#8 43.54 Installed:
-#8 43.54   mssql-tools18-18.2.1.1-1.x86_64                                               
-#8 43.54 
-#8 43.54 Complete!
-#8 44.16 Updating Subscription Management repositories.
-#8 44.16 Unable to read consumer identity
-#8 44.16 Subscription Manager is operating in container mode.
-#8 44.16 
-#8 44.16 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#8 44.16 
-#8 44.29 Last metadata expiration check: 0:00:10 ago on Tue Sep 12 06:10:56 2023.
-#8 44.52 Dependencies resolved.
-#8 44.52 ================================================================================
-#8 44.52  Package          Arch     Version          Repository                     Size
-#8 44.52 ================================================================================
-#8 44.52 Installing:
-#8 44.52  initscripts      x86_64   10.00.18-1.el8   ubi-8-baseos-rpms             340 k
-#8 44.52  unixODBC-devel   x86_64   2.3.7-1.rh       packages-microsoft-com-prod    42 k
-#8 44.52 Downgrading:
-#8 44.52  unixODBC         x86_64   2.3.7-1.rh       packages-microsoft-com-prod   213 k
-#8 44.52 
-#8 44.52 Transaction Summary
-#8 44.52 ================================================================================
-#8 44.52 Install    2 Packages
-#8 44.52 Downgrade  1 Package
-#8 44.52 
-#8 44.52 Total download size: 595 k
-#8 44.52 Downloading Packages:
-#8 44.84 (1/3): unixODBC-devel-2.3.7-1.rh.x86_64.rpm     134 kB/s |  42 kB     00:00    
-#8 44.93 (2/3): initscripts-10.00.18-1.el8.x86_64.rpm    848 kB/s | 340 kB     00:00    
-#8 44.94 (3/3): unixODBC-2.3.7-1.rh.x86_64.rpm           518 kB/s | 213 kB     00:00    
-#8 44.94 --------------------------------------------------------------------------------
-#8 44.95 Total                                           1.4 MB/s | 595 kB     00:00     
-#8 45.01 Running transaction check
-#8 45.05 Transaction check succeeded.
-#8 45.05 Running transaction test
-#8 45.12 Transaction test succeeded.
-#8 45.12 Running transaction
-#8 45.15   Preparing        :                                                        1/1 
-#8 45.25   Downgrading      : unixODBC-2.3.7-1.rh.x86_64                             1/4 
-#8 45.27   Running scriptlet: unixODBC-2.3.7-1.rh.x86_64                             1/4 
-#8 45.30   Installing       : unixODBC-devel-2.3.7-1.rh.x86_64                       2/4 
-#8 45.37   Installing       : initscripts-10.00.18-1.el8.x86_64                      3/4 
-#8 45.39   Running scriptlet: initscripts-10.00.18-1.el8.x86_64                      3/4 
-#8 45.42   Cleanup          : unixODBC-2.3.11-1.rh.x86_64                            4/4 
-#8 45.42   Running scriptlet: unixODBC-2.3.11-1.rh.x86_64                            4/4 
-#8 45.65   Verifying        : unixODBC-2.3.7-1.rh.x86_64                             1/4 
-#8 45.65   Verifying        : unixODBC-2.3.11-1.rh.x86_64                            2/4 
-#8 45.65   Verifying        : unixODBC-devel-2.3.7-1.rh.x86_64                       3/4 
-#8 45.65   Verifying        : initscripts-10.00.18-1.el8.x86_64                      4/4 
-#8 45.89 Installed products updated.
-#8 45.92 
-#8 45.92 Downgraded:
-#8 45.92   unixODBC-2.3.7-1.rh.x86_64                                                    
-#8 45.92 Installed:
-#8 45.92   initscripts-10.00.18-1.el8.x86_64       unixODBC-devel-2.3.7-1.rh.x86_64      
-#8 45.92 
-#8 45.92 Complete!
-#8 46.22 Updating channel "pecl.php.net"
-#8 46.63 Update of Channel "pecl.php.net" succeeded
-#8 50.30 downloading sqlsrv-5.10.1.tgz ...
-#8 50.30 Starting to download sqlsrv-5.10.1.tgz (193,661 bytes)
-#8 50.30 .........................................done: 193,661 bytes
-#8 50.57 34 source files, building
-#8 50.57 running: phpize
-#8 50.59 Configuring for:
-#8 50.59 PHP Api Version:         20190902
-#8 50.59 Zend Module Api No:      20190902
-#8 50.59 Zend Extension Api No:   320190902
-#8 51.43 building in /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1
-#8 51.43 running: /var/tmp/sqlsrv/configure --with-php-config=/bin/php-config
-#8 51.55 checking for grep that handles long lines and -e... /bin/grep
-#8 51.56 checking for egrep... /bin/grep -E
-#8 51.56 checking for a sed that does not truncate output... /bin/sed
-#8 51.58 checking for pkg-config... /bin/pkg-config
-#8 51.59 checking pkg-config is at least version 0.9.0... yes
-#8 51.59 checking for cc... cc
-#8 51.83 checking whether the C compiler works... yes
-#8 51.83 checking for C compiler default output file name... a.out
-#8 51.87 checking for suffix of executables...
-#8 51.93 checking whether we are cross compiling... no
-#8 51.96 checking for suffix of object files... o
-#8 51.98 checking whether we are using the GNU C compiler... yes
-#8 52.01 checking whether cc accepts -g... yes
-#8 52.06 checking for cc option to accept ISO C89... none needed
-#8 52.09 checking how to run the C preprocessor... cc -E
-#8 52.13 checking for icc... no
-#8 52.14 checking for suncc... no
-#8 52.14 checking for system library directory... lib
-#8 52.15 checking if compiler supports -R... no
-#8 52.19 checking if compiler supports -Wl,-rpath,... yes
-#8 52.26 checking build system type... x86_64-pc-linux-gnu
-#8 52.26 checking host system type... x86_64-pc-linux-gnu
-#8 52.26 checking target system type... x86_64-pc-linux-gnu
-#8 52.33 checking for PHP prefix... /usr
-#8 52.33 checking for PHP includes... -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib
-#8 52.33 checking for PHP extension directory... /usr/lib64/php/modules
-#8 52.33 checking for PHP installed headers prefix... /usr/include/php
-#8 52.37 checking if debug is enabled... no
-#8 52.40 checking if zts is enabled... no
-#8 52.40 checking for gawk... gawk
-#8 52.40 checking whether to enable sqlsrv functions... yes, shared
-#8 52.40 checking for SQLSRV headers... /var/tmp/sqlsrv/shared/
-#8 52.41 checking for g++... g++
-#8 52.68 checking whether we are using the GNU C++ compiler... yes
-#8 52.70 checking whether g++ accepts -g... yes
-#8 52.73 checking how to run the C++ preprocessor... g++ -E
-#8 52.85 checking how to print strings... printf
-#8 52.85 checking for a sed that does not truncate output... (cached) /bin/sed
-#8 52.86 checking for fgrep... /bin/grep -F
-#8 52.86 checking for ld used by cc... /bin/ld
-#8 52.87 checking if the linker (/bin/ld) is GNU ld... yes
-#8 52.87 checking for BSD- or MS-compatible name lister (nm)... /bin/nm -B
-#8 52.89 checking the name lister (/bin/nm -B) interface... BSD nm
-#8 52.89 checking whether ln -s works... yes
-#8 52.90 checking the maximum length of command line arguments... 1572864
-#8 52.90 checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
-#8 52.90 checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
-#8 52.90 checking for /bin/ld option to reload object files... -r
-#8 52.90 checking for objdump... objdump
-#8 52.90 checking how to recognize dependent libraries... pass_all
-#8 52.91 checking for dlltool... no
-#8 52.91 checking how to associate runtime and link libraries... printf %s\n
-#8 52.91 checking for ar... ar
-#8 52.94 checking for archiver @FILE support... @
-#8 52.94 checking for strip... strip
-#8 52.94 checking for ranlib... ranlib
-#8 52.94 checking for gawk... (cached) gawk
-#8 53.02 checking command to parse /bin/nm -B output from cc object... ok
-#8 53.02 checking for sysroot... no
-#8 53.03 checking for a working dd... /var/tmp/sqlsrv/configure: line 7033: cmp: command not found
-#8 53.03 /var/tmp/sqlsrv/configure: line 7033: cmp: command not found
-#8 53.03 
-#8 53.04 checking how to truncate binary pipes... /bin/sed -e 4q
-#8 53.06 checking for mt... no
-#8 53.07 checking if : is a manifest tool... no
-#8 53.27 checking for ANSI C header files... yes
-#8 53.33 checking for sys/types.h... yes
-#8 53.37 checking for sys/stat.h... yes
-#8 53.41 checking for stdlib.h... yes
-#8 53.46 checking for string.h... yes
-#8 53.51 checking for memory.h... yes
-#8 53.56 checking for strings.h... yes
-#8 53.61 checking for inttypes.h... yes
-#8 53.66 checking for stdint.h... yes
-#8 53.72 checking for unistd.h... yes
-#8 53.78 checking for dlfcn.h... yes
-#8 53.80 checking for objdir... .libs
-#8 53.99 checking if cc supports -fno-rtti -fno-exceptions... /var/tmp/sqlsrv/configure: line 8839: diff: command not found
-#8 53.99 no
-#8 53.99 checking for cc option to produce PIC... -fPIC -DPIC
-#8 54.03 checking if cc PIC flag -fPIC -DPIC works... yes
-#8 54.09 checking if cc static flag -static works... no
-#8 54.14 checking if cc supports -c -o file.o... yes
-#8 54.14 checking if cc supports -c -o file.o... (cached) yes
-#8 54.15 checking whether the cc linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 54.21 checking whether -lc should be explicitly linked in... no
-#8 54.36 checking dynamic linker characteristics... GNU/Linux ld.so
-#8 54.36 checking how to hardcode library paths into programs... immediate
-#8 54.36 checking whether stripping libraries is possible... yes
-#8 54.36 checking if libtool supports shared libraries... yes
-#8 54.36 checking whether to build shared libraries... yes
-#8 54.36 checking whether to build static libraries... no
-#8 54.37 checking how to run the C++ preprocessor... g++ -E
-#8 54.60 checking for ld used by g++... /bin/ld -m elf_x86_64
-#8 54.60 checking if the linker (/bin/ld -m elf_x86_64) is GNU ld... yes
-#8 54.61 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 54.80 checking for g++ option to produce PIC... -fPIC -DPIC
-#8 54.84 checking if g++ PIC flag -fPIC -DPIC works... yes
-#8 54.89 checking if g++ static flag -static works... no
-#8 54.94 checking if g++ supports -c -o file.o... yes
-#8 54.94 checking if g++ supports -c -o file.o... (cached) yes
-#8 54.94 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 54.95 checking dynamic linker characteristics... (cached) GNU/Linux ld.so
-#8 54.95 checking how to hardcode library paths into programs... immediate
-#8 55.15 configure: patching config.h.in
-#8 55.15 configure: creating ./config.status
-#8 56.22 config.status: creating config.h
-#8 56.24 config.status: executing libtool commands
-#8 56.33 running: make
-#8 56.33 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/conn.cpp -o conn.lo
-#8 56.41 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/conn.cpp  -fPIC -DPIC -o .libs/conn.o
-#8 60.66 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/util.cpp -o util.lo
-#8 60.76 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/util.cpp  -fPIC -DPIC -o .libs/util.o
-#8 62.41 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/init.cpp -o init.lo
-#8 62.46 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/init.cpp  -fPIC -DPIC -o .libs/init.o
-#8 63.94 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/stmt.cpp -o stmt.lo
-#8 64.02 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/stmt.cpp  -fPIC -DPIC -o .libs/stmt.o
-#8 67.02 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_conn.cpp -o shared/core_conn.lo
-#8 67.11 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_conn.cpp  -fPIC -DPIC -o shared/.libs/core_conn.o
-#8 68.57 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_results.cpp -o shared/core_results.lo
-#8 68.64 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_results.cpp  -fPIC -DPIC -o shared/.libs/core_results.o
-#8 70.19 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_stream.cpp -o shared/core_stream.lo
-#8 70.24 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_stream.cpp  -fPIC -DPIC -o shared/.libs/core_stream.o
-#8 71.53 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_init.cpp -o shared/core_init.lo
-#8 71.61 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_init.cpp  -fPIC -DPIC -o shared/.libs/core_init.o
-#8 72.65 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_stmt.cpp -o shared/core_stmt.lo
-#8 72.70 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_stmt.cpp  -fPIC -DPIC -o shared/.libs/core_stmt.o
-#8 74.55 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_util.cpp -o shared/core_util.lo
-#8 74.61 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_util.cpp  -fPIC -DPIC -o shared/.libs/core_util.o
-#8 75.71 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/FormattedPrint.cpp -o shared/FormattedPrint.lo
-#8 75.82 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/FormattedPrint.cpp  -fPIC -DPIC -o shared/.libs/FormattedPrint.o
-#8 77.31 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/localizationimpl.cpp -o shared/localizationimpl.lo
-#8 77.43 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/localizationimpl.cpp  -fPIC -DPIC -o shared/.libs/localizationimpl.o
-#8 78.94 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/StringFunctions.cpp -o shared/StringFunctions.lo
-#8 79.06 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/StringFunctions.cpp  -fPIC -DPIC -o shared/.libs/StringFunctions.o
-#8 79.57 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=link cc -DPHP_ATOM_INC -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -g -O2    -o sqlsrv.la -export-dynamic -avoid-version -prefer-pic -module -rpath /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules  conn.lo util.lo init.lo stmt.lo shared/core_conn.lo shared/core_results.lo shared/core_stream.lo shared/core_init.lo shared/core_stmt.lo shared/core_util.lo shared/FormattedPrint.lo shared/localizationimpl.lo shared/StringFunctions.lo -Wl,-z,now -lstdc++ -lodbc -lodbcinst
-#8 79.90 libtool: link: cc -shared  -fPIC -DPIC  .libs/conn.o .libs/util.o .libs/init.o .libs/stmt.o shared/.libs/core_conn.o shared/.libs/core_results.o shared/.libs/core_stream.o shared/.libs/core_init.o shared/.libs/core_stmt.o shared/.libs/core_util.o shared/.libs/FormattedPrint.o shared/.libs/localizationimpl.o shared/.libs/StringFunctions.o   -lstdc++ /usr/lib64/libodbc.so /usr/lib64/libodbcinst.so -ldl -lpthread  -g -O2 -Wl,-z -Wl,now   -pthread -Wl,-soname -Wl,sqlsrv.so -o .libs/sqlsrv.so
-#8 80.10 libtool: link: ( cd ".libs" && rm -f "sqlsrv.la" && ln -s "../sqlsrv.la" "sqlsrv.la" )
-#8 80.11 /bin/sh /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/libtool --mode=install cp ./sqlsrv.la /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules
-#8 80.20 libtool: install: cp ./.libs/sqlsrv.so /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules/sqlsrv.so
-#8 80.21 libtool: install: cp ./.libs/sqlsrv.lai /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules/sqlsrv.la
-#8 80.37 libtool: finish: PATH="/sbin:/bin:/usr/sbin:/usr/bin:/sbin" ldconfig -n /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules
-#8 80.38 ----------------------------------------------------------------------
-#8 80.38 Libraries have been installed in:
-#8 80.38    /var/tmp/pear-build-rootIN33bh/sqlsrv-5.10.1/modules
-#8 80.38 
-#8 80.38 If you ever happen to want to link against installed libraries
-#8 80.38 in a given directory, LIBDIR, you must either use libtool, and
-#8 80.38 specify the full pathname of the library, or use the '-LLIBDIR'
-#8 80.38 flag during linking and do at least one of the following:
-#8 80.38    - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
-#8 80.38      during execution
-#8 80.38    - add LIBDIR to the 'LD_RUN_PATH' environment variable
-#8 80.38      during linking
-#8 80.38    - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
-#8 80.38    - have your system administrator add LIBDIR to '/etc/ld.so.conf'
-#8 80.38 
-#8 80.38 See any operating system documentation about shared libraries for
-#8 80.38 more information, such as the ld(1) and ld.so(8) manual pages.
-#8 80.38 ----------------------------------------------------------------------
-#8 80.39 
-#8 80.39 Build complete.
-#8 80.39 Don't forget to run 'make test'.
-#8 80.40 
-#8 80.40 running: make INSTALL_ROOT="/var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1" install
-#8 80.50 Installing shared extensions:     /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr/lib64/php/modules/
-#8 80.63 running: find "/var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1" | xargs ls -dils
-#8 80.64 524261   4 drwxr-xr-x 3 root root   4096 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1
-#8 80.64 524308   4 drwxr-xr-x 3 root root   4096 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr
-#8 80.64 524309   4 drwxr-xr-x 3 root root   4096 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr/lib64
-#8 80.64 524310   4 drwxr-xr-x 3 root root   4096 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr/lib64/php
-#8 80.64 524311   4 drwxr-xr-x 2 root root   4096 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr/lib64/php/modules
-#8 80.64 524306 408 -rwxr-xr-x 1 root root 416880 Sep 12 06:11 /var/tmp/pear-build-rootIN33bh/install-sqlsrv-5.10.1/usr/lib64/php/modules/sqlsrv.so
-#8 80.65 
-#8 80.65 Build process completed successfully
-#8 80.65 Installing '/usr/lib64/php/modules/sqlsrv.so'
-#8 80.67 install ok: channel://pecl.php.net/sqlsrv-5.10.1
-#8 80.67 configuration option "php_ini" is not set to php.ini location
-#8 80.67 You should add "extension=sqlsrv.so" to php.ini
-#8 83.33 downloading pdo_sqlsrv-5.10.1.tgz ...
-#8 83.33 Starting to download pdo_sqlsrv-5.10.1.tgz (189,816 bytes)
-#8 83.53 .........................................done: 189,816 bytes
-#8 83.78 35 source files, building
-#8 83.78 running: phpize
-#8 83.81 Configuring for:
-#8 83.81 PHP Api Version:         20190902
-#8 83.81 Zend Module Api No:      20190902
-#8 83.81 Zend Extension Api No:   320190902
-#8 86.02 building in /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1
-#8 86.02 running: /var/tmp/pdo_sqlsrv/configure --with-php-config=/bin/php-config
-#8 86.25 checking for grep that handles long lines and -e... /bin/grep
-#8 86.25 checking for egrep... /bin/grep -E
-#8 86.26 checking for a sed that does not truncate output... /bin/sed
-#8 86.30 checking for pkg-config... /bin/pkg-config
-#8 86.30 checking pkg-config is at least version 0.9.0... yes
-#8 86.30 checking for cc... cc
-#8 86.46 checking whether the C compiler works... yes
-#8 86.46 checking for C compiler default output file name... a.out
-#8 86.52 checking for suffix of executables...
-#8 86.62 checking whether we are cross compiling... no
-#8 86.67 checking for suffix of object files... o
-#8 86.71 checking whether we are using the GNU C compiler... yes
-#8 86.75 checking whether cc accepts -g... yes
-#8 86.81 checking for cc option to accept ISO C89... none needed
-#8 86.85 checking how to run the C preprocessor... cc -E
-#8 86.90 checking for icc... no
-#8 86.91 checking for suncc... no
-#8 86.92 checking for system library directory... lib
-#8 86.94 checking if compiler supports -R... no
-#8 86.99 checking if compiler supports -Wl,-rpath,... yes
-#8 87.07 checking build system type... x86_64-pc-linux-gnu
-#8 87.07 checking host system type... x86_64-pc-linux-gnu
-#8 87.07 checking target system type... x86_64-pc-linux-gnu
-#8 87.15 checking for PHP prefix... /usr
-#8 87.15 checking for PHP includes... -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib
-#8 87.15 checking for PHP extension directory... /usr/lib64/php/modules
-#8 87.15 checking for PHP installed headers prefix... /usr/include/php
-#8 87.19 checking if debug is enabled... no
-#8 87.24 checking if zts is enabled... no
-#8 87.24 checking for gawk... gawk
-#8 87.24 checking for pdo_sqlsrv support... yes, shared
-#8 87.24 checking for PDO includes... /usr/include/php/ext
-#8 87.24 checking for PDO_SQLSRV headers... /var/tmp/pdo_sqlsrv/shared/
-#8 87.25 checking for g++... g++
-#8 87.32 checking whether we are using the GNU C++ compiler... yes
-#8 87.37 checking whether g++ accepts -g... yes
-#8 87.41 checking how to run the C++ preprocessor... g++ -E
-#8 87.54 checking how to print strings... printf
-#8 87.54 checking for a sed that does not truncate output... (cached) /bin/sed
-#8 87.54 checking for fgrep... /bin/grep -F
-#8 87.55 checking for ld used by cc... /bin/ld
-#8 87.55 checking if the linker (/bin/ld) is GNU ld... yes
-#8 87.55 checking for BSD- or MS-compatible name lister (nm)... /bin/nm -B
-#8 87.59 checking the name lister (/bin/nm -B) interface... BSD nm
-#8 87.59 checking whether ln -s works... yes
-#8 87.59 checking the maximum length of command line arguments... 1572864
-#8 87.60 checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
-#8 87.60 checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
-#8 87.60 checking for /bin/ld option to reload object files... -r
-#8 87.60 checking for objdump... objdump
-#8 87.60 checking how to recognize dependent libraries... pass_all
-#8 87.60 checking for dlltool... no
-#8 87.60 checking how to associate runtime and link libraries... printf %s\n
-#8 87.60 checking for ar... ar
-#8 87.64 checking for archiver @FILE support... @
-#8 87.64 checking for strip... strip
-#8 87.64 checking for ranlib... ranlib
-#8 87.64 checking for gawk... (cached) gawk
-#8 87.73 checking command to parse /bin/nm -B output from cc object... ok
-#8 87.73 checking for sysroot... no
-#8 87.74 checking for a working dd... /var/tmp/pdo_sqlsrv/configure: line 7082: cmp: command not found
-#8 87.75 /var/tmp/pdo_sqlsrv/configure: line 7082: cmp: command not found
-#8 87.75 
-#8 87.75 checking how to truncate binary pipes... /bin/sed -e 4q
-#8 87.77 checking for mt... no
-#8 87.78 checking if : is a manifest tool... no
-#8 87.95 checking for ANSI C header files... yes
-#8 87.99 checking for sys/types.h... yes
-#8 88.02 checking for sys/stat.h... yes
-#8 88.06 checking for stdlib.h... yes
-#8 88.10 checking for string.h... yes
-#8 88.14 checking for memory.h... yes
-#8 88.18 checking for strings.h... yes
-#8 88.22 checking for inttypes.h... yes
-#8 88.26 checking for stdint.h... yes
-#8 88.30 checking for unistd.h... yes
-#8 88.35 checking for dlfcn.h... yes
-#8 88.35 checking for objdir... .libs
-#8 88.51 checking if cc supports -fno-rtti -fno-exceptions... /var/tmp/pdo_sqlsrv/configure: line 8888: diff: command not found
-#8 88.51 no
-#8 88.51 checking for cc option to produce PIC... -fPIC -DPIC
-#8 88.53 checking if cc PIC flag -fPIC -DPIC works... yes
-#8 88.56 checking if cc static flag -static works... no
-#8 88.60 checking if cc supports -c -o file.o... yes
-#8 88.60 checking if cc supports -c -o file.o... (cached) yes
-#8 88.61 checking whether the cc linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 88.65 checking whether -lc should be explicitly linked in... no
-#8 88.76 checking dynamic linker characteristics... GNU/Linux ld.so
-#8 88.76 checking how to hardcode library paths into programs... immediate
-#8 88.76 checking whether stripping libraries is possible... yes
-#8 88.76 checking if libtool supports shared libraries... yes
-#8 88.76 checking whether to build shared libraries... yes
-#8 88.76 checking whether to build static libraries... no
-#8 88.76 checking how to run the C++ preprocessor... g++ -E
-#8 88.92 checking for ld used by g++... /bin/ld -m elf_x86_64
-#8 88.92 checking if the linker (/bin/ld -m elf_x86_64) is GNU ld... yes
-#8 88.93 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 89.04 checking for g++ option to produce PIC... -fPIC -DPIC
-#8 89.06 checking if g++ PIC flag -fPIC -DPIC works... yes
-#8 89.09 checking if g++ static flag -static works... no
-#8 89.13 checking if g++ supports -c -o file.o... yes
-#8 89.13 checking if g++ supports -c -o file.o... (cached) yes
-#8 89.13 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
-#8 89.13 checking dynamic linker characteristics... (cached) GNU/Linux ld.so
-#8 89.13 checking how to hardcode library paths into programs... immediate
-#8 89.25 configure: patching config.h.in
-#8 89.25 configure: creating ./config.status
-#8 89.92 config.status: creating config.h
-#8 89.94 config.status: executing libtool commands
-#8 89.99 running: make
-#8 89.99 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_dbh.cpp -o pdo_dbh.lo
-#8 90.05 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_dbh.cpp  -fPIC -DPIC -o .libs/pdo_dbh.o
-#8 92.19 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_parser.cpp -o pdo_parser.lo
-#8 92.23 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_parser.cpp  -fPIC -DPIC -o .libs/pdo_parser.o
-#8 93.10 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_util.cpp -o pdo_util.lo
-#8 93.15 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_util.cpp  -fPIC -DPIC -o .libs/pdo_util.o
-#8 94.02 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_init.cpp -o pdo_init.lo
-#8 94.08 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_init.cpp  -fPIC -DPIC -o .libs/pdo_init.o
-#8 94.84 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_stmt.cpp -o pdo_stmt.lo
-#8 94.89 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_stmt.cpp  -fPIC -DPIC -o .libs/pdo_stmt.o
-#8 96.08 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_conn.cpp -o shared/core_conn.lo
-#8 96.14 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_conn.cpp  -fPIC -DPIC -o shared/.libs/core_conn.o
-#8 97.29 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_results.cpp -o shared/core_results.lo
-#8 97.34 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_results.cpp  -fPIC -DPIC -o shared/.libs/core_results.o
-#8 98.87 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_stream.cpp -o shared/core_stream.lo
-#8 98.92 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_stream.cpp  -fPIC -DPIC -o shared/.libs/core_stream.o
-#8 99.64 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_init.cpp -o shared/core_init.lo
-#8 99.69 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_init.cpp  -fPIC -DPIC -o shared/.libs/core_init.o
-#8 100.4 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_stmt.cpp -o shared/core_stmt.lo
-#8 100.4 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_stmt.cpp  -fPIC -DPIC -o shared/.libs/core_stmt.o
-#8 103.2 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_util.cpp -o shared/core_util.lo
-#8 103.2 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_util.cpp  -fPIC -DPIC -o shared/.libs/core_util.o
-#8 104.3 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/FormattedPrint.cpp -o shared/FormattedPrint.lo
-#8 104.4 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/FormattedPrint.cpp  -fPIC -DPIC -o shared/.libs/FormattedPrint.o
-#8 105.2 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/localizationimpl.cpp -o shared/localizationimpl.lo
-#8 105.2 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/localizationimpl.cpp  -fPIC -DPIC -o shared/.libs/localizationimpl.o
-#8 106.0 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/StringFunctions.cpp -o shared/StringFunctions.lo
-#8 106.1 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/StringFunctions.cpp  -fPIC -DPIC -o shared/.libs/StringFunctions.o
-#8 106.4 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=link cc -DPHP_ATOM_INC -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -g -O2    -o pdo_sqlsrv.la -export-dynamic -avoid-version -prefer-pic -module -rpath /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules  pdo_dbh.lo pdo_parser.lo pdo_util.lo pdo_init.lo pdo_stmt.lo shared/core_conn.lo shared/core_results.lo shared/core_stream.lo shared/core_init.lo shared/core_stmt.lo shared/core_util.lo shared/FormattedPrint.lo shared/localizationimpl.lo shared/StringFunctions.lo -Wl,-z,now -lstdc++ -lodbc -lodbcinst
-#8 106.6 libtool: link: cc -shared  -fPIC -DPIC  .libs/pdo_dbh.o .libs/pdo_parser.o .libs/pdo_util.o .libs/pdo_init.o .libs/pdo_stmt.o shared/.libs/core_conn.o shared/.libs/core_results.o shared/.libs/core_stream.o shared/.libs/core_init.o shared/.libs/core_stmt.o shared/.libs/core_util.o shared/.libs/FormattedPrint.o shared/.libs/localizationimpl.o shared/.libs/StringFunctions.o   -lstdc++ /usr/lib64/libodbc.so /usr/lib64/libodbcinst.so -ldl -lpthread  -g -O2 -Wl,-z -Wl,now   -pthread -Wl,-soname -Wl,pdo_sqlsrv.so -o .libs/pdo_sqlsrv.so
-#8 106.7 libtool: link: ( cd ".libs" && rm -f "pdo_sqlsrv.la" && ln -s "../pdo_sqlsrv.la" "pdo_sqlsrv.la" )
-#8 106.7 /bin/sh /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/libtool --mode=install cp ./pdo_sqlsrv.la /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules
-#8 106.7 libtool: install: cp ./.libs/pdo_sqlsrv.so /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules/pdo_sqlsrv.so
-#8 106.7 libtool: install: cp ./.libs/pdo_sqlsrv.lai /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules/pdo_sqlsrv.la
-#8 106.7 libtool: finish: PATH="/sbin:/bin:/usr/sbin:/usr/bin:/sbin" ldconfig -n /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules
-#8 106.7 ----------------------------------------------------------------------
-#8 106.7 Libraries have been installed in:
-#8 106.7    /var/tmp/pear-build-rootnQodAA/pdo_sqlsrv-5.10.1/modules
-#8 106.7 
-#8 106.7 If you ever happen to want to link against installed libraries
-#8 106.7 in a given directory, LIBDIR, you must either use libtool, and
-#8 106.7 specify the full pathname of the library, or use the '-LLIBDIR'
-#8 106.7 flag during linking and do at least one of the following:
-#8 106.7    - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
-#8 106.7      during execution
-#8 106.7    - add LIBDIR to the 'LD_RUN_PATH' environment variable
-#8 106.7      during linking
-#8 106.7    - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
-#8 106.7    - have your system administrator add LIBDIR to '/etc/ld.so.conf'
-#8 106.7 
-#8 106.7 See any operating system documentation about shared libraries for
-#8 106.7 more information, such as the ld(1) and ld.so(8) manual pages.
-#8 106.7 ----------------------------------------------------------------------
-#8 106.7 
-#8 106.7 Build complete.
-#8 106.7 Don't forget to run 'make test'.
-#8 106.7 
-#8 106.7 running: make INSTALL_ROOT="/var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1" install
-#8 106.8 Installing shared extensions:     /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules/
-#8 106.8 running: find "/var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1" | xargs ls -dils
-#8 106.9 524275   4 drwxr-xr-x 3 root root   4096 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1
-#8 106.9 524327   4 drwxr-xr-x 3 root root   4096 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr
-#8 106.9 524328   4 drwxr-xr-x 3 root root   4096 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr/lib64
-#8 106.9 524329   4 drwxr-xr-x 3 root root   4096 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr/lib64/php
-#8 106.9 524330   4 drwxr-xr-x 2 root root   4096 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules
-#8 106.9 524325 420 -rwxr-xr-x 1 root root 427520 Sep 12 06:12 /var/tmp/pear-build-rootnQodAA/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules/pdo_sqlsrv.so
-#8 106.9 
-#8 106.9 Build process completed successfully
-#8 106.9 Installing '/usr/lib64/php/modules/pdo_sqlsrv.so'
-#8 106.9 install ok: channel://pecl.php.net/pdo_sqlsrv-5.10.1
-#8 106.9 configuration option "php_ini" is not set to php.ini location
-#8 106.9 You should add "extension=pdo_sqlsrv.so" to php.ini
-#8 107.9 All settings correct for using Composer
-#8 107.9 Downloading...
-#8 108.8 
-#8 108.8 Composer (version 2.6.2) successfully installed to: /usr/local/bin/composer
-#8 108.8 Use it: php /usr/local/bin/composer
-#8 108.8 
-#8 DONE 108.8s
+#8 [ 4/14] RUN bash /patch1.sh && rm /patch1.sh
+#8 1.440 Updating Subscription Management repositories.
+#8 1.441 Unable to read consumer identity
+#8 1.442 Subscription Manager is operating in container mode.
+#8 1.452 
+#8 1.452 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 1.452 
+#8 1.736 Dependencies resolved.
+#8 1.738 ========================================================================================================================
+#8 1.738  Package            Arch    Version                                             Repository                          Size
+#8 1.738 ========================================================================================================================
+#8 1.738 Removing:
+#8 1.738  nodejs             x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   37 M
+#8 1.738 Removing dependent packages:
+#8 1.738  npm                x86_64  1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6 @rhel-8-for-x86_64-appstream-rpms   16 M
+#8 1.738 Removing unused dependencies:
+#8 1.738  nodejs-docs        noarch  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   60 M
+#8 1.738  nodejs-full-i18n   x86_64  1:14.21.3-1.module+el8.7.0+18531+81d21ca6           @rhel-8-for-x86_64-appstream-rpms   28 M
+#8 1.738 
+#8 1.738 Transaction Summary
+#8 1.738 ========================================================================================================================
+#8 1.738 Remove  4 Packages
+#8 1.738 
+#8 1.738 Freed space: 141 M
+#8 1.739 Running transaction check
+#8 1.753 Transaction check succeeded.
+#8 1.753 Running transaction test
+#8 1.891 Transaction test succeeded.
+#8 1.892 Running transaction
+#8 2.043   Preparing        :                                                        1/1 
+#8 2.081   Erasing          : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
+#8 2.801   Erasing          : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   2/4 
+#8 2.896   Erasing          : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   3/4 
+#8 2.922   Erasing          : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   4/4 
+#8 3.023   Verifying        : nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86   1/4 
+#8 3.023   Verifying        : nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca   2/4 
+#8 3.023   Verifying        : nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81   3/4 
+#8 3.024   Verifying        : npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21   4/4 
+#8 3.194 Installed products updated.
+#8 3.203 
+#8 3.203 Removed:
+#8 3.203   nodejs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64                       
+#8 3.203   nodejs-docs-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.noarch                  
+#8 3.203   nodejs-full-i18n-1:14.21.3-1.module+el8.7.0+18531+81d21ca6.x86_64             
+#8 3.203   npm-1:6.14.18-1.14.21.3.1.module+el8.7.0+18531+81d21ca6.x86_64                
+#8 3.203 
+#8 3.203 Complete!
+#8 3.837 Updating Subscription Management repositories.
+#8 3.837 Unable to read consumer identity
+#8 3.837 Subscription Manager is operating in container mode.
+#8 3.845 
+#8 3.845 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 3.845 
+#8 3.854 0 files removed
+#8 4.381 Updating Subscription Management repositories.
+#8 4.381 Unable to read consumer identity
+#8 4.382 Subscription Manager is operating in container mode.
+#8 4.385 
+#8 4.385 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 4.385 
+#8 5.006 Red Hat Universal Base Image 8 (RPMs) - BaseOS  1.3 MB/s | 716 kB     00:00    
+#8 5.738 Red Hat Universal Base Image 8 (RPMs) - AppStre 4.9 MB/s | 2.9 MB     00:00    
+#8 6.643 Red Hat Universal Base Image 8 (RPMs) - CodeRea 298 kB/s |  99 kB     00:00    
+#8 6.942 Dependencies resolved.
+#8 6.943 ===================================================================================================
+#8 6.943  Package            Arch    Version                                     Repository             Size
+#8 6.943 ===================================================================================================
+#8 6.943 Upgrading:
+#8 6.943  httpd              x86_64  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms  1.4 M
+#8 6.943  httpd-filesystem   noarch  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms   43 k
+#8 6.943  httpd-tools        x86_64  2.4.37-56.module+el8.8.0+19808+379766d6.7   ubi-8-appstream-rpms  110 k
+#8 6.943  mod_ssl            x86_64  1:2.4.37-56.module+el8.8.0+19808+379766d6.7 ubi-8-appstream-rpms  140 k
+#8 6.943 
+#8 6.943 Transaction Summary
+#8 6.943 ===================================================================================================
+#8 6.943 Upgrade  4 Packages
+#8 6.943 
+#8 6.944 Total download size: 1.7 M
+#8 6.945 Downloading Packages:
+#8 7.157 (1/4): httpd-tools-2.4.37-56.module+el8.8.0+198 525 kB/s | 110 kB     00:00    
+#8 7.233 (2/4): mod_ssl-2.4.37-56.module+el8.8.0+19808+3 1.8 MB/s | 140 kB     00:00    
+#8 7.236 (3/4): httpd-filesystem-2.4.37-56.module+el8.8. 150 kB/s |  43 kB     00:00    
+#8 7.310 (4/4): httpd-2.4.37-56.module+el8.8.0+19808+379 3.9 MB/s | 1.4 MB     00:00    
+#8 7.314 --------------------------------------------------------------------------------
+#8 7.314 Total                                           4.6 MB/s | 1.7 MB     00:00     
+#8 7.363 Running transaction check
+#8 7.387 Transaction check succeeded.
+#8 7.387 Running transaction test
+#8 7.471 Transaction test succeeded.
+#8 7.474 Running transaction
+#8 7.510   Preparing        :                                                        1/1 
+#8 7.556   Running scriptlet: httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/1 
+#8 7.566   Running scriptlet: httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/8 
+#8 7.574   Upgrading        : httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   1/8 
+#8 7.600   Upgrading        : httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.   2/8 
+#8 8.019   Upgrading        : httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   3/8 
+#8 8.049   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   3/8 
+#8 8.084   Upgrading        : mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.   4/8 
+#8 8.107   Cleanup          : mod_ssl-1:2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.   5/8 
+#8 8.125   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
+#8 8.193   Cleanup          : httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
+#8 8.194   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   6/8 
+#8 8.224   Cleanup          : httpd-filesystem-2.4.37-56.module+el8.8.0+18758+b3a9   7/8 
+#8 8.235   Cleanup          : httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   8/8 
+#8 8.246   Running scriptlet: httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   8/8 
+#8 8.277   Running scriptlet: httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   8/8 
+#8 8.569   Verifying        : httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_   1/8 
+#8 8.569   Verifying        : httpd-2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.x86_   2/8 
+#8 8.569   Verifying        : httpd-filesystem-2.4.37-56.module+el8.8.0+19808+3797   3/8 
+#8 8.569   Verifying        : httpd-filesystem-2.4.37-56.module+el8.8.0+18758+b3a9   4/8 
+#8 8.569   Verifying        : httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.   5/8 
+#8 8.570   Verifying        : httpd-tools-2.4.37-56.module+el8.8.0+18758+b3a9c8da.   6/8 
+#8 8.571   Verifying        : mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.   7/8 
+#8 8.571   Verifying        : mod_ssl-1:2.4.37-56.module+el8.8.0+18758+b3a9c8da.6.   8/8 
+#8 8.802 Installed products updated.
+#8 8.832 
+#8 8.832 Upgraded:
+#8 8.832   httpd-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                        
+#8 8.832   httpd-filesystem-2.4.37-56.module+el8.8.0+19808+379766d6.7.noarch             
+#8 8.832   httpd-tools-2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                  
+#8 8.832   mod_ssl-1:2.4.37-56.module+el8.8.0+19808+379766d6.7.x86_64                    
+#8 8.832 
+#8 8.832 Complete!
+#8 9.507 Updating Subscription Management repositories.
+#8 9.508 Unable to read consumer identity
+#8 9.508 Subscription Manager is operating in container mode.
+#8 9.513 
+#8 9.513 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 9.513 
+#8 9.608 Last metadata expiration check: 0:00:04 ago on Tue Sep 12 10:40:43 2023.
+#8 9.863 Dependencies resolved.
+#8 9.866 Nothing to do.
+#8 9.866 Complete!
+#8 10.51 Updating Subscription Management repositories.
+#8 10.51 Unable to read consumer identity
+#8 10.51 Subscription Manager is operating in container mode.
+#8 10.52 
+#8 10.52 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 10.52 
+#8 10.62 Last metadata expiration check: 0:00:05 ago on Tue Sep 12 10:40:43 2023.
+#8 10.88 Package unzip-6.0-46.el8.x86_64 is already installed.
+#8 10.89 Package zip-3.0-23.el8.x86_64 is already installed.
+#8 10.91 Dependencies resolved.
+#8 10.91 ==========================================================================================
+#8 10.91  Package     Arch    Version                                   Repository             Size
+#8 10.91 ==========================================================================================
+#8 10.91 Installing:
+#8 10.91  php-devel   x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa    ubi-8-appstream-rpms  730 k
+#8 10.91  php-pear    noarch  1:1.10.13-1.module+el8.7.0+15127+a450a8db ubi-8-appstream-rpms  362 k
+#8 10.91  sudo        x86_64  1.8.29-10.el8                             ubi-8-baseos-rpms     926 k
+#8 10.91  yum-utils   noarch  4.0.21-19.el8_8                           ubi-8-baseos-rpms      75 k
+#8 10.91 Installing dependencies:
+#8 10.91  libtool     x86_64  2.4.6-25.el8                              ubi-8-appstream-rpms  709 k
+#8 10.91 
+#8 10.91 Transaction Summary
+#8 10.91 ==========================================================================================
+#8 10.91 Install  5 Packages
+#8 10.91 
+#8 10.91 Total download size: 2.7 M
+#8 10.91 Installed size: 13 M
+#8 10.91 Downloading Packages:
+#8 11.12 (1/5): yum-utils-4.0.21-19.el8_8.noarch.rpm     358 kB/s |  75 kB     00:00    
+#8 11.38 (2/5): libtool-2.4.6-25.el8.x86_64.rpm          1.5 MB/s | 709 kB     00:00    
+#8 11.43 (3/5): sudo-1.8.29-10.el8.x86_64.rpm            1.8 MB/s | 926 kB     00:00    
+#8 11.47 (4/5): php-devel-7.4.33-1.module+el8.8.0+17865+ 2.0 MB/s | 730 kB     00:00    
+#8 11.48 (5/5): php-pear-1.10.13-1.module+el8.7.0+15127+ 3.4 MB/s | 362 kB     00:00    
+#8 11.49 --------------------------------------------------------------------------------
+#8 11.49 Total                                           4.7 MB/s | 2.7 MB     00:00     
+#8 11.60 Running transaction check
+#8 11.66 Transaction check succeeded.
+#8 11.66 Running transaction test
+#8 11.78 Transaction test succeeded.
+#8 11.79 Running transaction
+#8 11.88   Preparing        :                                                        1/1 
+#8 12.04   Installing       : libtool-2.4.6-25.el8.x86_64                            1/5 
+#8 12.06   Running scriptlet: libtool-2.4.6-25.el8.x86_64                            1/5 
+#8 12.26   Installing       : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   2/5 
+#8 12.40   Installing       : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   3/5 
+#8 12.44   Installing       : yum-utils-4.0.21-19.el8_8.noarch                       4/5 
+#8 12.82   Installing       : sudo-1.8.29-10.el8.x86_64                              5/5 
+#8 12.84   Running scriptlet: sudo-1.8.29-10.el8.x86_64                              5/5 
+#8 12.94   Running scriptlet: php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   5/5 
+#8 13.38   Verifying        : sudo-1.8.29-10.el8.x86_64                              1/5 
+#8 13.38   Verifying        : yum-utils-4.0.21-19.el8_8.noarch                       2/5 
+#8 13.38   Verifying        : libtool-2.4.6-25.el8.x86_64                            3/5 
+#8 13.38   Verifying        : php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86   4/5 
+#8 13.38   Verifying        : php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.n   5/5 
+#8 13.57 Installed products updated.
+#8 13.60 
+#8 13.60 Installed:
+#8 13.60   libtool-2.4.6-25.el8.x86_64                                                   
+#8 13.60   php-devel-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                       
+#8 13.60   php-pear-1:1.10.13-1.module+el8.7.0+15127+a450a8db.noarch                     
+#8 13.60   sudo-1.8.29-10.el8.x86_64                                                     
+#8 13.60   yum-utils-4.0.21-19.el8_8.noarch                                              
+#8 13.60 
+#8 13.60 Complete!
+#8 13.73   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#8 13.73                                  Dload  Upload   Total   Spent    Left  Speed
+#8 13.73   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[packages-microsoft-com-prod]
+#8 14.05 name=packages-microsoft-com-prod
+#8 14.05 baseurl=https://packages.microsoft.com/rhel/8/prod/
+#8 14.05 enabled=1
+#8 14.05 gpgcheck=1
+#8 14.05 gpgkey=https://packages.microsoft.com/keys/microsoft.asc100   192  100   192    0     0    592      0 --:--:-- --:--:-- --:--:--   592
+#8 14.45 Updating Subscription Management repositories.
+#8 14.45 Unable to read consumer identity
+#8 14.45 Subscription Manager is operating in container mode.
+#8 14.45 
+#8 14.45 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 14.45 
+#8 14.54 No match for argument: unixODBC-utf16
+#8 14.54 No match for argument: unixODBC-utf16-devel
+#8 14.54 No packages marked for removal.
+#8 14.55 Dependencies resolved.
+#8 14.55 Nothing to do.
+#8 14.55 Complete!
+#8 15.05 Updating Subscription Management repositories.
+#8 15.05 Unable to read consumer identity
+#8 15.05 Subscription Manager is operating in container mode.
+#8 15.05 
+#8 15.05 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 15.05 
+#8 16.50 packages-microsoft-com-prod                     6.0 MB/s | 8.2 MB     00:01    
+#8 18.94 Last metadata expiration check: 0:00:03 ago on Tue Sep 12 10:40:53 2023.
+#8 19.24 Dependencies resolved.
+#8 19.25 ================================================================================
+#8 19.25  Package        Arch      Version          Repository                      Size
+#8 19.25 ================================================================================
+#8 19.25 Installing:
+#8 19.25  msodbcsql18    x86_64    18.3.1.1-1       packages-microsoft-com-prod    925 k
+#8 19.25 Installing dependencies:
+#8 19.25  unixODBC       x86_64    2.3.11-1.rh      packages-microsoft-com-prod    274 k
+#8 19.25 
+#8 19.25 Transaction Summary
+#8 19.25 ================================================================================
+#8 19.25 Install  2 Packages
+#8 19.25 
+#8 19.25 Total download size: 1.2 M
+#8 19.25 Installed size: 2.9 M
+#8 19.25 Downloading Packages:
+#8 19.58 (1/2): unixODBC-2.3.11-1.rh.x86_64.rpm          825 kB/s | 274 kB     00:00    
+#8 19.74 (2/2): msodbcsql18-18.3.1.1-1.x86_64.rpm        1.8 MB/s | 925 kB     00:00    
+#8 19.75 --------------------------------------------------------------------------------
+#8 19.75 Total                                           2.3 MB/s | 1.2 MB     00:00     
+#8 20.00 packages-microsoft-com-prod                     4.1 kB/s | 983  B     00:00    
+#8 20.08 Importing GPG key 0xBE1229CF:
+#8 20.08  Userid     : "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+#8 20.08  Fingerprint: BC52 8686 B50D 79E3 39D3 721C EB3E 94AD BE12 29CF
+#8 20.08  From       : https://packages.microsoft.com/keys/microsoft.asc
+#8 20.09 Key imported successfully
+#8 20.13 Running transaction check
+#8 20.14 Transaction check succeeded.
+#8 20.14 Running transaction test
+#8 20.18 Transaction test succeeded.
+#8 20.18 Running transaction
+#8 20.21   Preparing        :                                                        1/1 
+#8 20.25   Installing       : unixODBC-2.3.11-1.rh.x86_64                            1/2 
+#8 20.26   Running scriptlet: unixODBC-2.3.11-1.rh.x86_64                            1/2 
+#8 20.28   Running scriptlet: msodbcsql18-18.3.1.1-1.x86_64                          2/2 
+#8 20.31   Installing       : msodbcsql18-18.3.1.1-1.x86_64                          2/2 
+#8 20.32   Running scriptlet: msodbcsql18-18.3.1.1-1.x86_64                          2/2 
+#8 20.34 odbcinst: Driver installed. Usage count increased to 1. 
+#8 20.34     Target directory is /etc
+#8 20.34 
+#8 20.44   Verifying        : msodbcsql18-18.3.1.1-1.x86_64                          1/2 
+#8 20.44   Verifying        : unixODBC-2.3.11-1.rh.x86_64                            2/2 
+#8 20.59 Installed products updated.
+#8 20.62 
+#8 20.62 Installed:
+#8 20.62   msodbcsql18-18.3.1.1-1.x86_64           unixODBC-2.3.11-1.rh.x86_64          
+#8 20.62 
+#8 20.62 Complete!
+#8 21.18 Updating Subscription Management repositories.
+#8 21.18 Unable to read consumer identity
+#8 21.18 Subscription Manager is operating in container mode.
+#8 21.18 
+#8 21.18 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 21.18 
+#8 21.27 Last metadata expiration check: 0:00:05 ago on Tue Sep 12 10:40:53 2023.
+#8 21.45 Dependencies resolved.
+#8 21.45 ================================================================================
+#8 21.45  Package          Arch      Version        Repository                      Size
+#8 21.45 ================================================================================
+#8 21.45 Installing:
+#8 21.45  mssql-tools18    x86_64    18.2.1.1-1     packages-microsoft-com-prod    292 k
+#8 21.45 
+#8 21.45 Transaction Summary
+#8 21.45 ================================================================================
+#8 21.45 Install  1 Package
+#8 21.45 
+#8 21.45 Total download size: 292 k
+#8 21.45 Installed size: 718 k
+#8 21.45 Downloading Packages:
+#8 21.80 mssql-tools18-18.2.1.1-1.x86_64.rpm             844 kB/s | 292 kB     00:00    
+#8 21.80 --------------------------------------------------------------------------------
+#8 21.80 Total                                           837 kB/s | 292 kB     00:00     
+#8 21.82 Running transaction check
+#8 21.82 Transaction check succeeded.
+#8 21.82 Running transaction test
+#8 21.83 Transaction test succeeded.
+#8 21.83 Running transaction
+#8 21.84   Preparing        :                                                        1/1 
+#8 21.84   Running scriptlet: mssql-tools18-18.2.1.1-1.x86_64                        1/1 
+#8 21.86   Installing       : mssql-tools18-18.2.1.1-1.x86_64                        1/1 
+#8 21.92   Verifying        : mssql-tools18-18.2.1.1-1.x86_64                        1/1 
+#8 22.08 Installed products updated.
+#8 22.10 
+#8 22.10 Installed:
+#8 22.10   mssql-tools18-18.2.1.1-1.x86_64                                               
+#8 22.10 
+#8 22.10 Complete!
+#8 22.64 Updating Subscription Management repositories.
+#8 22.64 Unable to read consumer identity
+#8 22.64 Subscription Manager is operating in container mode.
+#8 22.64 
+#8 22.64 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#8 22.64 
+#8 22.75 Last metadata expiration check: 0:00:07 ago on Tue Sep 12 10:40:53 2023.
+#8 22.96 Dependencies resolved.
+#8 22.97 ================================================================================
+#8 22.97  Package          Arch     Version          Repository                     Size
+#8 22.97 ================================================================================
+#8 22.97 Installing:
+#8 22.97  initscripts      x86_64   10.00.18-1.el8   ubi-8-baseos-rpms             340 k
+#8 22.97  unixODBC-devel   x86_64   2.3.7-1.rh       packages-microsoft-com-prod    42 k
+#8 22.97 Downgrading:
+#8 22.97  unixODBC         x86_64   2.3.7-1.rh       packages-microsoft-com-prod   213 k
+#8 22.97 
+#8 22.97 Transaction Summary
+#8 22.97 ================================================================================
+#8 22.97 Install    2 Packages
+#8 22.97 Downgrade  1 Package
+#8 22.97 
+#8 22.97 Total download size: 595 k
+#8 22.97 Downloading Packages:
+#8 23.22 (1/3): initscripts-10.00.18-1.el8.x86_64.rpm    1.3 MB/s | 340 kB     00:00    
+#8 23.26 (2/3): unixODBC-devel-2.3.7-1.rh.x86_64.rpm     145 kB/s |  42 kB     00:00    
+#8 23.32 (3/3): unixODBC-2.3.7-1.rh.x86_64.rpm           605 kB/s | 213 kB     00:00    
+#8 23.33 --------------------------------------------------------------------------------
+#8 23.33 Total                                           1.6 MB/s | 595 kB     00:00     
+#8 23.36 Running transaction check
+#8 23.39 Transaction check succeeded.
+#8 23.39 Running transaction test
+#8 23.45 Transaction test succeeded.
+#8 23.45 Running transaction
+#8 23.48   Preparing        :                                                        1/1 
+#8 23.55   Downgrading      : unixODBC-2.3.7-1.rh.x86_64                             1/4 
+#8 23.58   Running scriptlet: unixODBC-2.3.7-1.rh.x86_64                             1/4 
+#8 23.60   Installing       : unixODBC-devel-2.3.7-1.rh.x86_64                       2/4 
+#8 23.68   Installing       : initscripts-10.00.18-1.el8.x86_64                      3/4 
+#8 23.73   Running scriptlet: initscripts-10.00.18-1.el8.x86_64                      3/4 
+#8 23.75   Cleanup          : unixODBC-2.3.11-1.rh.x86_64                            4/4 
+#8 23.75   Running scriptlet: unixODBC-2.3.11-1.rh.x86_64                            4/4 
+#8 23.92   Verifying        : unixODBC-2.3.7-1.rh.x86_64                             1/4 
+#8 23.92   Verifying        : unixODBC-2.3.11-1.rh.x86_64                            2/4 
+#8 23.92   Verifying        : unixODBC-devel-2.3.7-1.rh.x86_64                       3/4 
+#8 23.92   Verifying        : initscripts-10.00.18-1.el8.x86_64                      4/4 
+#8 24.09 Installed products updated.
+#8 24.12 
+#8 24.12 Downgraded:
+#8 24.12   unixODBC-2.3.7-1.rh.x86_64                                                    
+#8 24.12 Installed:
+#8 24.12   initscripts-10.00.18-1.el8.x86_64       unixODBC-devel-2.3.7-1.rh.x86_64      
+#8 24.12 
+#8 24.12 Complete!
+#8 24.35 Updating channel "pecl.php.net"
+#8 24.67 Update of Channel "pecl.php.net" succeeded
+#8 27.08 downloading sqlsrv-5.10.1.tgz ...
+#8 27.08 Starting to download sqlsrv-5.10.1.tgz (193,661 bytes)
+#8 27.08 .........................................done: 193,661 bytes
+#8 27.40 34 source files, building
+#8 27.40 running: phpize
+#8 27.41 Configuring for:
+#8 27.41 PHP Api Version:         20190902
+#8 27.41 Zend Module Api No:      20190902
+#8 27.41 Zend Extension Api No:   320190902
+#8 28.34 building in /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1
+#8 28.34 running: /var/tmp/sqlsrv/configure --with-php-config=/bin/php-config
+#8 28.46 checking for grep that handles long lines and -e... /bin/grep
+#8 28.46 checking for egrep... /bin/grep -E
+#8 28.47 checking for a sed that does not truncate output... /bin/sed
+#8 28.48 checking for pkg-config... /bin/pkg-config
+#8 28.49 checking pkg-config is at least version 0.9.0... yes
+#8 28.49 checking for cc... cc
+#8 28.68 checking whether the C compiler works... yes
+#8 28.68 checking for C compiler default output file name... a.out
+#8 28.72 checking for suffix of executables...
+#8 28.80 checking whether we are cross compiling... no
+#8 28.84 checking for suffix of object files... o
+#8 28.87 checking whether we are using the GNU C compiler... yes
+#8 28.91 checking whether cc accepts -g... yes
+#8 28.97 checking for cc option to accept ISO C89... none needed
+#8 29.01 checking how to run the C preprocessor... cc -E
+#8 29.05 checking for icc... no
+#8 29.06 checking for suncc... no
+#8 29.06 checking for system library directory... lib
+#8 29.08 checking if compiler supports -R... no
+#8 29.13 checking if compiler supports -Wl,-rpath,... yes
+#8 29.19 checking build system type... x86_64-pc-linux-gnu
+#8 29.19 checking host system type... x86_64-pc-linux-gnu
+#8 29.19 checking target system type... x86_64-pc-linux-gnu
+#8 29.26 checking for PHP prefix... /usr
+#8 29.26 checking for PHP includes... -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib
+#8 29.26 checking for PHP extension directory... /usr/lib64/php/modules
+#8 29.26 checking for PHP installed headers prefix... /usr/include/php
+#8 29.31 checking if debug is enabled... no
+#8 29.35 checking if zts is enabled... no
+#8 29.35 checking for gawk... gawk
+#8 29.35 checking whether to enable sqlsrv functions... yes, shared
+#8 29.35 checking for SQLSRV headers... /var/tmp/sqlsrv/shared/
+#8 29.36 checking for g++... g++
+#8 29.51 checking whether we are using the GNU C++ compiler... yes
+#8 29.55 checking whether g++ accepts -g... yes
+#8 29.59 checking how to run the C++ preprocessor... g++ -E
+#8 29.71 checking how to print strings... printf
+#8 29.71 checking for a sed that does not truncate output... (cached) /bin/sed
+#8 29.71 checking for fgrep... /bin/grep -F
+#8 29.72 checking for ld used by cc... /bin/ld
+#8 29.72 checking if the linker (/bin/ld) is GNU ld... yes
+#8 29.73 checking for BSD- or MS-compatible name lister (nm)... /bin/nm -B
+#8 29.76 checking the name lister (/bin/nm -B) interface... BSD nm
+#8 29.76 checking whether ln -s works... yes
+#8 29.77 checking the maximum length of command line arguments... 1572864
+#8 29.77 checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+#8 29.77 checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+#8 29.78 checking for /bin/ld option to reload object files... -r
+#8 29.78 checking for objdump... objdump
+#8 29.78 checking how to recognize dependent libraries... pass_all
+#8 29.78 checking for dlltool... no
+#8 29.78 checking how to associate runtime and link libraries... printf %s\n
+#8 29.78 checking for ar... ar
+#8 29.82 checking for archiver @FILE support... @
+#8 29.82 checking for strip... strip
+#8 29.82 checking for ranlib... ranlib
+#8 29.82 checking for gawk... (cached) gawk
+#8 29.92 checking command to parse /bin/nm -B output from cc object... ok
+#8 29.92 checking for sysroot... no
+#8 29.92 checking for a working dd... /var/tmp/sqlsrv/configure: line 7033: cmp: command not found
+#8 29.93 /var/tmp/sqlsrv/configure: line 7033: cmp: command not found
+#8 29.93 
+#8 29.94 checking how to truncate binary pipes... /bin/sed -e 4q
+#8 29.97 checking for mt... no
+#8 29.97 checking if : is a manifest tool... no
+#8 30.16 checking for ANSI C header files... yes
+#8 30.20 checking for sys/types.h... yes
+#8 30.24 checking for sys/stat.h... yes
+#8 30.28 checking for stdlib.h... yes
+#8 30.32 checking for string.h... yes
+#8 30.36 checking for memory.h... yes
+#8 30.41 checking for strings.h... yes
+#8 30.45 checking for inttypes.h... yes
+#8 30.50 checking for stdint.h... yes
+#8 30.55 checking for unistd.h... yes
+#8 30.60 checking for dlfcn.h... yes
+#8 30.61 checking for objdir... .libs
+#8 30.78 checking if cc supports -fno-rtti -fno-exceptions... /var/tmp/sqlsrv/configure: line 8839: diff: command not found
+#8 30.79 no
+#8 30.79 checking for cc option to produce PIC... -fPIC -DPIC
+#8 30.82 checking if cc PIC flag -fPIC -DPIC works... yes
+#8 30.85 checking if cc static flag -static works... no
+#8 30.89 checking if cc supports -c -o file.o... yes
+#8 30.89 checking if cc supports -c -o file.o... (cached) yes
+#8 30.91 checking whether the cc linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 30.96 checking whether -lc should be explicitly linked in... no
+#8 31.09 checking dynamic linker characteristics... GNU/Linux ld.so
+#8 31.09 checking how to hardcode library paths into programs... immediate
+#8 31.09 checking whether stripping libraries is possible... yes
+#8 31.09 checking if libtool supports shared libraries... yes
+#8 31.10 checking whether to build shared libraries... yes
+#8 31.10 checking whether to build static libraries... no
+#8 31.10 checking how to run the C++ preprocessor... g++ -E
+#8 31.26 checking for ld used by g++... /bin/ld -m elf_x86_64
+#8 31.27 checking if the linker (/bin/ld -m elf_x86_64) is GNU ld... yes
+#8 31.27 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 31.39 checking for g++ option to produce PIC... -fPIC -DPIC
+#8 31.42 checking if g++ PIC flag -fPIC -DPIC works... yes
+#8 31.45 checking if g++ static flag -static works... no
+#8 31.49 checking if g++ supports -c -o file.o... yes
+#8 31.49 checking if g++ supports -c -o file.o... (cached) yes
+#8 31.49 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 31.50 checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+#8 31.50 checking how to hardcode library paths into programs... immediate
+#8 31.62 configure: patching config.h.in
+#8 31.63 configure: creating ./config.status
+#8 32.34 config.status: creating config.h
+#8 32.36 config.status: executing libtool commands
+#8 32.42 running: make
+#8 32.44 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/conn.cpp -o conn.lo
+#8 32.52 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/conn.cpp  -fPIC -DPIC -o .libs/conn.o
+#8 34.41 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/util.cpp -o util.lo
+#8 34.48 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/util.cpp  -fPIC -DPIC -o .libs/util.o
+#8 35.55 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/init.cpp -o init.lo
+#8 35.61 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/init.cpp  -fPIC -DPIC -o .libs/init.o
+#8 36.66 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/stmt.cpp -o stmt.lo
+#8 36.72 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/stmt.cpp  -fPIC -DPIC -o .libs/stmt.o
+#8 38.36 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_conn.cpp -o shared/core_conn.lo
+#8 38.43 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_conn.cpp  -fPIC -DPIC -o shared/.libs/core_conn.o
+#8 39.80 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_results.cpp -o shared/core_results.lo
+#8 39.86 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_results.cpp  -fPIC -DPIC -o shared/.libs/core_results.o
+#8 41.61 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_stream.cpp -o shared/core_stream.lo
+#8 41.68 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_stream.cpp  -fPIC -DPIC -o shared/.libs/core_stream.o
+#8 42.52 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_init.cpp -o shared/core_init.lo
+#8 42.58 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_init.cpp  -fPIC -DPIC -o shared/.libs/core_init.o
+#8 43.49 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_stmt.cpp -o shared/core_stmt.lo
+#8 43.54 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_stmt.cpp  -fPIC -DPIC -o shared/.libs/core_stmt.o
+#8 46.05 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/core_util.cpp -o shared/core_util.lo
+#8 46.11 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/core_util.cpp  -fPIC -DPIC -o shared/.libs/core_util.o
+#8 47.32 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/FormattedPrint.cpp -o shared/FormattedPrint.lo
+#8 47.38 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/FormattedPrint.cpp  -fPIC -DPIC -o shared/.libs/FormattedPrint.o
+#8 48.16 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/localizationimpl.cpp -o shared/localizationimpl.lo
+#8 48.22 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/localizationimpl.cpp  -fPIC -DPIC -o shared/.libs/localizationimpl.o
+#8 48.93 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=compile g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/sqlsrv/shared/StringFunctions.cpp -o shared/StringFunctions.lo
+#8 48.98 libtool: compile:  g++ -std=c++11 -I. -I/var/tmp/sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/sqlsrv/shared/StringFunctions.cpp  -fPIC -DPIC -o shared/.libs/StringFunctions.o
+#8 49.27 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=link cc -DPHP_ATOM_INC -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/main -I/var/tmp/sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/sqlsrv/shared/  -DHAVE_CONFIG_H  -g -O2    -o sqlsrv.la -export-dynamic -avoid-version -prefer-pic -module -rpath /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules  conn.lo util.lo init.lo stmt.lo shared/core_conn.lo shared/core_results.lo shared/core_stream.lo shared/core_init.lo shared/core_stmt.lo shared/core_util.lo shared/FormattedPrint.lo shared/localizationimpl.lo shared/StringFunctions.lo -Wl,-z,now -lstdc++ -lodbc -lodbcinst
+#8 49.39 libtool: link: cc -shared  -fPIC -DPIC  .libs/conn.o .libs/util.o .libs/init.o .libs/stmt.o shared/.libs/core_conn.o shared/.libs/core_results.o shared/.libs/core_stream.o shared/.libs/core_init.o shared/.libs/core_stmt.o shared/.libs/core_util.o shared/.libs/FormattedPrint.o shared/.libs/localizationimpl.o shared/.libs/StringFunctions.o   -lstdc++ /usr/lib64/libodbc.so /usr/lib64/libodbcinst.so -ldl -lpthread  -g -O2 -Wl,-z -Wl,now   -pthread -Wl,-soname -Wl,sqlsrv.so -o .libs/sqlsrv.so
+#8 49.47 libtool: link: ( cd ".libs" && rm -f "sqlsrv.la" && ln -s "../sqlsrv.la" "sqlsrv.la" )
+#8 49.47 /bin/sh /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/libtool --mode=install cp ./sqlsrv.la /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules
+#8 49.49 libtool: install: cp ./.libs/sqlsrv.so /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules/sqlsrv.so
+#8 49.50 libtool: install: cp ./.libs/sqlsrv.lai /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules/sqlsrv.la
+#8 49.54 libtool: finish: PATH="/sbin:/bin:/usr/sbin:/usr/bin:/sbin" ldconfig -n /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules
+#8 49.54 ----------------------------------------------------------------------
+#8 49.54 Libraries have been installed in:
+#8 49.54    /var/tmp/pear-build-rootJDrsBq/sqlsrv-5.10.1/modules
+#8 49.54 
+#8 49.54 If you ever happen to want to link against installed libraries
+#8 49.54 in a given directory, LIBDIR, you must either use libtool, and
+#8 49.54 specify the full pathname of the library, or use the '-LLIBDIR'
+#8 49.54 flag during linking and do at least one of the following:
+#8 49.54    - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+#8 49.54      during execution
+#8 49.54    - add LIBDIR to the 'LD_RUN_PATH' environment variable
+#8 49.54      during linking
+#8 49.54    - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+#8 49.54    - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+#8 49.54 
+#8 49.54 See any operating system documentation about shared libraries for
+#8 49.54 more information, such as the ld(1) and ld.so(8) manual pages.
+#8 49.54 ----------------------------------------------------------------------
+#8 49.55 
+#8 49.55 Build complete.
+#8 49.55 Don't forget to run 'make test'.
+#8 49.56 
+#8 49.56 running: make INSTALL_ROOT="/var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1" install
+#8 49.60 Installing shared extensions:     /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr/lib64/php/modules/
+#8 49.65 running: find "/var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1" | xargs ls -dils
+#8 49.65 563431   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1
+#8 49.65 563478   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr
+#8 49.65 563479   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr/lib64
+#8 49.65 563480   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr/lib64/php
+#8 49.65 563481   4 drwxr-xr-x 2 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr/lib64/php/modules
+#8 49.65 563476 408 -rwxr-xr-x 1 root root 416880 Sep 12 10:41 /var/tmp/pear-build-rootJDrsBq/install-sqlsrv-5.10.1/usr/lib64/php/modules/sqlsrv.so
+#8 49.66 
+#8 49.66 Build process completed successfully
+#8 49.66 Installing '/usr/lib64/php/modules/sqlsrv.so'
+#8 49.66 install ok: channel://pecl.php.net/sqlsrv-5.10.1
+#8 49.66 configuration option "php_ini" is not set to php.ini location
+#8 49.66 You should add "extension=sqlsrv.so" to php.ini
+#8 54.15 downloading pdo_sqlsrv-5.10.1.tgz ...
+#8 54.15 Starting to download pdo_sqlsrv-5.10.1.tgz (189,816 bytes)
+#8 54.15 .........................................done: 189,816 bytes
+#8 54.43 35 source files, building
+#8 54.43 running: phpize
+#8 54.44 Configuring for:
+#8 54.44 PHP Api Version:         20190902
+#8 54.44 Zend Module Api No:      20190902
+#8 54.44 Zend Extension Api No:   320190902
+#8 55.00 building in /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1
+#8 55.00 running: /var/tmp/pdo_sqlsrv/configure --with-php-config=/bin/php-config
+#8 55.08 checking for grep that handles long lines and -e... /bin/grep
+#8 55.08 checking for egrep... /bin/grep -E
+#8 55.09 checking for a sed that does not truncate output... /bin/sed
+#8 55.09 checking for pkg-config... /bin/pkg-config
+#8 55.10 checking pkg-config is at least version 0.9.0... yes
+#8 55.10 checking for cc... cc
+#8 55.14 checking whether the C compiler works... yes
+#8 55.14 checking for C compiler default output file name... a.out
+#8 55.17 checking for suffix of executables...
+#8 55.21 checking whether we are cross compiling... no
+#8 55.23 checking for suffix of object files... o
+#8 55.25 checking whether we are using the GNU C compiler... yes
+#8 55.27 checking whether cc accepts -g... yes
+#8 55.29 checking for cc option to accept ISO C89... none needed
+#8 55.31 checking how to run the C preprocessor... cc -E
+#8 55.34 checking for icc... no
+#8 55.35 checking for suncc... no
+#8 55.35 checking for system library directory... lib
+#8 55.36 checking if compiler supports -R... no
+#8 55.39 checking if compiler supports -Wl,-rpath,... yes
+#8 55.44 checking build system type... x86_64-pc-linux-gnu
+#8 55.44 checking host system type... x86_64-pc-linux-gnu
+#8 55.44 checking target system type... x86_64-pc-linux-gnu
+#8 55.48 checking for PHP prefix... /usr
+#8 55.48 checking for PHP includes... -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib
+#8 55.48 checking for PHP extension directory... /usr/lib64/php/modules
+#8 55.48 checking for PHP installed headers prefix... /usr/include/php
+#8 55.50 checking if debug is enabled... no
+#8 55.53 checking if zts is enabled... no
+#8 55.53 checking for gawk... gawk
+#8 55.53 checking for pdo_sqlsrv support... yes, shared
+#8 55.53 checking for PDO includes... /usr/include/php/ext
+#8 55.53 checking for PDO_SQLSRV headers... /var/tmp/pdo_sqlsrv/shared/
+#8 55.54 checking for g++... g++
+#8 55.57 checking whether we are using the GNU C++ compiler... yes
+#8 55.59 checking whether g++ accepts -g... yes
+#8 55.61 checking how to run the C++ preprocessor... g++ -E
+#8 55.69 checking how to print strings... printf
+#8 55.69 checking for a sed that does not truncate output... (cached) /bin/sed
+#8 55.69 checking for fgrep... /bin/grep -F
+#8 55.70 checking for ld used by cc... /bin/ld
+#8 55.70 checking if the linker (/bin/ld) is GNU ld... yes
+#8 55.70 checking for BSD- or MS-compatible name lister (nm)... /bin/nm -B
+#8 55.72 checking the name lister (/bin/nm -B) interface... BSD nm
+#8 55.72 checking whether ln -s works... yes
+#8 55.73 checking the maximum length of command line arguments... 1572864
+#8 55.73 checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+#8 55.73 checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+#8 55.73 checking for /bin/ld option to reload object files... -r
+#8 55.73 checking for objdump... objdump
+#8 55.73 checking how to recognize dependent libraries... pass_all
+#8 55.73 checking for dlltool... no
+#8 55.73 checking how to associate runtime and link libraries... printf %s\n
+#8 55.73 checking for ar... ar
+#8 55.76 checking for archiver @FILE support... @
+#8 55.76 checking for strip... strip
+#8 55.76 checking for ranlib... ranlib
+#8 55.76 checking for gawk... (cached) gawk
+#8 55.82 checking command to parse /bin/nm -B output from cc object... ok
+#8 55.82 checking for sysroot... no
+#8 55.83 checking for a working dd... /var/tmp/pdo_sqlsrv/configure: line 7082: cmp: command not found
+#8 55.83 /var/tmp/pdo_sqlsrv/configure: line 7082: cmp: command not found
+#8 55.83 
+#8 55.83 checking how to truncate binary pipes... /bin/sed -e 4q
+#8 55.85 checking for mt... no
+#8 55.85 checking if : is a manifest tool... no
+#8 55.98 checking for ANSI C header files... yes
+#8 56.00 checking for sys/types.h... yes
+#8 56.03 checking for sys/stat.h... yes
+#8 56.05 checking for stdlib.h... yes
+#8 56.08 checking for string.h... yes
+#8 56.11 checking for memory.h... yes
+#8 56.13 checking for strings.h... yes
+#8 56.16 checking for inttypes.h... yes
+#8 56.19 checking for stdint.h... yes
+#8 56.22 checking for unistd.h... yes
+#8 56.25 checking for dlfcn.h... yes
+#8 56.25 checking for objdir... .libs
+#8 56.36 checking if cc supports -fno-rtti -fno-exceptions... /var/tmp/pdo_sqlsrv/configure: line 8888: diff: command not found
+#8 56.36 no
+#8 56.36 checking for cc option to produce PIC... -fPIC -DPIC
+#8 56.38 checking if cc PIC flag -fPIC -DPIC works... yes
+#8 56.40 checking if cc static flag -static works... no
+#8 56.42 checking if cc supports -c -o file.o... yes
+#8 56.42 checking if cc supports -c -o file.o... (cached) yes
+#8 56.43 checking whether the cc linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 56.46 checking whether -lc should be explicitly linked in... no
+#8 56.54 checking dynamic linker characteristics... GNU/Linux ld.so
+#8 56.54 checking how to hardcode library paths into programs... immediate
+#8 56.54 checking whether stripping libraries is possible... yes
+#8 56.54 checking if libtool supports shared libraries... yes
+#8 56.54 checking whether to build shared libraries... yes
+#8 56.54 checking whether to build static libraries... no
+#8 56.55 checking how to run the C++ preprocessor... g++ -E
+#8 56.66 checking for ld used by g++... /bin/ld -m elf_x86_64
+#8 56.67 checking if the linker (/bin/ld -m elf_x86_64) is GNU ld... yes
+#8 56.67 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 56.76 checking for g++ option to produce PIC... -fPIC -DPIC
+#8 56.77 checking if g++ PIC flag -fPIC -DPIC works... yes
+#8 56.80 checking if g++ static flag -static works... no
+#8 56.82 checking if g++ supports -c -o file.o... yes
+#8 56.82 checking if g++ supports -c -o file.o... (cached) yes
+#8 56.82 checking whether the g++ linker (/bin/ld -m elf_x86_64) supports shared libraries... yes
+#8 56.83 checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+#8 56.83 checking how to hardcode library paths into programs... immediate
+#8 56.90 configure: patching config.h.in
+#8 56.90 configure: creating ./config.status
+#8 57.32 config.status: creating config.h
+#8 57.33 config.status: executing libtool commands
+#8 57.37 running: make
+#8 57.37 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_dbh.cpp -o pdo_dbh.lo
+#8 57.41 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_dbh.cpp  -fPIC -DPIC -o .libs/pdo_dbh.o
+#8 58.69 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_parser.cpp -o pdo_parser.lo
+#8 58.73 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_parser.cpp  -fPIC -DPIC -o .libs/pdo_parser.o
+#8 59.40 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_util.cpp -o pdo_util.lo
+#8 59.45 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_util.cpp  -fPIC -DPIC -o .libs/pdo_util.o
+#8 60.12 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_init.cpp -o pdo_init.lo
+#8 60.17 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_init.cpp  -fPIC -DPIC -o .libs/pdo_init.o
+#8 60.77 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/pdo_stmt.cpp -o pdo_stmt.lo
+#8 60.88 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/pdo_stmt.cpp  -fPIC -DPIC -o .libs/pdo_stmt.o
+#8 62.45 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_conn.cpp -o shared/core_conn.lo
+#8 62.51 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_conn.cpp  -fPIC -DPIC -o shared/.libs/core_conn.o
+#8 63.87 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_results.cpp -o shared/core_results.lo
+#8 63.93 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_results.cpp  -fPIC -DPIC -o shared/.libs/core_results.o
+#8 66.09 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_stream.cpp -o shared/core_stream.lo
+#8 66.14 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_stream.cpp  -fPIC -DPIC -o shared/.libs/core_stream.o
+#8 66.82 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_init.cpp -o shared/core_init.lo
+#8 66.87 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_init.cpp  -fPIC -DPIC -o shared/.libs/core_init.o
+#8 67.58 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_stmt.cpp -o shared/core_stmt.lo
+#8 67.64 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_stmt.cpp  -fPIC -DPIC -o shared/.libs/core_stmt.o
+#8 69.62 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/core_util.cpp -o shared/core_util.lo
+#8 69.67 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/core_util.cpp  -fPIC -DPIC -o shared/.libs/core_util.o
+#8 70.71 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/FormattedPrint.cpp -o shared/FormattedPrint.lo
+#8 70.76 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/FormattedPrint.cpp  -fPIC -DPIC -o shared/.libs/FormattedPrint.o
+#8 71.61 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/localizationimpl.cpp -o shared/localizationimpl.lo
+#8 71.83 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/localizationimpl.cpp  -fPIC -DPIC -o shared/.libs/localizationimpl.o
+#8 74.89 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=compile g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector   -c /var/tmp/pdo_sqlsrv/shared/StringFunctions.cpp -o shared/StringFunctions.lo
+#8 74.99 libtool: compile:  g++ -I/usr/include/php/ext -std=c++11 -I. -I/var/tmp/pdo_sqlsrv -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/ -DHAVE_CONFIG_H -std=c++11 -D_FORTIFY_SOURCE=2 -O2 -fstack-protector -c /var/tmp/pdo_sqlsrv/shared/StringFunctions.cpp  -fPIC -DPIC -o shared/.libs/StringFunctions.o
+#8 75.40 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=link cc -DPHP_ATOM_INC -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/include -I/var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/main -I/var/tmp/pdo_sqlsrv -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -I/var/tmp/pdo_sqlsrv/shared/  -DHAVE_CONFIG_H  -g -O2    -o pdo_sqlsrv.la -export-dynamic -avoid-version -prefer-pic -module -rpath /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules  pdo_dbh.lo pdo_parser.lo pdo_util.lo pdo_init.lo pdo_stmt.lo shared/core_conn.lo shared/core_results.lo shared/core_stream.lo shared/core_init.lo shared/core_stmt.lo shared/core_util.lo shared/FormattedPrint.lo shared/localizationimpl.lo shared/StringFunctions.lo -Wl,-z,now -lstdc++ -lodbc -lodbcinst
+#8 75.58 libtool: link: cc -shared  -fPIC -DPIC  .libs/pdo_dbh.o .libs/pdo_parser.o .libs/pdo_util.o .libs/pdo_init.o .libs/pdo_stmt.o shared/.libs/core_conn.o shared/.libs/core_results.o shared/.libs/core_stream.o shared/.libs/core_init.o shared/.libs/core_stmt.o shared/.libs/core_util.o shared/.libs/FormattedPrint.o shared/.libs/localizationimpl.o shared/.libs/StringFunctions.o   -lstdc++ /usr/lib64/libodbc.so /usr/lib64/libodbcinst.so -ldl -lpthread  -g -O2 -Wl,-z -Wl,now   -pthread -Wl,-soname -Wl,pdo_sqlsrv.so -o .libs/pdo_sqlsrv.so
+#8 75.67 libtool: link: ( cd ".libs" && rm -f "pdo_sqlsrv.la" && ln -s "../pdo_sqlsrv.la" "pdo_sqlsrv.la" )
+#8 75.68 /bin/sh /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/libtool --mode=install cp ./pdo_sqlsrv.la /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules
+#8 75.70 libtool: install: cp ./.libs/pdo_sqlsrv.so /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules/pdo_sqlsrv.so
+#8 75.71 libtool: install: cp ./.libs/pdo_sqlsrv.lai /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules/pdo_sqlsrv.la
+#8 75.75 libtool: finish: PATH="/sbin:/bin:/usr/sbin:/usr/bin:/sbin" ldconfig -n /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules
+#8 75.75 ----------------------------------------------------------------------
+#8 75.75 Libraries have been installed in:
+#8 75.75    /var/tmp/pear-build-rootFf5mRQ/pdo_sqlsrv-5.10.1/modules
+#8 75.75 
+#8 75.75 If you ever happen to want to link against installed libraries
+#8 75.75 in a given directory, LIBDIR, you must either use libtool, and
+#8 75.75 specify the full pathname of the library, or use the '-LLIBDIR'
+#8 75.75 flag during linking and do at least one of the following:
+#8 75.75    - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+#8 75.75      during execution
+#8 75.75    - add LIBDIR to the 'LD_RUN_PATH' environment variable
+#8 75.75      during linking
+#8 75.75    - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+#8 75.75    - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+#8 75.75 
+#8 75.75 See any operating system documentation about shared libraries for
+#8 75.75 more information, such as the ld(1) and ld.so(8) manual pages.
+#8 75.75 ----------------------------------------------------------------------
+#8 75.76 
+#8 75.76 Build complete.
+#8 75.76 Don't forget to run 'make test'.
+#8 75.76 
+#8 75.76 running: make INSTALL_ROOT="/var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1" install
+#8 75.81 Installing shared extensions:     /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules/
+#8 75.86 running: find "/var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1" | xargs ls -dils
+#8 75.86 563445   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1
+#8 75.86 563497   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr
+#8 75.86 563498   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr/lib64
+#8 75.86 563499   4 drwxr-xr-x 3 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr/lib64/php
+#8 75.86 563500   4 drwxr-xr-x 2 root root   4096 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules
+#8 75.86 563495 420 -rwxr-xr-x 1 root root 427520 Sep 12 10:41 /var/tmp/pear-build-rootFf5mRQ/install-pdo_sqlsrv-5.10.1/usr/lib64/php/modules/pdo_sqlsrv.so
+#8 75.87 
+#8 75.87 Build process completed successfully
+#8 75.87 Installing '/usr/lib64/php/modules/pdo_sqlsrv.so'
+#8 75.88 install ok: channel://pecl.php.net/pdo_sqlsrv-5.10.1
+#8 75.88 configuration option "php_ini" is not set to php.ini location
+#8 75.88 You should add "extension=pdo_sqlsrv.so" to php.ini
+#8 76.43 All settings correct for using Composer
+#8 76.43 Downloading...
+#8 77.35 
+#8 77.35 Composer (version 2.6.2) successfully installed to: /usr/local/bin/composer
+#8 77.35 Use it: php /usr/local/bin/composer
+#8 77.35 
+#8 DONE 77.4s
 
-#9 [ 5/10] RUN dnf -y install php-zip
-#9 1.173 Updating Subscription Management repositories.
-#9 1.173 Unable to read consumer identity
-#9 1.173 Subscription Manager is operating in container mode.
-#9 1.179 
-#9 1.179 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#9 1.179 
-#9 1.299 Last metadata expiration check: 0:01:16 ago on Tue Sep 12 06:10:56 2023.
-#9 1.488 Package php-pecl-zip-1.18.2-1.module+el8.3.0+6678+b09f589e.x86_64 is already installed.
-#9 1.530 Dependencies resolved.
-#9 1.531 Nothing to do.
-#9 1.532 Complete!
-#9 DONE 1.6s
+#9 [ 5/14] RUN dnf -y install php-zip
+#9 0.888 Updating Subscription Management repositories.
+#9 0.888 Unable to read consumer identity
+#9 0.888 Subscription Manager is operating in container mode.
+#9 0.892 
+#9 0.892 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#9 0.892 
+#9 1.032 Last metadata expiration check: 0:01:02 ago on Tue Sep 12 10:40:53 2023.
+#9 1.259 Package php-pecl-zip-1.18.2-1.module+el8.3.0+6678+b09f589e.x86_64 is already installed.
+#9 1.304 Dependencies resolved.
+#9 1.306 Nothing to do.
+#9 1.306 Complete!
+#9 DONE 1.4s
 
-#10 [ 6/10] RUN dnf remove nginx-filesystem -y
-#10 0.931 Updating Subscription Management repositories.
-#10 0.933 Unable to read consumer identity
-#10 0.933 Subscription Manager is operating in container mode.
-#10 0.943 
-#10 0.943 This system is not registered with an entitlement server. You can use subscription-manager to register.
-#10 0.943 
-#10 1.093 Dependencies resolved.
-#10 1.095 ============================================================================================================
-#10 1.095  Package            Arch    Version                                 Repository                          Size
-#10 1.095 ============================================================================================================
-#10 1.095 Removing:
-#10 1.095  nginx-filesystem   noarch  1:1.14.1-9.module+el8.0.0+4108+af250afe @rhel-8-for-x86_64-appstream-rpms    0  
-#10 1.095 Removing dependent packages:
-#10 1.095  php-fpm            x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa  @rhel-8-for-x86_64-appstream-rpms  6.2 M
-#10 1.095 
-#10 1.095 Transaction Summary
-#10 1.095 ============================================================================================================
-#10 1.095 Remove  2 Packages
-#10 1.095 
-#10 1.096 Freed space: 6.2 M
-#10 1.097 Running transaction check
-#10 1.101 Transaction check succeeded.
-#10 1.101 Running transaction test
-#10 1.126 Transaction test succeeded.
-#10 1.127 Running transaction
-#10 1.234   Preparing        :                                                        1/1 
-#10 1.256   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/1 
-#10 1.265   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#10 1.289   Erasing          : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#10 1.290   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
-#10 1.325   Erasing          : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
-#10 1.326   Running scriptlet: nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
-#10 1.405   Verifying        : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   1/2 
-#10 1.405   Verifying        : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   2/2 
-#10 1.585 Installed products updated.
-#10 1.597 
-#10 1.597 Removed:
-#10 1.597   nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af250afe.noarch               
-#10 1.597   php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                         
-#10 1.597 
-#10 1.597 Complete!
+#10 [ 6/14] RUN dnf remove nginx-filesystem -y
+#10 0.946 Updating Subscription Management repositories.
+#10 0.946 Unable to read consumer identity
+#10 0.946 Subscription Manager is operating in container mode.
+#10 0.950 
+#10 0.950 This system is not registered with an entitlement server. You can use subscription-manager to register.
+#10 0.950 
+#10 1.080 Dependencies resolved.
+#10 1.081 ============================================================================================================
+#10 1.081  Package            Arch    Version                                 Repository                          Size
+#10 1.081 ============================================================================================================
+#10 1.081 Removing:
+#10 1.081  nginx-filesystem   noarch  1:1.14.1-9.module+el8.0.0+4108+af250afe @rhel-8-for-x86_64-appstream-rpms    0  
+#10 1.081 Removing dependent packages:
+#10 1.081  php-fpm            x86_64  7.4.33-1.module+el8.8.0+17865+ef7eddfa  @rhel-8-for-x86_64-appstream-rpms  6.2 M
+#10 1.081 
+#10 1.081 Transaction Summary
+#10 1.081 ============================================================================================================
+#10 1.081 Remove  2 Packages
+#10 1.081 
+#10 1.082 Freed space: 6.2 M
+#10 1.082 Running transaction check
+#10 1.086 Transaction check succeeded.
+#10 1.086 Running transaction test
+#10 1.106 Transaction test succeeded.
+#10 1.107 Running transaction
+#10 1.249   Preparing        :                                                        1/1 
+#10 1.269   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/1 
+#10 1.277   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#10 1.296   Erasing          : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#10 1.297   Running scriptlet: php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   1/2 
+#10 1.319   Erasing          : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
+#10 1.319   Running scriptlet: nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   2/2 
+#10 1.394   Verifying        : nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af25   1/2 
+#10 1.394   Verifying        : php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_6   2/2 
+#10 1.548 Installed products updated.
+#10 1.562 
+#10 1.562 Removed:
+#10 1.562   nginx-filesystem-1:1.14.1-9.module+el8.0.0+4108+af250afe.noarch               
+#10 1.562   php-fpm-7.4.33-1.module+el8.8.0+17865+ef7eddfa.x86_64                         
+#10 1.562 
+#10 1.562 Complete!
 #10 DONE 1.7s
 
-#11 [ 7/10] WORKDIR /var/www/html/
+#11 [ 7/14] WORKDIR /var/www/html/
 #11 DONE 0.0s
 
-#12 [ 8/10] RUN composer install --no-interaction
-#12 0.544 Composer plugins have been disabled for safety in this non-interactive session. Set COMPOSER_ALLOW_SUPERUSER=1 if you want to allow plugins to run as root/super user.
-#12 0.544 Do not run Composer as root/super user! See https://getcomposer.org/root for details
-#12 0.688 Installing dependencies from lock file (including require-dev)
-#12 0.689 Verifying lock file contents can be installed on current platform.
-#12 0.726 Package operations: 0 installs, 0 updates, 2 removals
-#12 0.727   - Removing laminas/laminas-stdlib (3.7.1)
-#12 0.729   - Removing laminas/laminas-db (2.15.0)
-#12 0.740  0/2 [>---------------------------]   0%
-#12 0.754  2/2 [============================] 100%
-#12 0.762 Generating autoload files
-#12 0.766 3 packages you are using are looking for funding.
-#12 0.766 Use the `composer fund` command to find out more!
-#12 DONE 0.8s
+#12 [ 8/14] RUN chown -R 1001:0 /run
+#12 DONE 0.6s
 
-#13 [ 9/10] ADD ./patch2.sh /patch2.sh
-#13 DONE 0.0s
+#13 [ 9/14] RUN chown -R 1001:0 /etc/httpd/run
+#13 DONE 0.5s
 
-#14 [10/10] RUN bash /patch2.sh && rm /patch2.sh
-#14 DONE 0.5s
+#14 [10/14] RUN chmod -R 777 /run
+#14 DONE 0.6s
 
-#15 exporting to image
-#15 exporting layers
-#15 exporting layers 1.8s done
-#15 writing image sha256:63fe9034698548c0826edcb07e9b7926f6050ce2e87ef4a4631bfb08623e84a2 done
-#15 naming to docker.io/library/kpes done
-#15 DONE 1.8s
+#15 [11/14] RUN chmod -R 777 /etc/httpd/run
+#15 DONE 0.5s
+
+#16 [12/14] RUN composer install --no-interaction
+#16 0.680 Composer plugins have been disabled for safety in this non-interactive session. Set COMPOSER_ALLOW_SUPERUSER=1 if you want to allow plugins to run as root/super user.
+#16 0.680 Do not run Composer as root/super user! See https://getcomposer.org/root for details
+#16 0.811 Installing dependencies from lock file (including require-dev)
+#16 0.811 Verifying lock file contents can be installed on current platform.
+#16 0.842 Package operations: 0 installs, 0 updates, 2 removals
+#16 0.842   - Removing laminas/laminas-stdlib (3.7.1)
+#16 0.844   - Removing laminas/laminas-db (2.15.0)
+#16 0.857  0/2 [>---------------------------]   0%
+#16 0.871  2/2 [============================] 100%
+#16 0.877 Generating autoload files
+#16 0.881 3 packages you are using are looking for funding.
+#16 0.881 Use the `composer fund` command to find out more!
+#16 DONE 0.9s
+
+#17 [13/14] ADD ./patch2.sh /patch2.sh
+#17 DONE 0.0s
+
+#18 [14/14] RUN bash /patch2.sh && rm /patch2.sh
+#18 DONE 0.5s
+
+#19 exporting to image
+#19 exporting layers
+#19 exporting layers 2.3s done
+#19 writing image sha256:1d5d30d886f6bdc27acebc97672a7ce26840482956081ea15663b8e7df5d8ba1 0.0s done
+#19 naming to docker.io/library/kpes done
+#19 DONE 2.3s
 
 [1mWhat's Next?
 [0m  View summary of image vulnerabilities and recommendations → [36mdocker scout quickview[0m
