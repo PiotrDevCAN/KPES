@@ -158,7 +158,8 @@ class AccountPersonTable extends DbTable {
         $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . htmlspecialchars($accountId)  . "' " : null;
 
         if ($length != '-1') {
-            $sql.= " LIMIT " . $length . ' OFFSET ' . $start;
+            // $sql.= " LIMIT " . $length . ' OFFSET ' . $start;
+            $sql.= ' OFFSET ' . $start . ' ROWS FETCH FIRST ' . $length . ' ROWS ONLY';
         }
         return $sql;
     }
