@@ -127,7 +127,7 @@ class AccountPersonTable extends DbTable {
         $sql.= ", AP.MEMBERSHIP ";
         $sql.= ", AP.NI_EVIDENCE ";
         $sql.= ", AP.PROCESSING_STATUS ";
-        $sql.= ", ADD_HOURS(AP.PROCESSING_STATUS_CHANGED, 1) AS PROCESSING_STATUS_CHANGED ";
+        $sql.= ", DATEADD(hour, 1, AP.PROCESSING_STATUS_CHANGED) AS PROCESSING_STATUS_CHANGED ";
         $sql.= ", AP.DATE_LAST_CHASED ";
         $sql.= ", AP.PES_STATUS ";
         $sql.= ", AP.PES_STATUS_DETAILS ";
