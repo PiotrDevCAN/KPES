@@ -90,7 +90,7 @@ class AccountPersonTable extends DbTable {
                 break;
             case self::PES_TRACKER_RECORDS_NOT_ACTIVE :
                 $pesStatusPredicate = " AP.PES_STATUS not in ('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "')  ";
-                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > current timestamp - 31 days  ";
+                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > DATEADD(day, -31, CURRENT_TIMESTAMP)  ";
                 break;
             case self::PES_TRACKER_RECORDS_ALL :
                 $pesStatusPredicate = " 1=1 ";
@@ -181,7 +181,7 @@ class AccountPersonTable extends DbTable {
                 break;
             case self::PES_TRACKER_RECORDS_NOT_ACTIVE :
                 $pesStatusPredicate = " AP.PES_STATUS not in ('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "')  ";
-                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > current timestamp - 31 days  ";
+                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > DATEADD(day, -31, CURRENT_TIMESTAMP)  ";
                 break;
             case self::PES_TRACKER_RECORDS_ALL :
                 $pesStatusPredicate = " 1=1 ";
@@ -855,7 +855,7 @@ class AccountPersonTable extends DbTable {
             return $_SESSION['prepareProcessStatusUpdate'];
         }
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql.= " SET PROCESSING_STATUS =?, PROCESSING_STATUS_CHANGED = current timestamp ";
+        $sql.= " SET PROCESSING_STATUS =?, PROCESSING_STATUS_CHANGED = CURRENT_TIMESTAMP ";
         $sql.= " WHERE UPES_REF=? AND ACCOUNT_ID=?";
 
         $this->preparedSelectSQL = $sql;
@@ -1274,7 +1274,7 @@ class AccountPersonTable extends DbTable {
         foreach (self::PES_TRACKER_STAGES as $trackerStage) {
             $sql.= " , " . $trackerStage . " = null ";
         }
-        $sql.= " ,  PROCESSING_STATUS_CHANGED= current timestamp, DATE_LAST_CHASED = null ";
+        $sql.= " ,  PROCESSING_STATUS_CHANGED= CURRENT_TIMESTAMP, DATE_LAST_CHASED = null ";
         $sql.= " WHERE ACCOUNT_ID = ?  AND UPES_REF = ? ";
 
         $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);

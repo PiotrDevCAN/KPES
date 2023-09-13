@@ -18,7 +18,7 @@ class AuditTable extends DbTable {
             $sql = " INSERT INTO " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT;
             $sql . " ('TIMESTAMP','EMAIL_ADDRESS','DATA','TYPE') ";
             $sql .= " VALUES ";
-            $sql .= " ( CURRENT TIMESTAMP, '" . htmlspecialchars($_SESSION['ssoEmail']) . "','" . htmlspecialchars($statement) . "','" . htmlspecialchars($type) . "' )";
+            $sql .= " ( CURRENT_TIMESTAMP, '" . htmlspecialchars($_SESSION['ssoEmail']) . "','" . htmlspecialchars($statement) . "','" . htmlspecialchars($type) . "' )";
 
             $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
@@ -35,9 +35,9 @@ class AuditTable extends DbTable {
 
             $sql  = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT ;
             $sql .= " WHERE " ;
-            $sql .= " (TYPE='" . self::RECORD_TYPE_AUDIT . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . htmlspecialchars($auditLifeSpan) . " )) ";
+            $sql .= " (TYPE='" . self::RECORD_TYPE_AUDIT . "' AND \"TIMESTAMP\" < ( CURRENT_TIMESTAMP - " . htmlspecialchars($auditLifeSpan) . " )) ";
             $sql .= " OR " ;
-            $sql .= " (TYPE='" . self::RECORD_TYPE_DETAILS . "' AND \"TIMESTAMP\" < ( CURRENT TIMESTAMP - " . htmlspecialchars($detailsLifeSpan) . " ))  ";
+            $sql .= " (TYPE='" . self::RECORD_TYPE_DETAILS . "' AND \"TIMESTAMP\" < ( CURRENT_TIMESTAMP - " . htmlspecialchars($detailsLifeSpan) . " ))  ";
 
             $rs = sqlsrv_query($GLOBALS['conn'], $sql);
 
@@ -64,7 +64,7 @@ class AuditTable extends DbTable {
         $sql.= $orderBy;
         $sql.= " ) AS rownum,A.* FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
         $sql .= " WHERE 1=1 ";
-        $sql .= " AND TIMESTAMP >= (CURRENT TIMESTAMP - 31 days) ";
+        $sql .= " AND TIMESTAMP >= DATEADD(day, -31, CURRENT_TIMESTAMP) ";
         $sql .= !empty($predicate)   ? "  $predicate " : null;
         $sql .= " ) as tmp ";
         $sql .= " WHERE ROWNUM >= $fromRecord AND ROWNUM < " .  $end ;
@@ -82,7 +82,7 @@ class AuditTable extends DbTable {
         $data = array();
         $data['rows'] = array();
 
-        while(($row = sqlsrv_fetch_array($rs))==true){
+        while(($row=sqlsrv_fetch_array($rs))==true){
             $trimmedRow = array_map('trim', $row);
             $data['rows'][] = $trimmedRow;
         }
@@ -94,7 +94,7 @@ class AuditTable extends DbTable {
      static function recordsFiltered($predicate){
          $sql = " SELECT count(*) as recordsFiltered FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
          $sql .= " WHERE 1=1 ";
-         $sql .= " AND TIMESTAMP >= (CURRENT TIMESTAMP - 31 days) ";
+         $sql .= " AND TIMESTAMP >= DATEADD (day, -31, CURRENT_TIMESTAMP) ";
          $sql .= !empty($predicate)   ? "  $predicate " : null;
 
          $rs = sqlsrv_query($GLOBALS['conn'],$sql);
@@ -103,7 +103,7 @@ class AuditTable extends DbTable {
              DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
          }
 
-         $row = sqlsrv_fetch_array($rs);
+         $row=sqlsrv_fetch_array($rs);
 
          return $row['RECORDSFILTERED'];
 
@@ -113,7 +113,7 @@ class AuditTable extends DbTable {
      static function totalRows($type=null){
          $sql = " SELECT count(*) as totalRows FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
          $sql .= " WHERE 1=1 ";
-         $sql .= " AND TIMESTAMP >= (CURRENT TIMESTAMP - 31 days) ";
+         $sql .= " AND TIMESTAMP >= DATEADD (day, -31, CURRENT_TIMESTAMP) ";
          $sql .= $type=='Revalidation' ? " AND TYPE='Revalidation' " : null;
          $rs = sqlsrv_query($GLOBALS['conn'],$sql);
 
@@ -121,7 +121,7 @@ class AuditTable extends DbTable {
              DbTable::displayErrorMessage($rs, __CLASS__, __METHOD__, $sql);
          }
 
-         $row = sqlsrv_fetch_array($rs);
+         $row=sqlsrv_fetch_array($rs);
 
          return $row['TOTALROWS'];
      }

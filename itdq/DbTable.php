@@ -1127,7 +1127,7 @@ class DbTable
                     case 93:
                         if (empty($updateArray[$key])) {
                             $values .= ", $key = null ";
-                        } elseif ($updateArray[$key] == 'CURRENT TIMESTAMP') {
+                        } elseif ($updateArray[$key] == 'CURRENT_TIMESTAMP') {
                             $values .= ", $key = $updateArray[$key] ";
                         } else {
                             $values .= ", $key = '$updateArray[$key]' ";

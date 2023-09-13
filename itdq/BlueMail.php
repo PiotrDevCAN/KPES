@@ -226,7 +226,7 @@ class BlueMail
     static function updatelog($recordId, $result)
     {
         $sql  = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
-        $sql .= " SET RESPONSE = '" . htmlspecialchars($result) . "', SENT_TIMESTAMP = CURRENT TIMESTAMP " ;
+        $sql .= " SET RESPONSE = '" . htmlspecialchars($result) . "', SENT_TIMESTAMP = CURRENT_TIMESTAMP " ;
         $sql .= " WHERE RECORD_ID= " . htmlspecialchars($recordId) . "; ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -242,7 +242,7 @@ class BlueMail
     static function logStatus($recordId, $status)
     {
         $sql  = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
-        $sql .= " SET LAST_STATUS = '" . htmlspecialchars($status) . "', STATUS_TIMESTAMP = CURRENT TIMESTAMP " ;
+        $sql .= " SET LAST_STATUS = '" . htmlspecialchars($status) . "', STATUS_TIMESTAMP = CURRENT_TIMESTAMP " ;
         $sql .= " WHERE RECORD_ID= " . htmlspecialchars($recordId) . "; ";
 
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);
@@ -258,7 +258,7 @@ class BlueMail
     static function clearLog($retainPeriod = ' 3 months')
     {
        $sql  = " DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$EMAIL_LOG;
-       $sql .= ' WHERE SENT_TIMESTAMP < (CURRENT TIMESTAMP - ' . $retainPeriod . "); ";
+       $sql .= " WHERE SENT_TIMESTAMP < DATEADD(month, 3, CURRENT_TIMESTAMP); ";
        sqlsrv_query($GLOBALS['conn'], $sql);
     }
 
