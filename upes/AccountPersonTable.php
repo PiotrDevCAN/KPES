@@ -370,7 +370,6 @@ class AccountPersonTable extends DbTable {
 
         $row = sqlsrv_fetch_array($rs);
 
-        // return $row['RECORDSFILTERED'];
         return $row['COUNTER'];
     }
 
@@ -385,7 +384,6 @@ class AccountPersonTable extends DbTable {
 
         $row = sqlsrv_fetch_array($rs);
 
-        // return $row['TOTALROWS'];
         return $row['COUNTER'];
     }
 

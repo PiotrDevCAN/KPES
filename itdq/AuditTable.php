@@ -92,7 +92,7 @@ class AuditTable extends DbTable {
      }
 
      static function recordsFiltered($predicate){
-         $sql = " SELECT count(*) as recordsFiltered FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
+         $sql = " SELECT count(*) as RECORDSFILTERED FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
          $sql .= " WHERE 1=1 ";
          $sql .= " AND TIMESTAMP >= DATEADD (day, -31, CURRENT_TIMESTAMP) ";
          $sql .= !empty($predicate)   ? "  $predicate " : null;
@@ -111,7 +111,7 @@ class AuditTable extends DbTable {
      }
 
      static function totalRows($type=null){
-         $sql = " SELECT count(*) as totalRows FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
+         $sql = " SELECT count(*) as TOTALROWS FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$AUDIT . " AS A ";
          $sql .= " WHERE 1=1 ";
          $sql .= " AND TIMESTAMP >= DATEADD (day, -31, CURRENT_TIMESTAMP) ";
          $sql .= $type=='Revalidation' ? " AND TYPE='Revalidation' " : null;
