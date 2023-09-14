@@ -53,26 +53,26 @@ function addFieldToSearch($searchValue = null, $column = '')
 $predicate = '';
 if(!empty($_REQUEST['search']['value'])) {
     $searchValue = htmlspecialchars(trim($_REQUEST['search']['value']));
-    $predicate .= " AND )";
+    $predicate .= " AND (";
     $predicate .= addFieldToSearch($searchValue, 'P.PASSPORT_FIRST_NAME');
-    $predicate .= addFieldToSearch($searchValue, 'P.PASSPORT_LAST_NAME');
-    $predicate .= addFieldToSearch($searchValue, 'P.CNUM');
-    $predicate .= addFieldToSearch($searchValue, 'P.IBM_STATUS');
-    $predicate .= addFieldToSearch($searchValue, 'P.COUNTRY');
-    $predicate .= addFieldToSearch($searchValue, 'AP.COUNTRY_OF_RESIDENCE');
-    $predicate .= addFieldToSearch($searchValue, 'P.UPES_REF');
-    $predicate .= addFieldToSearch($searchValue, 'A.ACCOUNT_ID');
-    $predicate .= addFieldToSearch($searchValue, 'A.ACCOUNT_TYPE');
-    $predicate .= addFieldToSearch($searchValue, 'A.ACCOUNT');
-    $predicate .= addFieldToSearch($searchValue, 'P.FULL_NAME');
-    $predicate .= addFieldToSearch($searchValue, 'P.EMAIL_ADDRESS');
-    $predicate .= addFieldToSearch($searchValue, 'PL.PES_LEVEL');
-    $predicate .= addFieldToSearch($searchValue, 'PL.PES_LEVEL_DESCRIPTION');
-    $predicate .= addFieldToSearch($searchValue, 'AP.PES_REQUESTOR');
-    $predicate .= addFieldToSearch($searchValue, 'AP.PES_DATE_REQUESTED');
-    $predicate .= addFieldToSearch($searchValue, 'AP.DATE_LAST_CHASED');
-    $predicate .= addFieldToSearch($searchValue, 'AP.PES_STATUS');
-    $predicate .= addFieldToSearch($searchValue, 'AP.COMMENT');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.PASSPORT_LAST_NAME');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.CNUM');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.IBM_STATUS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.COUNTRY');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.COUNTRY_OF_RESIDENCE');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.UPES_REF');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT_ID');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT_TYPE');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.FULL_NAME');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.EMAIL_ADDRESS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'PL.PES_LEVEL');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'PL.PES_LEVEL_DESCRIPTION');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_REQUESTOR');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_DATE_REQUESTED');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.DATE_LAST_CHASED');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_STATUS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.COMMENT');
     $predicate .= ") ";
 }
 
