@@ -5,6 +5,7 @@
 // ** for fpdf http://www.fpdf.org/ download of pdf files in https;
 
 use itdq\JwtSecureSession;
+use itdq\Redis;
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 
 # Takes a hash of values and files in a text template
@@ -338,7 +339,6 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
 
     $GLOBALS['Db2Schema'] = strtoupper($_ENV['environment']);
     $GLOBALS['Db2Schema'] = str_replace('_LOCAL', '_DEV', $GLOBALS['Db2Schema']);
-
     $https = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == "on");
 
     // global var and config file
@@ -386,11 +386,15 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && !empty($_SERVER['HTTP_USER_AGENT'])) {
     error_log("Pre connect:" . (float)($elapsed-$start));
     include ('connect.php');
     
+    $elapsed = microtime(true);
+    error_log("Pre Redis:" . (float)($elapsed-$start));
+    $redisClient = new Redis();
+    
     if ($helper->isCli()) {
         // $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
     } else {
         $elapsed = microtime(true);
-        error_log("Post connect:" . (float)($elapsed-$start));
+        error_log("Post Redis:" . (float)($elapsed-$start));
         include('displayNavbar.php');
         
         $elapsed = microtime(true);
