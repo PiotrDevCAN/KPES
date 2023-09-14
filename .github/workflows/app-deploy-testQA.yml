@@ -75,7 +75,9 @@ jobs:
             kps-gd-app-kpes/data/testqa/w3us/SSOserver host | SSO_HOST ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_id | SSO_CLIENT_ID ;
             kps-gd-app-kpes/data/testqa/w3us/SSOserver client_secret | SSO_CLIENT_SECRET ;
-            kps-gd-app-kpes/data/testqa/w3us/SSOserver client_api_token | SSO_API_TOKEN
+            kps-gd-app-kpes/data/testqa/w3us/SSOserver client_api_token | SSO_API_TOKEN ;
+            kps-gd-app-kpes/data/testqa/w3us/Redis PORT | REDIS_PORT ;
+            kps-gd-app-kpes/data/testqa/w3us/Redis PASSWORD | REDIS_PW
       - name: Get Worker API Credentials
         id: import-secrets-worker-api
         uses: hashicorp/vault-action@v2
@@ -141,6 +143,15 @@ jobs:
           secret-name: kpes-app-docker-secrets-worker-api
           secret-type: 'generic'
           arguments: --from-literal=worker_api_authority=${{ vars.WORKER_API_URL }} --from-literal=worker_api_token_scope=${{ vars.WORKER_API_SCOPE }} --from-literal=worker_api_host=${{ vars.WORKER_API_URL_EXT }}  --from-literal=worker_api_client_id=${{ steps.import-secrets-worker-api.outputs.CLIENT_ID }} --from-literal=worker_api_client_secret=${{ steps.import-secrets-worker-api.outputs.CLIENT_SECRET }}
+      - name: Set ImagePullSecrets Redis
+        id: image_secret-worker-redis
+        uses: azure/k8s-actions/k8s-create-secret@master
+        # uses: Azure/k8s-create-secret@v4.0
+        with:
+          namespace: ${{ steps.import-secrets.outputs.NAMESPACE }}
+          secret-name: kpes-app-docker-secrets-redis
+          secret-type: 'generic'
+          arguments: --from-literal=redis_host=${{ vars.REDIS_URL }} --from-literal=redis_port=${{ steps.import-secrets.outputs.REDIS_PORT }} --from-literal=redis_password=${{ steps.import-secrets.outputs.REDIS_PW }}          
       - name: Deploy application
         id: deploy-app
         uses: Azure/k8s-deploy@v4
@@ -164,5 +175,6 @@ jobs:
             kpes-app-docker-secrets-smtp
             kpes-app-docker-secrets-sso
             kpes-app-docker-secrets-worker-api
+            kpes-app-docker-secrets-redis
             env-configmap-testqa
             env-secrets
