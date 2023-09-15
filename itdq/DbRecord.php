@@ -464,7 +464,7 @@ class DbRecord extends FormClass {
 								}
 								break;
 							case 'TIMESTAMP' :
-								if(strtoupper($value)=='CURRENT DATE'){
+								if(strtoupper($value)=='CURRENT_DATE'){
 									$now = new \DateTime();
 									$this->$key = $now->format('Y-m-d H:i:s');
 								} elseif (empty ( $value ) && $defaultValue != 'NULL') {
