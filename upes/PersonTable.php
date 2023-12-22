@@ -84,7 +84,7 @@ class PersonTable extends DbTable
     }
 
     static function getNamesFromUpesref($upesref){
-        $sql = " SELECT case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else P.PASSPORT_FIRST_NAME concat ' ' concat P.PASSPORT_LAST_NAME end as FULL_NAME ";
+        $sql = " SELECT case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else CONCAT (P.PASSPORT_FIRST_NAME, ' ', P.PASSPORT_LAST_NAME) end as FULL_NAME ";
         $sql.= " FROM " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " as P ";
         $sql.= " WHERE P.UPES_REF = '" . htmlspecialchars(strtoupper(trim($upesref))) . "' ";
 

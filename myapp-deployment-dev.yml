@@ -54,3 +54,5 @@ spec:
             name: kpes-app-docker-secrets-sso
         - secretRef:
             name: kpes-app-docker-secrets-worker-api
+        - secretRef:
+            name: kpes-app-docker-secrets-redis

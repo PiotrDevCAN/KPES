@@ -65,7 +65,7 @@ class JavaScript {
 	 * @param array $data			4 Dimensional Array
 	 * @param string $arrayName		Name of the array when addressed by Javascript.
 	 */
-	static function buildSelectArrayFour($data, $arrayName ){
+	static function buildSelectArrayFour($data, $arrayName){
 
 		echo '<script type="text/javascript" charset="utf-8">';
 		echo "var $arrayName = new Array();";
@@ -73,9 +73,6 @@ class JavaScript {
 //		echo $arrayName . '[1] = new Array();';
 //		echo $arrayName . '[1][0] = "1.0";';
 //		echo $arrayName . '[1][1] = "1.1";';
-
-
-
 //		echo $arrayName . '[0][0]=""; ';
 		$i=0;
 		foreach($data as $primaryKey => $primaryArray){
@@ -101,14 +98,13 @@ class JavaScript {
 		echo "</script>";
 	}
 
-
 	/**
 	 * Creates a 3 dimensional array, called $arrayName for use by Javascript in autopopulating a Third Drop down based on the value selected in a Primary & Secondary Drop Downs.
 	 *
 	 * @param array $data			3 Dimensional Array
 	 * @param string $arrayName		Name of the array when addressed by Javascript.
 	 */
-	static function buildSelectArrayThree($data, $arrayName ){
+	static function buildSelectArrayThree($data, $arrayName){
 
 		echo '<script type="text/javascript" charset="utf-8">';
 		echo "var $arrayName = new Array();";
@@ -116,9 +112,6 @@ class JavaScript {
 //		echo $arrayName . '[1] = new Array();';
 //		echo $arrayName . '[1][0] = "1.0";';
 //		echo $arrayName . '[1][1] = "1.1";';
-
-
-
 //		echo $arrayName . '[0][0]=""; ';
 		$i=0;
 		foreach($data as $primaryKey => $primaryArray){
@@ -144,7 +137,7 @@ class JavaScript {
 	 * @param array $data			Array
 	 * @param string $arrayName		Name of the array when addressed by Javascript.
 	 */
-	static function buildArray($data, $arrayName ){
+	static function buildArray($data, $arrayName){
 	    echo '<script type="text/javascript" charset="utf-8">';
 	    echo "var $arrayName = new Array();";
 	    echo $arrayName . '[0]=""; ';
@@ -157,38 +150,39 @@ class JavaScript {
 	    echo "";
 	}
 
-
 	/**
 	 * Creates a 2 dimensional array, called $arrayName for use by Javascript in autopopulating a Secondary Drop down based on the value selected in a Primary Drop Down.
 	 *
 	 * @param array $data			2 Dimensional Array
 	 * @param string $arrayName		Name of the array when addressed by Javascript.
 	 */
-	static function buildSelectArray($data, $arrayName ){
+	static function buildSelectArray($data, $arrayName){
 	    ?>
 		<script type="text/javascript" charset="utf-8">
 		var <?=$arrayName?> = new Array();
 		<?=$arrayName?>[0]= new Array();
 		<?php
 		$i=1;
-		foreach($data as $competency => $pools){
-			$poolString =  $arrayName . "[" . $i++ . "] = [";
-			foreach ($pools as $poolName ){
-				$poolString .=  ',"' . $poolName . '"';
+		if (count($data) >0) {
+			foreach($data as $competency => $pools){
+				$poolString =  $arrayName . "[" . $i++ . "] = [";
+				foreach ($pools as $poolName ){
+					$poolString .=  ',"' . $poolName . '"';
+				}
+				$poolString .= ']; ';
+				echo str_replace("[,","[",$poolString);
 			}
-			$poolString .= ']; ';
-			echo str_replace("[,","[",$poolString);
+
+			foreach($data as $competency => $pools){
+				echo $arrayName?>[0].push('<?=$competency?>'); <?php
+			}
 		}
-
-		foreach($data as $competency => $pools){
-		    echo $arrayName?>[0].push('<?=$competency?>'); <?php
-	       }
-
 		?>
 		</script>
 		<?php
 	}
-	static function buildSelectArrayFromLoadIndexed($data, $arrayName ){
+	
+	static function buildSelectArrayFromLoadIndexed($data, $arrayName){
 
 		echo '<script type="text/javascript" charset="utf-8">';
 		echo "var $arrayName = new Array();";
@@ -203,15 +197,13 @@ class JavaScript {
 		echo "</script>";
 	}
 
-
-
 	/**
 	 * Creates a 2 dimensional array, called $arrayName for use by Javascript in autopopulating a Secondary Drop down based on the value selected in a Primary Drop Down.
 	 *
 	 * @param array $data			2 Dimensional Array
 	 * @param string $arrayName		Name of the array when addressed by Javascript.
 	 */
-	static function buildSelectArrayFromLoadIndexedPair($data, $arrayKey, $arrayValues ){
+	static function buildSelectArrayFromLoadIndexedPair($data, $arrayKey, $arrayValues){
 
 		echo '<script type="text/javascript" charset="utf-8">';
 		echo "var $arrayKey = new Array();";
@@ -236,7 +228,6 @@ class JavaScript {
 		}
 		echo "</script>";
 	}
-
 
 	static function buildObjectFromLoadIndexedPair($data, $objectName){
 	    ?><script type="text/javascript" charset="utf-8">
@@ -266,6 +257,4 @@ class JavaScript {
 	    console.log(<?=$objectName?>);
 	    </script><?php
 	}
-
-
 }?>

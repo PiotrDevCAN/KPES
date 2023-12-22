@@ -148,7 +148,7 @@ class Trace extends Log{
 	}
 
 	static function deleteTraceRecords($keepDays=2){
-		$sql = "DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE . " WHERE LASTUPDATED < (CURRENT TIMESTAMP - $keepDays DAYS) ";
+		$sql = "DELETE FROM " . $GLOBALS['Db2Schema'] . "." . AllItdqTables::$TRACE . " WHERE LASTUPDATED < DATEADD(day, -$keepDays, CURRENT_TIMESTAMP) ";
 
 		Trace::traceVariable($keepDays);
 		$rs = sqlsrv_query($GLOBALS['conn'],$sql);

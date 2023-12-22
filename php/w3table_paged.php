@@ -55,7 +55,8 @@ class w3_Table_Paged extends w3_Table {
 		$sql_count = $this->_rewriteCountQuery($sql);
 		$this->total_items = $db->GetOne($sql_count, $inputarr);
 		$this->start = (($this->current_page - 1) * $this->page_size);
-		$sql .= " LIMIT " . $this->page_size . " OFFSET " . ($this->start);
+		// $sql .= " LIMIT " . $this->page_size . " OFFSET " . ($this->start);
+		$sql.= ' OFFSET ' . $this->start . ' ROWS FETCH FIRST ' . $this->page_size . ' ROWS ONLY';
 
 		$this->data = $db->GetAll($sql, $inputarr);
 		foreach ($this->data as $row) {

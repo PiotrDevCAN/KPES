@@ -41,7 +41,7 @@ class PesStatusAuditTable extends DbTable
         $sql.= " VALUES ";
         $sql.= " ('" . htmlspecialchars($cnum) . "','" . htmlspecialchars($email_address) . "','" . htmlspecialchars($account) . "' ";
         $sql.= " ,'" . htmlspecialchars($pesStatus) . "','" . htmlspecialchars($pesClearedDate) .  "' ";
-        $sql.= " ,'" . htmlspecialchars($_SESSION['ssoEmail']) . "', CURRENT TIMESTAMP ";
+        $sql.= " ,'" . htmlspecialchars($_SESSION['ssoEmail']) . "', CURRENT_TIMESTAMP ";
         $sql.= " ) ";
         
         $rs = sqlsrv_query($GLOBALS['conn'], $sql);

@@ -1127,7 +1127,7 @@ class DbTable
                     case 93:
                         if (empty($updateArray[$key])) {
                             $values .= ", $key = null ";
-                        } elseif ($updateArray[$key] == 'CURRENT TIMESTAMP') {
+                        } elseif ($updateArray[$key] == 'CURRENT_TIMESTAMP') {
                             $values .= ", $key = $updateArray[$key] ";
                         } else {
                             $values .= ", $key = '$updateArray[$key]' ";
@@ -1961,7 +1961,7 @@ class DbTable
         if (isset(AllItdqTables::$DB2_ERRORS)) {
             echo "<BR/>" . $method . "<B>DB2 Error:</B><span style='color:red'>" . $db2Error . "</span><B>Message:</B><span style='color:red'>" . $db2ErrorMsg . "</span>$sql";
             $printableSql = empty($pwd) ? $sql : str_replace($pwd, "******", $sql);
-            DbTable::logDb2Error($data);
+            DbTable::logDb2Error($db2Error, $db2ErrorMsg, $data);
             trigger_error("Error in: '$method' running: $printableSql code: $db2Error", E_USER_ERROR);
             return array(
                 'Db2Error' => $db2Error,
@@ -1989,7 +1989,7 @@ class DbTable
         }
     }
 
-    static function logDb2Error($data = null)
+    static function logDb2Error($db2StmtError = null, $db2StmtErrorMsg = null, $data = null)
     {
         $table = new DbTable(AllItdqTables::$DB2_ERRORS);
         $userid = isset($_SESSION['ssoEmail']) ? $_SESSION['ssoEmail'] : 'userNotDefined';
@@ -2019,17 +2019,25 @@ class DbTable
             @ob_end_clean();
         }
         // $request = strlen(htmlspecialchars($request)) > 1024 ? substr(htmlspecialchars($request), 0, 1000) : htmlspecialchars($request);
-        $request = $table->truncateValueToFitColumn(htmlspecialchars($request), 'REQUEST');
+        $request = $table->truncateValueToFitColumn($request, 'REQUEST');
 
-        $db2StmtError = json_encode(sqlsrv_errors());
+        // $db2StmtError = json_encode(sqlsrv_errors());
         // $db2StmtError = strlen(htmlspecialchars($db2StmtError)) > 50 ? substr(htmlspecialchars($db2StmtError), 0, 50) : htmlspecialchars($db2StmtError);
-        $db2StmtError = $table->truncateValueToFitColumn(htmlspecialchars($db2StmtError), 'DB2_ERROR');
+        $db2StmtError = $table->truncateValueToFitColumn($db2StmtError, 'DB2_ERROR');
 
-        $db2StmeErrorMsg = json_encode(sqlsrv_errors());
-        // $db2StmeErrorMsg = strlen(htmlspecialchars($db2StmeErrorMsg)) > 50 ? substr(htmlspecialchars($db2StmeErrorMsg), 0, 50) : htmlspecialchars($db2StmeErrorMsg);
-        $db2StmeErrorMsg = $table->truncateValueToFitColumn(htmlspecialchars($db2StmeErrorMsg), 'DB2_MESSAGE');
+        // $db2StmtErrorMsg = json_encode(sqlsrv_errors());
+        // $db2StmtErrorMsg = strlen(htmlspecialchars($db2StmtErrorMsg)) > 50 ? substr(htmlspecialchars($db2StmtErrorMsg), 0, 50) : htmlspecialchars($db2StmtErrorMsg);
+        $db2StmtErrorMsg = $table->truncateValueToFitColumn($db2StmtErrorMsg, 'DB2_MESSAGE');
 
-        $sql .= " VALUES ('" . $userid . "','" . $_SERVER['PHP_SELF'] . "','" . $db2StmtError . "','" . $db2StmeErrorMsg . "','" . $backtrace . "','" . $request . "')";
+        $sql .= " VALUES (?, ?, ?, ?, ? ,?)";
+        $params = array(
+            $userid,
+            $_SERVER['PHP_SELF'],
+            $db2StmtError,
+            $db2StmtErrorMsg,
+            $backtrace,
+            $request
+        );
 
         if (isset($_SESSION['phoneHome']) && class_exists('Email')) {
             $to = $_SESSION['phoneHome'];
@@ -2040,7 +2048,7 @@ class DbTable
             echo "<h4>An email has been sent to: $to informing them of this problem</h4>";
         }
 
-        $rs = @sqlsrv_query($GLOBALS['conn'], $sql);
+        $rs = sqlsrv_query($GLOBALS['conn'], $sql, $params);
         if (! $rs) {
             echo "<BR>Error: " . json_encode(sqlsrv_errors());
             echo "<BR>Msg: " . json_encode(sqlsrv_errors()) . "<BR>";
@@ -2113,7 +2121,6 @@ class DbTable
             $written = fputcsv($handle, $fields);
         }
 
-
         $bubbleSuitableSize = false;
 
         while (!$bubbleSuitableSize) {
@@ -2148,8 +2155,6 @@ class DbTable
         }
         return array('maxBubble'=>$maxBubbleSize, 'allFields'=>$allFields);
     }
-
-
 
     function buildWordCloud($column, $predicate = null)
     {

@@ -90,7 +90,7 @@ class AccountPersonTable extends DbTable {
                 break;
             case self::PES_TRACKER_RECORDS_NOT_ACTIVE :
                 $pesStatusPredicate = " AP.PES_STATUS not in ('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "')  ";
-                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > current timestamp - 31 days  ";
+                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > DATEADD(day, -31, CURRENT_TIMESTAMP)  ";
                 break;
             case self::PES_TRACKER_RECORDS_ALL :
                 $pesStatusPredicate = " 1=1 ";
@@ -104,7 +104,7 @@ class AccountPersonTable extends DbTable {
         $sql.= ", P.EMAIL_ADDRESS ";
         $sql.= ", P.PASSPORT_FIRST_NAME ";
         $sql.= ", P.PASSPORT_LAST_NAME ";
-        $sql.= ", case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else P.PASSPORT_FIRST_NAME CONCAT ' ' CONCAT P.PASSPORT_LAST_NAME end as FULL_NAME  ";
+        $sql.= ", case when P.PASSPORT_FIRST_NAME is null then P.FULL_NAME else CONCAT (P.PASSPORT_FIRST_NAME, ' ', P.PASSPORT_LAST_NAME) end as FULL_NAME  ";
         $sql.= ", P.COUNTRY ";
         $sql.= ", P.IBM_STATUS ";
         $sql.= ", AP.UPES_REF ";
@@ -127,7 +127,7 @@ class AccountPersonTable extends DbTable {
         $sql.= ", AP.MEMBERSHIP ";
         $sql.= ", AP.NI_EVIDENCE ";
         $sql.= ", AP.PROCESSING_STATUS ";
-        $sql.= ", ADD_HOURS(AP.PROCESSING_STATUS_CHANGED, 1) AS PROCESSING_STATUS_CHANGED ";
+        $sql.= ", DATEADD(hour, 1, AP.PROCESSING_STATUS_CHANGED) AS PROCESSING_STATUS_CHANGED ";
         $sql.= ", AP.DATE_LAST_CHASED ";
         $sql.= ", AP.PES_STATUS ";
         $sql.= ", AP.PES_STATUS_DETAILS ";
@@ -158,7 +158,9 @@ class AccountPersonTable extends DbTable {
         $sql.= !empty($accountId) ? " AND AP.ACCOUNT_ID='" . htmlspecialchars($accountId)  . "' " : null;
 
         if ($length != '-1') {
-            $sql.= " LIMIT " . $length . ' OFFSET ' . $start;
+            $sql.= ' ORDER BY 1';
+            // $sql.= " LIMIT " . $length . ' OFFSET ' . $start;
+            $sql.= ' OFFSET ' . $start . ' ROWS FETCH FIRST ' . $length . ' ROWS ONLY';
         }
         return $sql;
     }
@@ -179,7 +181,7 @@ class AccountPersonTable extends DbTable {
                 break;
             case self::PES_TRACKER_RECORDS_NOT_ACTIVE :
                 $pesStatusPredicate = " AP.PES_STATUS not in ('" . AccountPersonRecord::PES_STATUS_STARTER_REQUESTED . "','" . AccountPersonRecord::PES_STATUS_CANCEL_REQ .  "','" . AccountPersonRecord::PES_STATUS_RECHECK_PROGRESSING . "','" . AccountPersonRecord::PES_STATUS_PES_PROGRESSING. "','" . AccountPersonRecord::PES_STATUS_PROVISIONAL. "')  ";
-                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > current timestamp - 31 days  ";
+                $pesStatusPredicate.= " AND AP.PROCESSING_STATUS_CHANGED > DATEADD(day, -31, CURRENT_TIMESTAMP)  ";
                 break;
             case self::PES_TRACKER_RECORDS_ALL :
                 $pesStatusPredicate = " 1=1 ";
@@ -368,7 +370,6 @@ class AccountPersonTable extends DbTable {
 
         $row = sqlsrv_fetch_array($rs);
 
-        // return $row['RECORDSFILTERED'];
         return $row['COUNTER'];
     }
 
@@ -383,7 +384,6 @@ class AccountPersonTable extends DbTable {
 
         $row = sqlsrv_fetch_array($rs);
 
-        // return $row['TOTALROWS'];
         return $row['COUNTER'];
     }
 
@@ -853,7 +853,7 @@ class AccountPersonTable extends DbTable {
             return $_SESSION['prepareProcessStatusUpdate'];
         }
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . $this->tableName;
-        $sql.= " SET PROCESSING_STATUS =?, PROCESSING_STATUS_CHANGED = current timestamp ";
+        $sql.= " SET PROCESSING_STATUS =?, PROCESSING_STATUS_CHANGED = CURRENT_TIMESTAMP ";
         $sql.= " WHERE UPES_REF=? AND ACCOUNT_ID=?";
 
         $this->preparedSelectSQL = $sql;
@@ -1223,7 +1223,7 @@ class AccountPersonTable extends DbTable {
 //        $sql.= " AND AP.PES_STATUS != '" . AccountPersonRecord::PES_STATUS_RECHECK_REQ . "' ";
         $sql.= " AND AP.PES_STATUS = '" . AccountPersonRecord::PES_STATUS_CLEARED . "' ";
         $sql.= " and AP.PES_RECHECK_DATE is not null ";
-        $sql.= " and AP.PES_RECHECK_DATE < CURRENT DATE + 56 DAYS ";
+        $sql.= " and AP.PES_RECHECK_DATE < DATEADD(day, 56, CURRENT_TIMESTAMP) ";
         $rs = sqlsrv_query($localConnection, $sql);
 
         if(!$rs){
@@ -1272,7 +1272,7 @@ class AccountPersonTable extends DbTable {
         foreach (self::PES_TRACKER_STAGES as $trackerStage) {
             $sql.= " , " . $trackerStage . " = null ";
         }
-        $sql.= " ,  PROCESSING_STATUS_CHANGED= current timestamp, DATE_LAST_CHASED = null ";
+        $sql.= " ,  PROCESSING_STATUS_CHANGED= CURRENT_TIMESTAMP, DATE_LAST_CHASED = null ";
         $sql.= " WHERE ACCOUNT_ID = ?  AND UPES_REF = ? ";
 
         $preparedStmt = sqlsrv_prepare($GLOBALS['conn'], $sql, $data);
@@ -1409,8 +1409,8 @@ class AccountPersonTable extends DbTable {
 
         //         $sql.= " LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " AS P ";
         //         $sql.= " ON AP.UPES_REF = P.UPES_REF ";
-        $sql.= " WHERE DATE(PES_RECHECK_DATE) >= CURRENT DATE - 1 month ";
-        $sql.= " AND DATE(PES_RECHECK_DATE) <= CURRENT DATE + 5 MONTHS ";
+        $sql.= " WHERE DATE(PES_RECHECK_DATE) >= DATEADD(month, -1, CURRENT_TIMESTAMP) ";
+        $sql.= " AND DATE(PES_RECHECK_DATE) <= DATEADD(month, 5, CURRENT_TIMESTAMP) ";
         $sql.= " GROUP by ACCOUNT, YEAR(PES_RECHECK_DATE), MONTH(PES_RECHECK_DATE) ";
         $sql.= " ORDER by ACCOUNT ";
 
@@ -1440,8 +1440,8 @@ class AccountPersonTable extends DbTable {
 
         //         $sql.= " LEFT JOIN " . $GLOBALS['Db2Schema'] . "." . AllTables::$PERSON . " AS P ";
         //         $sql.= " ON AP.UPES_REF = P.UPES_REF ";
-        $sql.= " WHERE DATE(PES_RECHECK_DATE) >= CURRENT DATE - 1 month ";
-        $sql.= " AND DATE(PES_RECHECK_DATE) <= CURRENT DATE + 5 MONTHS ";
+        $sql.= " WHERE DATE(PES_RECHECK_DATE) >= DATEADD(month, -1, CURRENT_TIMESTAMP) ";
+        $sql.= " AND DATE(PES_RECHECK_DATE) <= DATEADD(month, 5, CURRENT_TIMESTAMP) ";
         $sql.= " GROUP by ACCOUNT, CONTRACT, YEAR(PES_RECHECK_DATE), MONTH(PES_RECHECK_DATE) ";
         $sql.= " ORDER by ACCOUNT ";
 
@@ -1549,8 +1549,8 @@ class AccountPersonTable extends DbTable {
         // sqlsrv_commit($GLOBALS['conn'],DB2_AUTOCOMMIT_OFF);
         
         $sql = " UPDATE " . $GLOBALS['Db2Schema'] . "." . AllTables::$ACCOUNT_PERSON;
-        $sql.= " SET OFFBOARDED_DATE = current date ";
-        $sql.= "     ,OFFBOARDED_BY = '" . htmlspecialchars($_SESSION['ssoEmail']) . "' ";
+        $sql.= " SET OFFBOARDED_DATE = CAST( CURRENT_TIMESTAMP AS Date ) ";
+        $sql.= " ,OFFBOARDED_BY = '" . htmlspecialchars($_SESSION['ssoEmail']) . "' ";
         $sql.= " WHERE ACCOUNT_ID = '" . htmlspecialchars($accountId) . "' ";
         $sql.= " AND UPES_REF = '" . htmlspecialchars($upesref) . "' ";
         

@@ -106,9 +106,9 @@ $isCdi       = $OKTAGroups->inAGroup($_SESSION['cdiBgAz'],  $_SESSION['ssoEmail'
 $isPesTeam   = $OKTAGroups->inAGroup($_SESSION['pesTeamBgAz'],  $_SESSION['ssoEmail']) ? ".not('.accessPesTeam')" : null;
 $isUser      = ".not('.accessUser')";
 
-$isCdi        = stripos($_ENV['environment'], 'dev') ? ".not('.accessCdi')"        : $isCdi;
-$isPesTeam    = stripos($_ENV['environment'], 'dev') ? ".not('.accessPesTeam')"   : $isPesTeam;
-$isUser       = stripos($_ENV['environment'], 'dev') ? ".not('.accessUser')"      : $isUser;
+$isCdi        = (stripos($_ENV['environment'], 'dev') || stripos($_ENV['environment'], 'local')) ? ".not('.accessCdi')"     : $isCdi;
+$isPesTeam    = (stripos($_ENV['environment'], 'dev') || stripos($_ENV['environment'], 'local')) ? ".not('.accessPesTeam')" : $isPesTeam;
+$isUser       = (stripos($_ENV['environment'], 'dev') || stripos($_ENV['environment'], 'local')) ? ".not('.accessUser')"    : $isUser;
 
 $_SESSION['isCdi']       = !empty($isCdi)     ? true : false;
 $_SESSION['isPesTeam']   = !empty($isPesTeam) ? true : false;

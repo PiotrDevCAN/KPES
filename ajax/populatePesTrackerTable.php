@@ -17,28 +17,62 @@ $draw = isset($_REQUEST['draw']) ? $_REQUEST['draw'] * 1 : 1 ;
 $start = isset($_REQUEST['start']) ? $_REQUEST['start'] * 1 : 1 ;
 $length = isset($_REQUEST['length']) ? $_REQUEST['length'] : 50;
 
+// $predicate = '';
+// if(!empty($_REQUEST['search']['value'])) {
+//     $searchValue = htmlspecialchars(trim($_REQUEST['search']['value']));
+//     $predicate .= " AND (REGEXP_LIKE(P.PASSPORT_FIRST_NAME, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.PASSPORT_LAST_NAME, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.CNUM, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.IBM_STATUS, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.COUNTRY, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.COUNTRY_OF_RESIDENCE, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.UPES_REF, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_ID, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_TYPE, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(A.ACCOUNT, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.FULL_NAME, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(P.EMAIL_ADDRESS, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL_DESCRIPTION, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.PES_REQUESTOR, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.PES_DATE_REQUESTED, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.DATE_LAST_CHASED, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.PES_STATUS, '". $searchValue . "', 'i')";
+//     $predicate .= " OR REGEXP_LIKE(AP.COMMENT, '". $searchValue . "', 'i')";
+//     $predicate .= ") ";
+// }
+
+function addFieldToSearch($searchValue = null, $column = '')
+{
+    $searchPredicate = ''; {
+        $searchPredicate .= " " . $column . " LIKE '%$searchValue%'";
+    }
+    return $searchPredicate;
+}
+
 $predicate = '';
 if(!empty($_REQUEST['search']['value'])) {
     $searchValue = htmlspecialchars(trim($_REQUEST['search']['value']));
-    $predicate .= " AND (REGEXP_LIKE(P.PASSPORT_FIRST_NAME, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.PASSPORT_LAST_NAME, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.CNUM, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.IBM_STATUS, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.COUNTRY, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.COUNTRY_OF_RESIDENCE, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.UPES_REF, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_ID, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT_TYPE, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(A.ACCOUNT, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.FULL_NAME, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(P.EMAIL_ADDRESS, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(PL.PES_LEVEL_DESCRIPTION, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_REQUESTOR, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_DATE_REQUESTED, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.DATE_LAST_CHASED, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.PES_STATUS, '". $searchValue . "', 'i')";
-    $predicate .= " OR REGEXP_LIKE(AP.COMMENT, '". $searchValue . "', 'i')";
+    $predicate .= " AND (";
+    $predicate .= addFieldToSearch($searchValue, 'P.PASSPORT_FIRST_NAME');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.PASSPORT_LAST_NAME');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.CNUM');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.IBM_STATUS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.COUNTRY');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.COUNTRY_OF_RESIDENCE');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.UPES_REF');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT_ID');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT_TYPE');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'A.ACCOUNT');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.FULL_NAME');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'P.EMAIL_ADDRESS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'PL.PES_LEVEL');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'PL.PES_LEVEL_DESCRIPTION');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_REQUESTOR');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_DATE_REQUESTED');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.DATE_LAST_CHASED');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.PES_STATUS');
+    $predicate .= " OR " . addFieldToSearch($searchValue, 'AP.COMMENT');
     $predicate .= ") ";
 }
 

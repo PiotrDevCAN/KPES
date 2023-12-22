@@ -1,15 +1,21 @@
 <?php
 use itdq\Trace;
 use itdq\WorkerAPI;
-use itdq\OKTAGroups;
-use upes\AllTables;
-use upes\ContractRecord;
-use upes\ContractTable;
 
 Trace::pageOpening($_SERVER['PHP_SELF']);
 
-// $workerAPI = new WorkerAPI();
-// $workerData = $workerAPI->getworkerByEmail($_SESSION['ssoEmail']);
+if(!isset($_SESSION['uid'])) {
+	$_SESSION['uid'] = 'piotr.tajanowicz@kyndryl.com';
+}
+
+$start = microtime(true);
+
+$workerAPI = new WorkerAPI();
+$workerData = $workerAPI->getworkerByEmail($_SESSION['ssoEmail']);
+
+$elapsed = microtime(true);
+echo ("WorkerAPI call took:" . (float)($elapsed-$start));
+echo '</br>';
 
 // $OKTAGroups = new OKTAGroups();
 // $groupDetails = $OKTAGroups->listMembers('00g7bmv7zmnSf5DAX697');
@@ -34,7 +40,6 @@ Trace::pageOpening($_SERVER['PHP_SELF']);
 // var_dump($pesTeamGroupData[0]);
 
 // echo '</pre>';
-
 
 echo 'Emails status: '.trim($_ENV['email']);
 
