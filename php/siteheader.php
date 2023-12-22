@@ -8,6 +8,9 @@ use itdq\JwtSecureSession;
 use itdq\Redis;
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 
+echo 'TEST';
+exit;
+
 # Takes a hash of values and files in a text template
 function build_template($template, $vals) {
     $file = dirname(__FILE__) . "/templates/" . $template;
